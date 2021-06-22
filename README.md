@@ -32,8 +32,8 @@ Code cũ đã có sơ lược 3 service. Các services này base code ko dính d
    ```
 3. s3: ./ep-storage_headless
     ```
-   cd ep-storage_headless/sa/
-   python3 sa.py
+   cd ep-storage_headless/sa
+   python3 saFlow.py
    bash run.sh
    ```
 

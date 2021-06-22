@@ -1,6 +1,7 @@
 import unittest
 from selenium import webdriver
 from utils.cookies import cookie
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 
 
@@ -15,8 +16,8 @@ class BaseTest(unittest.TestCase):
         chrome_options.add_argument("--no-default-browser-check")
         chrome_options.add_argument("--ignore-certificate-errors")
         chrome_options.add_argument("--start-maximized")
-        chrome_options.add_argument("--window-size=1920,1080");
-        self.driver = webdriver.Chrome('chromedriver', options=chrome_options)
+        chrome_options.add_argument("--window-size=1920,1080")
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
         self.driver.get('https://console.engineering.vng.vn')
         self.driver.add_cookie(cookie)
         self.driver.get('https://console.engineering.vng.vn')
