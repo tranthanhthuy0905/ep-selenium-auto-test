@@ -26,8 +26,8 @@ Code cũ đã có sơ lược 3 service. Các services này base code ko dính d
    ```
 2. ec2 security group: ./security_groups
    ```
-   cd security_groups/Tests
-   python3 security_groups.py
+   cd security_groups
+   python3 -m Tests.security_groups
    bash run.sh
    ```
 3. s3: ./ep-storage_headless
