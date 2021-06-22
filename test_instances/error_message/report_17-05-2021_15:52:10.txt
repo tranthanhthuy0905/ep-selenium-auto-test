@@ -1,0 +1,255 @@
+test_a_create_vm (tests.test_instances.TestInstances) ... ERROR
+test_b_create_vm_with_existed_hostname (tests.test_instances.TestInstances) ... ERROR
+test_c_connect_vm (tests.test_instances.TestInstances) ... ERROR
+test_d_copy_instance_detail (tests.test_instances.TestInstances) ... ERROR
+test_e_show_instance_types (tests.test_instances.TestInstances) ... ERROR
+test_f_stop_instance (tests.test_instances.TestInstances) ... ERROR
+test_g_start_instance (tests.test_instances.TestInstances) ... ERROR
+test_h_reboot_instance (tests.test_instances.TestInstances) ... ERROR
+test_i_terminate_instance (tests.test_instances.TestInstances) ... ERROR
+test_k_expunge_volume (tests.test_instances.TestInstances) ... ERROR
+
+======================================================================
+ERROR: test_a_create_vm (tests.test_instances.TestInstances)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 72, in start
+    self.process = subprocess.Popen(cmd, env=self.env,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 854, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 1702, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'chromedriver'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/test_instances/tests/base_test.py", line 19, in setUp
+    self.driver = webdriver.Chrome('chromedriver', options=chrome_options)
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 73, in __init__
+    self.service.start()
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 81, in start
+    raise WebDriverException(
+selenium.common.exceptions.WebDriverException: Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+
+======================================================================
+ERROR: test_b_create_vm_with_existed_hostname (tests.test_instances.TestInstances)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 72, in start
+    self.process = subprocess.Popen(cmd, env=self.env,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 854, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 1702, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'chromedriver'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/test_instances/tests/base_test.py", line 19, in setUp
+    self.driver = webdriver.Chrome('chromedriver', options=chrome_options)
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 73, in __init__
+    self.service.start()
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 81, in start
+    raise WebDriverException(
+selenium.common.exceptions.WebDriverException: Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+
+======================================================================
+ERROR: test_c_connect_vm (tests.test_instances.TestInstances)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 72, in start
+    self.process = subprocess.Popen(cmd, env=self.env,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 854, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 1702, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'chromedriver'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/test_instances/tests/base_test.py", line 19, in setUp
+    self.driver = webdriver.Chrome('chromedriver', options=chrome_options)
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 73, in __init__
+    self.service.start()
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 81, in start
+    raise WebDriverException(
+selenium.common.exceptions.WebDriverException: Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+
+======================================================================
+ERROR: test_d_copy_instance_detail (tests.test_instances.TestInstances)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 72, in start
+    self.process = subprocess.Popen(cmd, env=self.env,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 854, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 1702, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'chromedriver'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/test_instances/tests/base_test.py", line 19, in setUp
+    self.driver = webdriver.Chrome('chromedriver', options=chrome_options)
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 73, in __init__
+    self.service.start()
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 81, in start
+    raise WebDriverException(
+selenium.common.exceptions.WebDriverException: Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+
+======================================================================
+ERROR: test_e_show_instance_types (tests.test_instances.TestInstances)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 72, in start
+    self.process = subprocess.Popen(cmd, env=self.env,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 854, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 1702, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'chromedriver'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/test_instances/tests/base_test.py", line 19, in setUp
+    self.driver = webdriver.Chrome('chromedriver', options=chrome_options)
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 73, in __init__
+    self.service.start()
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 81, in start
+    raise WebDriverException(
+selenium.common.exceptions.WebDriverException: Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+
+======================================================================
+ERROR: test_f_stop_instance (tests.test_instances.TestInstances)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 72, in start
+    self.process = subprocess.Popen(cmd, env=self.env,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 854, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 1702, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'chromedriver'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/test_instances/tests/base_test.py", line 19, in setUp
+    self.driver = webdriver.Chrome('chromedriver', options=chrome_options)
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 73, in __init__
+    self.service.start()
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 81, in start
+    raise WebDriverException(
+selenium.common.exceptions.WebDriverException: Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+
+======================================================================
+ERROR: test_g_start_instance (tests.test_instances.TestInstances)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 72, in start
+    self.process = subprocess.Popen(cmd, env=self.env,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 854, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 1702, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'chromedriver'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/test_instances/tests/base_test.py", line 19, in setUp
+    self.driver = webdriver.Chrome('chromedriver', options=chrome_options)
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 73, in __init__
+    self.service.start()
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 81, in start
+    raise WebDriverException(
+selenium.common.exceptions.WebDriverException: Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+
+======================================================================
+ERROR: test_h_reboot_instance (tests.test_instances.TestInstances)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 72, in start
+    self.process = subprocess.Popen(cmd, env=self.env,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 854, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 1702, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'chromedriver'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/test_instances/tests/base_test.py", line 19, in setUp
+    self.driver = webdriver.Chrome('chromedriver', options=chrome_options)
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 73, in __init__
+    self.service.start()
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 81, in start
+    raise WebDriverException(
+selenium.common.exceptions.WebDriverException: Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+
+======================================================================
+ERROR: test_i_terminate_instance (tests.test_instances.TestInstances)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 72, in start
+    self.process = subprocess.Popen(cmd, env=self.env,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 854, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 1702, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'chromedriver'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/test_instances/tests/base_test.py", line 19, in setUp
+    self.driver = webdriver.Chrome('chromedriver', options=chrome_options)
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 73, in __init__
+    self.service.start()
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 81, in start
+    raise WebDriverException(
+selenium.common.exceptions.WebDriverException: Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+
+======================================================================
+ERROR: test_k_expunge_volume (tests.test_instances.TestInstances)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 72, in start
+    self.process = subprocess.Popen(cmd, env=self.env,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 854, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/subprocess.py", line 1702, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'chromedriver'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lap13511/dp/repos/ep-audit/test_instances/tests/base_test.py", line 19, in setUp
+    self.driver = webdriver.Chrome('chromedriver', options=chrome_options)
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/chrome/webdriver.py", line 73, in __init__
+    self.service.start()
+  File "/Users/lap13511/dp/repos/ep-audit/venv/lib/python3.8/site-packages/selenium/webdriver/common/service.py", line 81, in start
+    raise WebDriverException(
+selenium.common.exceptions.WebDriverException: Message: 'chromedriver' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.034s
+
+FAILED (errors=10)
