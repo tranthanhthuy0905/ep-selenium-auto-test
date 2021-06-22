@@ -38,9 +38,13 @@ Code cũ đã có sơ lược 3 service. Các services này base code ko dính d
    ```
    
 #### Notes: 
-Hiện tại các flow đang là headless-test, tức là ko hiện browser để mình nhìn. 
-Để tiện debug, mọi người vào chỗ khai báo driver (ở các class Base), comment dòng này lại:
+- Debug: Hiện tại các flow đang là headless-test, tức là ko hiện browser để mình nhìn.
+Để tiện debug, vào chỗ khai báo driver (ở các class Base), comment dòng này lại:
 ```chrome_options.add_argument('--headless')```.
+- Authentication: Phần authentication nằm ở hàm add_cookie sau khi init driver. Chỉnh biến cookie, field value thành token mới nhất. Payload cookie:
+```{"name": "user-token", "value": "<user-token>"}```
+
+
 
 ## 3. Tài liệu tham khảo
 - Docs Selenium step by step: https://selenium-python.readthedocs.io/index.html
