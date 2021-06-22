@@ -36,6 +36,11 @@ Code cũ đã có sơ lược 3 service. Các services này base code ko dính d
    python3 saFlow.py
    bash run.sh
    ```
+   
+#### Notes: 
+Hiện tại các flow đang là headless-test, tức là ko hiện browser để mình nhìn. 
+Để tiện debug, mọi người vào chỗ khai báo driver (ở các class Base), comment dòng này lại:
+```chrome_options.add_argument('--headless')```.
 
 ## 3. Tài liệu tham khảo
 - Docs Selenium step by step: https://selenium-python.readthedocs.io/index.html
