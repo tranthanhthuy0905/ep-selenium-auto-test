@@ -1,6 +1,6 @@
-from utils.locators import *
+from locators.ec2_locators import *
 from pages.base_page import BasePage
-from pages.ec2_launch_instances_wizard_page import EC2LaunchInstancesWizardPage
+from pages.ec2.ec2_launch_instances_wizard_page import EC2LaunchInstancesWizardPage
 
 
 class EC2InstancesPage(BasePage):

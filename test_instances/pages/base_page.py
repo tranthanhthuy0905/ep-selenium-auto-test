@@ -6,7 +6,7 @@ import time
 
 
 class BasePage(object):
-    def __init__(self, driver, base_url='https://console.engineering.vng.vn'):
+    def __init__(self, driver, base_url='https://staging-console.engineering.vng.vn'):
         self.base_url = base_url
         self.driver = driver
         self.timeout = 30

@@ -1,8 +1,8 @@
-from utils.locators import *
+from locators.ec2_locators import *
 from pages.base_page import BasePage
-from pages.ec2_instances_page import EC2InstancesPage
-from pages.ec2_instances_type_page import EC2InstanceTypesPage
-from pages.ec2_elastic_block_store_volumnes_page import EC2ElasticBlockStoreVolumnePage
+from pages.ec2.ec2_instances_page import EC2InstancesPage
+from pages.ec2.ec2_instances_type_page import EC2InstanceTypesPage
+from pages.ec2.ec2_elastic_block_store_volumnes_page import EC2ElasticBlockStoreVolumnePage
 
 
 class EC2Page(BasePage):

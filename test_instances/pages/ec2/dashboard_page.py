@@ -1,6 +1,6 @@
-from utils.locators import *
+from locators.ec2_locators import *
 from pages.base_page import BasePage
-from pages.ec2_page import EC2Page
+from pages.ec2.ec2_page import EC2Page
 
 
 class DashboardPage(BasePage):

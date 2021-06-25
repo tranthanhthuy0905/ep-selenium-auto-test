@@ -1,4 +1,4 @@
-from utils.locators import *
+from locators.ec2_locators import *
 from pages.base_page import BasePage
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
