@@ -1,5 +1,5 @@
 import time
-from tests.base_test import BaseTest
+from Tests.base_test import BaseTest
 from pages.ec2.dashboard_page import DashboardPage
 from pages.ec2.ec2_instances_page import EC2InstancesPage
 from locators.ec2_locators import *

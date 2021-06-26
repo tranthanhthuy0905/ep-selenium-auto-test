@@ -15,7 +15,6 @@ from pprint import pprint
 
 from Locators.locators import SecurityGroupHomeLocators
 
-
 class EPAudit:
     def __init__(self, service_name, headless=True):
         self.url = self.get_url(service_name)

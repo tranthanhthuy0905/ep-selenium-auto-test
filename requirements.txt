@@ -1,3 +1,5 @@
-requests
-selenium
-webdriver-manager
+requests==2.25.1
+selenium==3.141.0
+webdriver-manager==3.4.2
+html-testRunner==1.2.1
+pyautogui==0.9.52

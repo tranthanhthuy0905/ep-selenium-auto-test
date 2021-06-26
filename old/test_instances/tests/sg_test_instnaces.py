@@ -1,14 +1,5 @@
 import datetime
-import os
-import json
-import requests
-import logging
-import unittest
-import random
 
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from pprint import pprint
 

@@ -28,13 +28,11 @@ Code cũ đã có sơ lược 3 service. Các services này base code ko dính d
    ```
    cd security_groups
    python3 -m Tests.security_groups
-   bash run.sh
    ```
 3. s3: ./ep-storage_headless
     ```
    cd ep-storage_headless/sa
    python3 saFlow.py
-   bash run.sh
    ```
    
 #### Notes: 
@@ -45,8 +43,13 @@ Code cũ đã có sơ lược 3 service. Các services này base code ko dính d
 ```{"name": "user-token", "value": "<user-token>"}```
 
 
+## 3. Chạy flow mới
+```
+pip install -r requirements.txt
+python3 -m unittest -v
+```
 
-## 3. Tài liệu tham khảo
+## 4. Tài liệu tham khảo
 - Docs Selenium step by step: https://selenium-python.readthedocs.io/index.html
 - Example flow test cơ bản: https://realpython.com/headless-selenium-testing-with-python-and-phantomjs/
 - Design patterns - POM: https://www.lambdatest.com/blog/page-object-model-in-selenium-python/
