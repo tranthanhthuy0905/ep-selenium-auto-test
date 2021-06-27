@@ -26,7 +26,7 @@ Lệnh này sẽ tìm và chạy file toàn bộ project theo các bước:
 #### b. Chạy riêng 1 file test
 Ví dụ chạy 1 test case Create Bucket của s3
 ```
-python3 -m unittest Tests.s3.test_create_bucket_001 -v
+python3 -m unittest Tests.s3.test_s3_create_bucket_001 -v
 ```
 #### c. Chạy các file test trong 1 folder
 Ví dụ chạy các file toàn bộ test s3
