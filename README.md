@@ -6,13 +6,13 @@
 ```
 pip install -r requirements.txt
 ```
-###1.2 Chỉnh sửa user-token
+### 1.2 Chỉnh sửa user-token
 
 - Vào ```cd Configs/local```. chỉnh sửa biến USER_TOKEN thành token của mình.
 
-###1.3 Chạy code
+### 1.3 Chạy code
 
-####a. Chạy all test
+#### a. Chạy all test
 ```
 python3 -m unittest -v
 ```
@@ -23,29 +23,29 @@ Lệnh này sẽ tìm và chạy file toàn bộ project theo các bước:
 
 <b>Note:</b> Ở project này, các file này nằm trong folder Tests 
 
-####b. Chạy riêng 1 file test
+#### b. Chạy riêng 1 file test
 Ví dụ chạy 1 test case Create Bucket của s3
 ```
 python3 -m unittest Tests.s3.test_create_bucket_001 -v
 ```
-####c. Chạy các file test trong 1 folder
+#### c. Chạy các file test trong 1 folder
 Ví dụ chạy các file toàn bộ test s3
 ```
 python3 -m unittest discover Tests.s3 -v
 ```
 
 <b>Debug</b>: Hiện tại các flow đang là headless-test, tức là ko hiện browser để mình nhìn.
-Để tiện debug, vào chỗ khai báo driver (ở các class Base), comment dòng này lại:
-```chrome_options.add_argument('--headless')``` hoặc ```options.headless = True```.
+Để tiện debug, vào Tests/base_test, comment dòng này lại:
+```chrome_options.add_argument('--headless')```.
 
-##2. Project Structure
-* ###Configs
+## 2. Project Structure
+* ### Configs
     * <b>Configs/TestData</b>: Chứa các plain text trên UI để test.
     * <b>Configs/\*.py</b>: Chứa các configs url, token,...*
   
-* ###Driver
+* ### Driver
     * Chứa các driver của browser
-* ###Locators
+* ### Locators
     * Chứa các biến để define các địa chỉ để định vị các element trong 1 trang.
     * Tham khảo: https://selenium-python.readthedocs.io/locating-elements.html
 * ### Pages
