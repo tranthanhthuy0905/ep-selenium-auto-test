@@ -18,13 +18,13 @@ class BaseTest(unittest.TestCase):
         self.driver = webdriver.Chrome(CHROME_DRIVER_PATH, options=chrome_options)
 
     def clear_test_instances(self):
-        self.delete_s3_bucket()
-        self.delete_ec2_instance()
+        self._call_api_delete_s3_bucket()
+        self._call_api_delete_ec2_instance()
 
-    def delete_s3_bucket(self):
+    def _call_api_delete_s3_bucket(self):
         pass
 
-    def delete_ec2_instance(self):
+    def _call_api_delete_ec2_instance(self):
         pass
 
     def _call_request_delete(self, url, params):
@@ -38,7 +38,7 @@ class BaseTest(unittest.TestCase):
             print(f"Succeeded calling {url}")
         else:
             print(f"FAILED calling {url}")
-        print(f"Delete response: {r.content}")
+        print(f"Delete response: {r.content}. Params: {params}")
 
 
     def tearDown(self):

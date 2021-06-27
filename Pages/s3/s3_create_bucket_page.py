@@ -11,6 +11,9 @@ class S3CreateBucketPage(BasePage):
 
     def fill_bucket_create_information(self):
         _bucket_name = S3TestData.BUCKET_NAME
+
+        self.find_element(*S3Locators.BUCKET_NAME_TEXTBOX) \
+            .clear()
         self.find_element(*S3Locators.BUCKET_NAME_TEXTBOX)\
             .send_keys(_bucket_name)
         self.find_element(*S3Locators.BUCKET_REGION_DROPDOWN)\

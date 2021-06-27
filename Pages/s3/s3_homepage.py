@@ -1,4 +1,5 @@
 from Pages.base_page import BasePage
+from Pages.s3.s3_create_bucket_page import S3CreateBucketPage
 from Configs import S3_BASE_URL
 from Locators.s3 import S3Locators
 

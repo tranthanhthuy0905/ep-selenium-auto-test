@@ -43,7 +43,7 @@ python3 -m unittest discover Tests.s3 -v
     * <b>Configs/TestData</b>: Chứa các plain text trên UI để test.
     * <b>Configs/\*.py</b>: Chứa các configs url, token,...*
   
-* ### Driver
+* ### Drivers
     * Chứa các driver của browser
 * ### Locators
     * Chứa các biến để define các địa chỉ để định vị các element trong 1 trang.
