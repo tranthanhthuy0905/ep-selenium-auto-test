@@ -11,7 +11,7 @@ from Configs.TestData.S3TestData import S3TestData
 
 class Test_S3_Home_Page(BaseTest):
 
-    def _test_load_homepage(self):
+    def test_load_homepage(self):
         """
             TEST CASE: S3 Homepage must be loaded successfully
         """
