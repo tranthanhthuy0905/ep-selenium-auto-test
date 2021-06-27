@@ -1,7 +1,7 @@
 import os
 import urllib.parse
 
-USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGQ0MjA2ODViZjgwNjAwMTgwNmUwMTQiLCJuYW1lIjoicXVhbmxoMiIsImlhdCI6MTYyNDc3MjU0MCwiZXhwIjoxNjI0ODU4OTQwfQ.E51eXdTw8gTGEaBG8_WDq9h83RZry0ixSgBTUTM2yjQ"
+USER_TOKEN = ""
 COOKIE = { "name": "user-token", "value": USER_TOKEN}
 
 EC2_BASE_URL = "http://staging-ce.engineering.vng.vn/"
