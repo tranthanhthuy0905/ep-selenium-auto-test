@@ -1,7 +1,7 @@
 # Flow test bằng Selenium cho EP
 
 ## 1. Chạy flow test
-###1.1 Cài thư viện cần thiết
+### 1.1 Cài thư viện cần thiết
 
 ```
 pip install -r requirements.txt
