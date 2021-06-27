@@ -13,7 +13,7 @@ class Test_S3_Home_Page(BaseTest):
 
     def _test_load_homepage(self):
         """
-            S3 Homepage must be loaded successfully
+            TEST CASE: S3 Homepage must be loaded successfully
         """
         self.s3_homepage = S3HomePage(self.driver)
 

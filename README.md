@@ -12,38 +12,13 @@ Ví dụ 1 scenario - Selenium tạo bucket s3 qua các bước sau:
 6. Chọn nút "Create Bucket". Nếu thành công, url sẽ là https://s3.engineering.vng.vn/s3/buckets/<tên-bucket>; Display được 1 số text nhất định ở trang tạo thành công.
 
 
-## 2. Legacy code (code cũ)
-#### Các thư viện cần: 
-```
-selenium
-webdriver-manager
-```
-Code cũ đã có sơ lược 3 service. Các services này base code ko dính dáng gì đến nhau, nên mọi người cứ tham khảo qua hết flow. 2 base code "gần chuẩn" theo **Page Object Model** design pattern là security_groups với ec2 instance.
-1. ec2 instance: ./test_instances
-   ```
-   cd test_instances
-   bash run.sh
-   ```
-2. ec2 security group: ./security_groups
-   ```
-   cd security_groups
-   python3 -m Tests.security_groups
-   ```
-3. s3: ./ep-storage_headless
-    ```
-   cd ep-storage_headless/sa
-   python3 saFlow.py
-   ```
-   
+## 2. Chạy flow test
 #### Notes: 
 - Debug: Hiện tại các flow đang là headless-test, tức là ko hiện browser để mình nhìn.
 Để tiện debug, vào chỗ khai báo driver (ở các class Base), comment dòng này lại:
 ```chrome_options.add_argument('--headless')``` hoặc ```options.headless = True```.
 - Authentication: Phần authentication nằm ở hàm add_cookie sau khi init driver. Chỉnh biến cookie, field value thành token mới nhất. Payload cookie:
 ```{"name": "user-token", "value": "<user-token>"}```
-
-
-## 3. Chạy flow mới
 ```
 pip install -r requirements.txt
 python3 -m unittest -v

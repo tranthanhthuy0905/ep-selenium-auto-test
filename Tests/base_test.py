@@ -1,9 +1,8 @@
-import time
+import requests
 import unittest
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 
-from Configs import CHROME_DRIVER_PATH
+from Configs import CHROME_DRIVER_PATH, USER_TOKEN
 
 class BaseTest(unittest.TestCase):
     def setUp(self):
@@ -18,7 +17,32 @@ class BaseTest(unittest.TestCase):
         chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(CHROME_DRIVER_PATH, options=chrome_options)
 
+    def clear_test_instances(self):
+        self.delete_s3_bucket()
+        self.delete_ec2_instance()
+
+    def delete_s3_bucket(self):
+        pass
+
+    def delete_ec2_instance(self):
+        pass
+
+    def _call_request_delete(self, url, params):
+        user_token = USER_TOKEN
+        headers = {
+            "cookie": f"user-token={user_token}",
+            "accept": "application/json"
+        }
+        r = requests.delete(url, headers=headers, params=params)
+        if r.status_code == 200:
+            print(f"Succeeded calling {url}")
+        else:
+            print(f"FAILED calling {url}")
+        print(f"Delete response: {r.content}")
+
+
     def tearDown(self):
+        self.clear_test_instances()
         self.driver.quit()
 
 

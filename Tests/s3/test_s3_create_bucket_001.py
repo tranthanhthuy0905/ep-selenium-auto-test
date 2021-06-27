@@ -1,19 +1,24 @@
 import os
 import unittest
-import time
 
 import HtmlTestRunner
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.base_test import BaseTest
-from Pages.s3.s3_homepage import S3HomePage, S3CreateBucketPage, S3BucketDetailsPage
+from Tests.s3.s3_base_test import S3BaseTest
+
+from Pages.s3.s3_homepage import S3HomePage
+from Pages.s3.s3_create_bucket_page import S3CreateBucketPage
+from Pages.s3.s3_bucket_details_page import S3BucketDetailsPage
+
 from Locators.s3 import S3Locators
 
 
-class Test_S3_Create_Bucket(BaseTest):
+class Test_S3_Create_Bucket(S3BaseTest):
 
     def test_create_bucket_successful(self):
         """
-            S3 Bucket should be created successfully
+            TEST CASE: S3 Bucket should be created successfully
         """
         self.s3_homepage = S3HomePage(self.driver)
         self.s3_homepage.click_create_bucket()
@@ -25,17 +30,18 @@ class Test_S3_Create_Bucket(BaseTest):
         )
 
         bucket_name = self.s3_create_bucket_page.fill_bucket_create_information()
+        self.service_slug = bucket_name
+
         self.s3_create_bucket_page.click_create_bucket_submit_button()
 
         self.driver.implicitly_wait(10)
         self.bucket_details_page = S3BucketDetailsPage(self.driver, bucket_name)
         self.driver.implicitly_wait(10)
+
+        WebDriverWait(self.driver, 10).until(EC.url_to_be(self.bucket_details_page.base_url))
         self.assertEqual(
             self.driver.current_url, self.bucket_details_page.base_url
         )
-        time.sleep(10)
-
-
 
 
 if __name__ == "__main__":

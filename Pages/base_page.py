@@ -16,6 +16,10 @@ class BasePage(object):
     def authenticate(self):
         self.driver.add_cookie(COOKIE)
         self.driver.get(self.base_url)
+        self.driver.implicitly_wait(10)
+        if "session/signin" in self.driver.current_url:
+            self.driver.quit()
+            raise Exception("Authentication may not be successful. User-token may need to be updated!")
 
     def find_element(self, *locator):
         try:
