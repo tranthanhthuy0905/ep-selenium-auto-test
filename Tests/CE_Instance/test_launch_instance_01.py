@@ -96,6 +96,7 @@ class Test_launch_instance_01(BaseTest):
 
         # Sleep to wait for the page loading
         time.sleep(3)
+        self.tearDown()
 
     def test_launch_instance_01_edit_valid_pw(self):
         """
@@ -121,7 +122,7 @@ class Test_launch_instance_01(BaseTest):
 
         # Sleep to wait for the page loading
         time.sleep(3)
-
+        self.tearDown()
 
     def test_launch_instance_01_edit_invalid_pw(self):
         """
@@ -152,6 +153,7 @@ class Test_launch_instance_01(BaseTest):
 
         # Sleep to wait for the page loading
         time.sleep(3)
+        self.tearDown()
 
 if __name__ == "__main__":
     unittest.main(
