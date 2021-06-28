@@ -1,4 +1,4 @@
-from Locators.ec2 import EC2InstanceTypesPageLocators
+from Locators.CE import EC2InstanceTypesPageLocators
 from Pages.base_page import BasePage
 
 

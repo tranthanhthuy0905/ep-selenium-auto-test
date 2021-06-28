@@ -4,7 +4,7 @@ import time
 from Pages.base_page import BasePage
 from Configs import S3_BUCKET_DETAILS_URL, S3_BUCKET_FILE_UPLOAD_URL
 from Configs import FILE_PATH_UPLOAD_SAMPLE
-from Locators.s3 import S3Locators
+from Locators.S3 import S3Locators
 
 class S3BucketDetailsPage(BasePage):
     def __init__(self, driver, bucket_name):

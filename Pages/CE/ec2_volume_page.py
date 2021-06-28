@@ -1,7 +1,7 @@
-from Pages.ec2.ec2_create_volume_page import EC2CreateVolumePage
-from Locators.ec2 import EC2InstancePageLocators, EC2VolumnePageLocators
+from Pages.CE.ec2_create_volume_page import EC2CreateVolumePage
+from Locators.CE import EC2InstancePageLocators, EC2VolumnePageLocators
 from Pages.base_page import BasePage
-from Pages.ec2.ec2_launch_instances_wizard_page import EC2LaunchInstancesWizardPage
+from Pages.CE.ec2_launch_instances_wizard_page import EC2LaunchInstancesWizardPage
 from Configs import EC2_VOLUME_URL
 
 

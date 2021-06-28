@@ -3,8 +3,8 @@ import unittest
 
 import HtmlTestRunner
 
-from Tests.s3.s3_base_test import S3BaseTest
-from Pages.s3.s3_homepage import S3HomePage
+from Tests.S3.s3_base_test import S3BaseTest
+from Pages.S3.s3_homepage import S3HomePage
 
 class Test_S3_Delete_Bucket(S3BaseTest):
 

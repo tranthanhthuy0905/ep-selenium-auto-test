@@ -26,7 +26,7 @@ class BaseTest(unittest.TestCase, APIService):
                             level=logging.INFO) 
 
     def clear_test_instances(self):
-        self.delete_s3_buckets()
+        # self.delete_s3_buckets()
         self._call_api_delete_ec2_instance()
 
     def tearDown(self):

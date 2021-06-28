@@ -1,6 +1,6 @@
-from Locators.ec2 import DashboardPageLocators
+from Locators.CE import DashboardPageLocators
 from Pages.base_page import BasePage
-from Pages.ec2.ec2_page import EC2Page
+from Pages.CE.ec2_page import EC2Page
 from Configs import EC2_BASE_URL
 
 

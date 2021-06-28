@@ -1,8 +1,8 @@
-from Locators.ec2 import EC2PageLocators
+from Locators.CE import EC2PageLocators
 from Pages.base_page import BasePage
-from Pages.ec2.ec2_instances_page import EC2InstancesPage
-from Pages.ec2.ec2_instances_type_page import EC2InstanceTypesPage
-from Pages.ec2.ec2_elastic_block_store_volumnes_page import EC2ElasticBlockStoreVolumnePage
+from Pages.CE.ec2_instances_page import EC2InstancesPage
+from Pages.CE.ec2_instances_type_page import EC2InstanceTypesPage
+from Pages.CE.ec2_elastic_block_store_volumnes_page import EC2ElasticBlockStoreVolumnePage
 from Configs import EC2_BASE_URL
 
 

@@ -1,8 +1,8 @@
 import time
 from Tests.base_test import BaseTest
-from Pages.ec2.dashboard_page import DashboardPage
-from Pages.ec2.ec2_instances_page import EC2InstancesPage
-from Locators.ec2 import *
+from Pages.CE.dashboard_page import DashboardPage
+from Pages.CE.ec2_instances_page import EC2InstancesPage
+from Locators.CE import *
 
 
 class TestInstances(BaseTest):

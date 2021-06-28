@@ -3,8 +3,8 @@ import unittest
 
 import HtmlTestRunner
 
-from Tests.s3.s3_base_test import S3BaseTest
-from Pages.s3.s3_bucket_details_page import S3BucketDetailsPage, S3BucketFilesAndFoldersPage
+from Tests.S3.s3_base_test import S3BaseTest
+from Pages.S3.s3_bucket_details_page import S3BucketDetailsPage, S3BucketFilesAndFoldersPage
 
 class Test_S3_Upload_File(S3BaseTest):
 

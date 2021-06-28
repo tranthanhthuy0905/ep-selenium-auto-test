@@ -1,7 +1,7 @@
 from Pages.base_page import BasePage
-from Pages.s3.s3_create_bucket_page import S3CreateBucketPage
+from Pages.S3.s3_create_bucket_page import S3CreateBucketPage
 from Configs import S3_BASE_URL, S3_USER_TOKEN
-from Locators.s3 import S3Locators
+from Locators.S3 import S3Locators
 
 class S3HomePage(BasePage):
     def __init__(self, driver):

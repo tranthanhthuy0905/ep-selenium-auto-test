@@ -5,13 +5,13 @@ import HtmlTestRunner
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.ec2.ce_base_test import CEBaseTest
-from Pages.ec2.ec2_homepage import EC2HomePage
-from Pages.ec2.ec2_instances_page import EC2InstancesPage
-from Pages.ec2.ec2_launch_instances_wizard_page import EC2LaunchInstancesWizardPage
+from Tests.CE.ce_base_test import CEBaseTest
+from Pages.CE.ec2_homepage import EC2HomePage
+from Pages.CE.ec2_instances_page import EC2InstancesPage
+from Pages.CE.ec2_launch_instances_wizard_page import EC2LaunchInstancesWizardPage
 from Configs.TestData.CEVolumeTestData import CEVolumeTestData
 from Configs.TestData.CEKeypairTestData import CEKeypairTestData
-from Locators.ec2 import *
+from Locators.CE import *
 
 import time
 

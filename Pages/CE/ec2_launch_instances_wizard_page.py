@@ -1,4 +1,4 @@
-from Locators.ec2 import EC2LaunchInstancesWizardPageLocators
+from Locators.CE import EC2LaunchInstancesWizardPageLocators
 from Pages.base_page import BasePage
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException

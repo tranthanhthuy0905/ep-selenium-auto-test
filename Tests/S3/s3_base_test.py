@@ -7,9 +7,9 @@ from Tests.base_test import BaseTest
 from Configs import S3_BUCKET_API_CLIENT_URL, S3_FILES_API_CLIENT_URL
 from Configs import S3_BUCKET_DETAILS_URL
 from Configs import S3_USER_TOKEN
-from Pages.s3.s3_homepage import S3HomePage
-from Pages.s3.s3_create_bucket_page import S3CreateBucketPage
-from Pages.s3.s3_bucket_details_page import S3BucketDetailsPage
+from Pages.S3.s3_homepage import S3HomePage
+from Pages.S3.s3_create_bucket_page import S3CreateBucketPage
+from Pages.S3.s3_bucket_details_page import S3BucketDetailsPage
 
 class S3BaseTest(BaseTest):
     def _call_api_delete_s3_bucket(self, bucket_name):
