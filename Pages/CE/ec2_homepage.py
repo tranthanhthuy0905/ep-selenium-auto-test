@@ -4,14 +4,14 @@ from Pages.CE.ec2_instances_page import EC2InstancesPage
 from Pages.CE.ec2_instances_type_page import EC2InstanceTypesPage
 from Pages.CE.ec2_elastic_block_store_volumnes_page import EC2VolumePage
 from Locators.CE import EC2PageLocators
-from Configs import EC2_BASE_URL
+from Configs import EC2_BASE_URL, EC2_USER_TOKEN
 
 
 class EC2HomePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver=driver, base_url=EC2_BASE_URL)
         self.driver.get(EC2_BASE_URL)
-        self.authenticate()
+        self.authenticate(EC2_USER_TOKEN)
 
     def access_ec2_instances_page(self):
         ec2_instances_page = self\
