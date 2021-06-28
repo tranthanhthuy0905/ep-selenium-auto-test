@@ -1,4 +1,8 @@
 import time
+import os
+import unittest
+
+import HtmlTestRunner
 
 from Tests.s3.s3_base_test import S3BaseTest
 from Pages.s3.s3_bucket_details_page import S3BucketDetailsPage, S3BucketFilesAndFoldersPage
@@ -17,7 +21,13 @@ class Test_S3_Upload_File(S3BaseTest):
         self.s3_files_and_folders_page = S3BucketFilesAndFoldersPage(self.driver, bucket_name)
         self.assertEqual(self.driver.current_url, self.s3_files_and_folders_page.base_url)
 
-        self.s3_files_and_folders_page.click_add_file_button()
+        # self.s3_files_and_folders_page.click_add_file_button()
         self.s3_files_and_folders_page.upload_file_from_browser()
 
         time.sleep(10)
+
+if __name__ == "__main__":
+    unittest.main(
+        testRunner=HtmlTestRunner.HTMLTestRunner(
+            output=os.path.join(os.getcwd(), "Reports"))
+    )

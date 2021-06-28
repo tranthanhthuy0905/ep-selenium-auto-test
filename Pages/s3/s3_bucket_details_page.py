@@ -23,11 +23,11 @@ class S3BucketFilesAndFoldersPage(BasePage):
         super().__init__(driver=driver, base_url=S3_BUCKET_FILE_UPLOAD_URL.format(bucket_name=bucket_name))
 
     def click_add_file_button(self):
-        pass
         self.find_element(*S3Locators.ADD_FILES_BUTTON).click()
 
     def upload_file_from_browser(self):
         # TODO: CHECK FROM DIALOG POPUP???
+        self.driver.implicitly_wait(10)
         file_input = self.driver.find_element(*S3Locators.FILE_INPUT)
         file_input.send_keys(FILE_PATH_UPLOAD_SAMPLE)
         # file_input.send_keys(Keys.ENTER)
