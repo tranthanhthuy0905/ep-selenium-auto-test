@@ -2,6 +2,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.keys import Keys
 import time
 
 from Configs import COOKIE
@@ -99,3 +100,15 @@ class BasePage(object):
             print("\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1]))
             self.driver.quit()
             return False
+
+    def fill_form(self, value, locator):
+        try:
+            form = self.find_element(*locator)
+            form.send_keys(Keys.COMMAND + "a" + Keys.DELETE)
+            form.send_keys(value)
+            return self
+        except TimeoutException:
+            self.driver.get_screenshot_as_file(
+                'error_snapshot/{filename}.png'.format(filename='fill_form'))
+            self.driver.quit()
+    

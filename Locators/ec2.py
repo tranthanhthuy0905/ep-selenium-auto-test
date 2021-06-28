@@ -83,6 +83,7 @@ class EC2VolumnePageLocators(object):
     EXPUNGE_VOLUME_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(4)')
     EXPUNGE_VOLUME_CONFIRM_BTN = (By.XPATH, "//span[text()='Expunge']")
     CREATE_VOLUMNE_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Expunge volume is successful!']")
+    VOLUME_NAME_IN_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[2]")
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,' Create Volume')]")
 
 
@@ -91,7 +92,7 @@ class EC2CreateVolumnePageLocators(object):
     CREATE_VOlUMNE_BTN = (By.XPATH, "//button[contains(.,'Create Volume')]")
     VOLUME_TYPE_LIST = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section[@class='ant-layout ant-layout-has-sider settings__borderLess settings__menuShadow']/section[@class='ant-layout']/main[@class='ant-layout-content']/div/div[@class='ant-spin-nested-loading']/div[@class='ant-spin-container']/div/div[@class='style_content__3zwDt']/div[@class='ant-card style_card__2lPJS']/div[@class='ant-card-body']/div[@class='ant-col ant-col-24 style_card-body__bjpMO']/div[@class='style_field__1eia8'][2]/div[@class='ant-row']/div/div")
     CUSTOM_DISK = (By.XPATH, "//div[text()='Custom Disk']")
-    VOLUME_NAME_FORM = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section[@class='ant-layout ant-layout-has-sider settings__borderLess settings__menuShadow']/section[@class='ant-layout']/main[@class='ant-layout-content']/div/div[@class='ant-spin-nested-loading']/div[@class='ant-spin-container']/div/div[@class='style_content__3zwDt']/div[@class='ant-card style_card__2lPJS']/div[@class='ant-card-head']")
-    VOLUME_SIZE_FORM = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section[@class='ant-layout ant-layout-has-sider settings__borderLess settings__menuShadow']/section[@class='ant-layout']/main[@class='ant-layout-content']/div/div[@class='ant-spin-nested-loading']/div[@class='ant-spin-container']/div/div[@class='style_content__3zwDt']/div[@class='ant-card style_card__2lPJS']/div[@class='ant-card-body']/div[@class='ant-col ant-col-24 style_card-body__bjpMO']/div[@class='style_field__1eia8'][3]/div[@class='ant-row']/div[@class='ant-input-number']/div[@class='ant-input-number-input-wrap']/input[@class='ant-input-number-input']")
+    VOLUME_NAME_FORM = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[3]/div[2]/div/div[1]/input")
+    VOLUME_SIZE_FORM = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section[@class='ant-layout ant-layout-has-sider settings__borderLess settings__menuShadow']/section[@class='ant-layout']/main[@class='ant-layout-content']/div/div[@class='ant-spin-nested-loading']/div[@class='ant-spin-container']/div/div[@class='style_content__3zwDt']/div[@class='ant-card style_card__2lPJS']/div[@class='ant-card-body']/div[@class='ant-col ant-col-24 style_card-body__bjpMO']/div[@class='style_field__1eia8'][3]/div[@class='ant-row']/div/div/input")
     CREATE_VOLUMNE_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Created volume successfully.']")
 

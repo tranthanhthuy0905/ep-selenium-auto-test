@@ -12,6 +12,7 @@ EC2_INSTANCE_URL = urllib.parse.urljoin(EC2_BASE_URL, "instances")
 EC2_INSTANCE_CREATE_WIZARD_URL = urllib.parse.urljoin(EC2_BASE_URL, "launch-instance-wizard")
 EC2_INSTANCE_API_CLIENT_URL = urllib.parse.urljoin(EC2_API_URL, "instances/")
 EC2_KEYPAIR_API_CLIENT_URL = urllib.parse.urljoin(EC2_API_URL, "keypairs/")
+EC2_VOLUME_API_CLIENT_URL = urllib.parse.urljoin(EC2_API_URL, "volumes/")
 
 S3_BASE_URL = "https://staging-s3.engineering.vng.vn/s3/"
 S3_BUCKET_URL = urllib.parse.urljoin(S3_BASE_URL, "buckets/")
