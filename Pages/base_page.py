@@ -5,8 +5,6 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 import time
 
-from Configs import COOKIE
-
 
 class BasePage(object):
     def __init__(self, driver, base_url):
@@ -14,8 +12,9 @@ class BasePage(object):
         self.driver = driver
         self.timeout = 30
 
-    def authenticate(self):
-        self.driver.add_cookie(COOKIE)
+    def authenticate(self, user_token):
+        _cookie = { "name": "user-token", "value": user_token}
+        self.driver.add_cookie(_cookie)
         self.driver.get(self.base_url)
         self.driver.implicitly_wait(10)
         if "session/signin" in self.driver.current_url:

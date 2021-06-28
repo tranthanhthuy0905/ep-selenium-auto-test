@@ -14,7 +14,7 @@ from Locators.ec2 import *
 
 import time
 
-"""
+'''
 Screnario 2: Create Volume without "Launch Instance" process
     Given a certain user
     When user clicks on "Volumes" button on the left side
@@ -23,7 +23,7 @@ Screnario 2: Create Volume without "Launch Instance" process
     Then user can see a pop-up "Create New Volume" box
     When user clicks on "Create" button
     Then user can see the newly created volume updated in the list of volumes (status: Allocated) 
-"""
+'''
 
 class TestVolume(CEBaseTest):
     def test_create_volume(self):

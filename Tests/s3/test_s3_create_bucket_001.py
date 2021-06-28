@@ -1,5 +1,6 @@
 import os
 import unittest
+import logging
 
 import HtmlTestRunner
 from selenium.webdriver.support.ui import WebDriverWait
@@ -18,8 +19,9 @@ class Test_S3_Create_Bucket(S3BaseTest):
 
     def test_create_bucket_successful(self):
         """
-            TEST CASE: S3 Bucket should be created successfully
+            S3 Bucket should be created successfully
         """
+        logging.info("St")
         self.s3_homepage = S3HomePage(self.driver)
         self.s3_homepage.click_create_bucket()
 
