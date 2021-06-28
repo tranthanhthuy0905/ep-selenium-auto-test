@@ -5,6 +5,10 @@ S3_USER_TOKEN = ""
 
 EC2_BASE_URL = "http://staging-ce.engineering.vng.vn/"
 
+
+'''
+S3
+'''
 S3_BASE_URL = "https://staging-s3.engineering.vng.vn/s3/"
 S3_BUCKET_URL = urllib.parse.urljoin(S3_BASE_URL, "buckets/")
 S3_BUCKET_CREATE_URL = urllib.parse.urljoin(S3_BUCKET_URL, "create")
