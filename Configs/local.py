@@ -1,7 +1,7 @@
 import os
 import urllib.parse
 
-S3_USER_TOKEN = ""
+S3_USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGQ0MjA2ODViZjgwNjAwMTgwNmUwMTQiLCJuYW1lIjoicXVhbmxoMiIsImlhdCI6MTYyNDg0NDE0MSwiZXhwIjoxNjI0OTMwNTQxfQ.MVLUQvzsWjxu8L1dBWDkUUR8l1Av-15RLnhgyaQXZZQ"
 
 EC2_BASE_URL = "http://staging-ce.engineering.vng.vn/"
 

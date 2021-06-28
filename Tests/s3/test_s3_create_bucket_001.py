@@ -21,7 +21,6 @@ class Test_S3_Create_Bucket(S3BaseTest):
         """
             S3 Bucket should be created successfully
         """
-        logging.info("St")
         self.s3_homepage = S3HomePage(self.driver)
         self.s3_homepage.click_create_bucket()
 
