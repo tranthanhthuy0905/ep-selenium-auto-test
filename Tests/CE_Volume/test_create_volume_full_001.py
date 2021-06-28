@@ -62,6 +62,7 @@ class TestVolume(CEBaseTest):
         self.volume_id = self.driver.find_element_by_xpath("//td[contains(.,'" + volume_name +"')]/parent::*").get_attribute("data-row-key")
         
     
+# python3 -m unittest Tests.CE_Volume.test_create_volume_full_001 -v
 
 if __name__ == "__main__":
     unittest.main(
