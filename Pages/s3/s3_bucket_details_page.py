@@ -31,6 +31,5 @@ class S3BucketFilesAndFoldersPage(BasePage):
         file_input = self.driver.find_element(*S3Locators.FILE_INPUT)
         file_input.send_keys(FILE_PATH_UPLOAD_SAMPLE)
         # file_input.send_keys(Keys.ENTER)
-        time.sleep(3)
         self.find_element(*S3Locators.UPLOAD_FILE_SUBMIT_BUTTON).click()
 
