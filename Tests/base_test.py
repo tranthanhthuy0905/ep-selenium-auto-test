@@ -2,7 +2,7 @@ import requests
 import unittest
 from selenium import webdriver
 
-from Configs import CHROME_DRIVER_PATH, USER_TOKEN
+from Configs import CHROME_DRIVER_PATH
 
 class BaseTest(unittest.TestCase):
     def setUp(self):
@@ -27,8 +27,7 @@ class BaseTest(unittest.TestCase):
     def _call_api_delete_ec2_instance(self):
         pass
 
-    def _call_request_delete(self, url, params):
-        user_token = USER_TOKEN
+    def _call_request_delete(self, url, params, user_token):
         headers = {
             "cookie": f"user-token={user_token}",
             "accept": "application/json"

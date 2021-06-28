@@ -11,3 +11,5 @@ class S3Locators:
 
     BUCKET_UPLOAD_FILE_BUTTON = (By.LINK_TEXT, "Upload")
     ADD_FILES_BUTTON = (By.XPATH, "//button[./div/text()='Add files']")
+    FILE_INPUT = (By.XPATH, "//input[@type='file']")
+    UPLOAD_FILE_SUBMIT_BUTTON = (By.XPATH, "//button[@type='button' and ./span/text()='Upload']")

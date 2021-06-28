@@ -13,6 +13,7 @@ S3_BUCKET_FILE_UPLOAD_URL = urllib.parse.urljoin(S3_BUCKET_URL, "{bucket_name}/u
 
 S3_BUCKET_API_CLIENT_URL = "https://staging-s3.engineering.vng.vn/api/client/buckets"
 
+FILE_PATH_UPLOAD_SAMPLE = os.path.join(os.getcwd(), "Configs/TestData/sample_files/first.txt")
 
 CHROME_DRIVER_PATH = os.path.join(os.getcwd(), "Drivers/chromedriver")
 CHROME_CONFIGS = []

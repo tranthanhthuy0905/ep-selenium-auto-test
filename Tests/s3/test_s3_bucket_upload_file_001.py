@@ -18,5 +18,6 @@ class Test_S3_Upload_File(S3BaseTest):
         self.assertEqual(self.driver.current_url, self.s3_files_and_folders_page.base_url)
 
         self.s3_files_and_folders_page.click_add_file_button()
+        self.s3_files_and_folders_page.upload_file_from_browser()
 
         time.sleep(10)

@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from Tests.base_test import BaseTest
 from Configs import S3_BUCKET_API_CLIENT_URL
 from Configs import S3_BUCKET_DETAILS_URL
+from Configs import S3_USER_TOKEN
 from Pages.s3.s3_homepage import S3HomePage
 from Pages.s3.s3_create_bucket_page import S3CreateBucketPage
 from Pages.s3.s3_bucket_details_page import S3BucketDetailsPage
@@ -17,7 +18,7 @@ class S3BaseTest(BaseTest):
             params = {
                 "bucket_name": self.service_slug
             }
-            self._call_request_delete(url, params)
+            self._call_request_delete(url, params, S3_USER_TOKEN)
         except Exception as e:
             print("Can't delete S3 bucket;", str(e))
 
