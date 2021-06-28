@@ -1,4 +1,3 @@
-import time
 import os
 import unittest
 
@@ -11,7 +10,7 @@ class Test_S3_Upload_File(S3BaseTest):
 
     def test_upload_file_to_bucket_successful(self):
         '''
-        TEST CASE: File should be successfully uploaded to a S3 bucket
+        File should be successfully uploaded to a S3 bucket
         '''
         bucket_name = self.create_s3_bucket()
         self.s3_bucket_details_page = S3BucketDetailsPage(self.driver, bucket_name)
@@ -23,8 +22,6 @@ class Test_S3_Upload_File(S3BaseTest):
 
         # self.s3_files_and_folders_page.click_add_file_button()
         self.s3_files_and_folders_page.upload_file_from_browser()
-
-        time.sleep(10)
 
 if __name__ == "__main__":
     unittest.main(

@@ -1,3 +1,5 @@
+import logging
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -9,8 +11,6 @@ from Pages.s3.s3_homepage import S3HomePage
 from Pages.s3.s3_create_bucket_page import S3CreateBucketPage
 from Pages.s3.s3_bucket_details_page import S3BucketDetailsPage
 
-
-
 class S3BaseTest(BaseTest):
     def _call_api_delete_s3_bucket(self, bucket_name):
         try:
@@ -20,7 +20,7 @@ class S3BaseTest(BaseTest):
             }
             self._call_request_delete(url, params, S3_USER_TOKEN)
         except Exception as e:
-            print("Can't delete S3 bucket;", str(e))
+            logging.error("Can't delete S3 bucket;", str(e))
 
     def create_s3_bucket(self):
         self.s3_homepage = S3HomePage(self.driver)
@@ -34,7 +34,10 @@ class S3BaseTest(BaseTest):
         return bucket_name
 
     def delete_s3_buckets(self):
-        bucket_name = self.service_slug
+        try:
+            bucket_name = self.service_slug
+        except:
+            return None
         self.delete_bucket_files(bucket_name)
     
     def delete_bucket_files(self,bucket_name):
@@ -43,13 +46,12 @@ class S3BaseTest(BaseTest):
         list_filenames = []
         try:
             if files_info and files_info["count"] > 0:
-                print("FILES INFO:", files_info)
                 for item in files_info["results"]["contents"]:
                     list_filenames.append(item["key"])
         except Exception as e:
-            print("Can't get filenames to delete;", str(e))
+            logging.error("Can't get filenames to delete;", str(e))
         
-        print(f"List files to delete in bucket {bucket_name}:", list_filenames)
+        logging.info(f"List files to delete in bucket {bucket_name}: {list_filenames}")
         if list_filenames:
             for filename in list_filenames:
                 self._call_api_delete_bucket_files(bucket_name, filename)
@@ -66,7 +68,7 @@ class S3BaseTest(BaseTest):
             }
             self._call_request_delete(url, params, S3_USER_TOKEN)
         except Exception as e:
-            print("Can't delete S3 files;", str(e))
+            logging.error("Can't delete S3 files;", str(e))
 
     def _call_api_get_bucket_files(self, bucket_name):
         url = S3_FILES_API_CLIENT_URL
@@ -76,7 +78,7 @@ class S3BaseTest(BaseTest):
             }
             self._call_request_get(url, params, S3_USER_TOKEN)
         except Exception as e:
-            print("Can't delete S3 files;", str(e))
+            logging.error("Can't delete S3 files;", str(e))
 
     def _call_api_get_bucket_files(self, bucket_name):
         url = S3_FILES_API_CLIENT_URL
@@ -86,7 +88,7 @@ class S3BaseTest(BaseTest):
             }
             return self._call_request_get(url, params, S3_USER_TOKEN)
         except Exception as e:
-            print("Can't list S3 files;", str(e))
+            logging.error("Can't list S3 files;", str(e))
         
 
 

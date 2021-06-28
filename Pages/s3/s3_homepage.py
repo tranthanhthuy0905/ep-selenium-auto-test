@@ -11,3 +11,9 @@ class S3HomePage(BasePage):
 
     def click_create_bucket(self):
         self.driver.find_element(*S3Locators.CREATE_BUCKET_HOME_BUTTON).click()
+
+    def select_s3_bucket(self, bucket_name):
+        pass
+        # buttonnnnn = S3Locators.BUCKET_RADIO_BUTTON(bucket_name)
+        # print(buttonnnnn)
+        # self.driver.find_element(*buttonnnnn)
