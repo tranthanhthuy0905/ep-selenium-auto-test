@@ -2,9 +2,10 @@ import requests
 import unittest
 from selenium import webdriver
 
-from Configs import CHROME_DRIVER_PATH, USER_TOKEN
+from Configs import CHROME_DRIVER_PATH
+from Tests.utils import APIService
 
-class BaseTest(unittest.TestCase):
+class BaseTest(unittest.TestCase, APIService):
     def setUp(self):
         chrome_options = webdriver.ChromeOptions()
         # chrome_options.add_argument('--headless')
@@ -18,28 +19,8 @@ class BaseTest(unittest.TestCase):
         self.driver = webdriver.Chrome(CHROME_DRIVER_PATH, options=chrome_options)
 
     def clear_test_instances(self):
-        self._call_api_delete_s3_bucket()
+        self.delete_s3_buckets()
         self._call_api_delete_ec2_instance()
-
-    def _call_api_delete_s3_bucket(self):
-        pass
-
-    def _call_api_delete_ec2_instance(self):
-        pass
-
-    def _call_request_delete(self, url, params):
-        user_token = USER_TOKEN
-        headers = {
-            "cookie": f"user-token={user_token}",
-            "accept": "application/json"
-        }
-        r = requests.delete(url, headers=headers, params=params)
-        if r.status_code == 200:
-            print(f"Succeeded calling {url}")
-        else:
-            print(f"FAILED calling {url}")
-        print(f"Delete response: {r.content}. Params: {params}")
-
 
     def tearDown(self):
         self.clear_test_instances()
