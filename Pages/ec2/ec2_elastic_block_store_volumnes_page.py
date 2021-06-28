@@ -1,9 +1,11 @@
-from Locators.ec2 import EC2ElasticBlockStoreVolumnePageLocators
+from Configs.local import EC2_VOLUME_URL
+from Pages.ec2.ec2_volume_page import EC2VolumePage
+from Locators.ec2 import EC2CreateVolumnePageLocators, EC2VolumnePageLocators
 from Pages.base_page import BasePage
 from Configs import EC2_BASE_URL
 
 
-class EC2ElasticBlockStoreVolumnePage(BasePage):
+class EC2VolumePage(BasePage):
     def __init__(self, driver):
-        self.locator = EC2ElasticBlockStoreVolumnePageLocators
-        super(EC2ElasticBlockStoreVolumnePage, self).__init__(driver, EC2_BASE_URL)
+        self.locator = EC2VolumnePageLocators
+        super(EC2VolumePage, self).__init__(driver, EC2_VOLUME_URL)
