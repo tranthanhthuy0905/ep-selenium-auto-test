@@ -7,7 +7,7 @@ class APIService:
     def _call_api_delete_s3_bucket(self):
         pass
 
-    def _call_api_delete_ec2_instance(self):
+    def _call_api_delete_instance(self):
         pass
 
     def _call_request_delete(self, url, params, user_token):
