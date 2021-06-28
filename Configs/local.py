@@ -1,8 +1,7 @@
 import os
 import urllib.parse
 
-USER_TOKEN = ""
-COOKIE = { "name": "user-token", "value": USER_TOKEN}
+S3_USER_TOKEN = ""
 
 EC2_BASE_URL = "http://staging-ce.engineering.vng.vn/"
 
