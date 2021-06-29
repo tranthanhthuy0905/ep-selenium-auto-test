@@ -4,16 +4,16 @@ import unittest
 
 import HtmlTestRunner
 
-from Tests.base_test import BaseTest
-from Pages.s3.s3_homepage import S3HomePage
+from Tests.S3.s3_base_test import S3BaseTest
+from Pages.S3.s3_homepage import S3HomePage
 from Configs.TestData.S3TestData import S3TestData
 
 
-class Test_S3_Home_Page(BaseTest):
+class Test_S3_Home_Page(S3BaseTest):
 
     def test_load_homepage(self):
         """
-            TEST CASE: S3 Homepage must be loaded successfully
+            S3 Homepage must be loaded successfully
         """
         self.s3_homepage = S3HomePage(self.driver)
 

@@ -8,6 +8,7 @@ class S3Locators:
     BUCKET_NAME_TEXTBOX = (By.XPATH, "//input[@id='bucket_name']")
     BUCKET_REGION_DROPDOWN = (By.XPATH, "//input[@id='zone']")
     BUCKET_CREATE_SUBMIT_BUTTON = (By.XPATH, "//button[@type='submit' and ./span/text()='Create bucket']")
+    BUCKET_RADIO_BUTTON = lambda _name: (By.XPATH, f"//input[@type='radio' and ./../../../../tr/@data-row-key='{_name}']")
 
     BUCKET_UPLOAD_FILE_BUTTON = (By.LINK_TEXT, "Upload")
     ADD_FILES_BUTTON = (By.XPATH, "//button[./div/text()='Add files']")

@@ -1,24 +1,25 @@
 import os
 import unittest
+import logging
 
 import HtmlTestRunner
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.s3.s3_base_test import S3BaseTest
+from Tests.S3.s3_base_test import S3BaseTest
 
-from Pages.s3.s3_homepage import S3HomePage
-from Pages.s3.s3_create_bucket_page import S3CreateBucketPage
-from Pages.s3.s3_bucket_details_page import S3BucketDetailsPage
+from Pages.S3.s3_homepage import S3HomePage
+from Pages.S3.s3_create_bucket_page import S3CreateBucketPage
+from Pages.S3.s3_bucket_details_page import S3BucketDetailsPage
 
-from Locators.s3 import S3Locators
+from Locators.S3 import S3Locators
 
 
 class Test_S3_Create_Bucket(S3BaseTest):
 
     def test_create_bucket_successful(self):
         """
-            TEST CASE: S3 Bucket should be created successfully
+            S3 Bucket should be created successfully
         """
         self.s3_homepage = S3HomePage(self.driver)
         self.s3_homepage.click_create_bucket()

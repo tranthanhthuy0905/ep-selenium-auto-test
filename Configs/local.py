@@ -1,15 +1,25 @@
 import os
 import urllib.parse
+import posixpath
 
-DASHBOARD_USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGQzZmRmY2U0M2Q3NjAwMTk5YmZhNzIiLCJuYW1lIjoidGh1eXR0NyIsImlhdCI6MTYyNDg4MjIzOCwiZXhwIjoxNjI0OTY4NjM4fQ.-7vmUrypJ3AtJwu9XTD2rxMNYIfWUAbw95zJ_VetLh0"
-DASHBOARD_BASE_URL = "https://staging-console.engineering.vng.vn/dashboard"
+CE_USER_TOKEN = ""
+S3_USER_TOKEN = ""
 
-EC2_USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGQ5OTIwODhlNDM1MjAwMTg5ZTNmNzMiLCJuYW1lIjoidGh1eXR0NyIsImlhdCI6MTYyNDg3MTQ1MSwiZXhwIjoxNjI0OTU3ODUxfQ.jbFSM7yW4J10Qdha_IG43MiHSJzouAuub9m3imZ_cwc"
-EC2_BASE_URL = "https://staging-ce.engineering.vng.vn/ce/"
-EC2_INSTANCE_URL = urllib.parse.urljoin(EC2_BASE_URL, "instances")
-EC2_INSTANCE_CREATE_WIZARD_URL = urllib.parse.urljoin(EC2_BASE_URL, "launch-instance-wizard")
+CE_BASE_URL = "https://staging-ce.engineering.vng.vn/ce/"
+CE_VOLUME_URL = posixpath.join(CE_BASE_URL, "elastic-block-store/volumes")
+CE_CREATE_VOLUME_URL = posixpath.join(CE_VOLUME_URL, "create-volume")
+CE_INSTANCE_URL = posixpath.join(CE_BASE_URL, "instances")
+CE_INSTANCE_CREATE_WIZARD_URL = posixpath.join(CE_BASE_URL, "launch-instance-wizard")
 
-S3_USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGQ0MjA2ODViZjgwNjAwMTgwNmUwMTQiLCJuYW1lIjoicXVhbmxoMiIsImlhdCI6MTYyNDg0NDE0MSwiZXhwIjoxNjI0OTMwNTQxfQ.MVLUQvzsWjxu8L1dBWDkUUR8l1Av-15RLnhgyaQXZZQ"
+CE_API_URL = "https://staging-ce.engineering.vng.vn/api/client/"
+CE_INSTANCE_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "instances/")
+CE_KEYPAIR_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "keypairs/")
+CE_VOLUME_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "volumes/")
+
+
+'''
+S3
+'''
 S3_BASE_URL = "https://staging-s3.engineering.vng.vn/s3/"
 S3_BUCKET_URL = urllib.parse.urljoin(S3_BASE_URL, "buckets/")
 S3_BUCKET_CREATE_URL = urllib.parse.urljoin(S3_BUCKET_URL, "create")
@@ -23,4 +33,4 @@ S3_FILES_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "files")
 FILE_PATH_UPLOAD_SAMPLE = os.path.join(os.getcwd(), "Configs/TestData/sample_files/first.txt")
 
 CHROME_DRIVER_PATH = os.path.join(os.getcwd(), "Drivers/chromedriver")
-CHROME_CONFIGS = []
+LOG_FILE_PATH = os.path.join(os.getcwd(), "Reports/logs")

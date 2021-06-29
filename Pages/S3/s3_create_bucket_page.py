@@ -3,7 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from Pages.base_page import BasePage
 from Configs import S3_BUCKET_CREATE_URL
 from Configs.TestData.S3TestData import S3TestData
-from Locators.s3 import S3Locators
+from Locators.S3 import S3Locators
 
 class S3CreateBucketPage(BasePage):
     def __init__(self, driver):
