@@ -16,6 +16,9 @@ CE_INSTANCE_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "instances/")
 CE_KEYPAIR_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "keypairs/")
 CE_VOLUME_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "volumes/")
 
+CE_SG_URL = "https://console.engineering.vng.vn/ec2/network/security-groups"
+CE_SG_CREATE_URL = "https://console.engineering.vng.vn/ec2/network/security-groups/create-security-group"
+
 
 '''
 S3

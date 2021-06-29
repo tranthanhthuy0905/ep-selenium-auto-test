@@ -97,3 +97,22 @@ class CECreateVolumnePageLocators(object):
     VOLUME_SIZE_FORM = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[3]/div/div/div/input")
     CREATE_VOLUMNE_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Created volume successfully.']")
 
+class CESecurityGroupLocators:
+
+    CREATE_SEC_GROUP_TEXTBOX_NAME_CSS = (By.CSS_SELECTOR, "input.ant-input")
+
+    CREATE_BUTTON = (By.XPATH, '//span[text()=" Create Security Group"]')
+    SUBMIT_CREATE_BUTTON_X_PATH = (By.XPATH, '//span[text()="Create Security Group"]')
+    CREATE_SUCCESSFUL_POPUP_XPATH = (By.XPATH, "//class[text()='Created security group successfully']")
+
+    COLLAPSE_TEXT_BOX_CLASS = (By.CLASS_NAME, "ant-collapse-content-box")
+    SECURITY_GROUP_ITEM_HOME_XPATH = (By.XPATH, '//tr[@data-row-key="{security_group_id}"]')
+
+    ADD_INGRESS_BUTTON = None
+    ADD_EGRESS_BUTTON = None
+
+    INGRESS_START_PORT_TEXTBOX = None
+    INGRESS_END_PORT_TEXTBOX = None
+
+    EGRESS_START_PORT_TEXTBOX = None
+    EGRESS_END_PORT_TEXTBOX = None
