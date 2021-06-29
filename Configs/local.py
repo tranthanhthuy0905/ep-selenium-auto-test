@@ -37,4 +37,3 @@ FILE_PATH_UPLOAD_SAMPLE = os.path.join(os.getcwd(), "Configs/TestData/sample_fil
 
 CHROME_DRIVER_PATH = os.path.join(os.getcwd(), "Drivers/chromedriver")
 LOG_FILE_PATH = os.path.join(os.getcwd(), "Reports/logs")
-CHROME_CONFIGS = []

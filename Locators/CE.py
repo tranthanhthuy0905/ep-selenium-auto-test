@@ -77,6 +77,12 @@ class CELaunchInstancesWizardPageLocators(object):
     CREATE_VOlUMNE_BTN = (By.XPATH, "//span[text()='Create']")
     CREATE_VOLUMNE_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Created volume successfully.']")
 
+    # test_launch_instance_01's elements
+    APPLY_THIS_PASSWORD = (By.XPATH, "/html/body/div[2]/div/div[2]/div/div[2]/div[3]/button[2]/span")
+    EDIT_PASSWORD = (By.XPATH, "/html/body/div[2]/div/div[2]/div/div[2]/div[3]/button[1]/span")
+    DEFAULT_PASSWORD = (By.ID, "password")
+    DEFAULT_PASSWORD_CONFIRM = (By.ID, "password_confirm")
+    TWO_PASSWORD_NOT_MATCH = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[3]/form/div[2]/div[2]/div/div/div[2]/div')
 
 class CEVolumnePageLocators(object):
     CHOOSE_VOLUMNE_RADIO = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/label/span/input')

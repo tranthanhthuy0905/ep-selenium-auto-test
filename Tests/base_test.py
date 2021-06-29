@@ -32,7 +32,7 @@ class BaseTest(unittest.TestCase, APIService):
     def tearDown(self):
         self.clear_test_instances()
         self.driver.quit()
-
+        print("Test completed")
 
 if __name__ == "__main__":
     unittest.main()

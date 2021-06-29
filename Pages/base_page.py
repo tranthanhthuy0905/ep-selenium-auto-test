@@ -110,4 +110,3 @@ class BasePage(object):
             self.driver.get_screenshot_as_file(
                 'error_snapshot/{filename}.png'.format(filename='fill_form'))
             self.driver.quit()
-    
