@@ -1,15 +1,18 @@
-from Locators.CE import EC2CreateVolumnePageLocators
+from Locators.CE import CECreateVolumnePageLocators
 from Pages.base_page import BasePage
-from Pages.CE.ec2_launch_instances_wizard_page import EC2LaunchInstancesWizardPage
+from Pages.CE.launch_instances_wizard_page import CELaunchInstancesWizardPage
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
-from Configs import EC2_CREATE_VOLUME_URL
+from Configs import CE_CREATE_VOLUME_URL
 import time
 
-class EC2CreateVolumePage(BasePage):
+class CECreateVolumePage(BasePage):
     def __init__(self, driver):
-        self.locator = EC2CreateVolumnePageLocators
-        super(EC2CreateVolumePage, self).__init__(driver, EC2_CREATE_VOLUME_URL)
+        self.locator = CECreateVolumnePageLocators
+        super().__init__(driver=driver, base_url=CE_CREATE_VOLUME_URL)
+    
+    def show(self):
+        print(self.base_url)
 
     def choose_volume_type(self, locator):
         try:

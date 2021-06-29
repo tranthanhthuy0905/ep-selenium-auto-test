@@ -1,19 +1,19 @@
-from Locators.CE import EC2LaunchInstancesWizardPageLocators
+from Locators.CE import CELaunchInstancesWizardPageLocators
 from Pages.base_page import BasePage
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
 from Configs.TestData.CEInstanceTestData import CEInstanceTestData
 from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 from Configs.TestData.CEVolumeTestData import CEVolumeTestData
-from Configs import EC2_INSTANCE_CREATE_WIZARD_URL
+from Configs import CE_INSTANCE_CREATE_WIZARD_URL
 from selenium.webdriver.common.by import By
 import time
 
 
-class EC2LaunchInstancesWizardPage(BasePage):
+class CELaunchInstancesWizardPage(BasePage):
     def __init__(self, driver):
-        self.locator = EC2LaunchInstancesWizardPageLocators
-        super(EC2LaunchInstancesWizardPage, self).__init__(driver, EC2_INSTANCE_CREATE_WIZARD_URL)
+        self.locator = CELaunchInstancesWizardPageLocators
+        super(CELaunchInstancesWizardPage, self).__init__(driver, CE_INSTANCE_CREATE_WIZARD_URL)
 
     def fill_form(self, value, locator):
         try:
@@ -59,7 +59,6 @@ class EC2LaunchInstancesWizardPage(BasePage):
         self.driver.implicitly_wait(10)
         self\
             .click_button(self.locator.CREATE_NEW_KEYPAIR_OK_BTN)\
-            .click_button(self.locator.CREATE_NEW_KEYPAIR_CLOSE_BTN)
         
         return self
 

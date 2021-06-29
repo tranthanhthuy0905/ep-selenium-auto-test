@@ -1,22 +1,20 @@
 import os
 import urllib.parse
+import posixpath
 
-# CE chưa refactor
-USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGQyZTdiZDBlYjhhNjAwMThmNjdkNjEiLCJuYW1lIjoibmhhbnRuYyIsImlhdCI6MTYyNDc5Mjc4NiwiZXhwIjoxNjI0ODc5MTg2fQ.wyBpG6ItUEht0e09cUXwFm_jqiqIc48khqEpUEFBAUY"
-COOKIE = { "name": "user-token", "value": USER_TOKEN}
-
-EC2_USER_TOKEN = ""
+CE_USER_TOKEN = ""
 S3_USER_TOKEN = ""
 
-EC2_BASE_URL = "https://staging-ce.engineering.vng.vn/ce/"
-EC2_API_URL = "https://staging-ce.engineering.vng.vn/api/client/"
-EC2_VOLUME_URL = urllib.parse.urljoin(EC2_BASE_URL, "elastic-block-store/volumes")
-EC2_CREATE_VOLUME_URL = urllib.parse.urljoin(EC2_BASE_URL, "elastic-block-store/volumes/create-volume")
-EC2_INSTANCE_URL = urllib.parse.urljoin(EC2_BASE_URL, "instances")
-EC2_INSTANCE_CREATE_WIZARD_URL = urllib.parse.urljoin(EC2_BASE_URL, "launch-instance-wizard")
-EC2_INSTANCE_API_CLIENT_URL = urllib.parse.urljoin(EC2_API_URL, "instances/")
-EC2_KEYPAIR_API_CLIENT_URL = urllib.parse.urljoin(EC2_API_URL, "keypairs/")
-EC2_VOLUME_API_CLIENT_URL = urllib.parse.urljoin(EC2_API_URL, "volumes/")
+CE_BASE_URL = "https://staging-ce.engineering.vng.vn/ce/"
+CE_VOLUME_URL = posixpath.join(CE_BASE_URL, "elastic-block-store/volumes")
+CE_CREATE_VOLUME_URL = posixpath.join(CE_VOLUME_URL, "create-volume")
+CE_INSTANCE_URL = posixpath.join(CE_BASE_URL, "instances")
+CE_INSTANCE_CREATE_WIZARD_URL = posixpath.join(CE_BASE_URL, "launch-instance-wizard")
+
+CE_API_URL = "https://staging-ce.engineering.vng.vn/api/client/"
+CE_INSTANCE_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "instances/")
+CE_KEYPAIR_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "keypairs/")
+CE_VOLUME_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "volumes/")
 
 
 '''
