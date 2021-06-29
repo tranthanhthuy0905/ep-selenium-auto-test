@@ -10,7 +10,7 @@ from Tests.utils import APIService
 class BaseTest(unittest.TestCase, APIService):
     def setUp(self):
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--headless')
+        #chrome_options.add_argument('--headless')
         chrome_options.add_argument("--test-type")
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--no-first-run")
@@ -23,7 +23,7 @@ class BaseTest(unittest.TestCase, APIService):
         #                     filemode='a',
         #                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
         #                     datefmt='%H:%M:%S',
-        #                     level=logging.INFO) 
+        #                     level=logging.INFO)
 
     def clear_test_instances(self):
         # self.delete_s3_buckets()
