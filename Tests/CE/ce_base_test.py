@@ -16,9 +16,10 @@ class CEBaseTest(BaseTest):
                 "expunge" : True
             }
             self._call_request_delete(url, params)
-            
+
             url = CE_KEYPAIR_API_CLIENT_URL + self.keypair_name
             self._call_request_delete(url, params)
         except Exception as e:
             print("Can't delete CE instance", str(e))
+
 

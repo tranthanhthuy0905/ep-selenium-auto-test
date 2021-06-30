@@ -101,9 +101,13 @@ class CEVolumePageLocators(object):
     SHRINK_OK_BTN = (By.ID, "form_resize_volume_shrink")
     DISK_OFFERING = (By.XPATH, '//*[@id="form_resize_volume"]/div[1]/div[2]/div/div/div')
     DEFAULT_100G = (By.XPATH, "//div[text()='Default (100G)']")
+    OPTION_200G = (By.XPATH, '/html/body/div[7]/div/div/div/div[2]/div[1]/div/div/div[2]')
+    OPTION_500G = (By.XPATH, '/html/body/div[7]/div/div/div/div[2]/div[1]/div/div/div[3]')
     SIZE_FORM = (By.XPATH, '//*[@id="form_resize_volume_size"]')
-    SUCCESS_RESIZE = (By.XPATH, '/html/body/div[2]/div/div')
-#'/html/body/div[2]/div/div/div/div/div/div[1]'
+
+    # Volume detail
+    VM_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[8]/div/div/div[2]')
+
 class CECreateVolumePageLocators(object):
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,'Create Volume')]")
     VOLUME_TYPE_LIST = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[2]/div/div/div")
