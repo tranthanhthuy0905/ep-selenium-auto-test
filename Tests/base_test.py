@@ -23,7 +23,7 @@ class BaseTest(unittest.TestCase, APIService):
         #                     filemode='a',
         #                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
         #                     datefmt='%H:%M:%S',
-        #                     level=logging.INFO) 
+        #                     level=logging.INFO)
 
     def clear_test_instances(self):
         # self.delete_s3_buckets()
@@ -32,7 +32,7 @@ class BaseTest(unittest.TestCase, APIService):
     def tearDown(self):
         self.clear_test_instances()
         self.driver.quit()
-
+        print("Test completed")
 
 if __name__ == "__main__":
     unittest.main()
