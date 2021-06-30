@@ -38,7 +38,7 @@ class TestVolume(CEBaseTest):
         self.volume_page = CEVolumePage(self.driver)
         self.assertEqual(self.driver.current_url, self.volume_page.base_url)
         self.assertTrue(
-            self.volume_page.check_element_existence(CEVolumnePageLocators.CREATE_VOLUME_BTN)
+            self.volume_page.check_element_existence(CEVolumePageLocators.CREATE_VOLUME_BTN)
         )
 
         # When user clicks on "Create Volume" button on the top right
