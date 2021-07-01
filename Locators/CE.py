@@ -101,8 +101,8 @@ class CEVolumePageLocators(object):
     SHRINK_OK_BTN = (By.ID, "form_resize_volume_shrink")
     DISK_OFFERING = (By.XPATH, '//*[@id="form_resize_volume"]/div[1]/div[2]/div/div/div')
     DEFAULT_100G = (By.XPATH, "//div[text()='Default (100G)']")
-    OPTION_200G = (By.XPATH, '/html/body/div[7]/div/div/div/div[2]/div[1]/div/div/div[2]')
-    OPTION_500G = (By.XPATH, '/html/body/div[7]/div/div/div/div[2]/div[1]/div/div/div[3]')
+    OPTION_200G = (By.XPATH, "//div[text()='200G']")
+    OPTION_500G = (By.XPATH, "//div[text()='500G']")
     SIZE_FORM = (By.XPATH, '//*[@id="form_resize_volume_size"]')
 
     # Volume detail

@@ -124,19 +124,19 @@ class Test_Resize_Volume(CEBaseTest):
     """
     # Choose Custom Disk and click on Shrink OK
     def test_custom_disk_N_shrink(self):
-        self.disk_option(CECreateVolumePageLocators.CUSTOM_DISK, True, CEVolumeTestData.SIZE)
+        self.resize_volume_options(CECreateVolumePageLocators.CUSTOM_DISK, True, CEVolumeTestData.SIZE)
 
     # Choose Default 100G and click on Shrink OK
     def test_default_100G_N_shrink(self):
-        self.disk_option(CEVolumePageLocators.DEFAULT_100G, True, 100)
+        self.resize_volume_options(CEVolumePageLocators.DEFAULT_100G, True, 100)
 
     # Choose 200G and click on Shrink OK
     def test_200G_N_shrink(self):
-        self.disk_option(CEVolumePageLocators.OPTION_200G, True, 200)
+        self.resize_volume_options(CEVolumePageLocators.OPTION_200G, True, 200)
 
     # Choose 500G and click on Shrink OK
     def test_500G_N_shrink(self):
-        self.disk_option(CEVolumePageLocators.OPTION_500G, True, 500)
+        self.resize_volume_options(CEVolumePageLocators.OPTION_500G, True, 500)
 
     """
         TEST CASE B: Not click on Shrink OK
@@ -144,19 +144,19 @@ class Test_Resize_Volume(CEBaseTest):
 
     # Choose Custom Disk and NOT click on Shrink OK
     def test_custom_disk_no_shrink(self):
-        self.disk_option(CECreateVolumePageLocators.CUSTOM_DISK, False, CEVolumeTestData.SIZE)
+        self.resize_volume_options(CECreateVolumePageLocators.CUSTOM_DISK, False, CEVolumeTestData.SIZE)
 
-    # Choose Default 100G and NOT click on Shrink OK
+    #Choose Default 100G and NOT click on Shrink OK
     def test_default_100G_no_shrink(self):
-        self.disk_option(CEVolumePageLocators.DEFAULT_100G, False, 100)
+        self.resize_volume_options(CEVolumePageLocators.DEFAULT_100G, False, 100)
 
     # Choose 200G and NOT click on Shrink OK
     def test_200G_no_shrink(self):
-        self.disk_option(CEVolumePageLocators.OPTION_200G, False, 200)
+        self.resize_volume_options(CEVolumePageLocators.OPTION_200G, False, 200)
 
     # Choose 500G and NOT click on Shrink OK
     def test_500G_no_shrink(self):
-        self.disk_option(CEVolumePageLocators.OPTION_500G, False, 500)
+        self.resize_volume_options(CEVolumePageLocators.OPTION_500G, False, 500)
 
 if __name__ == "__main__":
     unittest.main(
