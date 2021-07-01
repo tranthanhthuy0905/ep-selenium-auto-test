@@ -11,10 +11,6 @@ class CEVolumePage(BasePage):
         super().__init__(driver, CE_VOLUME_URL)
 
 
-    def click_create_volume_btn(self):
-        self.driver.find_element(*self.locator.CREATE_VOLUME_BTN).click()
-
-
     def change_instance_states(self, state_button, confirm_button, message):
         self.click_button(self.locator.RADIO_BTN)\
             .click_button(self.locator.INSTANCE_STATE_BTN)\
