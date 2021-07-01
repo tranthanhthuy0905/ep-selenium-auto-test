@@ -32,3 +32,13 @@ class CEBaseTest(BaseTest):
         except Exception as e:
             print("Can't delete CE keypair", str(e))
 
+    def delete_CE_sg_by_id(self, sg_id):
+        try:
+            url = CE_SECURITY_GROUP_API_CLIENT_URL
+            params = {
+                "id": sg_id,
+            }
+            self._call_request_delete(url, params, CE_USER_TOKEN)
+        except Exception as e:
+            print("Can't delete CE security group", str(e))
+
