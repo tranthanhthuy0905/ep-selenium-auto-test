@@ -30,7 +30,6 @@ class CELaunchInstancesWizardPage(BasePage):
         try:
             self.find_element(*locator)
             self.click_button(self.locator.CUSTOM_DISK)
-            time.sleep(5)
             return self
         except TimeoutException:
             self.driver.get_screenshot_as_file(
@@ -51,15 +50,10 @@ class CELaunchInstancesWizardPage(BasePage):
             .choose_keypair_in_selector(self.locator.KEYPAIR_LIST)
         return self
 
-    def create_keypair(self, name, publicKey):
+    def fill_keypair_info(self, name, publicKey):
         self\
-            .click_button(self.locator.CREATE_NEW_KEYPAIR_BTN)\
             .fill_form(name, self.locator.KEYPAIR_NAME)\
             .fill_form(publicKey, self.locator.PUBLIC_KEY)
-        self.driver.implicitly_wait(10)
-        self\
-            .click_button(self.locator.CREATE_NEW_KEYPAIR_OK_BTN)\
-
         return self
 
     def choose_keypair_in_selector(self, locator):
@@ -102,14 +96,11 @@ class CELaunchInstancesWizardPage(BasePage):
             .fill_form(value2, self.locator.DEFAULT_PASSWORD_CONFIRM)
 
 
-    def create_volume(self, volume_name, volume_size):
+    def fill_volume_info(self, volume_name, volume_size):
         self\
-            .click_button(self.locator.ADD_NEW_VOLUME_BTN)\
             .fill_form(volume_name, self.locator.VOlUME_NAME_FORM) \
             .click_button(self.locator.VOLUME_TYPE_LIST) \
             .choose_volume_type(self.locator.VOLUME_TYPE_LIST) \
-            .fill_form(volume_size, self.locator.VOLUME_SIZE_FORM) \
-            .click_button(self.locator.CREATE_VOLUME_BTN) \
-            .check_element_existence(self.locator.CREATE_VOLUME_SUCCESS_MESSAGE)
+            .fill_form(volume_size, self.locator.VOLUME_SIZE_FORM)
         return self
 

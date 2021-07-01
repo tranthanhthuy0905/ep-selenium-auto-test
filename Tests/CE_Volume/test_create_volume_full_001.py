@@ -51,7 +51,7 @@ class TestVolume(CEBaseTest):
         self.create_volume_page.create_volume(volume_name=volume_name, volume_size=CEVolumeTestData.SIZE)
         self.volume_name = volume_name
 
-
+        # TODO
         # Then user can see the newly created volume updated in the list of volumes (status: Allocated)
         WebDriverWait(self.driver, 10).until(EC.url_to_be(self.volume_page.base_url))
         self.assertTrue(
