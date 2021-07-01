@@ -20,9 +20,11 @@ Screnario 2: Create Volume without "Launch Instance" process
     When user clicks on "Volumes" button on the left side
     Then user can see the list of available Volumes 
     When user clicks on "Create Volume" button on the top right
-    Then user can see a pop-up "Create New Volume" box
-    When user clicks on "Create" button
-    Then user can see the newly created volume updated in the list of volumes (status: Allocated) 
+    Then user can move to "Create New Volume" page
+    And user can fill in Volume name
+    And user can select Volume type
+    When user clicks on "Create Volume" button
+    Then user can see the newly created volume updated in the list of volumes (status: Allocated)
 '''
 
 class TestVolume(CEBaseTest):
@@ -34,33 +36,33 @@ class TestVolume(CEBaseTest):
         # When user clicks on "Volumes" button on the left side
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_volumes_page()
-
+        # Then user can see the list of available Volumes
         self.volume_page = CEVolumePage(self.driver)
         self.assertEqual(self.driver.current_url, self.volume_page.base_url)
-        self.assertTrue(
-            self.volume_page.check_element_existence(CEVolumnePageLocators.CREATE_VOLUME_BTN)
-        )
+        self.assertTrue(self.volume_page.check_element_existence(CEVolumnePageLocators.CREATE_VOLUME_BTN))
+        self.assertTrue(self.volume_page.check_element_existence(CEVolumnePageLocators.VOLUMES_LIST))
 
         # When user clicks on "Create Volume" button on the top right
-        self.volume_page.click_create_volume_btn()
+        self.volume_page.click_button(CEVolumnePageLocators.CREATE_VOLUME_BTN)
+        #Then user can move to "Create New Volume" page
         self.create_volume_page = CECreateVolumePage(self.driver)
         self.assertEqual(self.driver.current_url, self.create_volume_page.base_url)
-
-        # When user clicks on "Create" button
+        # And user can fill in Volume name
+        # And user can select Volume type
         volume_name = CEVolumeTestData.VOLUME_NAME
-        self.create_volume_page.create_volume(volume_name=volume_name, volume_size=CEVolumeTestData.SIZE)
+        self.create_volume_page.fill_volume_info(volume_name=volume_name, volume_size=CEVolumeTestData.SIZE)
         self.volume_name = volume_name
 
-        # TODO
+        # When user clicks on "Create Volume" button
+        self.create_volume_page.click_button(CECreateVolumnePageLocators.CREATE_VOLUME_BTN)
         # Then user can see the newly created volume updated in the list of volumes (status: Allocated)
         WebDriverWait(self.driver, 10).until(EC.url_to_be(self.volume_page.base_url))
-        self.assertTrue(
-            self.volume_page.check_element_existence((By.XPATH, "//td[contains(.,'" + volume_name +"')]"))
-        )
-
+        volume_row = self.driver.find_element(*CECreateVolumnePageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
+        self.volume_id = volume_row.get_attribute("data-row-key")
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element((By.CLASS_NAME, "ant-badge-status-text"), "Allocated"))
+        
         # Clear test data
-        self.volume_id = self.driver.find_element_by_xpath("//td[contains(.,'" + volume_name +"')]/parent::*").get_attribute("data-row-key")
-        self.delete_CE_volume()
+        self.delete_CE_volume_by_id(self.volume_id)
     
 # python3 -m unittest Tests.CE_Volume.test_create_volume_full_001 -v
 

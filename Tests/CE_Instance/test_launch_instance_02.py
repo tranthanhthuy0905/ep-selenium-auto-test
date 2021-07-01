@@ -48,6 +48,7 @@ import os
 import unittest
 
 import HtmlTestRunner
+from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -128,8 +129,12 @@ class TestInstances(CEBaseTest):
         # When user clicks on "Create" button on modal
         self.launch_instances_wizard_page.click_button(CELaunchInstancesWizardPageLocators.CREATE_VOLUME_BTN)
         # Then the new volume is created
+        volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
+        self.volume_id = volume_row.get_attribute("data-row-key")
         self.launch_instances_wizard_page.check_element_existence(CELaunchInstancesWizardPageLocators.CREATE_VOLUME_SUCCESS_MESSAGE)
-        self.volume_id = self.driver.find_element_by_xpath("//td[contains(.,'" + volume_name +"')]/parent::*").get_attribute("data-row-key")
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(CELaunchInstancesWizardPageLocators.CLOSE_MESSAGE_BTN))
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element((By.CLASS_NAME, "ant-badge-status-text"), "Allocated"))
+
 #TODO When user selects a volume in Volumes list
 #TODO Then the volume is attached to the instance 
 
@@ -137,15 +142,20 @@ class TestInstances(CEBaseTest):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(CELaunchInstancesWizardPageLocators.CLOSE_MESSAGE_BTN))
         self.launch_instances_wizard_page.click_button(CELaunchInstancesWizardPageLocators.CLOSE_MESSAGE_BTN)
         self.launch_instances_wizard_page.click_button(CELaunchInstancesWizardPageLocators.NEXT_BTN)
+
+
+
         # instances_page.check_element_existence(CEInstancePageLocators.ANNOUNCEMENT)
         # instances_page.check_element_existence(CEInstancePageLocators.LAUNCH_VM_SUCCESS_MESSAGE)
 
+
+        
         time.sleep(3)
-        self.delete_CE_volume()
-        self.delete_CE_keypair()
+        self.delete_CE_volume_by_id(self.volume_id)
+        self.delete_CE_keypair_by_name(keypair_name)
 
 
-# python3 -m unittest Tests.CE_Instance.test_create_vm_full_001 -v
+# python3 -m unittest Tests.CE_Instance.test_launch_instance_02 -v
 
 if __name__ == "__main__":
     unittest.main(
