@@ -24,13 +24,12 @@ class CECreateVolumePage(BasePage):
                 'error_snapshot/{filename}.png'.format(filename='choose_volume_type'))
             self.driver.quit()
 
-    def create_volume(self, volume_name, volume_size):
+    def fill_volume_info(self, volume_name, volume_size):
         self\
             .fill_form(volume_name, self.locator.VOLUME_NAME_FORM) \
             .click_button(self.locator.VOLUME_TYPE_LIST) \
             .choose_volume_type(self.locator.VOLUME_TYPE_LIST) \
-            .fill_form(volume_size, self.locator.VOLUME_SIZE_FORM) \
-            .click_button(self.locator.CREATE_VOLUME_BTN)
+            .fill_form(volume_size, self.locator.VOLUME_SIZE_FORM)
         return self
 
 
