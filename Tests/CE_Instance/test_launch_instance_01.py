@@ -30,13 +30,13 @@ import time
 import unittest
 import HtmlTestRunner
 
-from Tests.base_test import BaseTest
+from Tests.CE.ce_base_test import CEBaseTest
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.launch_instances_wizard_page import CELaunchInstancesWizardPage
 from Locators.CE import CELaunchInstancesWizardPageLocators
 
-class Test_launch_instance_01(BaseTest):
+class Test_launch_instance_01(CEBaseTest):
     """
         TEST CASE: Launch instance with simple flow (Scenario 01)
     """
@@ -94,9 +94,10 @@ class Test_launch_instance_01(BaseTest):
 
         # Sleep to wait for the page loading
         time.sleep(3)
+        #self.delete_CE_instance()
         self.tearDown()
 
-    def test_launch_instance_01_edit_valid_pw(self):
+    def edit_pw(self, value1, value2):
         """
             TEST CASE: Edit own default password (matched confirmation password)
         """
@@ -115,43 +116,87 @@ class Test_launch_instance_01(BaseTest):
                 CELaunchInstancesWizardPageLocators.CONFIGURE_INSTANCE_DETAILS)
         )
         time.sleep(1)
-        self.launch_instances_wizard_page.input_password("Abc12345", "Abc12345")
-        self.launch_instances_wizard_page.review_and_launch_instance()
-
-        # Sleep to wait for the page loading
-        time.sleep(3)
-        self.tearDown()
-
-    def test_launch_instance_01_edit_invalid_pw(self):
-        """
-            TEST CASE: Edit own default password (unmatched confirmation password)
-        """
-        # Passing step 1 (Choose MI) and step 2 (Instance Type)
-        self.choose_MI_N_Instance_Type()
-
-        time.sleep(1)
-        # Edit own password
-        self.launch_instances_wizard_page.edit_password()
-        # Check if click on Edit button, whether come back to "Configure Instance" step or not
-        self.assertEqual(
-            self.driver.current_url, self.launch_instances_wizard_page.base_url
-        )
-        self.assertTrue(
-            self.launch_instances_wizard_page.check_element_existence(
-                CELaunchInstancesWizardPageLocators.CONFIGURE_INSTANCE_DETAILS)
-        )
-        time.sleep(1)
-        self.launch_instances_wizard_page.input_password("Abc12345", "Abcd12345")
+        self.launch_instances_wizard_page.input_password(value1, value2)
 
         # Check if there is a reminding message or not
-        self.assertTrue(
-            self.launch_instances_wizard_page.check_element_existence(
-                CELaunchInstancesWizardPageLocators.TWO_PASSWORD_NOT_MATCH)
-        )
+        if (value1 != value2):
+            self.assertTrue(
+                self.launch_instances_wizard_page.check_element_existence(
+                    CELaunchInstancesWizardPageLocators.TWO_PASSWORD_NOT_MATCH)
+            )
+        # Once two passwords match together, choose to launch instance
+        else:
+            self.launch_instances_wizard_page.review_and_launch_instance()
 
         # Sleep to wait for the page loading
         time.sleep(3)
+        #self.delete_CE_instance()
         self.tearDown()
+
+    def test_launch_instance_01_edit_valid_pw(self):
+        self.edit_pw("Abc12345", "Abc12345")
+
+    def test_launch_instance_01_edit_invalid_pw(self):
+        self.edit_pw("Abc12345", "Abcd12345")
+
+    # def test_launch_instance_01_edit_valid_pw(self):
+    #     """
+    #         TEST CASE: Edit own default password (matched confirmation password)
+    #     """
+    #     # Passing step 1 (Choose MI) and step 2 (Instance Type)
+    #     self.choose_MI_N_Instance_Type()
+    #
+    #     time.sleep(1)
+    #     # Edit own password
+    #     self.launch_instances_wizard_page.edit_password()
+    #     # Check if click on Edit button, whether come back to "Configure Instance" step or not
+    #     self.assertEqual(
+    #         self.driver.current_url, self.launch_instances_wizard_page.base_url
+    #     )
+    #     self.assertTrue(
+    #         self.launch_instances_wizard_page.check_element_existence(
+    #             CELaunchInstancesWizardPageLocators.CONFIGURE_INSTANCE_DETAILS)
+    #     )
+    #     time.sleep(1)
+    #     self.launch_instances_wizard_page.input_password("Abc12345", "Abc12345")
+    #     self.launch_instances_wizard_page.review_and_launch_instance()
+    #
+    #     # Sleep to wait for the page loading
+    #     time.sleep(3)
+    #     self.delete_CE_instance()
+    #     self.tearDown()
+
+    # def test_launch_instance_01_edit_invalid_pw(self):
+    #     """
+    #         TEST CASE: Edit own default password (unmatched confirmation password)
+    #     """
+    #     # Passing step 1 (Choose MI) and step 2 (Instance Type)
+    #     self.choose_MI_N_Instance_Type()
+    #
+    #     time.sleep(1)
+    #     # Edit own password
+    #     self.launch_instances_wizard_page.edit_password()
+    #     # Check if click on Edit button, whether come back to "Configure Instance" step or not
+    #     self.assertEqual(
+    #         self.driver.current_url, self.launch_instances_wizard_page.base_url
+    #     )
+    #     self.assertTrue(
+    #         self.launch_instances_wizard_page.check_element_existence(
+    #             CELaunchInstancesWizardPageLocators.CONFIGURE_INSTANCE_DETAILS)
+    #     )
+    #     time.sleep(1)
+    #     self.launch_instances_wizard_page.input_password("Abc12345", "Abcd12345")
+    #
+    #     # Check if there is a reminding message or not
+    #     self.assertTrue(
+    #         self.launch_instances_wizard_page.check_element_existence(
+    #             CELaunchInstancesWizardPageLocators.TWO_PASSWORD_NOT_MATCH)
+    #     )
+    #
+    #     # Sleep to wait for the page loading
+    #     time.sleep(3)
+    #     self.delete_CE_instance()
+    #     self.tearDown()
 
 if __name__ == "__main__":
     unittest.main(

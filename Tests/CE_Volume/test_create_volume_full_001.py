@@ -14,6 +14,8 @@ from Locators.CE import *
 
 import time
 
+from Tests.CE_Volume.volume_base_test import VolumeBaseTest
+
 '''
 Screnario 2: Create Volume without "Launch Instance" process
     Given a certain user
@@ -22,24 +24,16 @@ Screnario 2: Create Volume without "Launch Instance" process
     When user clicks on "Create Volume" button on the top right
     Then user can see a pop-up "Create New Volume" box
     When user clicks on "Create" button
-    Then user can see the newly created volume updated in the list of volumes (status: Allocated) 
+    Then user can see the newly created volume updated in thVolume of volumes (status: Allocated) 
 '''
 
-class TestVolume(CEBaseTest):
+class TestVolume(VolumeBaseTest):
     def test_create_volume(self):
         """
             TEST CASE: Volume should be created successfully
         """
-
-        # When user clicks on "Volumes" button on the left side
-        self.CE_homepage = CEHomePage(self.driver)
-        self.CE_homepage.access_volumes_page()
-
-        self.volume_page = CEVolumePage(self.driver)
-        self.assertEqual(self.driver.current_url, self.volume_page.base_url)
-        self.assertTrue(
-            self.volume_page.check_element_existence(CEVolumePageLocators.CREATE_VOLUME_BTN)
-        )
+        # Access volume page
+        self.access_volume_page()
 
         # When user clicks on "Create Volume" button on the top right
         self.volume_page.click_create_volume_btn()
@@ -58,9 +52,10 @@ class TestVolume(CEBaseTest):
             self.volume_page.check_element_existence((By.XPATH, "//td[contains(.,'" + volume_name +"')]"))
         )
 
-        # TODO: clear volume data
+        # Clear test data
+        time.sleep(2)
         self.volume_id = self.driver.find_element_by_xpath("//td[contains(.,'" + volume_name +"')]/parent::*").get_attribute("data-row-key")
-
+        self.delete_CE_volume()
 
 # python3 -m unittest Tests.CE_Volume.test_create_volume_full_001 -v
 

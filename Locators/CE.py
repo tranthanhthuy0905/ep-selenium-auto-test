@@ -91,6 +91,7 @@ class CEVolumePageLocators(object):
     CREATE_VOLUME_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Expunge volume is successful!']")
     VOLUME_NAME_IN_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[2]")
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,' Create Volume')]")
+    VOLUME_LIST = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]')
 
     # Resize Volume Elements
     RESIZE_VOLUME_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[2]')
@@ -107,6 +108,7 @@ class CEVolumePageLocators(object):
 
     # Volume detail
     VM_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[8]/div/div/div[2]')
+    VM_ID = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[2]')
 
 class CECreateVolumePageLocators(object):
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,'Create Volume')]")
@@ -116,4 +118,3 @@ class CECreateVolumePageLocators(object):
     VOLUME_SIZE_FORM = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[3]/div/div/div/input")
     CREATE_VOLUME_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Created volume successfully.']")
 
-#'//*[@id="form_resize_volume"]/div[1]/div[2]/div/div/div'

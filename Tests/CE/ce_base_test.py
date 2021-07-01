@@ -2,6 +2,9 @@ from Tests.base_test import BaseTest
 from Configs import *
 
 class CEBaseTest(BaseTest):
+    def create_instance(self):
+        pass
+
     def delete_CE_instance(self):
         try:
             url = CE_INSTANCE_API_CLIENT_URL + "destroy"
@@ -13,7 +16,7 @@ class CEBaseTest(BaseTest):
             url = CE_VOLUME_API_CLIENT_URL + "destroy"
             params = {
                 "id": self.volume_id,
-                "expunge" : True
+                "expunge": True
             }
             self._call_request_delete(url, params)
 
