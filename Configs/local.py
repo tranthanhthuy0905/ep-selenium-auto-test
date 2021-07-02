@@ -2,6 +2,7 @@ import os
 import urllib.parse
 import posixpath
 
+DF_USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGRlNzVhZGM3Y2M1ZTAwMThmNGZkYmUiLCJuYW1lIjoiaGFuZ2x0dDMiLCJpYXQiOjE2MjUxOTE4NTMsImV4cCI6MTYyNTI3ODI1M30.Xy9l6ORBErsaK7YX_SE_Y6quI6Tnys0KLgJabhUB1Ps"
 CE_USER_TOKEN = ""
 S3_USER_TOKEN = ""
 
@@ -21,6 +22,8 @@ CE_SG_URL = "https://staging-ce.engineering.vng.vn/ce/network/security-groups/"
 CE_SG_CREATE_URL = urllib.parse.urljoin(CE_SG_URL, "create-security-group")
 CE_SG_DETAILS_PAGE_URL = urllib.parse.urljoin(CE_SG_URL, "{sg_id}")
 
+CE_SG_API_URL = "https://staging-ce.engineering.vng.vn/api/client/security-groups"
+
 '''
 S3
 '''
@@ -38,3 +41,5 @@ FILE_PATH_UPLOAD_SAMPLE = os.path.join(os.getcwd(), "Configs/TestData/sample_fil
 
 CHROME_DRIVER_PATH = os.path.join(os.getcwd(), "Drivers/chromedriver")
 LOG_FILE_PATH = os.path.join(os.getcwd(), "Reports/logs")
+
+DF_BASE_URL = "https://staging-mobilefarm.engineering.vng.vn/devicefarm/mobile-device"

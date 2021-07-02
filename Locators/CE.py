@@ -150,6 +150,14 @@ class CESecurityGroupLocators:
 
     INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport']")
     INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport']")
+    INGRESS_CIDR_TEXTBOX = (By.XPATH, "//input[@id='addRule_cidrlist']")
 
     EGRESS_START_PORT_TEXTBOX = None
     EGRESS_END_PORT_TEXTBOX = None
+    EGRESS_CIDR_TEXTBOX = None
+
+    INVALID_CIDR_ALERT = (By.XPATH, "//div[@role='alert']")
+
+    REMOVE_FIRST_INGRESS_RULE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[2]/td[8]/button')
+    CONFIRM_DELETE_RULE_BUTTON = (By.XPATH, '/html/body/div[6]/div/div[2]/div/div[2]/div/div/div[2]/button[2]')
+
