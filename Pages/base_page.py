@@ -21,6 +21,9 @@ class BasePage(object):
             self.driver.quit()
             raise Exception("Authentication may not be successful. User-token may need to be updated!")
 
+    def access_page(self):
+        self.driver.get(self.base_url)
+
     def find_element(self, *locator):
         try:
             return self.driver.find_element(*locator)

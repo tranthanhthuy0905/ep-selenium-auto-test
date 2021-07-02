@@ -131,6 +131,11 @@ class CESecurityGroupLocators:
 
     INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport']")
     INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport']")
+    INGRESS_CIDR_TEXTBOX = (By.XPATH, "//input[@id='addRule_cidrlist']")
 
     EGRESS_START_PORT_TEXTBOX = None
     EGRESS_END_PORT_TEXTBOX = None
+    EGRESS_CIDR_TEXTBOX = None
+
+    INVALID_CIDR_ALERT = (By.XPATH, "//div[@role='alert']")
+
