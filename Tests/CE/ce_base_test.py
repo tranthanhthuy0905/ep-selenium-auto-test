@@ -13,6 +13,17 @@ class CEBaseTest(BaseTest):
         except Exception as e:
             print("Can't delete CE instance", str(e))
 
+    def delete_CE_instance_by_id(self, instance_id):
+        try:
+            url = CE_INSTANCE_API_CLIENT_URL + "destroy"
+            params = {
+                "id": instance_id
+            }
+            self._call_request_delete(url, params, CE_USER_TOKEN)
+
+        except Exception as e:
+            print("Can't delete CE instance", str(e))
+
 
     def delete_CE_volume_by_id(self, volume_id):
         try:
@@ -31,4 +42,14 @@ class CEBaseTest(BaseTest):
             self._call_request_delete(url, {}, CE_USER_TOKEN)
         except Exception as e:
             print("Can't delete CE keypair", str(e))
+
+    def delete_CE_sg_by_id(self, sg_id):
+        try:
+            url = CE_SECURITY_GROUP_API_CLIENT_URL
+            params = {
+                "id": sg_id,
+            }
+            self._call_request_delete(url, params, CE_USER_TOKEN)
+        except Exception as e:
+            print("Can't delete CE security group", str(e))
 
