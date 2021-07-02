@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-class DFProjectLocators(object):
+class DEVICE_FARM_ProjectLocators(object):
     CREATE_PROJECT_HOME_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[3]/span')
     PROJECT_CREATE_TITLE = (By.XPATH, "/html/body/div[*]/div/div[2]/div/div[2]/div[1]/div")
     PROJECT_NAME_TEXTBOX = (By.XPATH, "/html/body/div[*]/div/div[2]/div/div[2]/div[2]/div/input")
