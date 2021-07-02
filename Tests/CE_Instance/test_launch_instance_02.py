@@ -101,8 +101,8 @@ class TestInstances(CEBaseTest):
         self.configure_instance_wizard.fill_instance_name(instance_name)
 
         # Create keypair
-        keypair_name = CEKeypairTestData.KEYPAIR_NAME
-        self.configure_instance_wizard.create_new_keypair(keypair_name, "")
+        self.keypair_name = CEKeypairTestData.KEYPAIR_NAME
+        self.configure_instance_wizard.create_new_keypair(self.keypair_name, "")
 
         # Set default password
         self.configure_instance_wizard.fill_default_password(CEInstanceTestData.DEFAULT_PASSWORD, CEInstanceTestData.DEFAULT_PASSWORD)
@@ -116,10 +116,10 @@ class TestInstances(CEBaseTest):
 
         # Get Volume ID for delete data after test
         volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
-        volume_id = volume_row.get_attribute("data-row-key")
+        self.volume_id = volume_row.get_attribute("data-row-key")
         
         # Select volume to attach to instance
-        self.add_storage_wizard.select_volume(volume_id)
+        self.add_storage_wizard.select_volume(self.volume_id)
 
         self.add_storage_wizard.click_next_btn()
 
@@ -129,7 +129,7 @@ class TestInstances(CEBaseTest):
         self.configure_security_wizard.apply_sg_for_instance()
         
         # Get SG ID for delete data after test
-        sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
+        self.sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
     
         self.configure_security_wizard.click_button(CELaunchInstancesWizardPageLocators.REVIEW_N_LAUNCH_BTN)
 
@@ -140,24 +140,28 @@ class TestInstances(CEBaseTest):
         # Get instance id for clear data after test
         WebDriverWait(self.driver, 10).until(EC.url_to_be(self.instances_page.base_url))
         instance_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_INSTANCE_NAME(instance_name))
-        instance_id = instance_row.get_attribute("data-row-key")
+        self.instance_id = instance_row.get_attribute("data-row-key")
 
         self.instances_page.check_element_existence(CEInstancePageLocators.ANNOUNCEMENT)
         self.instances_page.check_element_existence(CEInstancePageLocators.LAUNCH_VM_SUCCESS_MESSAGE)
 
         # Check if the new instance state is Running
-        self.review_launch_wizard.check_instance_state(instance_id, "Running")
+        self.review_launch_wizard.check_instance_state(self.instance_id, "Running")
 
-
-        #TODO clear test data
-        self.delete_CE_instance_by_id(instance_id)
-        self.delete_CE_volume_by_id(volume_id)
-        self.delete_CE_keypair_by_name(keypair_name)
+        
+    def clear_test_instances(self):
+        self.delete_CE_instance_by_id(self.instance_id)
+        self.delete_CE_volume_by_id(self.volume_id)
+        self.delete_CE_keypair_by_name(self.keypair_name)
         self.driver.implicitly_wait(20)
-        self.delete_CE_sg_by_id(sg_id)
+        self.delete_CE_sg_by_id(self.sg_id)
+        
 
 
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_02 -v
+
+
+    
 
 if __name__ == "__main__":
     unittest.main(
