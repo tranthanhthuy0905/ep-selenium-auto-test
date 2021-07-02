@@ -12,6 +12,18 @@ from Pages.S3.s3_create_bucket_page import S3CreateBucketPage
 from Pages.S3.s3_bucket_details_page import S3BucketDetailsPage
 
 class S3BaseTest(BaseTest):
+    def clear_test_instances(self):
+        self.delete_s3_buckets()
+    
+
+    def delete_s3_buckets(self):
+        try:
+            bucket_name = self.bucket_name
+        except:
+            return None
+        self.delete_bucket_files(bucket_name)
+        self._call_api_delete_s3_bucket(bucket_name)
+
     def _call_api_delete_s3_bucket(self, bucket_name):
         try:
             url = S3_BUCKET_API_CLIENT_URL
@@ -32,17 +44,6 @@ class S3BaseTest(BaseTest):
         self.driver.implicitly_wait(10)
         WebDriverWait(self.driver, 10).until(EC.url_to_be(S3_BUCKET_DETAILS_URL.format(bucket_name=bucket_name)))
         return bucket_name
-
-    def clear_test_instances(self):
-        print("NOW CLEAN UP S3")
-        self.delete_s3_buckets()
-
-    def delete_s3_buckets(self):
-        try:
-            bucket_name = self.bucket_name
-        except:
-            return None
-        self.delete_bucket_files(bucket_name)
     
     def delete_bucket_files(self,bucket_name):
         #TODO: Refactor
@@ -59,8 +60,6 @@ class S3BaseTest(BaseTest):
         if list_filenames:
             for filename in list_filenames:
                 self._call_api_delete_bucket_files(bucket_name, filename)
-        
-        self._call_api_delete_s3_bucket(bucket_name)
 
 
     def _call_api_delete_bucket_files(self, bucket_name, filename):
