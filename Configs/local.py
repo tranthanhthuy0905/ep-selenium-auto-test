@@ -4,7 +4,7 @@ import posixpath
 
 DF_USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGRlNzVhZGM3Y2M1ZTAwMThmNGZkYmUiLCJuYW1lIjoiaGFuZ2x0dDMiLCJpYXQiOjE2MjUxOTE4NTMsImV4cCI6MTYyNTI3ODI1M30.Xy9l6ORBErsaK7YX_SE_Y6quI6Tnys0KLgJabhUB1Ps"
 CE_USER_TOKEN = ""
-S3_USER_TOKEN = ""
+S3_USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGRiZGNkZmM1ZTQ3NzAwMTE0NWRkODYiLCJuYW1lIjoicXVhbmxoMiIsImlhdCI6MTYyNTIxOTE5NywiZXhwIjoxNjI1MzA1NTk3fQ.owueftaI-nLge6Zfv518foM_g_xQ6G7P2ZPnBD8Qlxs"
 
 CE_BASE_URL = "https://staging-ce.engineering.vng.vn/ce/"
 CE_VOLUME_URL = posixpath.join(CE_BASE_URL, "elastic-block-store/volumes")
@@ -27,13 +27,13 @@ CE_SG_API_URL = "https://staging-ce.engineering.vng.vn/api/client/security-group
 '''
 S3
 '''
-S3_BASE_URL = "https://staging-s3.engineering.vng.vn/s3/"
+S3_BASE_URL = "https://s3.engineering.vng.vn/s3/"
 S3_BUCKET_URL = urllib.parse.urljoin(S3_BASE_URL, "buckets/")
 S3_BUCKET_CREATE_URL = urllib.parse.urljoin(S3_BUCKET_URL, "create")
 S3_BUCKET_DETAILS_URL = urllib.parse.urljoin(S3_BUCKET_URL, "{bucket_name}")
 S3_BUCKET_FILE_UPLOAD_URL = urllib.parse.urljoin(S3_BUCKET_URL, "{bucket_name}/upload",)
 
-S3_API_BASE_URL = "https://staging-s3.engineering.vng.vn/api/client/"
+S3_API_BASE_URL = "https://s3.engineering.vng.vn/api/client/"
 S3_BUCKET_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "buckets")
 S3_FILES_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "files")
 

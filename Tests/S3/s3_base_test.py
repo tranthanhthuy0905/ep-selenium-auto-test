@@ -33,9 +33,13 @@ class S3BaseTest(BaseTest):
         WebDriverWait(self.driver, 10).until(EC.url_to_be(S3_BUCKET_DETAILS_URL.format(bucket_name=bucket_name)))
         return bucket_name
 
+    def clear_test_instances(self):
+        print("NOW CLEAN UP S3")
+        self.delete_s3_buckets()
+
     def delete_s3_buckets(self):
         try:
-            bucket_name = self.service_slug
+            bucket_name = self.bucket_name
         except:
             return None
         self.delete_bucket_files(bucket_name)

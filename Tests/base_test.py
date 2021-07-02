@@ -27,8 +27,7 @@ class BaseTest(unittest.TestCase, APIService):
                             level=logging.INFO)
 
     def clear_test_instances(self):
-        # self.delete_s3_buckets()
-        self._call_api_delete_instance()
+        raise NotImplementedError
 
     def tearDown(self):
         self.clear_test_instances()
