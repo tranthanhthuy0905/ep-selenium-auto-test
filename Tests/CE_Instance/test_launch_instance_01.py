@@ -33,7 +33,7 @@ import HtmlTestRunner
 from Tests.base_test import BaseTest
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.homepage import CEHomePage
-from Pages.CE.launch_instances_wizard_page import CELaunchInstancesWizardPage
+from Pages.CE.launch_instances_wizard_page import *
 from Locators.CE import CELaunchInstancesWizardPageLocators
 
 class Test_launch_instance_01(BaseTest):
@@ -66,7 +66,14 @@ class Test_launch_instance_01(BaseTest):
         time.sleep(1)
         # Action 3: Select "Ubuntu20_20.04_Stable" image,
         # Select "2G-2Core-2k2" type
-        self.launch_instances_wizard_page.choose_instance_details()
+        # Step 1: Choose an Machine Image 
+        self.machine_image_wizard = MachineImageWizardPage(self.driver)
+        self.machine_image_wizard.choose_machine_image()
+
+    # Step 2: Choose an Instance Type
+        self.instances_type_wizard = InstanceTypeWizardPage(self.driver)
+        self.instances_type_wizard.choose_instance_type()
+        self.instances_type_wizard.click_next_btn()
         # Click on "Review and Launch" button
         self.launch_instances_wizard_page.click_button(CELaunchInstancesWizardPageLocators.REVIEW_N_LAUNCH_BTN)
         self.assertEqual(
