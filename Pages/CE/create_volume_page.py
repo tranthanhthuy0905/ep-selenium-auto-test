@@ -1,10 +1,9 @@
-from Locators.CE import CECreateVolumePageLocators
-from Pages.base_page import BasePage
-from Pages.CE.launch_instances_wizard_page import CELaunchInstancesWizardPage
-from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
+
 from Configs import CE_CREATE_VOLUME_URL
-import time
+from Locators.CE import CECreateVolumePageLocators, CEVolumePageLocators
+from Pages.base_page import BasePage
+
 
 class CECreateVolumePage(BasePage):
     def __init__(self, driver):
@@ -14,23 +13,27 @@ class CECreateVolumePage(BasePage):
     def show(self):
         print(self.base_url)
 
-    def choose_volume_type(self, locator):
+    def choose_volume_type(self, locator, option):
         try:
             self.find_element(*locator)
-            self.click_button(self.locator.CUSTOM_DISK)
+            self.click_button(option)
             return self
         except TimeoutException:
             self.driver.get_screenshot_as_file(
                 'error_snapshot/{filename}.png'.format(filename='choose_volume_type'))
             self.driver.quit()
 
-    def create_volume(self, volume_name, volume_size):
+
+    def create_volume(self, volume_name, volume_size, disk_option):
         self\
             .fill_form(volume_name, self.locator.VOLUME_NAME_FORM) \
             .click_button(self.locator.VOLUME_TYPE_LIST) \
-            .choose_volume_type(self.locator.VOLUME_TYPE_LIST) \
-            .fill_form(volume_size, self.locator.VOLUME_SIZE_FORM) \
-            .click_button(self.locator.CREATE_VOLUME_BTN)
+            .choose_volume_type(self.locator.VOLUME_TYPE_LIST, disk_option)
+        if (disk_option == CECreateVolumePageLocators.CUSTOM_DISK):
+            self\
+                .fill_form(volume_size, CECreateVolumePageLocators.VOLUME_SIZE_FORM)
+
+        self.click_button(self.locator.CREATE_VOLUME_BTN)
         return self
 
 

@@ -38,11 +38,12 @@ class CELaunchInstancesWizardPage(BasePage):
             self.driver.quit()
 
     def choose_instance_details(self):
+        self.instance_name = CEInstanceTestData.INSTANCE_NAME
         self\
             .click_button(self.locator.MI_SELECT_BTN)\
             .click_button(self.locator.TYPE_2G_RADIO)\
             .click_button(self.locator.NEXT_BTN)\
-            .fill_form(CEInstanceTestData.INSTANCE_NAME, self.locator.INSTANCE_NAME_FORM)
+            .fill_form(self.instance_name, self.locator.INSTANCE_NAME_FORM)
         return self
 
     def choose_keypair(self):

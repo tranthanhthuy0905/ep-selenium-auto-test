@@ -1,139 +1,163 @@
 """
-    Command runs test:
-        python3 -m unittest Tests.CE_Volume.test_resize_volume -v
-
-    This test is general to all the scenarios from 3 to 10 to RESIZE volume in CE_EBS
-
-    # TODO: Still lack of one scenario: When user tries to resize a volume when there is no volume in the list
+    Test big flow Resize_volume
 """
-
 import os
 import time
 import unittest
 
 import HtmlTestRunner
+from selenium.webdriver.common.by import By
 
 from Configs.TestData.CEVolumeTestData import CEVolumeTestData
 from Locators.CE import CEVolumePageLocators, CECreateVolumePageLocators
+from Pages.CE.volume_page import CEVolumePage
 from Tests.CE_Volume.volume_base_test import VolumeBaseTest
 
 
-class Test_Resize_Volume(VolumeBaseTest):
-    """
-        TEST CASE: All scenarios relating to RESIZE VOLUME
-    """
+class Test_custom_volume(VolumeBaseTest):
 
-    def resize_volume_options(self, disk_option, condition, enter_value):
-        """
-            This function includes "access_resize_volume" function above and all the steps after
-            the Resize volume box popped up:
-            - Include access_resize_volume function above
-            - Choose Disk offering option
-            - Click on Shrink OK or not
-            - Click OK and check the status (succeed or fail)
-        """
-
-        # Access volume page
-        self.access_volume_page()
-
-        # Check information of chosen volume
-        #self.check_info_volume()
-
+    ''' TEST CASE: Resize Volume'''
+    def resize_volume(self, disk_option, shrink_ok, stop_vm, initial_size, enter_value):
+        self.choose_volume(disk_option=disk_option, stop_vm=stop_vm, initial_size=initial_size)
+        time.sleep(2)
         # Click on "Resize volume" button
         self.volume_page.click_button(CEVolumePageLocators.RESIZE_VOLUME_BTN)
-
-        # Check whether popping up "Resize Volume" box or not after clicking on "Resize volume" button
-        self.assertTrue(
-            self.volume_page.check_element_existence(CEVolumePageLocators.RESIZE_VOLUME_BOX)
-        )
 
         # Wait for the Resize volume box popped up
         time.sleep(2)
         # Choose Disk Offering options
-        self.volume_page\
-            .click_button(CEVolumePageLocators.DISK_OFFERING)\
+        self.volume_page \
+            .click_button(CEVolumePageLocators.DISK_OFFERING) \
             .choose_disk_offering_option(CEVolumePageLocators.DISK_OFFERING, disk_option)
 
         # Wait for next actions loaded
-        time.sleep(2)
-
+        time.sleep(3)
         # Once choosing Custom Disk, a size blank should appear
         if (disk_option == CECreateVolumePageLocators.CUSTOM_DISK):
+            #driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS)
+
             self.volume_page \
                 .fill_form(enter_value, CEVolumePageLocators.SIZE_FORM)
 
         # Click on Shrink OK or not
-        if (condition):
+        if (shrink_ok == "with"):
             self.volume_page.choose_Shrink_OK()
 
         # Click OK
         self.volume_page.click_button(CEVolumePageLocators.OK_BTN)
 
-
-        time.sleep(4)
-
+        time.sleep(3)
         # When the VM is running => Should not resize successfully by all means
-        if (self.vm_id != "-" and self.vm_state == "Running"):
-            self.assertTrue(
-                self.volume_page.check_size_gb() == self.initial_volume_size,
-                "Should fail to resize volume when it is attached to a Running VM"
-            )
-        # When the VM is stopped
+        if (self.instance_id != "-" ):
+            if (self.instance_state == "Running"):
+                self.assertTrue(
+                    self.volume_page.check_size_gb() == initial_size,
+                    "Should fail to resize volume when it is attached to a Running VM"
+                )
+            else:
+                if (enter_value < initial_size and shrink_ok == "without Shrink OK"):
+                    self.assertTrue(
+                        self.volume_page.check_size_gb() == initial_size,
+                        "Should fail to downsize volume attached with a Stopped VM without shrinking it"
+                    )
+                else:
+                    self.assertTrue(
+                        self.volume_page.check_size_gb() != initial_size,
+                        "Should successfully resize volume when it is attached to a Stopped VM" + shrink_ok + " Shrink OK"
+                    )
+        # When no attached VM
         else:
             # Scenario 8 + 10: Downsize the volume without Shrink OK => Should not resize successfully
-            if (enter_value < self.initial_volume_size and condition == False):
+            if (enter_value < initial_size and shrink_ok == "without Shrink OK"):
                 self.assertTrue(
-                    self.volume_page.check_size_gb() == self.initial_volume_size,
-                    "Should fail to resize volume when downsizing the volume without shrinking it"
+                    self.volume_page.check_size_gb() == initial_size,
+                    "Should fail to downsize volume not attached with any VM without shrinking it"
                 )
             # Other scenarios should be successful by all means
             else:
                 self.assertTrue(
-                    self.volume_page.check_size_gb() != self.initial_volume_size,
-                    "Should successfully resize volume when it is attached to a Stopped VM or not attached to any VM"
+                    self.volume_page.check_size_gb() != initial_size,
+                    "Should successfully resize volume not attached with any VM " + shrink_ok +" Shrink OK"
                 )
-
         time.sleep(2)
+        # TODO: Delete Volume and Instance
+
         self.tearDown()
 
-    """
-        TEST CASE A: Click on Shrink OK
-    """
-    # Choose Custom Disk and click on Shrink OK
-    def test_custom_disk_N_shrink(self):
-        self.resize_volume_options(CECreateVolumePageLocators.CUSTOM_DISK, True, CEVolumeTestData.SIZE)
+    def test_upsize_shrink_running_VM_custom_disk(self):
+        ''' TEST CASE: Upsize Volume attached with Running VM, click on Shrink OK and choose Custom Disk option'''
+        self.resize_volume(CECreateVolumePageLocators.CUSTOM_DISK, "with",
+                           False, CEVolumeTestData.SIZE1, CEVolumeTestData.SIZE2)
 
-    # Choose Default 100G and click on Shrink OK
-    # def test_default_100G_N_shrink(self):
-    #     self.resize_volume_options(CEVolumePageLocators.DEFAULT_100G, True, 100)
+# TODO: Update scenarios below
+# *** Choosing 200G just to generalize for 100G, 500G option ***
+#     def test_upsize_shrink_running_VM_200G(self):
+#         ''' TEST CASE: Upsize Volume attached with Running VM, click on Shrink OK and choose 200G option'''
+#         self.resize_volume(CEVolumePageLocators.OPTION_200G, "with",
+#                            False, 200, int(CEVolumeTestData.SIZE1))
+#     def test_upsize_shrink_stopped_VM_custom_disk(self):
+#         ''' TEST CASE: Upsize Volume attached with Stopped VM, click on Shrink OK and choose Custom Disk option'''
+#         self.resize_volume(CECreateVolumePageLocators.CUSTOM_DISK, "with",
+#                            True, CEVolumeTestData.SIZE1, CEVolumeTestData.SIZE2)
     #
-    # # Choose 200G and click on Shrink OK
-    # def test_200G_N_shrink(self):
-    #     self.resize_volume_options(CEVolumePageLocators.OPTION_200G, True, 200)
+    # def test_upsize_shrink_stopped_VM_200G(self):
+    #     ''' TEST CASE: Upsize Volume attached with Stopped VM, click on Shrink OK and choose 200G option'''
+    #     self.resize_volume(CEVolumePageLocators.OPTION_200G, "with",
+    #                        True , 200, int(CEVolumeTestData.SIZE1))
+    # def test_upsize_noShrink_running_VM_custom_disk(self):
+    #     ''' TEST CASE: Upsize Volume attached with Running VM, NOT click on Shrink OK and choose Custom Disk option'''
+    #     self.resize_volume(CECreateVolumePageLocators.CUSTOM_DISK, "without",
+    #                        False, CEVolumeTestData.SIZE1, CEVolumeTestData.SIZE2)
     #
-    # # Choose 500G and click on Shrink OK
-    # def test_500G_N_shrink(self):
-    #     self.resize_volume_options(CEVolumePageLocators.OPTION_500G, True, 500)
-    #
-    # """
-    #     TEST CASE B: Not click on Shrink OK
-    # """
-    #
-    # # Choose Custom Disk and NOT click on Shrink OK
-    # def test_custom_disk_no_shrink(self):
-    #     self.resize_volume_options(CECreateVolumePageLocators.CUSTOM_DISK, False, CEVolumeTestData.SIZE)
-    #
-    # #Choose Default 100G and NOT click on Shrink OK
-    # def test_default_100G_no_shrink(self):
-    #     self.resize_volume_options(CEVolumePageLocators.DEFAULT_100G, False, 100)
-    #
-    # # Choose 200G and NOT click on Shrink OK
-    # def test_200G_no_shrink(self):
-    #     self.resize_volume_options(CEVolumePageLocators.OPTION_200G, False, 200)
-    #
-    # # Choose 500G and NOT click on Shrink OK
-    # def test_500G_no_shrink(self):
-    #     self.resize_volume_options(CEVolumePageLocators.OPTION_500G, False, 500)
+    # def test_upsize_noShrink_stopped_VM_custom_disk(self):
+    #     ''' TEST CASE: Upsize Volume attached with Stopped VM, NOT click on Shrink OK and choose Custom Disk option'''
+    #     self.resize_volume(CECreateVolumePageLocators.CUSTOM_DISK, "without",
+    #                        True, CEVolumeTestData.SIZE1, CEVolumeTestData.SIZE2)
+
+    # def test_upsize_noShrink_running_VM_200G(self):
+    #     ''' TEST CASE: Upsize Volume attached with Running VM, NOT click on Shrink OK and choose Custom Disk option'''
+    #     self.resize_volume(CECreateVolumePageLocators.CUSTOM_DISK, "without",
+    #                        False, CEVolumeTestData.SIZE1, 200)
+
+    # def test_upsize_noShrink_stopped_VM_200G(self):
+    #     ''' TEST CASE: Upsize Volume attached with Stopped VM, NOT click on Shrink OK and choose Custom Disk option'''
+    #     self.resize_volume(CECreateVolumePageLocators.CUSTOM_DISK, "without",
+    #                        True, CEVolumeTestData.SIZE1, 200)
+
+    ''' TEST CASE: Downsize'''
+        #def test_downsize_shrink_running_VM_custom_disk(self):
+        #     ''' TEST CASE: Downsize Volume attached with Running VM, click on Shrink OK and choose Custom Disk option'''
+        #     self.resize_volume(CECreateVolumePageLocators.CUSTOM_DISK, "with",
+        #                        False, CEVolumeTestData.SIZE2, CEVolumeTestData.SIZE1)
+
+        # *** Choosing 200G just to generalize for 100G, 500G option ***
+        #     def test_downsize_shrink_running_VM_500G(self):
+        #         ''' TEST CASE: Downsize Volume attached with Running VM, click on Shrink OK and choose 500G option'''
+        #         self.resize_volume(CEVolumePageLocators.OPTION_500G, "with",
+        #                            False, 500, int(CEVolumeTestData.SIZE1))
+        #     def test_downsize_shrink_stopped_VM_custom_disk(self):
+        #         ''' TEST CASE: Downsize Volume attached with Stopped VM, click on Shrink OK and choose Custom Disk option'''
+        #         self.resize_volume(CECreateVolumePageLocators.CUSTOM_DISK, "with",
+        #                            True, CEVolumeTestData.SIZE2, CEVolumeTestData.SIZE1)
+        #
+        # def test_downsize_shrink_stopped_VM_500G(self):
+        #     ''' TEST CASE: Downsize Volume attached with Stopped VM, click on Shrink OK and choose 500G option'''
+        #     self.resize_volume(CEVolumePageLocators.OPTION_500G, "with",
+        #                        True , 500, int(CEVolumeTestData.SIZE1))
+        # def test_downsize_noShrink_running_VM_custom_disk(self):
+        #     ''' TEST CASE: Downsize Volume attached with Running VM, NOT click on Shrink OK and choose Custom Disk option'''
+        #     self.resize_volume(CECreateVolumePageLocators.CUSTOM_DISK, "without",
+        #                        False, CEVolumeTestData.SIZE2, CEVolumeTestData.SIZE1)
+        #
+        # def test_downsize_noShrink_stopped_VM_custom_disk(self):
+        #     ''' TEST CASE: Downsize Volume attached with Stopped VM, NOT click on Shrink OK and choose Custom Disk option'''
+        #     self.resize_volume(CECreateVolumePageLocators.CUSTOM_DISK, "without",
+        #                        True, CEVolumeTestData.SIZE2, CEVolumeTestData.SIZE1)
+
+        # def test_downsize_noShrink_stopped_VM_500G(self):
+        #     ''' TEST CASE: Downsize Volume attached with Stopped VM, NOT click on Shrink OK and choose 500G option'''
+        #     self.resize_volume(CECreateVolumePageLocators.OPTION_500G, "without",
+        #                        True, 500, CEVolumeTestData.SIZE1)
 
 if __name__ == "__main__":
     unittest.main(

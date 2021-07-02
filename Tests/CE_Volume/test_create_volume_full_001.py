@@ -33,7 +33,7 @@ class TestVolume(VolumeBaseTest):
             TEST CASE: Volume should be created successfully
         """
         # Access volume page
-        self.access_volume_page()
+        self.direct_to_volume_page()
 
         # When user clicks on "Create Volume" button on the top right
         self.volume_page.click_create_volume_btn()

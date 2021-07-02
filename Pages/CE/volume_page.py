@@ -1,5 +1,12 @@
-from Pages.CE.create_volume_page import CECreateVolumePage
+import time
+import unittest
+
+from selenium.webdriver.common.by import By
+
+from Configs.TestData.CEVolumeTestData import CEVolumeTestData
+
 from Locators.CE import CEInstancePageLocators, CEVolumePageLocators, CECreateVolumePageLocators
+from Pages.CE.create_volume_page import CECreateVolumePage
 from Pages.base_page import BasePage
 from Pages.CE.launch_instances_wizard_page import CELaunchInstancesWizardPage
 from Configs import CE_VOLUME_URL
@@ -15,6 +22,25 @@ class CEVolumePage(BasePage):
     def click_create_volume_btn(self):
         self.driver.find_element(*self.locator.CREATE_VOLUME_BTN).click()
 
+    def create_new_volume(self, volume_size, disk_option):
+        # *** Create a volume ***
+        # When user clicks on "Create Volume" button on the top right
+        self.click_create_volume_btn()
+        self.create_volume_page = CECreateVolumePage(self.driver)
+        #self.assertEqual(self.driver.current_url, self.create_volume_page.base_url)
+
+        # When user clicks on "Create" button
+        self.volume_name = CEVolumeTestData.VOLUME_NAME
+        self.create_volume_page.create_volume(volume_name=self.volume_name, volume_size=volume_size, disk_option=disk_option)
+
+    def attach_volume_to_instance(self, instance_name):
+        self\
+            .click_button(CEVolumePageLocators.SELECT_AN_INSTANCE)\
+            .click_button(By.XPATH, '//div[text()="'+ instance_name +'"]')\
+            .click_button(CEVolumePageLocators.OK_BTN)
+        self
+
+    # .click_button(CEVolumePageLocators.ATTACH_VOLUME_BTN)\
     def choose_disk_offering_option(self, locator, option):
         try:
             self.find_element(*locator)
@@ -30,22 +56,18 @@ class CEVolumePage(BasePage):
         self\
             .click_button(self.locator.SHRINK_OK_BTN)
         self
-
-    def check_instance_state(self):
-        instance_state = self.driver.find_element(*self.locator.VM_STATE).text
-        return instance_state
-
+    #
     def check_size_gb(self):
         size_gb = self.driver.find_element(*self.locator.SIZE_GB).text
         return size_gb
 
-    def change_instance_states(self, state_button, confirm_button, message):
-        self.click_button(self.locator.RADIO_BTN)\
-            .click_button(self.locator.INSTANCE_STATE_BTN)\
-            .click_button(state_button)\
-            .wait_and_click_button(confirm_button)
-        if message:
-            self.check_element_existence(message)
-        return self
+    # def change_instance_states(self, state_button, confirm_button, message):
+    #     self.click_button(self.locator.RADIO_BTN)\
+    #         .click_button(self.locator.INSTANCE_STATE_BTN)\
+    #         .click_button(state_button)\
+    #         .wait_and_click_button(confirm_button)
+    #     if message:
+    #         self.check_element_existence(message)
+    #     return self
 
 

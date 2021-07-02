@@ -3,7 +3,11 @@
 """
 import time
 
+from selenium.webdriver.common.by import By
+
+from Configs.TestData.CEVolumeTestData import CEVolumeTestData
 from Locators.CE import CEInstancePageLocators, CEVolumePageLocators
+from Pages.CE.create_volume_page import CECreateVolumePage
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.volume_page import CEVolumePage
 from Tests.CE.ce_base_test import CEBaseTest
@@ -14,18 +18,7 @@ class VolumeBaseTest(CEBaseTest):
         TEST CASE: All scenarios relating to RESIZE VOLUME
     """
 
-    # def _create_volume(self):
-    #     pass
-    #
-    # def create_attached_volume(self):
-    #     instance_name = self.create_simple_instance()
-    #     volume_name = self._create_volume()
-    #     self.attach_volume_to_instance(volume_name)
-    #
-    # def create_unattached_volume(self):
-    #     pass
-
-    def access_volume_page(self):
+    def direct_to_volume_page(self):
         """
             This function includes all steps until user clicks on Resize Volume button:
             - Direct to Volume page
@@ -34,36 +27,50 @@ class VolumeBaseTest(CEBaseTest):
         """
 
         # When user clicks on "Volumes" button on the left side
-        self.CE_homepage = CEHomePage(self.driver)
-        self.CE_homepage.access_volumes_page()
+        self.access_volumes_page()
 
         self.volume_page = CEVolumePage(self.driver)
         self.assertEqual(self.driver.current_url, self.volume_page.base_url)
         self.assertTrue(
             self.volume_page.check_element_existence(CEVolumePageLocators.CREATE_VOLUME_BTN)
         )
-    #
-    # def check_info_volume(self):
-    #     # list = self.driver.find_element(*CEVolumePageLocators.VOLUME_LIST).text
-    #     # print("List volume is: ", list)
-    #     # self.assertTrue(
-    #     #     self.driver.find_element(*CEVolumePageLocators.VOLUME_LIST).text != None,
-    #     #     "Cannot resize volume once there is no existing volume"
-    #     # )
-    #     # if (self.driver.find_element(*CEVolumePageLocators.VOLUME_LIST).text != None):
 
-        # Choose one volume in the list
-        self.volume_page.click_button(CEInstancePageLocators.RADIO_BTN)
+    def create_volume(self, volume_size):
+        self\
+            .direct_to_volume_page()\
+            .volume_page.click_create_volume_btn()
+        self.create_volume_page = CECreateVolumePage(self.driver)
+        self.assertEqual(self.driver.current_url, self.create_volume_page.base_url)
 
-        # Check volume to be attached with VM or not
+        # When user clicks on "Create" button
+        self.volume_name = CEVolumeTestData.VOLUME_NAME
+        self.create_volume_page.create_volume(volume_name=self.volume_name, volume_size=volume_size)
+
+    def choose_volume(self, disk_option, stop_vm, initial_size):
+        # *** Create simple instance ***
+        self.launch_instance_01_default_pw()
+
         time.sleep(2)
-        self.vm_id = self.driver.find_element(*CEVolumePageLocators.VM_ID).text
+        # Stop the VM attached
+        if (stop_vm):
+            self.ce_instances_page.stop_vm(self.instance_id)
 
-        if (self.vm_id != "-"):
-            # Check volume's VM state
-            self.vm_state = self.volume_page.check_instance_state()
+        time.sleep(2)
+        # *** Access volume page ***
+        self.ce_homepage.access_volumes_page()
+        self.volume_page = CEVolumePage(self.driver)
+        self.assertEqual(self.driver.current_url, self.volume_page.base_url)
+        self.assertTrue(
+            self.volume_page.check_element_existence(CEVolumePageLocators.CREATE_VOLUME_BTN)
+        )
+        # *** Create a volume ***
+        time.sleep(2)
+        self.volume_page.create_new_volume(initial_size, disk_option)
 
-        # Check volume's initial size
-        self.initial_volume_size = self.volume_page.check_size_gb()
-
+        time.sleep(2)
+        # Select the newly created volume
+        self.volume_id = self.driver.find_element_by_xpath(
+            "//td[contains(.,'" + self.volume_page.volume_name + "')]/parent::*").get_attribute("data-row-key")
+        self.volume_page.click_button(
+            (By.XPATH, '//span[././input/@type="radio" and ancestor::tr/@data-row-key="' + self.volume_id + '"]'))
 
