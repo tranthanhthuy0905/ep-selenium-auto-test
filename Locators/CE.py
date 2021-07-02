@@ -88,12 +88,20 @@ class CELaunchInstancesWizardPageLocators(object):
     CREATE_SG_SUCCESS_MESSAGE = (By.XPATH, "//div[contains(.,'Created security group successfully')]")
     PARRENT_BY_INSTANCE_NAME = lambda _instance_name: (By.XPATH, f"//td[contains(.,'{_instance_name}')]/parent::*")
     STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[@class='ant-table-cell'][2]/div/span/span[@class='ant-badge-status-text']")
+    RANDOM_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[2]/button")
+    COPY_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[3]/button")
+    SHOW_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/span/span")
+    APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
+    INSTANCE_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[4]/div/span")
+    
+
+
 
     # test_launch_instance_01's elements
     REVIEW_INSTANCE_LAUNCH = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div/h2')
     CONFIGURE_INSTANCE_DETAILS = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div/h2')
-    APPLY_THIS_PASSWORD = (By.XPATH, "/html/body/div[2]/div/div[2]/div/div[2]/div[3]/button[2]/span")
-    EDIT_PASSWORD = (By.XPATH, "/html/body/div[2]/div/div[2]/div/div[2]/div[3]/button[1]/span")
+    APPLY_THIS_PASSWORD = (By.XPATH, "//button[contains(.,'Apply this password')]")
+    EDIT_PASSWORD = (By.XPATH, "//button[contains(.,'<< Edit password')]")
     TWO_PASSWORD_NOT_MATCH = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[3]/form/div[2]/div[2]/div/div/div[2]/div')
 
 class CEVolumnePageLocators(object):
