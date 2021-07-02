@@ -125,3 +125,31 @@ class CECreateVolumnePageLocators(object):
     CREATE_VOLUME_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Created volume successfully.']")
     PARRENT_BY_VOLUME_NAME = lambda _volume_name: (By.XPATH, f"//td[contains(.,'{_volume_name}')]/parent::*")
 
+class CESecurityGroupLocators:
+
+    CREATE_SEC_GROUP_TEXTBOX_NAME_CSS = (By.CSS_SELECTOR, "input.ant-input")
+
+    CREATE_BUTTON = (By.XPATH, '//span[text()=" Create Security Group"]')
+    SUBMIT_CREATE_BUTTON_X_PATH = (By.XPATH, '//span[text()="Create Security Group"]')
+    CREATE_SUCCESSFUL_POPUP_XPATH = (By.XPATH, "//class[text()='Created security group successfully']")
+
+    COLLAPSE_TEXT_BOX_CLASS = (By.CLASS_NAME, "ant-collapse-content-box")
+    SECURITY_GROUP_ITEM_HOME_XPATH = (By.XPATH, '//tr[@data-row-key="{security_group_id}"]')
+
+    '''
+    Weird note: ADD_INGRESS_BUTTON and ADD_EGRESS_BUTTON has different structure: preceding::div/text() vs div/span/text()
+    ADD_EGRESS_BUTTON has extra space and the end of text: 'Egress Rule '
+    '''
+    ADD_INGRESS_BUTTON = (By.XPATH, '//*[@id="addRule"]/div/div[5]/div/div[2]/div/div/button') 
+    # ADD_INGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
+    #                                 "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
+    #                                 "and preceding::div/text()='Ingress Rule')]][1]")
+    ADD_EGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
+                                   "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
+                                   "and preceding::div/span/text()='Egress Rule ')]]")
+
+    INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport']")
+    INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport']")
+
+    EGRESS_START_PORT_TEXTBOX = None
+    EGRESS_END_PORT_TEXTBOX = None
