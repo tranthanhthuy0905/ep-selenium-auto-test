@@ -58,7 +58,7 @@ class SGDetailsPage(BasePage):
         end_port_text_box = self.find_element(*CESecurityGroupLocators.EGRESS_END_PORT_TEXTBOX)
 
     def click_add_ingress(self):
-        self.find_element(*CESecurityGroupLocators.ADD_INGRESS_BUTTON)
+        self.find_element(*CESecurityGroupLocators.ADD_INGRESS_BUTTON).click()
 
     def click_add_egress(self):
         self.find_element(*CESecurityGroupLocators.ADD_EGRESS_BUTTON)
@@ -70,6 +70,3 @@ class SGDetailsPage(BasePage):
     def add_egress_rull(self):
         self.fill_in_egress_rule_info()
         self.click_add_egress()
-
-
-

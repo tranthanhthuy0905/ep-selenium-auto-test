@@ -121,9 +121,10 @@ class CESecurityGroupLocators:
     Weird note: ADD_INGRESS_BUTTON and ADD_EGRESS_BUTTON has different structure: preceding::div/text() vs div/span/text()
     ADD_EGRESS_BUTTON has extra space and the end of text: 'Egress Rule '
     '''
-    ADD_INGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
-                                    "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
-                                    "and preceding::div/text()='Ingress Rule')]][1]")
+    ADD_INGRESS_BUTTON = (By.XPATH, '//*[@id="addRule"]/div/div[5]/div/div[2]/div/div/button') 
+    # ADD_INGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
+    #                                 "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
+    #                                 "and preceding::div/text()='Ingress Rule')]][1]")
     ADD_EGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
                                    "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
                                    "and preceding::div/span/text()='Egress Rule ')]]")
