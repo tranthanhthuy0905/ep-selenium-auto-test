@@ -17,8 +17,8 @@ from Tests.CE_Volume.volume_base_test import VolumeBaseTest
 class Test_custom_volume(VolumeBaseTest):
 
     ''' TEST CASE: Resize Volume'''
-    def resize_volume(self, disk_option, shrink_ok, stop_vm, initial_size, enter_value):
-        self.choose_volume(disk_option=disk_option, stop_vm=stop_vm, initial_size=initial_size)
+    def resize_volume(self, disk_option, shrink_ok, stop_vm, attach_vm, initial_size, enter_value):
+        self.choose_volume(disk_option=disk_option, stop_vm=stop_vm, initial_size=initial_size, attach_vm=attach_vm)
         time.sleep(2)
         # Click on "Resize volume" button
         self.volume_page.click_button(CEVolumePageLocators.RESIZE_VOLUME_BTN)
@@ -34,8 +34,6 @@ class Test_custom_volume(VolumeBaseTest):
         time.sleep(3)
         # Once choosing Custom Disk, a size blank should appear
         if (disk_option == CECreateVolumePageLocators.CUSTOM_DISK):
-            #driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS)
-
             self.volume_page \
                 .fill_form(enter_value, CEVolumePageLocators.SIZE_FORM)
 
@@ -48,7 +46,7 @@ class Test_custom_volume(VolumeBaseTest):
 
         time.sleep(3)
         # When the VM is running => Should not resize successfully by all means
-        if (self.instance_id != "-" ):
+        if (attach_vm):
             if (self.instance_state == "Running"):
                 self.assertTrue(
                     self.volume_page.check_size_gb() == initial_size,
@@ -81,13 +79,16 @@ class Test_custom_volume(VolumeBaseTest):
                 )
         time.sleep(2)
         # TODO: Delete Volume and Instance
+        self.delete_CE_volume_by_id(self.volume_id)
+        if (attach_vm):
+            self.delete_CE_instance_by_id(self.instance_id)
 
         self.tearDown()
 
-    def test_upsize_shrink_running_VM_custom_disk(self):
-        ''' TEST CASE: Upsize Volume attached with Running VM, click on Shrink OK and choose Custom Disk option'''
+    def test_upsize_shrink_noVM_custom_disk(self):
+        ''' TEST CASE: Upsize Volume no VM, click on Shrink OK and choose Custom Disk option'''
         self.resize_volume(CECreateVolumePageLocators.CUSTOM_DISK, "with",
-                           False, CEVolumeTestData.SIZE1, CEVolumeTestData.SIZE2)
+                           False, False, CEVolumeTestData.SIZE1, CEVolumeTestData.SIZE2)
 
 # TODO: Update scenarios below
 # *** Choosing 200G just to generalize for 100G, 500G option ***
