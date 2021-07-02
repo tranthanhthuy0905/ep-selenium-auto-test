@@ -19,11 +19,11 @@ class BaseTest(unittest.TestCase, APIService):
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(CHROME_DRIVER_PATH, options=chrome_options)
-        # logging.basicConfig(filename=os.path.join(LOG_FILE_PATH, str(datetime.now())),
-        #                     filemode='a',
-        #                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
-        #                     datefmt='%H:%M:%S',
-        #                     level=logging.INFO)
+        logging.basicConfig(filename=os.path.join(LOG_FILE_PATH, str(datetime.now())),
+                            filemode='a',
+                            format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                            datefmt='%H:%M:%S',
+                            level=logging.INFO)
 
     def clear_test_instances(self):
         # self.delete_s3_buckets()

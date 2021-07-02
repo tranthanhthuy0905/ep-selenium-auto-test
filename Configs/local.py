@@ -22,6 +22,8 @@ CE_SG_URL = "https://staging-ce.engineering.vng.vn/ce/network/security-groups/"
 CE_SG_CREATE_URL = urllib.parse.urljoin(CE_SG_URL, "create-security-group")
 CE_SG_DETAILS_PAGE_URL = urllib.parse.urljoin(CE_SG_URL, "{sg_id}")
 
+CE_SG_API_URL = "https://staging-ce.engineering.vng.vn/api/client/security-groups"
+
 '''
 S3
 '''

@@ -1,4 +1,6 @@
 
+import time
+
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -45,13 +47,11 @@ class SGDetailsPage(BasePage):
     def __init__(self, driver, sg_id):
         super().__init__(driver, CE_SG_DETAILS_PAGE_URL.format(sg_id=sg_id))
 
-
-
-    def fill_in_ingress_rule_info(self):
+    def fill_in_ingress_rule_info(self, start_port, end_port):
         start_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_START_PORT_TEXTBOX)
         end_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_END_PORT_TEXTBOX)
-        start_port_text_box.send_keys(CESecurityGroupTestData.VALID_PORTS_1[0])
-        end_port_text_box.send_keys(CESecurityGroupTestData.VALID_PORTS_1[1])
+        start_port_text_box.send_keys(start_port)
+        end_port_text_box.send_keys(end_port)
 
     def fill_in_egress_rule_info(self):
         start_port_text_box = self.find_element(*CESecurityGroupLocators.EGRESS_START_PORT_TEXTBOX)
@@ -61,12 +61,27 @@ class SGDetailsPage(BasePage):
         self.find_element(*CESecurityGroupLocators.ADD_INGRESS_BUTTON).click()
 
     def click_add_egress(self):
-        self.find_element(*CESecurityGroupLocators.ADD_EGRESS_BUTTON)
+        self.find_element(*CESecurityGroupLocators.ADD_EGRESS_BUTTON).click()
 
-    def add_ingress_rule(self):
-        self.fill_in_ingress_rule_info()
+    def add_ingress_rule(self, start_port, end_port):
+        self.fill_in_ingress_rule_info(start_port, end_port)
         self.click_add_ingress()
 
     def add_egress_rull(self):
         self.fill_in_egress_rule_info()
         self.click_add_egress()
+
+    def add_ingress_cidr(self, cidr):
+        ingress_cidr_textbox = self.find_element(*CESecurityGroupLocators.INGRESS_CIDR_TEXTBOX)
+        # ingress_cidr_textbox.clear()
+        ingress_cidr_textbox.send_keys(cidr)
+        self.click_add_ingress()
+        time.sleep(10)
+
+    def click_first_remove_button(self):
+        self.find_element(*CESecurityGroupLocators.REMOVE_FIRST_INGRESS_RULE_BUTTON).click()
+
+    def click_confirm_remove_button(self):
+        self.find_element(*CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON).click()
+
+

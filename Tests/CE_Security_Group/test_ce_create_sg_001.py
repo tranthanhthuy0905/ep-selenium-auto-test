@@ -28,10 +28,11 @@ And the user can see the list of egress rules
 '''
 
 from Pages.CE.security_group_page import SGHomePage, SGCreatePage, SGDetailsPage
-from Tests.CE.ce_base_test import CEBaseTest
+from Tests.CE_Security_Group.sg_base_test import SGBaseTest
+from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 
 
-class TestCreateSecurityGroup(CEBaseTest):
+class TestCreateSecurityGroup(SGBaseTest):
 
     def test_create_security_group(self):
 
@@ -73,7 +74,10 @@ class TestCreateSecurityGroup(CEBaseTest):
 
         sg_id = self.driver.current_url.split("/")[-1]
         self.sg_details_page = SGDetailsPage(self.driver, sg_id)
-        self.sg_details_page.add_ingress_rule()
+        self.sg_details_page.add_ingress_rule(CESecurityGroupTestData.VALID_PORTS_1[0], CESecurityGroupTestData.VALID_PORTS_1[1])
+
+        #TODO: Generize this
+        self.delete_sg(sg_id)
   
 
 if __name__ == "__main__":
