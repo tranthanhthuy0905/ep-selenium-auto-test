@@ -4,7 +4,7 @@ from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.elastic_block_store_volumnes_page import CEVolumePage
 from Locators.CE import CEPageLocators
 from Configs import CE_BASE_URL, CE_USER_TOKEN
-
+import time
 
 class CEHomePage(BasePage):
     def __init__(self, driver):
@@ -13,6 +13,7 @@ class CEHomePage(BasePage):
         self.authenticate(CE_USER_TOKEN)
 
     def access_instances_page(self):
+        time.sleep(6)
         instances_page = self\
             .click_button_and_return_page(CEPageLocators.INSTANCES_SUBMENU_BTN, CEInstancesPage(self.driver))
         return instances_page
