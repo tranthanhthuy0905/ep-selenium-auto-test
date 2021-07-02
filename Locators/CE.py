@@ -117,11 +117,19 @@ class CESecurityGroupLocators:
     COLLAPSE_TEXT_BOX_CLASS = (By.CLASS_NAME, "ant-collapse-content-box")
     SECURITY_GROUP_ITEM_HOME_XPATH = (By.XPATH, '//tr[@data-row-key="{security_group_id}"]')
 
-    ADD_INGRESS_BUTTON = None
-    ADD_EGRESS_BUTTON = None
+    '''
+    Weird note: ADD_INGRESS_BUTTON and ADD_EGRESS_BUTTON has different structure: preceding::div/text() vs div/span/text()
+    ADD_EGRESS_BUTTON has extra space and the end of text: 'Egress Rule '
+    '''
+    ADD_INGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
+                                    "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
+                                    "and preceding::div/text()='Ingress Rule')]][1]")
+    ADD_EGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
+                                   "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
+                                   "and preceding::div/span/text()='Egress Rule ')]]")
 
-    INGRESS_START_PORT_TEXTBOX = None
-    INGRESS_END_PORT_TEXTBOX = None
+    INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport']")
+    INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport']")
 
     EGRESS_START_PORT_TEXTBOX = None
     EGRESS_END_PORT_TEXTBOX = None

@@ -1,8 +1,10 @@
 
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from Pages.base_page import BasePage
-from Configs import CE_SG_URL
+from Configs import CE_SG_URL, CE_SG_CREATE_URL, CE_SG_DETAILS_PAGE_URL
 from Configs import CE_USER_TOKEN
 from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 
@@ -12,10 +14,21 @@ from Locators.CE import CESecurityGroupLocators
 class SGHomePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver, CE_SG_URL)
+        self.driver.get(CE_SG_URL)
         self.authenticate(CE_USER_TOKEN)
+        self.driver.get(CE_SG_URL)
 
     def click_create_button(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(CESecurityGroupLocators.CREATE_BUTTON)
+        )
         self.driver.find_element(*CESecurityGroupLocators.CREATE_BUTTON).click()
+
+
+class SGCreatePage(BasePage):
+    def __init__(self, driver):
+        super().__init__(driver, CE_SG_CREATE_URL)
+        self.driver.get(CE_SG_CREATE_URL)
 
     def fill_sg_information(self):
         sec_group_name = CESecurityGroupTestData.SECURITY_GROUP_NAME
@@ -27,9 +40,18 @@ class SGHomePage(BasePage):
     def click_create_submit_button(self):
         self.driver.find_element(*CESecurityGroupLocators.SUBMIT_CREATE_BUTTON_X_PATH).click()
 
+
+class SGDetailsPage(BasePage):
+    def __init__(self, driver, sg_id):
+        super().__init__(driver, CE_SG_DETAILS_PAGE_URL.format(sg_id=sg_id))
+
+
+
     def fill_in_ingress_rule_info(self):
         start_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_START_PORT_TEXTBOX)
         end_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_END_PORT_TEXTBOX)
+        start_port_text_box.send_keys(CESecurityGroupTestData.VALID_PORTS_1[0])
+        end_port_text_box.send_keys(CESecurityGroupTestData.VALID_PORTS_1[1])
 
     def fill_in_egress_rule_info(self):
         start_port_text_box = self.find_element(*CESecurityGroupLocators.EGRESS_START_PORT_TEXTBOX)
@@ -48,7 +70,6 @@ class SGHomePage(BasePage):
     def add_egress_rull(self):
         self.fill_in_egress_rule_info()
         self.click_add_egress()
-
 
 
 
