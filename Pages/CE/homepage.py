@@ -13,7 +13,6 @@ class CEHomePage(BasePage):
         self.authenticate(CE_USER_TOKEN)
 
     def access_instances_page(self):
-        time.sleep(6)
         instances_page = self\
             .click_button_and_return_page(CEPageLocators.INSTANCES_SUBMENU_BTN, CEInstancesPage(self.driver))
         return instances_page

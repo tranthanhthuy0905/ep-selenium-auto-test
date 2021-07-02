@@ -191,6 +191,7 @@ class SecurityGroupWizardPage(CELaunchInstancesWizardPage):
         self.click_button(self.locator.CLOSE_MESSAGE_BTN)
     
     def apply_sg_for_instance(self):
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.locator.SG_APPLY_CHECKBOX))
         self.\
             click_button(self.locator.SG_APPLY_CHECKBOX)
         return self
