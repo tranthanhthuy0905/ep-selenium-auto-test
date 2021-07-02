@@ -2,15 +2,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from Tests.base_test import BaseTest
-from Configs import DF_BASE_URL
-from Pages.df.df_homepage import DFHomePage
-from Pages.df.df_create_project_page import DFCreateProjectPage
+from Configs import DEVICE_FARM_BASE_URL
+from Pages.device_farm.devicefarm_homepage import DEVICE_FARM_HomePage
+from Pages.device_farm.devicefarm_create_project_page import DEVICE_FARM_CreateProjectPage
 
-class DFBaseTest(BaseTest):
+class DEVICE_FARM_BaseTest(BaseTest):
     def create_df_project(self):
-        self.df_homepage = DFHomePage(self.driver)
+        self.df_homepage = DEVICE_FARM_HomePage(self.driver)
         self.df_homepage.click_create_project()
-        self.df_create_project_page = DFCreateProjectPage(self.driver)
+        self.df_create_project_page = DEVICE_FARM_CreateProjectPage(self.driver)
         project_name = self.df_create_project_page.fill_project_create_information()
         self.service_slug = project_name
         self.df_create_project_page.click_create_project_submit_button()

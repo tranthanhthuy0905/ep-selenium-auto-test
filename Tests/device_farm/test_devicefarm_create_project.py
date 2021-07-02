@@ -6,23 +6,23 @@ import HtmlTestRunner
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.df.df_base_test import DFBaseTest
-from Pages.df.df_homepage import DFHomePage
-from Pages.df.df_create_project_page import DFCreateProjectPage
+from Tests.device_farm.devicefarm_base_test import DEVICE_FARM_BaseTest
+from Pages.device_farm.devicefarm_homepage import DEVICE_FARM_HomePage
+from Pages.device_farm.devicefarm_create_project_page import DEVICE_FARM_CreateProjectPage
 
-from Locators.df import DFProjectLocators
+from Locators.device_farm import DEVICE_FARM_ProjectLocators
 
-class Test_DF_Create_Project(DFBaseTest):
+class Test_DEVICEFARM_Create_Project(DEVICE_FARM_BaseTest):
     def test_create_project_successful(self):
         """
             TEST CASE: DF Project should be created successfully
         """
-        self.df_homepage = DFHomePage(self.driver)
+        self.df_homepage = DEVICE_FARM_HomePage(self.driver)
         self.df_homepage.click_create_project()
 
-        self.df_create_project_page = DFCreateProjectPage(self.driver)
+        self.df_create_project_page = DEVICE_FARM_CreateProjectPage(self.driver)
         self.assertTrue(
-            self.df_create_project_page.check_element_existence(DFProjectLocators.PROJECT_CREATE_TITLE)
+            self.df_create_project_page.check_element_existence(DEVICE_FARM_ProjectLocators.PROJECT_CREATE_TITLE)
         )
         project_name = self.df_create_project_page.fill_project_create_information()
         self.service_slug = project_name
