@@ -78,3 +78,10 @@ class SGDetailsPage(BasePage):
         self.click_add_ingress()
         time.sleep(10)
 
+    def click_first_remove_button(self):
+        self.find_element(*CESecurityGroupLocators.REMOVE_FIRST_INGRESS_RULE_BUTTON).click()
+
+    def click_confirm_remove_button(self):
+        self.find_element(*CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON).click()
+
+
