@@ -2,8 +2,8 @@ import os
 import urllib.parse
 import posixpath
 
-CE_USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGQ5OTIwODhlNDM1MjAwMTg5ZTNmNzMiLCJuYW1lIjoidGh1eXR0NyIsImlhdCI6MTYyNDg3MTQ1MSwiZXhwIjoxNjI0OTU3ODUxfQ.jbFSM7yW4J10Qdha_IG43MiHSJzouAuub9m3imZ_cwc"
-S3_USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGQ5OTIwODhlNDM1MjAwMTg5ZTNmNzMiLCJuYW1lIjoidGh1eXR0NyIsImlhdCI6MTYyNDg5MDY3OSwiZXhwIjoxNjI0OTc3MDc5fQ.eZSGEZPn-xkcOnBizWgceKPCuYXPINqzbl7nrDlnKHQ"
+CE_USER_TOKEN = ""
+S3_USER_TOKEN = ""
 
 CE_BASE_URL = "https://staging-ce.engineering.vng.vn/ce/"
 CE_VOLUME_URL = posixpath.join(CE_BASE_URL, "elastic-block-store/volumes")
@@ -15,6 +15,7 @@ CE_API_URL = "https://staging-ce.engineering.vng.vn/api/client/"
 CE_INSTANCE_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "instances/")
 CE_KEYPAIR_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "keypairs/")
 CE_VOLUME_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "volumes/")
+CE_SECURITY_GROUP_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "security-groups/")
 
 
 '''

@@ -94,7 +94,8 @@ class TestInstances(CEBaseTest):
 
     # Step 3: Configure Instance Details
         # Set instance name
-        self.launch_instances_wizard_page.fill_instance_name(CEInstanceTestData.INSTANCE_NAME)
+        instance_name = CEInstanceTestData.INSTANCE_NAME
+        self.launch_instances_wizard_page.fill_instance_name(instance_name)
         # Click on "Create new Keypair"
         self.launch_instances_wizard_page.click_button(CELaunchInstancesWizardPageLocators.CREATE_NEW_KEYPAIR_BTN)
         # Fill in the form for creating keypair then click ok
@@ -128,7 +129,7 @@ class TestInstances(CEBaseTest):
         self.launch_instances_wizard_page.check_element_existence(CELaunchInstancesWizardPageLocators.CREATE_VOLUME_SUCCESS_MESSAGE)
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(CELaunchInstancesWizardPageLocators.CLOSE_MESSAGE_BTN))
         # Check if the new volume state is Allocated
-        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element((By.CLASS_NAME, "ant-badge-status-text"), "Allocated"))
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(CELaunchInstancesWizardPageLocators.STATE_BY_ID(volume_id), "Allocated"))
         # Select volume
         self.launch_instances_wizard_page.click_button(CELaunchInstancesWizardPageLocators.RADIO_BY_NAME(volume_id))
         # Close popup message
@@ -157,13 +158,27 @@ class TestInstances(CEBaseTest):
         self.launch_instances_wizard_page.click_button(CELaunchInstancesWizardPageLocators.REVIEW_N_LAUNCH_BTN)
 
     # Step 6: Review Instance & Launch
-        time.sleep(2)
-    
-        # instances_page.check_element_existence(CEInstancePageLocators.ANNOUNCEMENT)
-        # instances_page.check_element_existence(CEInstancePageLocators.LAUNCH_VM_SUCCESS_MESSAGE)
+        self.launch_instances_wizard_page.click_button(CELaunchInstancesWizardPageLocators.LAUNCH_BTN)
 
+        WebDriverWait(self.driver, 10).until(EC.url_to_be(self.instances_page.base_url))
+        instance_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_INSTANCE_NAME(instance_name))
+        instance_id = instance_row.get_attribute("data-row-key")
+
+    
+        self.instances_page.check_element_existence(CEInstancePageLocators.ANNOUNCEMENT)
+        self.instances_page.check_element_existence(CEInstancePageLocators.LAUNCH_VM_SUCCESS_MESSAGE)
+
+        #TODO Check if the new instance state is Running
+        try:
+            WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(CELaunchInstancesWizardPageLocators.STATE_BY_ID(instance_id), "Running"))
+        except Exception as e:
+            print(e)
+
+        #TODO clear test data
+        self.delete_CE_instance_by_id(instance_id)
         self.delete_CE_volume_by_id(volume_id)
         self.delete_CE_keypair_by_name(keypair_name)
+        self.driver.implicitly_wait(10)
         self.delete_CE_sg_by_id(sg_id)
 
 
