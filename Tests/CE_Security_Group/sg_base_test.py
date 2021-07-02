@@ -28,5 +28,4 @@ class SGBaseTest(CEBaseTest):
         params = {
             "id": sg_id
         }
-        print("START DELETING")
         self._call_request_delete(url, params, CE_USER_TOKEN)
