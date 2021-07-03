@@ -27,7 +27,7 @@ class BaseTest(unittest.TestCase, APIService):
                             level=logging.INFO)
 
     def clear_test_instances(self):
-        raise NotImplementedError
+        pass
 
     def tearDown(self):
         self.clear_test_instances()
