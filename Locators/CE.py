@@ -164,5 +164,5 @@ class CESecurityGroupLocators:
     INVALID_CIDR_ALERT = (By.XPATH, "//div[@role='alert']")
 
     REMOVE_FIRST_INGRESS_RULE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[2]/td[8]/button')
-    CONFIRM_DELETE_RULE_BUTTON = (By.XPATH, '/html/body/div[6]/div/div[2]/div/div[2]/div/div/div[2]/button[2]')
-
+    CONFIRM_DELETE_RULE_BUTTON = (By.XPATH, "//button[@type='button' and ./span/text()='Delete']")
+    CANCEL_DELETE_RULE_BUTTON = (By.XPATH, "//button[@type='button' and ./span/text()='Cancel']")

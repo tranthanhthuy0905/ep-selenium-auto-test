@@ -18,23 +18,21 @@ CHROME_DRIVER_PATH = os.path.join(os.getcwd(), "Drivers/chromedriver")
 LOG_FILE_PATH = os.path.join(os.getcwd(), "Reports/logs")
 
 # CE
-CE_BASE_URL = "https://staging-ce.engineering.vng.vn/ce/"
-CE_INSTANCE_CREATE_WIZARD_URL = posixpath.join(CE_BASE_URL, "launch-instance-wizard")
+CE_BASE_URL = "https://ce.engineering.vng.vn/ce/"
 CE_VOLUME_URL = posixpath.join(CE_BASE_URL, "elastic-block-store/volumes")
 CE_CREATE_VOLUME_URL = posixpath.join(CE_VOLUME_URL, "create-volume")
 CE_INSTANCE_URL = posixpath.join(CE_BASE_URL, "instances")
 
-CE_API_URL = "https://staging-ce.engineering.vng.vn/api/client/"
-CE_SECURITY_GROUP_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "security-groups/")
+CE_API_URL = "https://ce.engineering.vng.vn/api/client/"
 CE_INSTANCE_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "instances/")
 CE_KEYPAIR_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "keypairs/")
 CE_VOLUME_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "volumes/")
 
-CE_SG_URL = "https://staging-ce.engineering.vng.vn/ce/network/security-groups/"
+CE_SG_URL = "https://ce.engineering.vng.vn/ce/network/security-groups/"
 CE_SG_CREATE_URL = urllib.parse.urljoin(CE_SG_URL, "create-security-group")
 CE_SG_DETAILS_PAGE_URL = urllib.parse.urljoin(CE_SG_URL, "{sg_id}")
 
-CE_SG_API_URL = "https://staging-ce.engineering.vng.vn/api/client/security-groups"
+CE_SG_API_URL = "https://ce.engineering.vng.vn/api/client/security-groups"
 
 # S3
 S3_BASE_URL = "https://s3.engineering.vng.vn/s3/"
@@ -48,4 +46,4 @@ S3_BUCKET_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "buckets")
 S3_FILES_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "files")
 
 # Device Farm
-DEVICE_FARM_BASE_URL = "https://staging-mobilefarm.engineering.vng.vn/devicefarm/mobile-device"
+DEVICE_FARM_BASE_URL = "https://mobilefarm.engineering.vng.vn/devicefarm/mobile-device"

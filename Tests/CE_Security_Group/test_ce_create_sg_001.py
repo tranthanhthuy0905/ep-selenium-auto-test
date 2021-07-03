@@ -4,6 +4,9 @@ import unittest
 
 import HtmlTestRunner
 
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 '''
 Scenario 1: Create Security Group With Simple Flow
 Given a certain user
@@ -30,6 +33,7 @@ And the user can see the list of egress rules
 from Pages.CE.security_group_page import SGHomePage, SGCreatePage, SGDetailsPage
 from Tests.CE_Security_Group.sg_base_test import SGBaseTest
 from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
+from Configs import CE_SG_DETAILS_PAGE_URL
 
 
 class TestCreateSecurityGroup(SGBaseTest):
@@ -72,12 +76,13 @@ class TestCreateSecurityGroup(SGBaseTest):
         And the user can see the list of egress rules
         '''
 
-        sg_id = self.driver.current_url.split("/")[-1]
-        self.sg_details_page = SGDetailsPage(self.driver, sg_id)
+        WebDriverWait(self.driver, 10).until(
+            EC.url_matches(CE_SG_DETAILS_PAGE_URL.format(sg_id=CESecurityGroupTestData.SG_ID_REGEX)),
+            f"Current URL does not match SG details URL pattern"
+        )
+        self.sg_id = self.driver.current_url.split("/")[-1]
+        self.sg_details_page = SGDetailsPage(self.driver, self.sg_id)
         self.sg_details_page.add_ingress_rule(CESecurityGroupTestData.VALID_PORTS_1[0], CESecurityGroupTestData.VALID_PORTS_1[1])
-
-        #TODO: Generize this
-        self.delete_sg(sg_id)
   
 
 if __name__ == "__main__":

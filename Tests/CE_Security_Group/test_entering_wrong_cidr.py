@@ -14,6 +14,7 @@ from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 class TestEnteringWrongCidr(SGBaseTest):
     def test_entering_wrong_format_cidr_001(self):
         sg_id, sg_name = self.create_security_group()
+        self.sg_id = sg_id
         self.sg_details_page = SGDetailsPage(self.driver, sg_id)
         self.sg_details_page.access_page()
 
@@ -24,7 +25,7 @@ class TestEnteringWrongCidr(SGBaseTest):
         self.sg_details_page.fill_in_ingress_rule_info(*CESecurityGroupTestData.VALID_PORTS_1)
         self.sg_details_page.add_ingress_cidr(CESecurityGroupTestData.INVALID_CIDR_1)
 
-        # UI NOT IMPLEMENTED
+        # TODO: UI NOT IMPLEMENTED - PENDING
         '''
             Then there will be warning at the textbox
             And user cannot add Ingress Rule
@@ -33,7 +34,3 @@ class TestEnteringWrongCidr(SGBaseTest):
             self.sg_details_page.check_element_existence(CESecurityGroupLocators.INVALID_CIDR_ALERT), 
             "INVALID CIDR ALERT NOT FOUND"
             )
-
-
-        #TODO: Generize this
-        self.delete_sg(sg_id)
