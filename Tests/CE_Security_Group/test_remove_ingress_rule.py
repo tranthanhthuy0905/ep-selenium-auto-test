@@ -16,6 +16,7 @@ from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 class TestRemoveIngressRule(SGBaseTest):
     def test_entering_wrong_format_cidr_001(self):
         sg_id, sg_name = self.create_security_group()
+        self.sg_id = sg_id
         '''
             Given user just finished adding an Egress rule and the rule is displayed in the Egress Rule table
             When user clicks x button at the last column of the rule information
@@ -33,6 +34,3 @@ class TestRemoveIngressRule(SGBaseTest):
             self.sg_details_page.check_element_existence(CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON)
             )
         self.sg_details_page.click_confirm_remove_button()
-
-        #TODO: Generize this
-        self.delete_sg(sg_id)

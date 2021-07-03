@@ -1,4 +1,5 @@
 import os
+import logging
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -23,9 +24,17 @@ class SGBaseTest(CEBaseTest):
 
         return sg_id, sg_name
 
-    def delete_sg(self, sg_id):
+    def delete_sg(self):
         url = CE_SG_API_URL
-        params = {
-            "id": sg_id
-        }
+        try:
+            params = {
+                "id": self.sg_id
+            }
+        except:
+            logging.info("No created-SG to clean.")
+            return
+
         self._call_request_delete(url, params, CE_USER_TOKEN)
+
+    def clear_test_instances(self):
+        self.delete_sg()
