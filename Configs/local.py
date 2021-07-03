@@ -19,16 +19,16 @@ LOG_FILE_PATH = os.path.join(os.getcwd(), "Reports/logs")
 
 # CE
 CE_BASE_URL = "https://staging-ce.engineering.vng.vn/ce/"
+CE_INSTANCE_CREATE_WIZARD_URL = posixpath.join(CE_BASE_URL, "launch-instance-wizard")
 CE_VOLUME_URL = posixpath.join(CE_BASE_URL, "elastic-block-store/volumes")
 CE_CREATE_VOLUME_URL = posixpath.join(CE_VOLUME_URL, "create-volume")
 CE_INSTANCE_URL = posixpath.join(CE_BASE_URL, "instances")
-CE_INSTANCE_CREATE_WIZARD_URL = posixpath.join(CE_BASE_URL, "launch-instance-wizard")
 
 CE_API_URL = "https://staging-ce.engineering.vng.vn/api/client/"
+CE_SECURITY_GROUP_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "security-groups/")
 CE_INSTANCE_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "instances/")
 CE_KEYPAIR_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "keypairs/")
 CE_VOLUME_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "volumes/")
-CE_SECURITY_GROUP_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "security-groups/")
 
 CE_SG_URL = "https://staging-ce.engineering.vng.vn/ce/network/security-groups/"
 CE_SG_CREATE_URL = urllib.parse.urljoin(CE_SG_URL, "create-security-group")

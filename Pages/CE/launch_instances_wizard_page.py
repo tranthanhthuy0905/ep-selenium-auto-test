@@ -45,7 +45,7 @@ class CELaunchInstancesWizardPage(BasePage):
     """
     def apply_default_password(self):
         self\
-            .click_button(self.locator.APPLY_THIS_PASSWORD) \
+            .wait_and_click_button(self.locator.APPLY_THIS_PASSWORD) \
             .click_button(self.locator.LAUNCH_BTN)
 
     def edit_password(self):
@@ -225,9 +225,6 @@ class ReviewLaunchWizardPage(CELaunchInstancesWizardPage):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.locator.CLOSE_MESSAGE_BTN))
         self.click_button(self.locator.CLOSE_MESSAGE_BTN)
         return self
-
-    def check_instance_state(self, instance_id, state):
-        WebDriverWait(self.driver, 20).until(EC.text_to_be_present_in_element(CELaunchInstancesWizardPageLocators.INSTANCE_STATE_BY_ID(instance_id), state))
 
     def launch_instance(self):
         self\

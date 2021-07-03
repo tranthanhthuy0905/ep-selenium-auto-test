@@ -11,6 +11,8 @@ class CEPageLocators(object):
     INSTANCES_MENU_BTN = (By.LINK_TEXT, 'Instances')
     ELASTIC_BLOCK_STORE_MENU_BTN = (By.XPATH, '/html/body/div/section/div[2]/aside/div/div[2]/div[1]/ul/li[6]/div[1]')
     VOLUMES_SUBMENU_BTN = (By.LINK_TEXT, 'Volumes')
+    
+    
 
 
 class CEInstancePageLocators(object):
@@ -40,7 +42,10 @@ class CEInstancePageLocators(object):
     DROP_DOWN_LIST_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div[3]/div[2]/div/div[2]/div/div/div[1]')
     COPY = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div[3]/div[2]/div/div[2]/div/div/div[2]/div/div/div[2]/div/div/div[2]/div/span/span')
     REFRESH_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[1]')
-
+    INSTANCE_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[4]/div/span")
+    INSTANCE_RADIO_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td/label/span")
+    STOP_STATUS = "Stopped"
+    RUNNING_STATUS = "Running"
 
 class CEInstanceTypesPageLocators(object):
     INSTANCE_TYPE_4G_RADIO = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[1]/label/span/input')
@@ -80,19 +85,19 @@ class CELaunchInstancesWizardPageLocators(object):
     RADIO_BY_NAME = lambda _radio_name: (By.NAME, f'{_radio_name}')
     CREATE_NEW_SG_RADIO = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/label/span[1]/input")
     SELECT_EXISTING_SG_RADIO = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[2]/label/span[1]/input")
-    SG_NAME_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[2]/input")
-    SG_DESCRIPTION_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[2]/div[2]/input")
-    ADD_SG_BTN = (By.XPATH, "//button[contains(.,'Add Security group')]")
+    SG_NAME_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[2]/div[2]/span/span/input")
+    SG_DESCRIPTION_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[3]/div[2]/input")
+    ADD_SG_BTN = (By.XPATH, "//button[contains(.,'Add Security Group')]")
     SG_DETAILS_ID = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[4]/div/div/div/div/div/div[1]/div[2]/div/div[1]/div[2]/div")
-    SG_APPLY_CHECKBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div/div[2]/label/span[1]")
+    SG_APPLY_CHECKBOX = (By.XPATH, "/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div/div[2]/label/span[1]")
     CREATE_SG_SUCCESS_MESSAGE = (By.XPATH, "//div[contains(.,'Created security group successfully')]")
     PARRENT_BY_INSTANCE_NAME = lambda _instance_name: (By.XPATH, f"//td[contains(.,'{_instance_name}')]/parent::*")
     STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[@class='ant-table-cell'][2]/div/span/span[@class='ant-badge-status-text']")
-    RANDOM_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[2]/button")
-    COPY_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[3]/button")
+    RANDOM_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[2]/button/span")
+    COPY_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[3]/button/span")
     SHOW_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/span/span")
     APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
-    INSTANCE_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[4]/div/span")
+    
     
 
 

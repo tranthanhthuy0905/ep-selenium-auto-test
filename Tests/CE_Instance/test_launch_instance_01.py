@@ -34,7 +34,7 @@ from Tests.base_test import BaseTest
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.launch_instances_wizard_page import *
-from Locators.CE import CELaunchInstancesWizardPageLocators
+from Locators.CE import CEInstancePageLocators, CELaunchInstancesWizardPageLocators
 
 class Test_launch_instance_01(BaseTest):
     """
@@ -44,7 +44,6 @@ class Test_launch_instance_01(BaseTest):
     # General method to pass through step 1 & 2 of launching an instance
     def choose_MI_N_Instance_Type(self):
 
-        time.sleep(1)
         # Access to CE main page
         self.ce_homepage = CEHomePage(self.driver)
 
@@ -52,20 +51,17 @@ class Test_launch_instance_01(BaseTest):
         # Step 1: User selects "Instances => Instances" on left side menu
         self.ce_homepage.access_instances_page()
         self.ce_instances_page = CEInstancesPage(self.driver)
-        self.assertEqual(
-            self.driver.current_url, self.ce_instances_page.base_url
-        )
+        self.assertEqual(self.driver.current_url, self.ce_instances_page.base_url)
 
-        time.sleep(1)
         # Step 2: Click on "Launch Instance" button
         # Direct to Launch Instance Wizard page
         self.ce_instances_page.access_launch_instances_wizard_page()
         self.launch_instances_wizard_page = CELaunchInstancesWizardPage(self.driver)
         self.assertEqual(self.driver.current_url, self.launch_instances_wizard_page.base_url)
 
-        time.sleep(1)
         # Action 3: Select "Ubuntu20_20.04_Stable" image,
         # Select "2G-2Core-2k2" type
+
         # Step 1: Choose an Machine Image 
         self.machine_image_wizard = MachineImageWizardPage(self.driver)
         self.machine_image_wizard.choose_machine_image()
@@ -87,7 +83,6 @@ class Test_launch_instance_01(BaseTest):
         # Passing step 1 (Choose MI) and step 2 (Instance Type)
         self.choose_MI_N_Instance_Type()
 
-        time.sleep(1)
         # Click "Apply this password" button,
         # Click "Launch" button
         self.launch_instances_wizard_page.apply_default_password()
@@ -99,9 +94,6 @@ class Test_launch_instance_01(BaseTest):
                 CELaunchInstancesWizardPageLocators.REVIEW_INSTANCE_LAUNCH)
         )
 
-        # Sleep to wait for the page loading
-        time.sleep(3)
-        self.tearDown()
 
     def test_launch_instance_01_edit_valid_pw(self):
         """
@@ -109,8 +101,8 @@ class Test_launch_instance_01(BaseTest):
         """
         # Passing step 1 (Choose MI) and step 2 (Instance Type)
         self.choose_MI_N_Instance_Type()
+        self.instances_page = CEInstancesPage(self.driver)
 
-        time.sleep(1)
         # Edit own password
         self.launch_instances_wizard_page.edit_password()
         # Check if click on Edit button, whether come back to "Configure Instance" step or not
@@ -121,13 +113,33 @@ class Test_launch_instance_01(BaseTest):
             self.launch_instances_wizard_page.check_element_existence(
                 CELaunchInstancesWizardPageLocators.CONFIGURE_INSTANCE_DETAILS)
         )
-        time.sleep(1)
         self.launch_instances_wizard_page.input_password("Abc12345", "Abc12345")
+        instance_name = self.driver.find_element(*CELaunchInstancesWizardPageLocators.INSTANCE_NAME_TEXTBOX).text
         self.launch_instances_wizard_page.review_and_launch_instance()
 
-        # Sleep to wait for the page loading
-        time.sleep(3)
-        self.tearDown()
+        # Get instance id for clear data after test
+        WebDriverWait(self.driver, 10).until(EC.url_to_be(self.instances_page.base_url))
+        instance_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_INSTANCE_NAME(instance_name))
+        self.instance_id = instance_row.get_attribute("data-row-key")
+
+        self.instances_page.check_element_existence(CEInstancePageLocators.ANNOUNCEMENT)
+        self.instances_page.check_element_existence(CEInstancePageLocators.LAUNCH_VM_SUCCESS_MESSAGE)
+
+        # Check if the new instance state is Running
+        self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.RUNNING_STATUS)
+        print("Instance is created successfully!")
+
+        # Test completed, stop instance for cleaning test data
+        self.instances_page.select_instance(self.instance_id)
+        self.instances_page.change_instance_states(CEInstancePageLocators.STOP_INSTANCE_BTN, CEInstancePageLocators.STOP_CONFIRM_BTN)
+        print("Instance is stopping")
+
+        # Check if the new instance state is Stopped
+        WebDriverWait(self.driver, 300).until(EC.text_to_be_present_in_element(
+            CEInstancePageLocators.INSTANCE_STATE_BY_ID(self.instance_id), 
+            CEInstancePageLocators.STOP_STATUS)
+        )
+
 
     def test_launch_instance_01_edit_invalid_pw(self):
         """
@@ -136,7 +148,6 @@ class Test_launch_instance_01(BaseTest):
         # Passing step 1 (Choose MI) and step 2 (Instance Type)
         self.choose_MI_N_Instance_Type()
 
-        time.sleep(1)
         # Edit own password
         self.launch_instances_wizard_page.edit_password()
         # Check if click on Edit button, whether come back to "Configure Instance" step or not
@@ -147,7 +158,6 @@ class Test_launch_instance_01(BaseTest):
             self.launch_instances_wizard_page.check_element_existence(
                 CELaunchInstancesWizardPageLocators.CONFIGURE_INSTANCE_DETAILS)
         )
-        time.sleep(1)
         self.launch_instances_wizard_page.input_password("Abc12345", "Abcd12345")
 
         # Check if there is a reminding message or not
@@ -155,10 +165,6 @@ class Test_launch_instance_01(BaseTest):
             self.launch_instances_wizard_page.check_element_existence(
                 CELaunchInstancesWizardPageLocators.TWO_PASSWORD_NOT_MATCH)
         )
-
-        # Sleep to wait for the page loading
-        time.sleep(3)
-        self.tearDown()
 
 if __name__ == "__main__":
     unittest.main(

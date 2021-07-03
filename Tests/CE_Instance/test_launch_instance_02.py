@@ -146,15 +146,20 @@ class TestInstances(CEBaseTest):
         self.instances_page.check_element_existence(CEInstancePageLocators.LAUNCH_VM_SUCCESS_MESSAGE)
 
         # Check if the new instance state is Running
-        self.review_launch_wizard.check_instance_state(self.instance_id, "Running")
+        self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.RUNNING_STATUS)
+        print("Instance is created successfully!")
 
-        
-    def clear_test_instances(self):
-        self.delete_CE_instance_by_id(self.instance_id)
-        self.delete_CE_volume_by_id(self.volume_id)
-        self.delete_CE_keypair_by_name(self.keypair_name)
-        self.driver.implicitly_wait(20)
-        self.delete_CE_sg_by_id(self.sg_id)
+        # Test completed, stop instance for cleaning test data
+        self.instances_page.select_instance(self.instance_id)
+        self.instances_page.change_instance_states(CEInstancePageLocators.STOP_INSTANCE_BTN, CEInstancePageLocators.STOP_CONFIRM_BTN)
+        print("Instance is stopping")
+
+        # Check if the new instance state is Stopped
+        WebDriverWait(self.driver, 300).until(EC.text_to_be_present_in_element(
+            CEInstancePageLocators.INSTANCE_STATE_BY_ID(self.instance_id), 
+            CEInstancePageLocators.STOP_STATUS)
+        )
+
         
 
 
