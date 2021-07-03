@@ -14,7 +14,7 @@ from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 
 
 class TestRemoveIngressRule(SGBaseTest):
-    def test_entering_wrong_format_cidr_001(self):
+    def test_removing_ingress_rule(self):
         sg_id, sg_name = self.create_security_group()
         self.sg_id = sg_id
         '''
@@ -31,6 +31,7 @@ class TestRemoveIngressRule(SGBaseTest):
             And there  is a popup notifying user the action is succeed
         '''
         self.assertTrue(
-            self.sg_details_page.check_element_existence(CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON)
+            self.sg_details_page.check_element_existence(CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON),
+            "CONFIRM DELETE BUTTON NOT EXISTS"
             )
         self.sg_details_page.click_confirm_remove_button()

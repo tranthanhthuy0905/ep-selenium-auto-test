@@ -1,5 +1,6 @@
 
 import time
+import logging
 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -52,6 +53,7 @@ class SGDetailsPage(BasePage):
         end_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_END_PORT_TEXTBOX)
         start_port_text_box.send_keys(start_port)
         end_port_text_box.send_keys(end_port)
+        logging.info(f"Filled into textboxes ports {start_port} and {end_port}.")
 
     def fill_in_egress_rule_info(self):
         start_port_text_box = self.find_element(*CESecurityGroupLocators.EGRESS_START_PORT_TEXTBOX)
@@ -59,13 +61,17 @@ class SGDetailsPage(BasePage):
 
     def click_add_ingress(self):
         self.find_element(*CESecurityGroupLocators.ADD_INGRESS_BUTTON).click()
+        logging.info("Button add ingress rule is clicked.")
 
     def click_add_egress(self):
         self.find_element(*CESecurityGroupLocators.ADD_EGRESS_BUTTON).click()
+        logging.info("Button add egress rule is clicked.")
 
     def add_ingress_rule(self, start_port, end_port):
         self.fill_in_ingress_rule_info(start_port, end_port)
         self.click_add_ingress()
+        logging.info(f"Ingress rule with port: {start_port} - {end_port} added.")
+
 
     def add_egress_rull(self):
         self.fill_in_egress_rule_info()
@@ -80,8 +86,12 @@ class SGDetailsPage(BasePage):
 
     def click_first_remove_button(self):
         self.find_element(*CESecurityGroupLocators.REMOVE_FIRST_INGRESS_RULE_BUTTON).click()
+        logging.info(f"X button clicked for first ingress removing rule. "
+                     f"Element: {CESecurityGroupLocators.REMOVE_FIRST_INGRESS_RULE_BUTTON}")
 
     def click_confirm_remove_button(self):
         self.find_element(*CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON).click()
+        logging.info(f"Delete confirm button clicked. "
+                     f"Element: {CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON}")
 
 
