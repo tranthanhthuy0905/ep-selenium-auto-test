@@ -1,4 +1,7 @@
 """
+    Command run test:
+        python3 -m unittest Tests.CE_Volume.test_resize_volume -v
+
     Test big flow Resize_volume
 """
 import os

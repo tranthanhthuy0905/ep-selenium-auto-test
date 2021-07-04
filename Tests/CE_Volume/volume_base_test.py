@@ -77,9 +77,6 @@ class VolumeBaseTest(CEBaseTest):
         self.volume_page.click_button(
             (By.XPATH, '//span[././input/@type="radio" and ancestor::tr/@data-row-key="' + self.volume_id + '"]'))
 
-        time.sleep(2)
+        time.sleep(3)
         if (attach_vm):
-        #     print("Instance name is: ", self.instance_name)
-        #     print("Instance state is: ", self.instance_state)
-            time.sleep(3)
             self.volume_page.attach_volume_to_instance(self.instance_name, self.instance_state)

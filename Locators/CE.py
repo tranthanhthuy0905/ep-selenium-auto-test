@@ -95,7 +95,6 @@ class CEVolumePageLocators(object):
 
     # Resize Volume Elements
     RESIZE_VOLUME_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[2]')
-    ATTACH_VOLUME_BTN = (By.XPATH, '//button[following-sibling::button/div/text()="Actions " and ./div/span/@class="anticon anticon-link"]')
     SIZE_GB = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[6]')
     RESIZE_VOLUME_BOX = (By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]')
     OK_BTN = (By.XPATH, "//span[text()='OK']")
@@ -107,7 +106,13 @@ class CEVolumePageLocators(object):
     SIZE_FORM = (By.XPATH, "//*[@id='form_resize_volume_size']")
 
     # Attach volume
-    SELECT_AN_INSTANCE = (By.XPATH, '//div[contains(.,"Select a instance")]')
+    ATTACH_VOLUME_BTN = (By.XPATH, '//button[following-sibling::button/div/text()="Actions " and ./div/span/@class="anticon anticon-link"]')
+    SELECT_AN_INSTANCE = (By.ID, "form_attach_volume_vm_id")
+
+    # Detach volume
+    DETACH_VOLUME_BTN = ()
+    DETACH_CONFIRM_BTN = ()
+
     # Volume detail
     VM_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[8]/div/div/div[2]')
     VM_ID = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[2]')

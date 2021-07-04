@@ -2,6 +2,7 @@ import time
 import unittest
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -45,12 +46,16 @@ class CEVolumePage(BasePage):
     def attach_volume_to_instance(self, instance_name, instance_state):
         # *** Attach the volume with the running VM ***
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(CEVolumePageLocators.ATTACH_VOLUME_BTN))
-        self \
-            .click_button(CEVolumePageLocators.ATTACH_VOLUME_BTN)\
-            .click_button(CEVolumePageLocators.SELECT_AN_INSTANCE)\
-            .click_button(By.XPATH, '//div[text()="'+ instance_name +'"]')\
-            .click_button(CEVolumePageLocators.OK_BTN)
-
+        self.click_button(CEVolumePageLocators.ATTACH_VOLUME_BTN)
+        #     .click_button(CEVolumePageLocators.SELECT_AN_INSTANCE)\
+        #     .click_button(By.XPATH, '//div[text()="'+ instance_name +'"]')\
+        #     .click_button(CEVolumePageLocators.OK_BTN)
+        self.find_element(*CEVolumePageLocators.SELECT_AN_INSTANCE) \
+            .send_keys(instance_name)
+        self.find_element(*CEVolumePageLocators.SELECT_AN_INSTANCE) \
+            .send_keys(Keys.ENTER)
+        time.sleep(2)
+        self.click_button(CEVolumePageLocators.OK_BTN)
         # *** Check if the volume is attached with VM successfully or not ***
         self.assertTrue(
             self.volume_page.check_element_existence(
@@ -58,7 +63,11 @@ class CEVolumePage(BasePage):
                  '//td[text()="' + self.instance_name + '" and ancestor::tr/@data-row-key="' + self.volume_name + '"]')),
             "Should successfully attach the volume with a "+ instance_state + " VM"
         )
-    # .click_button(CEVolumePageLocators.ATTACH_VOLUME_BTN)\
+
+    def detach_volume_from_vm(self):
+        self\
+            .click_button(self.locator.VOLUME_ACTIONS_BTN)
+        self.ass
     def choose_disk_offering_option(self, locator, option):
         try:
             self.find_element(*locator)
