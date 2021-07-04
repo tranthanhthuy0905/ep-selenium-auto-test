@@ -93,7 +93,7 @@ class CELaunchInstancesWizardPageLocators(object):
     SHOW_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/span/span")
     APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
     INSTANCE_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[4]/div/span")
-    
+
 
 
 
@@ -104,7 +104,7 @@ class CELaunchInstancesWizardPageLocators(object):
     EDIT_PASSWORD = (By.XPATH, "//button[contains(.,'<< Edit password')]")
     TWO_PASSWORD_NOT_MATCH = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[3]/form/div[2]/div[2]/div/div/div[2]/div')
 
-class CEVolumnePageLocators(object):
+class CEVolumePageLocators(object):
     CHOOSE_VOLUME_RADIO = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/label/span/input')
     VOLUME_ACTIONS_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[4]')
     EXPUNGE_VOLUME_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(4)')
@@ -116,7 +116,7 @@ class CEVolumnePageLocators(object):
 
 
 
-class CECreateVolumnePageLocators(object):
+class CECreateVolumePageLocators(object):
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,'Create Volume')]")
     VOLUME_TYPE_LIST = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[2]/div/div/div")
     CUSTOM_DISK = (By.XPATH, "//div[text()='Custom Disk']")
@@ -140,7 +140,7 @@ class CESecurityGroupLocators:
     Weird note: ADD_INGRESS_BUTTON and ADD_EGRESS_BUTTON has different structure: preceding::div/text() vs div/span/text()
     ADD_EGRESS_BUTTON has extra space and the end of text: 'Egress Rule '
     '''
-    ADD_INGRESS_BUTTON = (By.XPATH, '//*[@id="addRule"]/div/div[5]/div/div[2]/div/div/button') 
+    ADD_INGRESS_BUTTON = (By.XPATH, '//*[@id="addRule"]/div/div[5]/div/div[2]/div/div/button')
     # ADD_INGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
     #                                 "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
     #                                 "and preceding::div/text()='Ingress Rule')]][1]")

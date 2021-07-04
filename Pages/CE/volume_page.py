@@ -1,5 +1,5 @@
 from Pages.CE.create_volume_page import CECreateVolumePage
-from Locators.CE import CEInstancePageLocators, CEVolumnePageLocators
+from Locators.CE import CEInstancePageLocators, CEVolumePageLocators
 from Pages.base_page import BasePage
 from Pages.CE.launch_instances_wizard_page import CELaunchInstancesWizardPage
 from Configs import CE_VOLUME_URL
@@ -7,7 +7,7 @@ from Configs import CE_VOLUME_URL
 
 class CEVolumePage(BasePage):
     def __init__(self, driver):
-        self.locator = CEVolumnePageLocators
+        self.locator = CEVolumePageLocators
         super().__init__(driver, CE_VOLUME_URL)
 
 
