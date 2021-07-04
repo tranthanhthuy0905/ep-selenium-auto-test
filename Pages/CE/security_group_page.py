@@ -73,7 +73,21 @@ class SGDetailsPage(BasePage):
         logging.info(f"Ingress rule with port: {start_port} - {end_port} added.")
 
 
-    def add_egress_rull(self):
+    def click_ingress_protocol_dropdown(self):
+        self.find_element(*CESecurityGroupLocators.INGRESS_PROTOCOL_SELECTOR).click()
+        logging.info(f"Dropdown list for protocol selection clicked.")
+
+
+    def select_ingress_protocol(self, selection_index):
+        self.click_ingress_protocol_dropdown()
+        _dropdown = self.find_element(*CESecurityGroupLocators.INGRESS_PROTOCOL_SELECTOR_INPUT)
+        for i in range(0, selection_index):
+            _dropdown.send_keys(Keys.ARROW_DOWN)
+            logging.info(f"Send key: Arrow down for ingress protocol dropdown: {i}")
+        _dropdown.send_keys(Keys.ENTER)
+        logging.info("Send key: Enter key hit after selection.")
+
+    def add_egress_rule(self):
         self.fill_in_egress_rule_info()
         self.click_add_egress()
 
