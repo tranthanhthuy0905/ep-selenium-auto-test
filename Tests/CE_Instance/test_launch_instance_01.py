@@ -34,7 +34,7 @@ from selenium.webdriver.common.by import By
 from Tests.CE.ce_base_test import CEBaseTest
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.homepage import CEHomePage
-from Pages.CE.launch_instances_wizard_page import CELaunchInstancesWizardPage
+from Pages.CE.launch_instances_wizard_page import *
 from Locators.CE import CELaunchInstancesWizardPageLocators
 
 class Test_launch_instance_01(CEBaseTest):

@@ -60,27 +60,48 @@ class CELaunchInstancesWizardPageLocators(object):
     CREATE_NEW_KEYPAIR_CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
     CREATE_NEW_KEYPAIR_SUCCESS_MESSAGE = (By.XPATH, "//div[contains(.,'Created keypair successfully.')]")
     KEYPAIR_LIST = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[2]/div/div/div")
-    KEYPAIR_NAME = (By.ID, "create-ssh-key-form_name")
-    PUBLIC_KEY = (By.ID, "create-ssh-key-form_publicKey")
-    DEFAULT_PASSWORD = (By.ID, "password")
-    DEFAULT_PASSWORD_CONFIRM = (By.ID, "password_confirm")
+    KEYPAIR_NAME_TEXTBOX = (By.ID, "create-ssh-key-form_name")
+    PUBLIC_KEY_TEXTBOX = (By.ID, "create-ssh-key-form_publicKey")
+    DEFAULT_PASSWORD_TEXTBOX = (By.ID, "password")
+    DEFAULT_PASSWORD_CONFIRM_TEXTBOX = (By.ID, "password_confirm")
     CREATE_KEYPAIR_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Created keypair successfully.']")
-    INSTANCE_NAME_FORM = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[3]/div[1]/div[2]/input')
+    INSTANCE_NAME_TEXTBOX = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[3]/div[1]/div[2]/input')
     LAUNCH_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[3]/button[3]')
     REVIEW_N_LAUNCH_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[3]/button[3]')
     ADD_NEW_VOLUME_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[1]/button/span')
-    VOlUME_NAME_FORM = (By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]/div[2]/div[1]/input')
-    VOLUME_TYPE_LIST = (By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]/div[2]/div[2]/div[2]/div/div')
-    VOLUME_SIZE_FORM = (By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]/div[2]/div[3]/div[2]/div/div[2]/input')
+    VOlUME_NAME_TEXTBOX = (By.XPATH, "/html/body/div/div/div[2]/div/div[2]/div[2]/div[1]/input[@class='ant-input']")
+    VOLUME_TYPE_LIST = (By.XPATH, '/html/body/div/div/div[2]/div/div[2]/div[2]/div[2]/div[2]/div/div/span[2]')
+    VOLUME_SIZE_TEXTBOX = (By.XPATH, "/html/body/div/div/div[2]/div/div[2]/div[2]/div[3]/div/div/div/input")
+    PARRENT_BY_VOLUME_NAME = lambda _volume_name: (By.XPATH, f"//td[contains(.,'{_volume_name}')]/parent::*")
     CUSTOM_DISK = (By.XPATH, "//div[text()='Custom Disk']")
     CREATE_VOLUME_BTN = (By.XPATH, "//span[text()='Create']")
     CREATE_VOLUME_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Created volume successfully.']")
+    CLOSE_MESSAGE_BTN = (By.CLASS_NAME, "ant-notification-close-x")
+    RADIO_BY_NAME = lambda _radio_name: (By.NAME, f'{_radio_name}')
+    CREATE_NEW_SG_RADIO = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/label/span[1]/input")
+    SELECT_EXISTING_SG_RADIO = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[2]/label/span[1]/input")
+    SG_NAME_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[2]/input")
+    SG_DESCRIPTION_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[2]/div[2]/input")
+    ADD_SG_BTN = (By.XPATH, "//button[contains(.,'Add Security group')]")
+    SG_DETAILS_ID = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[4]/div/div/div/div/div/div[1]/div[2]/div/div[1]/div[2]/div")
+    SG_APPLY_CHECKBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div/div[2]/label/span[1]")
+    CREATE_SG_SUCCESS_MESSAGE = (By.XPATH, "//div[contains(.,'Created security group successfully')]")
+    PARRENT_BY_INSTANCE_NAME = lambda _instance_name: (By.XPATH, f"//td[contains(.,'{_instance_name}')]/parent::*")
+    STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[@class='ant-table-cell'][2]/div/span/span[@class='ant-badge-status-text']")
+    RANDOM_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[2]/button")
+    COPY_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[3]/button")
+    SHOW_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/span/span")
+    APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
+    INSTANCE_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[4]/div/span")
+
+
+
 
     # test_launch_instance_01's elements
     REVIEW_INSTANCE_LAUNCH = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div/h2')
     CONFIGURE_INSTANCE_DETAILS = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div/h2')
-    APPLY_THIS_PASSWORD = (By.XPATH, '//span[text()="Apply this password"]')
-    EDIT_PASSWORD = (By.XPATH, "/html/body/div[2]/div/div[2]/div/div[2]/div[3]/button[1]/span")
+    APPLY_THIS_PASSWORD = (By.XPATH, "//button[contains(.,'Apply this password')]")
+    EDIT_PASSWORD = (By.XPATH, "//button[contains(.,'<< Edit password')]")
     TWO_PASSWORD_NOT_MATCH = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[3]/form/div[2]/div[2]/div/div/div[2]/div')
 
 class CEVolumePageLocators(object):
@@ -91,7 +112,7 @@ class CEVolumePageLocators(object):
     CREATE_VOLUME_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Expunge volume is successful!']")
     VOLUME_NAME_IN_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[2]")
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,' Create Volume')]")
-    VOLUME_LIST = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]')
+    #VOLUME_LIST = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]')
 
     # Resize Volume Elements
     RESIZE_VOLUME_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[2]')
@@ -116,6 +137,7 @@ class CEVolumePageLocators(object):
     # Volume detail
     VM_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[8]/div/div/div[2]')
     VM_ID = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[2]')
+    VOLUMES_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div")
 
 class CECreateVolumePageLocators(object):
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,'Create Volume')]")
@@ -124,4 +146,53 @@ class CECreateVolumePageLocators(object):
     VOLUME_NAME_FORM = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[3]/div[2]/div/div[1]/input")
     VOLUME_SIZE_FORM = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[3]/div/div/div/input")
     CREATE_VOLUME_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Created volume successfully.']")
+    PARRENT_BY_VOLUME_NAME = lambda _volume_name: (By.XPATH, f"//td[contains(.,'{_volume_name}')]/parent::*")
 
+class CESecurityGroupLocators:
+
+    CREATE_SEC_GROUP_TEXTBOX_NAME_CSS = (By.CSS_SELECTOR, "input.ant-input")
+
+    CREATE_BUTTON = (By.XPATH, '//span[text()=" Create Security Group"]')
+    SUBMIT_CREATE_BUTTON_X_PATH = (By.XPATH, '//span[text()="Create Security Group"]')
+    CREATE_SUCCESSFUL_POPUP_XPATH = (By.XPATH, "//class[text()='Created security group successfully']")
+
+    COLLAPSE_TEXT_BOX_CLASS = (By.CLASS_NAME, "ant-collapse-content-box")
+    SECURITY_GROUP_ITEM_HOME_XPATH = (By.XPATH, '//tr[@data-row-key="{security_group_id}"]')
+
+    '''
+    Weird note: ADD_INGRESS_BUTTON and ADD_EGRESS_BUTTON has different structure: preceding::div/text() vs div/span/text()
+    ADD_EGRESS_BUTTON has extra space and the end of text: 'Egress Rule '
+    '''
+    ADD_INGRESS_BUTTON = (By.XPATH, '//*[@id="addRule"]/div/div[5]/div/div[2]/div/div/button')
+    # ADD_INGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
+    #                                 "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
+    #                                 "and preceding::div/text()='Ingress Rule')]][1]")
+    ADD_EGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
+                                   "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
+                                   "and preceding::div/span/text()='Egress Rule ')]]")
+
+    INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport']")
+    INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport']")
+    INGRESS_CIDR_TEXTBOX = (By.XPATH, "//input[@id='addRule_cidrlist']")
+    INGRESS_PROTOCOL_SELECTOR = (By.XPATH, '//*[@id="addRule"]/div/div[1]/div/div[2]/div/div/div/div/span[2]')
+    INGRESS_PROTOCOL_SELECTOR_INPUT = (By.XPATH, '//*[@id="addRule_protocol"]')
+
+    EGRESS_START_PORT_TEXTBOX = None
+    EGRESS_END_PORT_TEXTBOX = None
+    EGRESS_CIDR_TEXTBOX = None
+
+    INVALID_CIDR_ALERT = (By.XPATH, "//div[@role='alert']")
+
+    REMOVE_FIRST_INGRESS_RULE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[2]/td[8]/button')
+    CONFIRM_DELETE_RULE_BUTTON = (By.XPATH, "//button[@type='button' and ./span/text()='Delete']")
+    CANCEL_DELETE_RULE_BUTTON = (By.XPATH, "//button[@type='button' and ./span/text()='Cancel']")
+
+    INGRESS_RULE_ROW = lambda protocol, start_port, end_port, cidr: (
+        By.XPATH,
+        f"//td[@class='ant-table-cell' and text()='{protocol}' "
+        f"and following-sibling::td[text()='{start_port}' "
+        f"and following-sibling::td[text()='{end_port}' "
+        f"and following-sibling::td[following-sibling"
+        f"::td[following-sibling"
+        f"::td[text()='{cidr}']]]]]]"
+    )

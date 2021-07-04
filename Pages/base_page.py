@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 import time
+import logging
 
 
 class BasePage(object):
@@ -19,13 +20,21 @@ class BasePage(object):
         self.driver.implicitly_wait(10)
         if "session/signin" in self.driver.current_url:
             self.driver.quit()
+            logging.error("Something's wrong with authentication. Test cancelled.")
             raise Exception("Authentication may not be successful. User-token may need to be updated!")
+        logging.info(f"Authenticated successfully to {self.base_url}")
+
+    def access_page(self):
+        self.driver.get(self.base_url)
+        logging.info(f"Access to {self.base_url}")
 
     def find_element(self, *locator):
         try:
             return self.driver.find_element(*locator)
         except TimeoutException:
-            print("\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1]))
+            _msg = "\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1])
+            logging.error(_msg)
+            print(_msg)
             self.driver.get_screenshot_as_file('error_snapshot/{filename}.png'.format(filename='find_element'))
             self.driver.quit()
 
@@ -92,11 +101,14 @@ class BasePage(object):
     def check_element_existence(self, locator):
         try:
             WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(locator))
+            logging.info(f"CHECK ELEMENT EXISTENCE: Element {locator} exists.")
             return self
         except TimeoutException:
+            _msg = "\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1])
             self.driver.get_screenshot_as_file(
                 'error_snapshot/{filename}.png'.format(filename='check_element_existence'))
-            print("\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1]))
+            print(_msg)
+            logging.error("CHECK ELEMENT EXISTENCE: Element {locator} does not exist.")
             self.driver.quit()
             return False
 

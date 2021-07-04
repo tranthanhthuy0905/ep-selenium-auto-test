@@ -21,7 +21,6 @@ class CEVolumePage(BasePage):
         self.locator = CEVolumePageLocators
         super().__init__(driver, CE_VOLUME_URL)
 
-
     def click_create_volume_btn(self):
         self.driver.find_element(*self.locator.CREATE_VOLUME_BTN).click()
 
@@ -67,7 +66,7 @@ class CEVolumePage(BasePage):
     def detach_volume_from_vm(self):
         self\
             .click_button(self.locator.VOLUME_ACTIONS_BTN)
-        self.ass
+        # self.ass
     def choose_disk_offering_option(self, locator, option):
         try:
             self.find_element(*locator)

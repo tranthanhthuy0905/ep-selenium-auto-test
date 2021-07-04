@@ -1,47 +1,47 @@
 '''
-Scenario 2: Launch instance with full flow  (Ubuntu 20)
-    Given a certain user
-    When user wants to launch an instance
-    Then user selects "Instances => Instances" on left side menu
-    And user can see the list of instances which belongs to that user
-    And user can see the "Launch instance" button on top right corner
-    When user clicks on that "Launch instance" button
-    Then user can see the wizard form for creating a new instance
-    And user can see the list of OS images in the step 1 of wizard
-    When user selects "Ubuntu20_20.04_Stable" image
-    Then user can see the list of Instance Types in the step 2 of wizard
-    And user can see the "Next" button in the bottom right corner
-    When user selects "2G-2Core-2k2" type and clicks on "Next" button
-    Then user can see the Configure Instance Details form in the step 3 of wizard
-    And user can change details of the current instance
-    When user clicks on "Create new Keypair"
-    Then user can see a modal form for creating new keypair
-    When user fills in the form and clicks on "Ok" button on modal
-    Then the new keypair is created and added to the instance
-    When user fills in "Default Password" and "Confirm Password" 
-    Then the password for root account is set
-    When user clicks on "Next" button in the bottom right corner
-    Then user can see the list of Volumes in the step 4 of wizard
-    When user clicks "Add new Volume" button
-    Then user can see a modal form for creating new volume
-    And user can fill the form and select type of volume
-    When user clicks on "Create" button on modal
-    Then the new volume is created
-    When user selects a volume in Volumes list
-    Then the volume is attached to the instance
-    When user clicks on "Next" button in the bottom right corner
-    Then user can see the Security Group Setting page
-    And user can create a security group or select an existing security group
-    When user fill the form and clicks on "Add Security Group" button
-    Then user can set Ingress and Egress rule
-    When user clicks on "Review and Launch" button in the bottom right corner
-    Then user can see the review of current instance in the last step of wizard
-    And user can see the "Launch" button in the bottom right corner
-    When user clicks "Launch" button
-    Then user can see the list of instances which belongs to that user
-    And user can see the newly created instance on top of that list
-    And user can see the state of that instance is "Starting"
-    And state of that instance will be "Running" after a few seconds
+Scenario 7. Launch instance without setting default password	
+	Given a certain user
+	When user wants to launch an instance
+	Then user selects "Instances => Instances" on left side menu
+	And user can see the list of instances which belongs to that user
+	And user can see the "Launch instance" button on top right corner
+	When user clicks on that "Launch instance" button
+	Then user can see the wizard form for creating a new instance
+	And user can see the list of OS images in the step 1 of wizard
+	When user selects "Ubuntu20_20.04_Stable" image
+	Then user can see the list of Instance Types in the step 2 of wizard
+	And user can see the "Next" button in the bottom right corner
+	When user selects "2G-2Core-2k2" type and clicks on "Next" button
+	Then user can see the Configure Instance Details form in the step 3 of wizard
+	And user can change details of the current instance
+	When user clicks on "Create new Keypair"
+	Then user can see a modal form for creating new keypair
+	When user fills in the form and clicks on "Ok" button on modal
+	Then the new keypair is created and added to the instance
+	When user clicks on "Next" button in the bottom right corner
+	Then user can see the list of Volumes in the step 4 of wizard
+	When user clicks "Add new Volume" button
+	Then user can see a modal form for creating new volume
+	And user can fill the form and select type of volume
+	When user clicks on "Create" button on modal
+	Then the new volume is created
+	When user selects a volume in Volumes list
+	Then the volume is attached to the instance
+	When user clicks on "Next" button in the bottom right corner
+	Then user can see the Security Group Setting page
+	And user can create a security group or select an existing security group
+	When user fill the form and clicks on "Add Security Group" button
+	Then user can set Ingress and Egress rule
+	When user clicks on "Review and Launch" button in the bottom right corner
+	Then user can see the review of current instance in the last step of wizard
+	And user can see the "Launch" button in the bottom right corner
+	When user clicks "Launch" button
+	Then user can see a form for Setting Default Password
+	When user click on "Apply this password"
+	Then user can see the list of instances which belongs to that user
+	And user can see the newly created instance on top of that list
+	And user can see the state of that instance is "Starting"
+	And state of that instance will be "Running" after a few seconds
 '''
 
 from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
@@ -104,10 +104,8 @@ class TestInstances(CEBaseTest):
         keypair_name = CEKeypairTestData.KEYPAIR_NAME
         self.configure_instance_wizard.create_new_keypair(keypair_name, "")
 
-        # Set default password
-        self.configure_instance_wizard.fill_default_password(CEInstanceTestData.DEFAULT_PASSWORD, CEInstanceTestData.DEFAULT_PASSWORD)
-
-        self.configure_instance_wizard.click_next_btn()
+        # Without setting default password
+    
 
     # Step 4: Add Storage
         volume_name = CEVolumeTestData.VOLUME_NAME
@@ -135,6 +133,15 @@ class TestInstances(CEBaseTest):
 
     # Step 6: Review Instance & Launch
         self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
+        # Show generated pass
+        self.review_launch_wizard.show_password()
+        
+        # Copy password
+        self.review_launch_wizard.copy_password()
+
+        # Apply pass 
+        self.review_launch_wizard.apply_password()
+
         self.review_launch_wizard.launch_instance()
 
         # Get instance id for clear data after test
