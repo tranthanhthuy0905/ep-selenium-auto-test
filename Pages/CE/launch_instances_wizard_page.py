@@ -1,5 +1,5 @@
-from Configs.TestData import CEInstanceTestData
-from Locators.CE import CELaunchInstancesWizardPageLocators
+from Configs.TestData.CEInstanceTestData import CEInstanceTestData
+from Locators.CE import CELaunchInstancesWizardPageLocators, CEVolumePageLocators
 from Pages.base_page import BasePage
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
@@ -31,7 +31,7 @@ class CELaunchInstancesWizardPage(BasePage):
             .click_button(self.locator.MI_SELECT_BTN)\
             .click_button(self.locator.TYPE_2G_RADIO)\
             .click_button(self.locator.NEXT_BTN)\
-            .fill_form(self.instance_name, self.locator.INSTANCE_NAME_FORM)
+            .fill_form(self.instance_name, self.locator.INSTANCE_NAME_TEXTBOX)
         return self
 
     def click_next_btn(self):
@@ -54,6 +54,9 @@ class CELaunchInstancesWizardPage(BasePage):
         Define two options: Apply the default password and Edit own password
     """
     def apply_default_password(self):
+        wait = WebDriverWait(self.driver, 20)
+        wait.until(EC.element_to_be_clickable(self.locator.APPLY_THIS_PASSWORD),
+                   'Cannot apply default password because "Apply this password" button is not clickable. Maybe it requires more time to wait')
         self\
             .click_button(self.locator.APPLY_THIS_PASSWORD) \
             .click_button(self.locator.LAUNCH_BTN)

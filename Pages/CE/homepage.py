@@ -21,3 +21,6 @@ class CEHomePage(BasePage):
         elastic_block_store_volumes_page = self\
             .click_button_and_return_page(CEPageLocators.VOLUMES_SUBMENU_BTN, CEVolumePage(self.driver))
         return elastic_block_store_volumes_page
+
+    def access_snapshot_page(self):
+        pass

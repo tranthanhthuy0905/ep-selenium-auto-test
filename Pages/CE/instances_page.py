@@ -2,7 +2,7 @@ import time
 
 from selenium.webdriver.common.by import By
 
-from Locators.CE import CEInstancePageLocators, CEVolumePageLocators
+from Locators.CE import CEInstancePageLocators, CEVolumePageLocators, CELaunchInstancesWizardPageLocators
 from Pages.base_page import BasePage
 from Pages.CE.launch_instances_wizard_page import CELaunchInstancesWizardPage
 from selenium.webdriver.support.ui import WebDriverWait
@@ -26,12 +26,13 @@ class CEInstancesPage(BasePage):
 
     def change_instance_states(self, instance_id,state_button, confirm_button):
         self.click_button((By.XPATH, '//input[@type="radio" and ancestor::tr/@data-row-key="' + instance_id + '"]'))\
-            .click_button(self.locator.INSTANCE_STATE_BTN)\
-            .click_button(state_button)\
+            .click_button(self.locator.INSTANCE_STATE_BTN)
+        # wait = WebDriverWait(self.driver, 20)
+        # wait.until(EC.element_to_be_clickable(state_button),
+        #            "Cannot click Stop instance in the given time.")
+        self\
+            .wait_and_click_button(state_button)\
             .wait_and_click_button(confirm_button)
-        # if message:
-        #     self.check_element_existence(message)
-        # return self
         self
 
     def stop_vm(self, instance_id):
@@ -39,9 +40,20 @@ class CEInstancesPage(BasePage):
                                   CEInstancePageLocators.STOP_INSTANCE_BTN,
                                   CEInstancePageLocators.STOP_CONFIRM_BTN)
 
-        time.sleep(2)
-        self.instance_state = self.check_instance_state(CEInstancePageLocators.INSTANCE_STATE)
+        # TODO: Test the instance state (should be Running)
+        # WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element
+        #                                      (CELaunchInstancesWizardPageLocators.INSTANCE_STATE_BY_ID(
+        #                                          instance_id),
+        #                                       "Stopped"),
+        #                                      "Cannot stop the chosen instance")
+        WebDriverWait(self.driver, 300).until(EC.text_to_be_present_in_element
+                                             (CELaunchInstancesWizardPageLocators.INSTANCE_STATE_BY_ID(
+                                                 instance_id),
+                                              "Stopped"),
+                                             "Cannot stop the chosen instance")
+        self.instance_state = self.ce_instances_page.check_instance_state(CEInstancePageLocators.INSTANCE_STATE)
+        return self
+        #self.instance_state = self.check_instance_state(CEInstancePageLocators.INSTANCE_STATE)
 
-        self.assertTrue(self.instance_state == "Stopped",
-                        "Should successfully stop an instance")
+
 

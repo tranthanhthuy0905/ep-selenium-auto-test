@@ -3,6 +3,7 @@ import urllib.parse
 import posixpath
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # AUTHENTICATION

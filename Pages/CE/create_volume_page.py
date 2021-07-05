@@ -13,10 +13,10 @@ class CECreateVolumePage(BasePage):
     def show(self):
         print(self.base_url)
 
-    def choose_volume_type(self, locator, option):
+    def choose_volume_type(self, locator, disk_option):
         try:
             self.find_element(*locator)
-            self.click_button(option)
+            self.click_button(disk_option)
             return self
         except TimeoutException:
             self.driver.get_screenshot_as_file(

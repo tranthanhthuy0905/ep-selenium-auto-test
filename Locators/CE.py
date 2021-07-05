@@ -41,7 +41,7 @@ class CEInstancePageLocators(object):
     COPY = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div[3]/div[2]/div/div[2]/div/div/div[2]/div/div/div[2]/div/div/div[2]/div/span/span')
     REFRESH_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[1]')
 
-    INSTANCE_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[4]/div/span')
+    INSTANCE_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div[3]/div[2]/div/div[2]/div/div[4]/div/div/div[2]')
 class CEInstanceTypesPageLocators(object):
     INSTANCE_TYPE_4G_RADIO = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[1]/label/span/input')
     INSTANCE_TYPE_32G_RADIO = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr[7]/td[1]/label/span/input')
@@ -118,7 +118,8 @@ class CEVolumePageLocators(object):
     RESIZE_VOLUME_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[2]')
     SIZE_GB = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[6]')
     RESIZE_VOLUME_BOX = (By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]')
-    OK_BTN = (By.XPATH, "//span[text()='OK']")
+    # OK_BTN = (By.XPATH, "//button/span[text()='OK']")
+    OK_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[3]/button[2]")
     SHRINK_OK_BTN = (By.ID, "form_resize_volume_shrink")
     DISK_OFFERING = (By.XPATH, '//*[@id="form_resize_volume"]/div[1]/div[2]/div/div/div')
     DEFAULT_100G = (By.XPATH, "//div[text()='Default (100G)']")
@@ -127,16 +128,21 @@ class CEVolumePageLocators(object):
     SIZE_FORM = (By.XPATH, "//*[@id='form_resize_volume_size']")
 
     # Attach volume
-    ATTACH_VOLUME_BTN = (By.XPATH, '//button[following-sibling::button/div/text()="Actions " and ./div/span/@class="anticon anticon-link"]')
+    ATTACH_VOLUME_BTN = (By.XPATH, "//button[following-sibling::button/div/text()='Actions ' and ./div/span/@class='anticon anticon-link']")
     SELECT_AN_INSTANCE = (By.ID, "form_attach_volume_vm_id")
-
+    ATTACH_VOLUME_BOX = (By.XPATH, "//div[@class='ant-modal-content' and contains(.,'Attach Volume')]")
+    ATTACH_OK_BUTTON = (By.XPATH, "/html/body/div[4]/div/div[2]/div/div[2]/div[3]/button[2]")
     # Detach volume
-    DETACH_VOLUME_BTN = ()
-    DETACH_CONFIRM_BTN = ()
+    DETACH_VOLUME_BTN = (By.XPATH, "//span[text()='Detach volume']")
+    DETACH_CONFIRM_BTN = (By.XPATH, "//button//span[text()='Detach']")
+    # Delete volume
+    DELETE_VOLUME_BTN = (By.XPATH, "//span[text()='Delete volume']")
+    DELETE_CONFIRM_BUTTON = (By.XPATH, "//button//span[text()='Delete']")
 
     # Volume detail
+    VM_NAME = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[4]/div/div/div[2]')
     VM_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[8]/div/div/div[2]')
-    VM_ID = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[2]')
+    VM_ID = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[2]/div/span/span')
     VOLUMES_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div")
 
 class CECreateVolumePageLocators(object):
