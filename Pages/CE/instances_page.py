@@ -13,6 +13,7 @@ class CEInstancesPage(BasePage):
 
     def access_launch_instances_wizard_page(self):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.locator.LAUNCH_INSTANCES_BTN))
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.locator.LAUNCH_INSTANCES_BTN))
         launch_instances_wizard_page = self.click_button_and_return_page(self.locator.LAUNCH_INSTANCES_BTN, CELaunchInstancesWizardPage(self.driver))
         return launch_instances_wizard_page
     
@@ -26,7 +27,7 @@ class CEInstancesPage(BasePage):
     def change_instance_states(self, state_button, confirm_button):
         self\
             .wait_and_click_button(self.locator.INSTANCE_STATE_BTN)\
-            .click_button(state_button)\
+            .wait_and_click_button(state_button)\
             .wait_and_click_button(confirm_button)
         return self
 

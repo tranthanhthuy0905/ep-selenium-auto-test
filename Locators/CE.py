@@ -17,7 +17,7 @@ class CEPageLocators(object):
 
 
 class CEInstancePageLocators(object):
-    LAUNCH_INSTANCES_BTN = (By.LINK_TEXT, 'Launch Instances')
+    LAUNCH_INSTANCES_BTN = (By.LINK_TEXT, 'Launch Instance')
     ANNOUNCEMENT = (By.CSS_SELECTOR, 'div > div > div > div.ant-notification-notice-message')
     RADIO_BTN = (By.CSS_SELECTOR, '#root > section > section > main > div > div > div > div > div > div > div > div:nth-child(1) > div > div > div.ant-card-body > div.ant-spin-nested-loading > div > div > div > div > div > div > div.ant-table-body > table > tbody > tr.ant-table-row.ant-table-row-level-0 > td.ant-table-cell.ant-table-selection-column > label > span > input')
     INSTANCE_STATE_BTN = (By.XPATH, "//button[contains(.,'Instance state ')]")
@@ -65,7 +65,7 @@ class CELaunchInstancesWizardPageLocators(object):
     CREATE_NEW_KEYPAIR_OK_BTN = (By.XPATH, "//button[contains(.,'OK')]")
     CREATE_NEW_KEYPAIR_CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
     CREATE_NEW_KEYPAIR_SUCCESS_MESSAGE = (By.XPATH, "//div[contains(.,'Created keypair successfully.')]")
-    KEYPAIR_LIST = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[2]/div/div/div")
+    KEYPAIR_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[3]/div[5]/div[2]/div")
     KEYPAIR_NAME_TEXTBOX = (By.ID, "create-ssh-key-form_name")
     PUBLIC_KEY_TEXTBOX = (By.ID, "create-ssh-key-form_publicKey")
     DEFAULT_PASSWORD_TEXTBOX = (By.ID, "password")
@@ -88,7 +88,7 @@ class CELaunchInstancesWizardPageLocators(object):
     SELECT_EXISTING_SG_RADIO = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[2]/label/span[1]/input")
     SG_NAME_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[2]/input")
     SG_DESCRIPTION_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[2]/div[2]/input")
-    ADD_SG_BTN = (By.XPATH, "//button[contains(.,'Add Security group')]")
+    ADD_SG_BTN = (By.XPATH, "//button[contains(.,'Add Security Group')]")
     SG_DETAILS_ID = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[4]/div/div/div/div/div/div[1]/div[2]/div/div[1]/div[2]/div")
     SG_APPLY_CHECKBOX = (By.XPATH, "/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div/div[2]/label/span[1]")
     CREATE_SG_SUCCESS_MESSAGE = (By.XPATH, "//div[contains(.,'Created security group successfully')]")
@@ -98,6 +98,7 @@ class CELaunchInstancesWizardPageLocators(object):
     COPY_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[3]/button/span")
     SHOW_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/span/span")
     APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
+    FAILED_TO_LAUNCH_NOTI = (By.XPATH, "//div[contains(.,'Failed to launch instance.')]")
     
     
 
@@ -119,6 +120,7 @@ class CEVolumnePageLocators(object):
     VOLUME_NAME_IN_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[2]")
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,' Create Volume')]")
     VOLUMES_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div")
+    CLOSE_MESSAGE_BTN = (By.CLASS_NAME, "ant-notification-close-x")
 
 
 
@@ -186,6 +188,6 @@ class CEKeypairLocators:
     CREATE_KEYPAIR_BTN = (By.XPATH, "//button[contains(.,' Create keypair')]")
     OK_BTN = (By.XPATH, "//button[contains(.,'OK')]")
     FINGERPRINT_BY_KEYPAIR_NAME = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[@class='ant-table-cell'][2]")
-    SUCCESSFULLY_MESSAGE = (By.XPATH, "/html/body/div[6]/div/div[2]/div/div[2]/div[@class='ant-modal-body']/p")
+    SUCCESSFULLY_MESSAGE = (By.XPATH, "//p[contains(.,'Created keypair successfully.')]")
     CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
     
