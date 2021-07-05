@@ -36,18 +36,18 @@ class TestCreateSgICMPProtocol(SGBaseTest):
         '''
             When user select Protocol to ICMP in Ingress Rule, and fill in Start Port and End Port information, and click Add
         '''
-        self.sg_details_page.fill_in_ingress_rule_info(CESecurityGroupTestData.VALID_PORTS_1[0], CESecurityGroupTestData.VALID_PORTS_1[1])
         self.sg_details_page.select_ingress_protocol(CESecurityGroupTestData.ICMP_SELECTION_INDEX)
+        self.sg_details_page.fill_in_icmp_info(CESecurityGroupTestData.VALID_ICMP_1[0], CESecurityGroupTestData.VALID_ICMP_1[1])
         self.sg_details_page.click_add_ingress()
 
         '''
             Then a new icmp rule is added
             And user should see a new rule is added to the Ingress Rule table, with field Protocal is ICMP
         '''
-        self.sg_details_page.check_element_existence(CESecurityGroupLocators.INGRESS_RULE_ROW(
+        self.sg_details_page.check_element_existence(CESecurityGroupLocators.INGRESS_RULE_ICMP_ROW(
             protocol=CESecurityGroupTestData.ICMP_VALUE_IN_TABLE,
-            start_port=CESecurityGroupTestData.VALID_PORTS_1[0],
-            end_port=CESecurityGroupTestData.VALID_PORTS_1[1],
+            icmp_type=CESecurityGroupTestData.VALID_ICMP_1[0],
+            icmp_code=CESecurityGroupTestData.VALID_ICMP_1[1],
             cidr=CESecurityGroupTestData.DEFAULT_CIDR
         ))
 
