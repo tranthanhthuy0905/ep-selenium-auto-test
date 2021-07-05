@@ -21,3 +21,4 @@ class CESecurityGroupTestData(BaseTestData):
     ALL_SELECTION_INDEX = 3
 
     UDP_VALUE_IN_TABLE = "udp"
+    ICMP_VALUE_IN_TABLE = "icmp"
