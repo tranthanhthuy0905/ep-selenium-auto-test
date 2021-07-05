@@ -8,7 +8,8 @@ pip install -r requirements.txt
 ```
 ### 1.2 Chỉnh sửa user-token
 
-- Vào ```cd Configs/local```. chỉnh sửa biến USER_TOKEN thành token của mình.
+- Vào file .env và config token cho các service cần test.
+- Không push file .env lên git
 
 ### 1.3 Chạy code
 

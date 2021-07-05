@@ -2,9 +2,9 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.keys import Keys
 import time
-
-from Configs import COOKIE
+import logging
 
 
 class BasePage(object):
@@ -13,19 +13,28 @@ class BasePage(object):
         self.driver = driver
         self.timeout = 30
 
-    def authenticate(self):
-        self.driver.add_cookie(COOKIE)
+    def authenticate(self, user_token):
+        _cookie = { "name": "user-token", "value": user_token}
+        self.driver.add_cookie(_cookie)
         self.driver.get(self.base_url)
         self.driver.implicitly_wait(10)
         if "session/signin" in self.driver.current_url:
             self.driver.quit()
+            logging.error("Something's wrong with authentication. Test cancelled.")
             raise Exception("Authentication may not be successful. User-token may need to be updated!")
+        logging.info(f"Authenticated successfully to {self.base_url}")
+
+    def access_page(self):
+        self.driver.get(self.base_url)
+        logging.info(f"Access to {self.base_url}")
 
     def find_element(self, *locator):
         try:
             return self.driver.find_element(*locator)
         except TimeoutException:
-            print("\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1]))
+            _msg = "\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1])
+            logging.error(_msg)
+            print(_msg)
             self.driver.get_screenshot_as_file('error_snapshot/{filename}.png'.format(filename='find_element'))
             self.driver.quit()
 
@@ -92,10 +101,24 @@ class BasePage(object):
     def check_element_existence(self, locator):
         try:
             WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(locator))
+            logging.info(f"CHECK ELEMENT EXISTENCE: Element {locator} exists.")
+            return self
+        except TimeoutException:
+            _msg = "\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1])
+            self.driver.get_screenshot_as_file(
+                'error_snapshot/{filename}.png'.format(filename='check_element_existence'))
+            print(_msg)
+            logging.error("CHECK ELEMENT EXISTENCE: Element {locator} does not exist.")
+            self.driver.quit()
+            return False
+
+    def fill_form(self, value, locator):
+        try:
+            form = self.find_element(*locator)
+            form.send_keys(Keys.COMMAND + "a" + Keys.DELETE)
+            form.send_keys(value)
             return self
         except TimeoutException:
             self.driver.get_screenshot_as_file(
-                'error_snapshot/{filename}.png'.format(filename='check_element_existence'))
-            print("\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1]))
+                'error_snapshot/{filename}.png'.format(filename='fill_form'))
             self.driver.quit()
-            return False
