@@ -97,7 +97,7 @@ class CEBaseTest(BaseTest):
 
     def delete_CE_sg_by_id(self, sg_id):
         try:
-            url = CE_SECURITY_GROUP_API_CLIENT_URL
+            url = CE_SG_API_CLIENT_URL
             params = {
                 "id": sg_id,
             }

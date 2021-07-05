@@ -87,10 +87,10 @@ class ConfigureInstanceWizardPage(CELaunchInstancesWizardPage):
         self.fill_form(instance_name, self.locator.INSTANCE_NAME_TEXTBOX)
         return self
 
-    def choose_keypair(self):
+    def choose_keypair(self, fingerprint):
         self\
             .click_button(self.locator.KEYPAIR_LIST)\
-            .choose_keypair_in_selector(self.locator.KEYPAIR_LIST)
+            .choose_keypair_in_selector(self.locator.KEYPAIR_LIST, fingerprint)
         return self
 
     def fill_keypair_info(self, name, publicKey):
@@ -99,11 +99,10 @@ class ConfigureInstanceWizardPage(CELaunchInstancesWizardPage):
             .fill_form(publicKey, self.locator.PUBLIC_KEY_TEXTBOX)
         return self
 
-    # TODO
-    def choose_keypair_in_selector(self, locator):
+    def choose_keypair_in_selector(self, locator, fingerprint):
         try:
             self.find_element(*locator)
-            self.click_button((By.XPATH,"//div[text()='bc:89:6b:6d:32:fd:7c:24:dd:e0:7a:da:6d:3a:f3:62']"))
+            self.click_button((By.XPATH,"//div[text()='" + fingerprint + "']"))
             return self
         except TimeoutException:
             self.driver.get_screenshot_as_file(
@@ -193,7 +192,7 @@ class SecurityGroupWizardPage(CELaunchInstancesWizardPage):
     def apply_sg_for_instance(self):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.locator.SG_APPLY_CHECKBOX))
         self.\
-            click_button(self.locator.SG_APPLY_CHECKBOX)
+            wait_and_click_button(self.locator.SG_APPLY_CHECKBOX)
         return self
 
     

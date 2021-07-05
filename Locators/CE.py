@@ -11,15 +11,16 @@ class CEPageLocators(object):
     INSTANCES_MENU_BTN = (By.LINK_TEXT, 'Instances')
     ELASTIC_BLOCK_STORE_MENU_BTN = (By.XPATH, '/html/body/div/section/div[2]/aside/div/div[2]/div[1]/ul/li[6]/div[1]')
     VOLUMES_SUBMENU_BTN = (By.LINK_TEXT, 'Volumes')
+    KEYPAIR_SUBMENU_BTN = (By.LINK_TEXT, 'Key Pairs')
     
     
 
 
 class CEInstancePageLocators(object):
-    LAUNCH_INSTANCES_BTN = (By.LINK_TEXT, 'Launch Instance')
+    LAUNCH_INSTANCES_BTN = (By.LINK_TEXT, 'Launch Instances')
     ANNOUNCEMENT = (By.CSS_SELECTOR, 'div > div > div > div.ant-notification-notice-message')
     RADIO_BTN = (By.CSS_SELECTOR, '#root > section > section > main > div > div > div > div > div > div > div > div:nth-child(1) > div > div > div.ant-card-body > div.ant-spin-nested-loading > div > div > div > div > div > div > div.ant-table-body > table > tbody > tr.ant-table-row.ant-table-row-level-0 > td.ant-table-cell.ant-table-selection-column > label > span > input')
-    INSTANCE_STATE_BTN = (By.CSS_SELECTOR, '#root > section > section > main > div > div > div > div > div > div > div > div:nth-child(1) > div > div > div.ant-card-head > div > div.ant-card-extra > div > button:nth-child(3) > div')
+    INSTANCE_STATE_BTN = (By.XPATH, "//button[contains(.,'Instance state ')]")
     STOP_INSTANCE_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(1)')
     START_INSTANCE_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(2)')
     REBOOT_INSTANCE_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(3)')
@@ -73,7 +74,7 @@ class CELaunchInstancesWizardPageLocators(object):
     INSTANCE_NAME_TEXTBOX = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[3]/div[1]/div[2]/input')
     LAUNCH_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[3]/button[3]')
     REVIEW_N_LAUNCH_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[3]/button[3]')
-    ADD_NEW_VOLUME_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[1]/button/span')
+    ADD_NEW_VOLUME_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div[1]/button/span')
     VOlUME_NAME_TEXTBOX = (By.XPATH, "/html/body/div/div/div[2]/div/div[2]/div[2]/div[1]/input[@class='ant-input']")
     VOLUME_TYPE_LIST = (By.XPATH, '/html/body/div/div/div[2]/div/div[2]/div[2]/div[2]/div[2]/div/div/span[2]')
     VOLUME_SIZE_TEXTBOX = (By.XPATH, "/html/body/div/div/div[2]/div/div[2]/div[2]/div[3]/div/div/div/input")
@@ -85,9 +86,9 @@ class CELaunchInstancesWizardPageLocators(object):
     RADIO_BY_NAME = lambda _radio_name: (By.NAME, f'{_radio_name}')
     CREATE_NEW_SG_RADIO = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/label/span[1]/input")
     SELECT_EXISTING_SG_RADIO = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[2]/label/span[1]/input")
-    SG_NAME_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[2]/div[2]/span/span/input")
-    SG_DESCRIPTION_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[3]/div[2]/input")
-    ADD_SG_BTN = (By.XPATH, "//button[contains(.,'Add Security Group')]")
+    SG_NAME_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[2]/input")
+    SG_DESCRIPTION_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[2]/div[2]/input")
+    ADD_SG_BTN = (By.XPATH, "//button[contains(.,'Add Security group')]")
     SG_DETAILS_ID = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[4]/div/div/div/div/div/div[1]/div[2]/div/div[1]/div[2]/div")
     SG_APPLY_CHECKBOX = (By.XPATH, "/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div/div[2]/label/span[1]")
     CREATE_SG_SUCCESS_MESSAGE = (By.XPATH, "//div[contains(.,'Created security group successfully')]")
@@ -166,3 +167,15 @@ class CESecurityGroupLocators:
     REMOVE_FIRST_INGRESS_RULE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[2]/td[8]/button')
     CONFIRM_DELETE_RULE_BUTTON = (By.XPATH, "//button[@type='button' and ./span/text()='Delete']")
     CANCEL_DELETE_RULE_BUTTON = (By.XPATH, "//button[@type='button' and ./span/text()='Cancel']")
+
+
+class CEKeypairLocators:
+    KEYPAIR_NAME_TEXTBOX = (By.XPATH, "//*[@id='create-ssh-key-form_name']")
+    PUBLIC_KEY_TEXTBOX = (By.XPATH, "//*[@id='create-ssh-key-form_publicKey']")
+    CREATE_KEYPAIR_BTN = (By.XPATH, "//button[contains(.,' Create keypair')]")
+    OK_BTN = (By.XPATH, "//button[contains(.,'OK')]")
+    FINGERPRINT_BY_KEYPAIR_NAME = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[@class='ant-table-cell'][2]")
+    SUCCESSFULLY_MESSAGE = (By.XPATH, "/html/body/div[6]/div/div[2]/div/div[2]/div[@class='ant-modal-body']/p")
+    CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
+    
+    
