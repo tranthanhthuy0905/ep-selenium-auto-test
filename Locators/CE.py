@@ -93,7 +93,7 @@ class CELaunchInstancesWizardPageLocators(object):
     SHOW_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/span/span")
     APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
     INSTANCE_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[4]/div/span")
-
+    
 
 
 
@@ -104,7 +104,7 @@ class CELaunchInstancesWizardPageLocators(object):
     EDIT_PASSWORD = (By.XPATH, "//button[contains(.,'<< Edit password')]")
     TWO_PASSWORD_NOT_MATCH = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[3]/form/div[2]/div[2]/div/div/div[2]/div')
 
-class CEVolumePageLocators(object):
+class CEVolumnePageLocators(object):
     CHOOSE_VOLUME_RADIO = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/label/span/input')
     VOLUME_ACTIONS_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[4]')
     EXPUNGE_VOLUME_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(4)')
@@ -116,7 +116,7 @@ class CEVolumePageLocators(object):
 
 
 
-class CECreateVolumePageLocators(object):
+class CECreateVolumnePageLocators(object):
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,'Create Volume')]")
     VOLUME_TYPE_LIST = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[2]/div/div/div")
     CUSTOM_DISK = (By.XPATH, "//div[text()='Custom Disk']")
@@ -140,7 +140,7 @@ class CESecurityGroupLocators:
     Weird note: ADD_INGRESS_BUTTON and ADD_EGRESS_BUTTON has different structure: preceding::div/text() vs div/span/text()
     ADD_EGRESS_BUTTON has extra space and the end of text: 'Egress Rule '
     '''
-    ADD_INGRESS_BUTTON = (By.XPATH, '//*[@id="addRule"]/div/div[5]/div/div[2]/div/div/button')
+    ADD_INGRESS_BUTTON = (By.XPATH, '//*[@id="addRule"]/div/div[5]/div/div[2]/div/div/button') 
     # ADD_INGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
     #                                 "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
     #                                 "and preceding::div/text()='Ingress Rule')]][1]")
@@ -150,6 +150,8 @@ class CESecurityGroupLocators:
 
     INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport']")
     INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport']")
+    INGRESS_IMCP_TYPE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmptype']")
+    INGRESS_IMCP_CODE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmpcode']")
     INGRESS_CIDR_TEXTBOX = (By.XPATH, "//input[@id='addRule_cidrlist']")
     INGRESS_PROTOCOL_SELECTOR = (By.XPATH, '//*[@id="addRule"]/div/div[1]/div/div[2]/div/div/div/div/span[2]')
     INGRESS_PROTOCOL_SELECTOR_INPUT = (By.XPATH, '//*[@id="addRule_protocol"]')
@@ -172,4 +174,12 @@ class CESecurityGroupLocators:
         f"and following-sibling::td[following-sibling"
         f"::td[following-sibling"
         f"::td[text()='{cidr}']]]]]]"
+    )
+
+    INGRESS_RULE_ICMP_ROW = lambda protocol, icmp_type, icmp_code, cidr: (
+        By.XPATH,
+        f"//td[@class='ant-table-cell' and text()='{protocol}' "
+        f"and following-sibling::td[following-sibling::td[following-sibling::td[text()='{icmp_type}' "
+        f"and following-sibling::td[text()='{icmp_code}' "
+        f"and following-sibling::td[text()='{cidr}']]]]]]"
     )
