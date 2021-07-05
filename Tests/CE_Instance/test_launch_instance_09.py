@@ -92,7 +92,7 @@ class TestInstances(CEBaseTest):
         WebDriverWait(self.driver, 10).until(EC.url_to_be(self.volume_page.base_url))
         volume_row = self.driver.find_element(*CECreateVolumnePageLocators.PARRENT_BY_VOLUME_NAME(self.volume_name))
         self.volume_id = volume_row.get_attribute("data-row-key")
-        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element((By.CLASS_NAME, "ant-badge-status-text"), "Allocated"))
+        self.volume_page.check_volume_state(self.volume_id, CEVolumeTestData.ALLOCATED)
         self.driver.find_element(*(CEVolumnePageLocators.CLOSE_MESSAGE_BTN)).click()
 
         # Move to instance page

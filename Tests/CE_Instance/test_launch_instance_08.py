@@ -95,7 +95,7 @@ class TestInstances(CEBaseTest):
         self.review_launch_wizard.launch_instance()
 
         # Get instance id for clear data after test
-        WebDriverWait(self.driver, 10).until(EC.url_to_be(self.instances_page.base_url))
+        # WebDriverWait(self.driver, 10).until(EC.url_to_be(self.instances_page.base_url))
         instance_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_INSTANCE_NAME(self.instance_name))
         self.instance_id = instance_row.get_attribute("data-row-key")
 
@@ -106,16 +106,6 @@ class TestInstances(CEBaseTest):
         self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.RUNNING_STATUS)
         print("Instance is created successfully!")
 
-        # Test completed, stop instance for cleaning test data
-        self.instances_page.select_instance(self.instance_id)
-        self.instances_page.change_instance_states(CEInstancePageLocators.STOP_INSTANCE_BTN, CEInstancePageLocators.STOP_CONFIRM_BTN)
-        print("Instance is stopping")
-
-        # Check if the new instance state is Stopped
-        WebDriverWait(self.driver, 300).until(EC.text_to_be_present_in_element(
-            CEInstancePageLocators.INSTANCE_STATE_BY_ID(self.instance_id), 
-            CEInstancePageLocators.STOP_STATUS)
-        )
 
 
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_08 -v

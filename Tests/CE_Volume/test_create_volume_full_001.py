@@ -44,6 +44,7 @@ class TestVolume(CEBaseTest):
 
         # When user clicks on "Create Volume" button on the top right
         self.volume_page.click_button(CEVolumnePageLocators.CREATE_VOLUME_BTN)
+
         #Then user can move to "Create New Volume" page
         self.create_volume_page = CECreateVolumePage(self.driver)
         self.assertEqual(self.driver.current_url, self.create_volume_page.base_url)
@@ -55,9 +56,12 @@ class TestVolume(CEBaseTest):
         self.create_volume_page.click_button(CECreateVolumnePageLocators.CREATE_VOLUME_BTN)
         # Then user can see the newly created volume updated in the list of volumes (status: Allocated)
         WebDriverWait(self.driver, 10).until(EC.url_to_be(self.volume_page.base_url))
+        # Get volume ID
         volume_row = self.driver.find_element(*CECreateVolumnePageLocators.PARRENT_BY_VOLUME_NAME(self.volume_name))
         self.volume_id = volume_row.get_attribute("data-row-key")
-        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element((By.CLASS_NAME, "ant-badge-status-text"), "Allocated"))
+        
+        # Check volume state is allocated
+        self.volume_page.check_volume_state(self.volume_id, CEVolumeTestData.ALLOCATED)
         
     
 # python3 -m unittest Tests.CE_Volume.test_create_volume_full_001 -v

@@ -121,7 +121,7 @@ class CEVolumnePageLocators(object):
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,' Create Volume')]")
     VOLUMES_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div")
     CLOSE_MESSAGE_BTN = (By.CLASS_NAME, "ant-notification-close-x")
-
+    VOLUME_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[3]/div/span/span[2]")
 
 
 class CECreateVolumnePageLocators(object):

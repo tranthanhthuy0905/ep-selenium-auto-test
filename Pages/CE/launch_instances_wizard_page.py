@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 from Configs import CE_INSTANCE_CREATE_WIZARD_URL
 from selenium.webdriver.common.by import By
 import time
@@ -184,9 +185,9 @@ class SecurityGroupWizardPage(CELaunchInstancesWizardPage):
         # Click on add SG button
         self.click_button(self.locator.ADD_SG_BTN)
         # Check if SG created successfully
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.locator.CREATE_SG_SUCCESS_MESSAGE))
+        # WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.locator.CREATE_SG_SUCCESS_MESSAGE))
         # Close popup message
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.locator.CLOSE_MESSAGE_BTN))
+        WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.locator.CLOSE_MESSAGE_BTN))
         self.click_button(self.locator.CLOSE_MESSAGE_BTN)
     
     def apply_sg_for_instance(self):
@@ -221,7 +222,7 @@ class ReviewLaunchWizardPage(CELaunchInstancesWizardPage):
     def copy_password(self):
         self\
             .click_button(self.locator.COPY_PASSWORD_BTN)
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.locator.CLOSE_MESSAGE_BTN))
+        WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.locator.CLOSE_MESSAGE_BTN))
         self.click_button(self.locator.CLOSE_MESSAGE_BTN)
         return self
 
