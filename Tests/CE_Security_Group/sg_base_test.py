@@ -37,4 +37,5 @@ class SGBaseTest(CEBaseTest):
         self._call_request_delete(url, params, CE_USER_TOKEN)
 
     def clear_test_instances(self):
+        logging.info("Done testing. Clearing test instances.")
         self.delete_sg()

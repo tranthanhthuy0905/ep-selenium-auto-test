@@ -157,6 +157,8 @@ class CESecurityGroupLocators:
     INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport']")
     INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport']")
     INGRESS_CIDR_TEXTBOX = (By.XPATH, "//input[@id='addRule_cidrlist']")
+    INGRESS_PROTOCOL_SELECTOR = (By.XPATH, '//*[@id="addRule"]/div/div[1]/div/div[2]/div/div/div/div/span[2]')
+    INGRESS_PROTOCOL_SELECTOR_INPUT = (By.XPATH, '//*[@id="addRule_protocol"]')
 
     EGRESS_START_PORT_TEXTBOX = None
     EGRESS_END_PORT_TEXTBOX = None
@@ -167,6 +169,15 @@ class CESecurityGroupLocators:
     REMOVE_FIRST_INGRESS_RULE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[2]/td[8]/button')
     CONFIRM_DELETE_RULE_BUTTON = (By.XPATH, "//button[@type='button' and ./span/text()='Delete']")
     CANCEL_DELETE_RULE_BUTTON = (By.XPATH, "//button[@type='button' and ./span/text()='Cancel']")
+    INGRESS_RULE_ROW = lambda protocol, start_port, end_port, cidr: (
+        By.XPATH,
+        f"//td[@class='ant-table-cell' and text()='{protocol}' "
+        f"and following-sibling::td[text()='{start_port}' "
+        f"and following-sibling::td[text()='{end_port}' "
+        f"and following-sibling::td[following-sibling"
+        f"::td[following-sibling"
+        f"::td[text()='{cidr}']]]]]]"
+    )
 
 
 class CEKeypairLocators:
@@ -177,5 +188,4 @@ class CEKeypairLocators:
     FINGERPRINT_BY_KEYPAIR_NAME = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[@class='ant-table-cell'][2]")
     SUCCESSFULLY_MESSAGE = (By.XPATH, "/html/body/div[6]/div/div[2]/div/div[2]/div[@class='ant-modal-body']/p")
     CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
-    
     
