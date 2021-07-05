@@ -1,0 +1,39 @@
+import os
+import unittest
+import time 
+
+import HtmlTestRunner
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from Tests.device_farm.devicefarm_base_test import DEVICE_FARM_BaseTest
+from Pages.device_farm.devicefarm_homepage import DEVICE_FARM_HomePage
+from Pages.device_farm.devicefarm_create_session_page import DEVICE_FARM_CreateSessionPage
+
+from Locators.device_farm import DEVICE_FARM_ProjectLocators
+
+class Test_DEVICEFARM_Create_Session(DEVICE_FARM_BaseTest):
+    def test_create_session_successful(self):
+        """
+            TEST CASE: DF Session should be created successfully
+        """
+        self.df_homepage = DEVICE_FARM_HomePage(self.driver)
+        self.df_session = DEVICE_FARM_CreateSessionPage(self.driver)
+        self.df_session.click_create_session_submit_button()
+        _session_name = self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_NAME_TEXT).text
+        self.find_element(*DEVICE_FARM_ProjectLocators.LG_G5_SE_BUTTON)\
+            .click()
+        time.sleep(2)
+        self.find_element(*DEVICE_FARM_ProjectLocators.CONFIRM_START_SESSION_BUTTON)\
+            .click()
+        time.sleep(2)
+        self.driver.implicitly_wait(10)
+        self.assertTrue(
+            self.driver.find_element_by_link_text(_session_name)
+        )
+        
+if __name__ == "__main__":
+    unittest.main(
+        testRunner=HtmlTestRunner.HTMLTestRunner(
+            output=os.path.join(os.getcwd(), "Reports"))
+    )

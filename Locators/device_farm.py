@@ -16,11 +16,13 @@ class DEVICE_FARM_ProjectLocators(object):
     PROJECT_NAME_TEXT = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[2]')
 
     # CREATE SESSION
-    PROJECT_SELECTOR_LINK = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[2]/div')
+    # PROJECT_SELECTOR_LINK = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[2]/div')
+    PROJECT_SELECTOR_LINK = (By.XPATH, "(//a[contains(text(),'selenium-test-')])[0]")
     SESSION_CREATE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/a/span')
     LG_G5_SE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/label/span/input')
     CONFIRM_START_SESSION_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[3]/button[2]/span')
-
+    SESSION_NAME_TEXT = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[2]/div/input')
+    
     # DELETE SESSION
     SESSION_SELECT_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/label/span/input')
     SESSION_ACTION_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[2]/div')
