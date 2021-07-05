@@ -8,7 +8,7 @@ And there  is a popup notifying user the action is succeed
 '''
 
 from Pages.CE.security_group_page import SGDetailsPage
-from Tests.CE_Security_Group.sg_base_test import SGBaseTest
+from Tests.CE.CE_Security_Group import SGBaseTest
 from Locators.CE import CESecurityGroupLocators
 from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 
