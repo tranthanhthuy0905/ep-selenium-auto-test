@@ -2,7 +2,7 @@ import os
 import urllib.parse
 import posixpath
 
-DEVICE_FARM_USER_TOKEN = ""
+DEVICE_FARM_USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGRkMzkwZWJlNWI4MzAwMTgzNTMyZDYiLCJuYW1lIjoiaGFuZ2x0dDMiLCJpYXQiOjE2MjUyMTk1MjIsImV4cCI6MTYyNTMwNTkyMn0.i2Lh1MWCgKk-XoyGrY58faF0TznFzkXouPrMWTVI-3Q"
 CE_USER_TOKEN = ""
 S3_USER_TOKEN = ""
 
@@ -42,4 +42,4 @@ FILE_PATH_UPLOAD_SAMPLE = os.path.join(os.getcwd(), "Configs/TestData/sample_fil
 CHROME_DRIVER_PATH = os.path.join(os.getcwd(), "Drivers/chromedriver")
 LOG_FILE_PATH = os.path.join(os.getcwd(), "Reports/logs")
 
-DEVICE_FARM_BASE_URL = "https://staging-mobilefarm.engineering.vng.vn/devicefarm/mobile-device"
+DEVICE_FARM_BASE_URL = "https://mobilefarm.engineering.vng.vn/devicefarm/mobile-device"
