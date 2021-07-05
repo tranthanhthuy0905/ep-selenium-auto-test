@@ -12,6 +12,7 @@ class CESecurityGroupTestData(BaseTestData):
     INVALID_CIDR_1 = "0.0.0.0"
     INVALID_CIDR_2 = "abcdef"
     INVALID_CIDR_3 = "0.0.0.0/0.0.0.0"
+    VALID_ICMP_1 = (10, 10)
 
     SG_ID_REGEX = "[A-z0-9]*?-[A-z0-9]*?-[A-z0-9]*?-[A-z0-9]*?"
 
@@ -21,3 +22,4 @@ class CESecurityGroupTestData(BaseTestData):
     ALL_SELECTION_INDEX = 3
 
     UDP_VALUE_IN_TABLE = "udp"
+    ICMP_VALUE_IN_TABLE = "icmp"

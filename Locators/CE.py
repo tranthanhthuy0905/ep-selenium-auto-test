@@ -158,6 +158,8 @@ class CESecurityGroupLocators:
 
     INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport']")
     INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport']")
+    INGRESS_IMCP_TYPE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmptype']")
+    INGRESS_IMCP_CODE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmpcode']")
     INGRESS_CIDR_TEXTBOX = (By.XPATH, "//input[@id='addRule_cidrlist']")
     INGRESS_PROTOCOL_SELECTOR = (By.XPATH, '//*[@id="addRule"]/div/div[1]/div/div[2]/div/div/div/div/span[2]')
     INGRESS_PROTOCOL_SELECTOR_INPUT = (By.XPATH, '//*[@id="addRule_protocol"]')
@@ -180,7 +182,13 @@ class CESecurityGroupLocators:
         f"::td[following-sibling"
         f"::td[text()='{cidr}']]]]]]"
     )
-
+    INGRESS_RULE_ICMP_ROW = lambda protocol, icmp_type, icmp_code, cidr: (
+            By.XPATH,
+            f"//td[@class='ant-table-cell' and text()='{protocol}' "
+            f"and following-sibling::td[following-sibling::td[following-sibling::td[text()='{icmp_type}' "
+            f"and following-sibling::td[text()='{icmp_code}' "
+            f"and following-sibling::td[text()='{cidr}']]]]]]"
+        )
 
 class CEKeypairLocators:
     KEYPAIR_NAME_TEXTBOX = (By.XPATH, "//*[@id='create-ssh-key-form_name']")
@@ -190,4 +198,5 @@ class CEKeypairLocators:
     FINGERPRINT_BY_KEYPAIR_NAME = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[@class='ant-table-cell'][2]")
     SUCCESSFULLY_MESSAGE = (By.XPATH, "//p[contains(.,'Created keypair successfully.')]")
     CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
+    
     

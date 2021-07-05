@@ -55,6 +55,20 @@ class SGDetailsPage(BasePage):
         end_port_text_box.send_keys(end_port)
         logging.info(f"Filled into textboxes ports {start_port} and {end_port}.")
 
+    def fill_in_ingress_rule_info(self, start_port, end_port):
+        start_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_START_PORT_TEXTBOX)
+        end_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_END_PORT_TEXTBOX)
+        start_port_text_box.send_keys(start_port)
+        end_port_text_box.send_keys(end_port)
+        logging.info(f"Filled into textboxes ports {start_port} and {end_port}.")
+
+    def fill_in_icmp_info(self, icmp_type, icmp_code):
+        start_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_START_PORT_TEXTBOX)
+        end_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_END_PORT_TEXTBOX)
+        start_port_text_box.send_keys(icmp_type)
+        end_port_text_box.send_keys(icmp_code)
+        logging.info(f"Filled into textboxes ICMP {icmp_type} and {icmp_code}.")
+
     def fill_in_egress_rule_info(self):
         start_port_text_box = self.find_element(*CESecurityGroupLocators.EGRESS_START_PORT_TEXTBOX)
         end_port_text_box = self.find_element(*CESecurityGroupLocators.EGRESS_END_PORT_TEXTBOX)
