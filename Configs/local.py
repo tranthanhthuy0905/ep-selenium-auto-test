@@ -47,13 +47,5 @@ S3_API_BASE_URL = "https://s3.engineering.vng.vn/api/client/"
 S3_BUCKET_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "buckets")
 S3_FILES_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "files")
 
-<<<<<<< HEAD
-FILE_PATH_UPLOAD_SAMPLE = os.path.join(os.getcwd(), "Configs/TestData/sample_files/first.txt")
-
-CHROME_DRIVER_PATH = os.path.join(os.getcwd(), "Drivers/chromedriver")
-LOG_FILE_PATH = os.path.join(os.getcwd(), "Reports/logs")
-
-=======
 # Device Farm
->>>>>>> dev
 DEVICE_FARM_BASE_URL = "https://mobilefarm.engineering.vng.vn/devicefarm/mobile-device"
