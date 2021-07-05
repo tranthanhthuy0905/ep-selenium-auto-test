@@ -19,7 +19,7 @@ class BaseTest(unittest.TestCase, APIService):
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(CHROME_DRIVER_PATH, options=chrome_options)
-        self.driver.set_window_position(x=2050, y=282)
+        # self.driver.set_window_position(x=2050, y=282)
         os.makedirs(LOG_FILE_PATH, exist_ok=True)
         logging.basicConfig(filename=os.path.join(LOG_FILE_PATH, str(datetime.now())),
                             filemode='a',
