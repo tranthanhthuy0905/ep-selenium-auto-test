@@ -7,10 +7,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from Tests.Mobile_Farm.devicefarm_base_test import DEVICE_FARM_BaseTest
-from Pages.device_farm.devicefarm_homepage import DEVICE_FARM_HomePage
-from Pages.device_farm.devicefarm_delete_project_page import DEVICE_FARM_DeleteProjectPage
+from Pages.Mobile_Farm.devicefarm_homepage import DEVICE_FARM_HomePage
+from Pages.Mobile_Farm.devicefarm_delete_project_page import DEVICE_FARM_DeleteProjectPage
 
-from Locators.device_farm import DEVICE_FARM_ProjectLocators
+from Locators.Mobile_Farm import DEVICE_FARM_ProjectLocators
 
 class Test_DEVICEFARM_Delete_Project(DEVICE_FARM_BaseTest):
     def test_delete_project_successful(self):

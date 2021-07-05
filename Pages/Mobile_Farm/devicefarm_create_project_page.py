@@ -3,7 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from Pages.base_page import BasePage
 from Configs import DEVICE_FARM_BASE_URL
 from Configs.TestData.DeviceFarmTestData import DEVICE_FARM_TestData
-from Locators.device_farm import DEVICE_FARM_ProjectLocators
+from Locators.Mobile_Farm import DEVICE_FARM_ProjectLocators
 
 class DEVICE_FARM_CreateProjectPage(BasePage):
     def __init__(self, driver):

@@ -3,8 +3,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from Tests.base_test import BaseTest
 from Configs import DEVICE_FARM_BASE_URL
-from Pages.device_farm.devicefarm_homepage import DEVICE_FARM_HomePage
-from Pages.device_farm.devicefarm_create_project_page import DEVICE_FARM_CreateProjectPage
+from Pages.Mobile_Farm.devicefarm_homepage import DEVICE_FARM_HomePage
+from Pages.Mobile_Farm.devicefarm_create_project_page import DEVICE_FARM_CreateProjectPage
 
 class DEVICE_FARM_BaseTest(BaseTest):
     def create_df_project(self):

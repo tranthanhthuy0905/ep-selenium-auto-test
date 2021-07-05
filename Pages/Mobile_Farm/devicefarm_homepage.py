@@ -1,7 +1,7 @@
 from Pages.base_page import BasePage
-from Pages.device_farm.devicefarm_create_project_page import DEVICE_FARM_CreateProjectPage
+from Pages.Mobile_Farm.devicefarm_create_project_page import DEVICE_FARM_CreateProjectPage
 from Configs import DEVICE_FARM_BASE_URL, DEVICE_FARM_USER_TOKEN
-from Locators.device_farm import DEVICE_FARM_ProjectLocators
+from Locators.Mobile_Farm import DEVICE_FARM_ProjectLocators
 
 class DEVICE_FARM_HomePage(BasePage):
     def __init__(self, driver):
