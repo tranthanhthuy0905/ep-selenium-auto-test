@@ -1,4 +1,4 @@
-from Locators.CE import CECreateVolumePageLocators
+from Locators.CE import CECreateVolumnePageLocators
 from Pages.base_page import BasePage
 from Pages.CE.launch_instances_wizard_page import CELaunchInstancesWizardPage
 from selenium.webdriver.common.keys import Keys
@@ -8,7 +8,7 @@ import time
 
 class CECreateVolumePage(BasePage):
     def __init__(self, driver):
-        self.locator = CECreateVolumePageLocators
+        self.locator = CECreateVolumnePageLocators
         super().__init__(driver=driver, base_url=CE_CREATE_VOLUME_URL)
 
     def show(self):

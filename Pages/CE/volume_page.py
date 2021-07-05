@@ -1,6 +1,6 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from Pages.CE.create_volume_page import CECreateVolumePage
-from Locators.CE import CEInstancePageLocators, CEVolumePageLocators
+from Locators.CE import CEInstancePageLocators, CEVolumnePageLocators
 from Pages.base_page import BasePage
 from Pages.CE.launch_instances_wizard_page import CELaunchInstancesWizardPage
 from selenium.webdriver.support import expected_conditions as EC
@@ -9,7 +9,7 @@ from Configs import CE_VOLUME_URL
 
 class CEVolumePage(BasePage):
     def __init__(self, driver):
-        self.locator = CEVolumePageLocators
+        self.locator = CEVolumnePageLocators
         super().__init__(driver, CE_VOLUME_URL)
 
     def check_volume_state(self, volume_id, state):

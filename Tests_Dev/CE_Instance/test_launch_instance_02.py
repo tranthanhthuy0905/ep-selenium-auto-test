@@ -166,8 +166,6 @@ class TestInstances(CEBaseTest):
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_02 -v
 
 
-    
-
 if __name__ == "__main__":
     unittest.main(
         testRunner=HtmlTestRunner.HTMLTestRunner(
