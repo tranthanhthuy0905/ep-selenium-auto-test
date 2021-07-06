@@ -218,3 +218,6 @@ class CESnapshotLocators(object):
     DELETE_CONFIRM = (By.XPATH, "//button[contains(.,'Delete')]")
     # Revert to snapshot
     REVERT_TO_SNAPSHOT = (By.XPATH, "//span[text()='Revert to snapshot']")
+
+    # Get Snapshot ID
+    PARRENT_BY_SNAPSHOT_NAME = lambda _snapshot_name: (By.XPATH, f"//td[contains(.,'{_snapshot_name}')]/parent::*")

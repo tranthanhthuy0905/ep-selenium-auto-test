@@ -9,7 +9,7 @@ Scenarios:
     When user clicks on "Attach volume" button
     Then user can see a pop-up Attach volume box
     When user selects one VM in the list suggested in "Select a volume" option
-    And user cliks on "OK" button
+    And user clicks on "OK" button
     Then user can see the VM Name updated in the chosen volume's information
     If user tries to re-attach the volume with the instance
     Then user cannot click the "Attach volume" button

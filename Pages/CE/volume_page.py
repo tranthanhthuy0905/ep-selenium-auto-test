@@ -26,7 +26,7 @@ class CEVolumePage(BasePage):
         # When user clicks on "Create" button
         self.volume_name = CEVolumeTestData.VOLUME_NAME
         time.sleep(2)
-        self.create_volume_page.create_volume(volume_name=self.volume_name, volume_size=volume_size, disk_option=disk_option)
+        self.create_volume_page.create_volume(volume_name=self.volume_name, volume_size=volume_size,disk_option=disk_option)
 
     def choose_disk_offering_option(self, locator, option):
         try:

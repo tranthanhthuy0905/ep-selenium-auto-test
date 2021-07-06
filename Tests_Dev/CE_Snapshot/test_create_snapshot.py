@@ -25,7 +25,10 @@ class Test_create_snapshot(SnapshotBaseTest):
         # - Click on Create Snapshot button
         # - Input snapshot name
         # - Should FAIL to find the name of volume not attached with any instance
-        self.create_snapshot(CESnapshotTestData.SNAPSHOT_NAME, self.volume_name, False)
+        snapshot_name = CESnapshotTestData.SNAPSHOT_NAME
+        self.create_snapshot(snapshot_name, self.volume_name, False)
+        # TODO: Delete the snapshot after testing
+        self.auto_delete_snapshot(snapshot_name)
 
     def test_create_snapshot_volume_Running_VM(self):
         '''
@@ -44,7 +47,10 @@ class Test_create_snapshot(SnapshotBaseTest):
         # - Click on Create Snapshot button
         # - Input snapshot name + Select Running instance
         # - Should FAIL to find the name of volume attached with a Running instance
-        self.create_snapshot(CESnapshotTestData.SNAPSHOT_NAME, self.volume_name, False)
+        snapshot_name = CESnapshotTestData.SNAPSHOT_NAME
+        self.create_snapshot(snapshot_name, self.volume_name, True)
+        # TODO: Delete the snapshot after testing
+        self.auto_delete_snapshot(snapshot_name)
 
     def test_create_snapshot_volume_Stopped_VM(self):
         '''
@@ -63,4 +69,7 @@ class Test_create_snapshot(SnapshotBaseTest):
         # - Click on Create Snapshot button
         # - Input snapshot name + Select Stopped instance
         # - Should SUCCEED to find the name of volume attached with a Stopped instance
-        self.create_snapshot(CESnapshotTestData.SNAPSHOT_NAME, self.volume_name, False)
+        snapshot_name = CESnapshotTestData.SNAPSHOT_NAME
+        self.create_snapshot(snapshot_name, self.volume_name, True)
+        # TODO: Delete the snapshot after testing
+        self.auto_delete_snapshot(snapshot_name)

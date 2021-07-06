@@ -59,7 +59,7 @@ class CEBaseTest(BaseTest):
         # Click "Launch" button
         wait = WebDriverWait(self.driver, 50)
         wait.until(EC.element_to_be_clickable(CELaunchInstancesWizardPageLocators.APPLY_THIS_PASSWORD),
-                   'Cannot apply default password because "Apply this password" button is not clickable. Maybe it requires more time to wait')
+        'Cannot apply default password because "Apply this password" button is not clickable. Maybe it requires more time to wait')
         self.launch_instances_wizard_page.apply_default_password()
         self.assertEqual(
             self.driver.current_url, self.launch_instances_wizard_page.base_url
@@ -127,6 +127,16 @@ class CEBaseTest(BaseTest):
             self._call_request_delete(url, params, CE_USER_TOKEN)
         except Exception as e:
             print("Can't delete CE volume", str(e))
+
+    def delete_CE_snapshot_by_id(self, snapshot_id):
+        try:
+            url = CE_SNAPSHOT_API_CLIENT_URL
+            params = {
+                "id": snapshot_id,
+            }
+            self._call_request_delete(url, params, CE_USER_TOKEN)
+        except Exception as e:
+            print("Can't delete CE snapshot volume", str(e))
 
     def delete_CE_keypair_by_name(self, keypair_name):
         try:

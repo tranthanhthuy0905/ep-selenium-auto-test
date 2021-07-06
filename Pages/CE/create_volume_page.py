@@ -4,7 +4,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 
 from Configs import CE_CREATE_VOLUME_URL
-from Locators.CE import CECreateVolumePageLocators, CEVolumePageLocators
+from Locators.CE import CECreateVolumePageLocators, CEVolumePageLocators, CELaunchInstancesWizardPageLocators
 from Pages.base_page import BasePage
 
 
@@ -19,6 +19,8 @@ class CECreateVolumePage(BasePage):
     def choose_volume_type(self, locator, disk_option):
         try:
             self.find_element(*locator)
+            wait = WebDriverWait(self.driver, 10)
+            wait.until(EC.element_to_be_clickable(disk_option), "Fail to select the volume type")
             self.click_button(disk_option)
             return self
         except TimeoutException:
@@ -31,9 +33,9 @@ class CECreateVolumePage(BasePage):
             .fill_form(volume_name, self.locator.VOLUME_NAME_FORM) \
             .click_button(self.locator.VOLUME_TYPE_LIST)\
             .choose_volume_type(self.locator.VOLUME_TYPE_LIST, disk_option)
-        if (disk_option == CECreateVolumePageLocators.CUSTOM_DISK):
-            self\
-                .fill_form(volume_size, CECreateVolumePageLocators.VOLUME_SIZE_FORM)
+
+        if disk_option == self.locator.CUSTOM_DISK:
+            self.fill_form(volume_size, CECreateVolumePageLocators.VOLUME_SIZE_FORM)
 
         self.click_button(self.locator.CREATE_VOLUME_BTN)
         return self

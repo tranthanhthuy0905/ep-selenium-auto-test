@@ -30,6 +30,7 @@ CE_KEYPAIR_URL = posixpath.join(CE_BASE_URL, "keypair")
 CE_INSTANCE_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "instances/")
 CE_KEYPAIR_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "keypairs/")
 CE_VOLUME_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "volumes/")
+CE_SNAPSHOT_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "snapshot-volume/")
 CE_SG_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "security-groups/")
 
 CE_SG_URL = urllib.parse.urljoin(CE_BASE_URL, "network/security-groups/")

@@ -7,4 +7,4 @@ class CEVolumeTestData(BaseTestData):
 
     SIZE1 = str(random.randint(1, 99))
 
-    SIZE2 = str(random.randint(100, 500))
+    SIZE2 = str(random.randint(101, 500))
