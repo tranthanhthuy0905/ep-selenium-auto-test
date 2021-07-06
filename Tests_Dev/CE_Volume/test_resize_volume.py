@@ -19,11 +19,21 @@ from Tests_Dev.CE_Volume.volume_base_test import VolumeBaseTest
 
 class Test_custom_volume(VolumeBaseTest):
 
-    ''' TEST CASE: Resize Volume'''
+    ''' TEST CASE: All the scenarios relating to Resize Volume'''
+
     def resize_volume(self, disk_option, shrink_ok, stop_vm, attach_vm, initial_size, enter_value):
+        ''' General method to resize volume '''
+
+    # *** Choose one existing volume attached with instance ***
+        # Flow of work: Create an instance ( + Stop the instance)
+        #               Create a volume
+        #               Attach volume with the above instance 
+    # OR
+    # *** Choose an independent existing volume ***
+        # Flow of work: Create a volume
         self.choose_volume(disk_option=disk_option, stop_vm=stop_vm, initial_size=initial_size, attach_vm=attach_vm)
         time.sleep(2)
-        # Click on "Resize volume" button
+        # When user clicks on "Resize volume" button on the top right
         self.volume_page.click_button(CEVolumePageLocators.RESIZE_VOLUME_BTN)
 
         # Wait for the Resize volume box popped up
@@ -33,40 +43,47 @@ class Test_custom_volume(VolumeBaseTest):
             .click_button(CEVolumePageLocators.DISK_OFFERING) \
             .choose_disk_offering_option(CEVolumePageLocators.DISK_OFFERING, disk_option)
 
-        # Wait for next actions loaded
         time.sleep(3)
-        # Once choosing Custom Disk, a size blank should appear
+        # If user chooses Custom Disk, a size blank should appear
         if (disk_option == CECreateVolumePageLocators.CUSTOM_DISK):
             self.volume_page \
                 .fill_form(enter_value, CEVolumePageLocators.SIZE_FORM)
 
-        # Click on Shrink OK or not
+        # If user clicks on Shrink OK
         if (shrink_ok == "with"):
             self.volume_page.choose_Shrink_OK()
 
-        # Click OK
+        # When user clicks on "OK" button
         self.volume_page.click_button(CEVolumePageLocators.OK_BTN)
 
         time.sleep(3)
-        # When the VM is running => Should not resize successfully by all means
+
+        # If a VM is attached to volume
         if (attach_vm):
+             # When the VM is running => Should not resize successfully by all means
             if (self.instance_state == "Running"):
                 self.assertTrue(
                     self.volume_page.check_size_gb() == initial_size,
                     "Should fail to resize volume when it is attached to a Running VM"
                 )
             else:
+                # When trying to downsize the volume attached with an instance without shrinking => Should fail by all means
                 if (enter_value < initial_size and shrink_ok == "without Shrink OK"):
                     self.assertTrue(
                         self.volume_page.check_size_gb() == initial_size,
                         "Should fail to downsize volume attached with a Stopped VM without shrinking it"
                     )
                 else:
+                # In any other cases:
+                #   - Upsize volume (whether with or without Shrink OK, with Custom Disk option or others)
+                #   - Downsize volume (with Shrink OK)
+                # => All should work by all means
                     self.assertTrue(
                         self.volume_page.check_size_gb() != initial_size,
                         "Should successfully resize volume when it is attached to a Stopped VM" + shrink_ok + " Shrink OK"
                     )
-        # When no attached VM
+
+        # If no VM is attached to volume
         else:
             # Scenario 8 + 10: Downsize the volume without Shrink OK => Should not resize successfully
             if (enter_value < initial_size and shrink_ok == "without Shrink OK"):
