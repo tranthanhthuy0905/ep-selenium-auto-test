@@ -50,7 +50,7 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_with_keypair_then_launch(self):
         """
             TEST CASE: Launch instance with keypair then click on "Preview and Launch"	
         """

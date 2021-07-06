@@ -68,9 +68,9 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_multiple_existing_security_groups(self):
         """
-            TEST CASE: Launch instance with existing security group	
+            TEST CASE: Launch instance with multiple existing security groups	
         """
         # first create a security group
         self.list_sg_id = []
@@ -171,7 +171,7 @@ class TestInstances(CEBaseTest):
         
 
 
-# python3 -m unittest Tests.CE_Instance.test_launch_instance_02 -v
+# python3 -m unittest Tests.CE_Instance.test_launch_instance_12 -v
 
 
 if __name__ == "__main__":

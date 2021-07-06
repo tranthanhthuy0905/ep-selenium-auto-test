@@ -67,7 +67,7 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_without_setting_password(self):
         """
             TEST CASE: Launch instance without setting default password	
         """

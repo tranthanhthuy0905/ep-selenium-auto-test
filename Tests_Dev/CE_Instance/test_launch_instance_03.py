@@ -64,7 +64,7 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_with_empty_name(self):
         """
             TEST CASE: Launch instance with empty name, Instance should be created fail 
         """
