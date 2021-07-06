@@ -30,7 +30,7 @@ And the user can see the list of egress rules
 '''
 
 from Pages.CE.security_group_page import SGHomePage, SGCreatePage, SGDetailsPage
-from Tests_Dev.CE import SGBaseTest
+from Tests.CE.CE_Security_Group.sg_base_test import SGBaseTest
 from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 from Configs import CE_SG_DETAILS_PAGE_URL
 

@@ -16,6 +16,11 @@ class CEHomePage(BasePage):
         instances_page = self\
             .click_button_and_return_page(CEPageLocators.INSTANCES_SUBMENU_BTN, CEInstancesPage(self.driver))
         return instances_page
+    
+    def access_keypair_page(self):
+        keypair_page = self\
+            .click_button_and_return_page(CEPageLocators.KEYPAIR_SUBMENU_BTN, CEInstancesPage(self.driver))
+        return keypair_page
 
     def access_volumes_page(self):
         elastic_block_store_volumes_page = self\
