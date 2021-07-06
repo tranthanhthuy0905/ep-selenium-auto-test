@@ -51,7 +51,7 @@ class CEInstancesPage(BasePage):
                                                  instance_id),
                                               "Stopped"),
                                              "Cannot stop the chosen instance")
-        self.instance_state = self.ce_instances_page.check_instance_state(CEInstancePageLocators.INSTANCE_STATE)
+        self.instance_state =  self.check_instance_state(CEInstancePageLocators.INSTANCE_STATE)
         return self
         #self.instance_state = self.check_instance_state(CEInstancePageLocators.INSTANCE_STATE)
 

@@ -11,7 +11,7 @@ class CEPageLocators(object):
     INSTANCES_MENU_BTN = (By.LINK_TEXT, 'Instances')
     ELASTIC_BLOCK_STORE_MENU_BTN = (By.XPATH, '/html/body/div/section/div[2]/aside/div/div[2]/div[1]/ul/li[6]/div[1]')
     VOLUMES_SUBMENU_BTN = (By.LINK_TEXT, 'Volumes')
-
+    SNAPSHOTS_SUBMENU_BTN = (By.LINK_TEXT, 'Snapshots')
 
 class CEInstancePageLocators(object):
     LAUNCH_INSTANCES_BTN = (By.LINK_TEXT, 'Launch Instance')
@@ -106,7 +106,7 @@ class CELaunchInstancesWizardPageLocators(object):
 
 class CEVolumePageLocators(object):
     CHOOSE_VOLUME_RADIO = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/label/span/input')
-    VOLUME_ACTIONS_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[4]')
+    VOLUME_ACTIONS_BTN = (By.XPATH, '//button[contains(.,"Actions ")]')
     EXPUNGE_VOLUME_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(4)')
     EXPUNGE_VOLUME_CONFIRM_BTN = (By.XPATH, "//span[text()='Expunge']")
     CREATE_VOLUME_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Expunge volume is successful!']")
@@ -142,14 +142,14 @@ class CEVolumePageLocators(object):
     # Volume detail
     VM_NAME = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[4]/div/div/div[2]')
     VM_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[8]/div/div/div[2]')
-    VM_ID = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[2]/div/span/span')
+    VM_ID = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[2]/div')
     VOLUMES_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div")
 
 class CECreateVolumePageLocators(object):
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,'Create Volume')]")
     VOLUME_TYPE_LIST = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[2]/div/div/div")
-    CUSTOM_DISK = (By.XPATH, "//div[text()='Custom Disk']")
     VOLUME_NAME_FORM = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[3]/div[2]/div/div[1]/input")
+    CUSTOM_DISK = (By.XPATH, "//div[text()='Custom Disk']")
     VOLUME_SIZE_FORM = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[3]/div/div/div/input")
     CREATE_VOLUME_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Created volume successfully.']")
     PARRENT_BY_VOLUME_NAME = lambda _volume_name: (By.XPATH, f"//td[contains(.,'{_volume_name}')]/parent::*")
@@ -202,3 +202,19 @@ class CESecurityGroupLocators:
         f"::td[following-sibling"
         f"::td[text()='{cidr}']]]]]]"
     )
+
+class CESnapshotLocators(object):
+    # Create Snapshot
+    CREATE_SNAPSHOT_BTN = (By.XPATH, "//span[text()=' Create Snapshot']")
+    SNAPSHOT_NAME_FORM = (By.XPATH, "//input[preceding-sibling::div/text()='Snapshot name']")
+    SELECT_VOLUME = (By.XPATH, "//div[preceding-sibling::div/text()='Volume']")
+    CREATE_SNAPSHOT_CONFIRM = (By.XPATH, "//button[contains(.,'Create Snapshot')]")
+
+    # Actions button
+    ACTIONS_BTN = (By.XPATH, "//button[contains(.,'Actions ')]")
+
+    # Delete Snapshot
+    DELETE_SNAPSHOT = (By.XPATH, "//span[text()='Delete snapshot']")
+    DELETE_CONFIRM = (By.XPATH, "//button[contains(.,'Delete')]")
+    # Revert to snapshot
+    REVERT_TO_SNAPSHOT = (By.XPATH, "//span[text()='Revert to snapshot']")

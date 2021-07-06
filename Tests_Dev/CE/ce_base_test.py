@@ -55,9 +55,11 @@ class CEBaseTest(BaseTest):
         # Passing step 1 (Choose MI) and step 2 (Instance Type)
         self.choose_MI_N_Instance_Type()
 
-        time.sleep(3)
         # Click "Apply this password" button,
         # Click "Launch" button
+        wait = WebDriverWait(self.driver, 50)
+        wait.until(EC.element_to_be_clickable(CELaunchInstancesWizardPageLocators.APPLY_THIS_PASSWORD),
+                   'Cannot apply default password because "Apply this password" button is not clickable. Maybe it requires more time to wait')
         self.launch_instances_wizard_page.apply_default_password()
         self.assertEqual(
             self.driver.current_url, self.launch_instances_wizard_page.base_url

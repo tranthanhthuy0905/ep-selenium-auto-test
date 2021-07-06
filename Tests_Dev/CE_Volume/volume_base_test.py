@@ -20,37 +20,10 @@ class VolumeBaseTest(CEBaseTest):
     """
         All the methods relating to Volume should come here
     """
-    # def direct_to_volume_page(self):
-    #     """
-    #         This function includes all steps until user clicks on Resize Volume button:
-    #         - Direct to Volume page
-    #         - Check the information of the chosen volume: its VM's state, initial volume size
-    #         - Click on Resize volume
-    #     """
-    #
-    #     # When user clicks on "Volumes" button on the left side
-    #     self.access_volumes_page()
-    #
-    #     self.volume_page = CEVolumePage(self.driver)
-    #     self.assertEqual(self.driver.current_url, self.volume_page.base_url)
-    #     self.assertTrue(
-    #         self.volume_page.check_element_existence(CEVolumePageLocators.CREATE_VOLUME_BTN)
-    #     )
-    #
-    # def create_volume(self, volume_size):
-    #     self\
-    #         .direct_to_volume_page()\
-    #         .volume_page.click_create_volume_btn()
-    #     self.create_volume_page = CECreateVolumePage(self.driver)
-    #     self.assertEqual(self.driver.current_url, self.create_volume_page.base_url)
-    #
-    #     # When user clicks on "Create" button
-    #     self.volume_name = CEVolumeTestData.VOLUME_NAME
-    #     self.create_volume_page.create_volume(volume_name=self.volume_name, volume_size=volume_size)
 
     def choose_volume(self, disk_option, stop_vm, initial_size, attach_vm):
         if (attach_vm):
-        # *** Create simple instance incase user wants to attach volume with an instance ***
+        # *** Create simple instance in case user wants to attach volume with an instance ***
             self.launch_instance_01_default_pw()
             time.sleep(2)
             # Stop the VM attached
@@ -74,8 +47,9 @@ class VolumeBaseTest(CEBaseTest):
         time.sleep(2)
         self.volume_page.create_new_volume(initial_size, disk_option)
         # Check whether the information of newly created volume is updated in the list
+        self.volume_name = self.volume_page.volume_name
         self.assertTrue(
-            self.driver.find_element_by_xpath("//td[contains(.,'" + self.volume_page.volume_name + "')]/parent::*"),
+            self.driver.find_element_by_xpath("//td[contains(.,'" + self.volume_name + "')]/parent::*"),
             "Should successfully update newly created volume to the list"
         )
 
@@ -94,28 +68,22 @@ class VolumeBaseTest(CEBaseTest):
         #           - Select an existing instance
         #           - Click on OK button
             self.attach_volume_to_instance(self.instance_name)
-            time.sleep(2)
             # *** Check if the volume is attached with VM successfully or not ***
-            # self.assertTrue(
-            #     self.volume_page.check_element_existence(
-            #         (By.XPATH,
-            #          '//td[text()="' + self.instance_name + '" and ancestor::tr/@data-row-key="' + self.volume_page.volume_name + '"]')),
-            #     "Should successfully attach the volume with a " + self.instance_state + " VM"
-            # )
-            # self.volume_page.click_button(
-            #     (By.XPATH, '//span[././input/@type="radio" and ancestor::tr/@data-row-key="' + self.volume_id + '"]'))
-            # self.assertTrue(
-            #     self.volume_page.find_element(*CEVolumePageLocators.VM_ID).text == self.instance_id,
-            #     "Fail to attach the volume with a " + self.instance_state + " VM"
-            # )
-            # TODO: Check whether the vm is attached successfully or not
+            time.sleep(10)
+            self.volume_page.click_button(
+                (By.XPATH, '//span[././input/@type="radio" and ancestor::tr/@data-row-key="' + self.volume_id + '"]'))
+            WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element
+                                                 (CEVolumePageLocators.VM_ID,
+                                                  self.instance_id),
+                                                 "Fail to attach the volume with a " + self.instance_state + " VM")
+
 
     def attach_volume_to_instance(self, instance_name):
         # *** Attach the volume with VM ***
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.element_to_be_clickable(CEVolumePageLocators.ATTACH_VOLUME_BTN))
         # When user clicks on "Attach volume" button
-    
+
         self.volume_page.click_button(CEVolumePageLocators.ATTACH_VOLUME_BTN)
 
         # Then user can see a pop-up Attach volume box
@@ -124,36 +92,36 @@ class VolumeBaseTest(CEBaseTest):
             .send_keys(instance_name)
         self.volume_page.find_element(*CEVolumePageLocators.SELECT_AN_INSTANCE) \
             .send_keys(Keys.ENTER)
-        # And user cliks on "OK" button
+        # And user clicks on "OK" button
         self.volume_page.click_button(CEVolumePageLocators.ATTACH_OK_BUTTON)
 
-    def detach_volume_from_instance(self):
-        self.volume_page\
+    def detach_volume_from_instance(self, instance_state):
         # When user clicks on "Actions" button on the top right
-            .click_button(CEVolumePageLocators.VOLUME_ACTIONS_BTN)\
         # When user clicks on the "Detach volume" option
-            .click_button(CEVolumePageLocators.DETACH_VOLUME_BTN) \
         # And user clicks on "Detach" button pop-up
+        self.volume_page\
+            .click_button(CEVolumePageLocators.VOLUME_ACTIONS_BTN)\
+            .click_button(CEVolumePageLocators.DETACH_VOLUME_BTN) \
             .click_button(CEVolumePageLocators.DETACH_CONFIRM_BTN)
 
         # Check whether detach successfully or not
         self.volume_page.click_button((By.XPATH, '//span[././input/@type="radio" and ancestor::tr/@data-row-key="' + self.volume_id + '"]'))
         self.assertTrue(
             self.volume_page.find_element(*CEVolumePageLocators.VM_NAME).text == "-",
-            "Fail to detach the volume from its current instance"
+            "Fail to detach the volume from its " + instance_state + " instance"
         )
         return self
 
     def delete_volume(self):
+        # When user clicks on "Actions" button on the top right
+        # When user clicks on the "Delete volume" option
+        # And user clicks on "Delete" button to confirm
         self.volume_page.click_button(
             (By.XPATH, '//span[././input/@type="radio" and ancestor::tr/@data-row-key="' + self.volume_id + '"]')) \
-        # When user clicks on "Actions" button on the top right
             .click_button(CEVolumePageLocators.VOLUME_ACTIONS_BTN)\
-        # When user clicks on the "Delete volume" option
             .click_button(CEVolumePageLocators.DELETE_VOLUME_BTN)\
-        # And user clicks on "Delete" button to confirm
             .click_button(CEVolumePageLocators.DELETE_CONFIRM_BUTTON)
-            
+
         # Check whether delete successfully or not
         self.assertFalse(
             self.volume_page.click_button(

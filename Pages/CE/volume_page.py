@@ -28,10 +28,6 @@ class CEVolumePage(BasePage):
         time.sleep(2)
         self.create_volume_page.create_volume(volume_name=self.volume_name, volume_size=volume_size, disk_option=disk_option)
 
-    def detach_volume_from_vm(self):
-        self\
-            .click_button(self.locator.VOLUME_ACTIONS_BTN)
-        # self.ass
     def choose_disk_offering_option(self, locator, option):
         try:
             self.find_element(*locator)

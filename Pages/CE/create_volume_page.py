@@ -1,4 +1,7 @@
+from selenium.webdriver.support import expected_conditions as EC
+
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.wait import WebDriverWait
 
 from Configs import CE_CREATE_VOLUME_URL
 from Locators.CE import CECreateVolumePageLocators, CEVolumePageLocators
@@ -26,7 +29,7 @@ class CECreateVolumePage(BasePage):
     def create_volume(self, volume_name, volume_size, disk_option):
         self\
             .fill_form(volume_name, self.locator.VOLUME_NAME_FORM) \
-            .click_button(self.locator.VOLUME_TYPE_LIST) \
+            .click_button(self.locator.VOLUME_TYPE_LIST)\
             .choose_volume_type(self.locator.VOLUME_TYPE_LIST, disk_option)
         if (disk_option == CECreateVolumePageLocators.CUSTOM_DISK):
             self\
