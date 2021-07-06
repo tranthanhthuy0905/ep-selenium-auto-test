@@ -1,5 +1,5 @@
 '''
-Scenario 7. Launch instance without setting default password	
+Scenario 5. Launch instance with existing keypair	
 	Given a certain user
 	When user wants to launch an instance
 	Then user selects "Instances => Instances" on left side menu
@@ -14,10 +14,11 @@ Scenario 7. Launch instance without setting default password
 	When user selects "2G-2Core-2k2" type and clicks on "Next" button
 	Then user can see the Configure Instance Details form in the step 3 of wizard
 	And user can change details of the current instance
-	When user clicks on "Create new Keypair"
-	Then user can see a modal form for creating new keypair
-	When user fills in the form and clicks on "Ok" button on modal
-	Then the new keypair is created and added to the instance
+	And user can see a list of existing keypair
+	When user chooses keypair from the list
+	Then the keypair is added to the instance
+	When user fills in "Default Password" and "Confirm Password" 
+	Then the password for root account is set
 	When user clicks on "Next" button in the bottom right corner
 	Then user can see the list of Volumes in the step 4 of wizard
 	When user clicks "Add new Volume" button
@@ -36,8 +37,6 @@ Scenario 7. Launch instance without setting default password
 	Then user can see the review of current instance in the last step of wizard
 	And user can see the "Launch" button in the bottom right corner
 	When user clicks "Launch" button
-	Then user can see a form for Setting Default Password
-	When user click on "Apply this password"
 	Then user can see the list of instances which belongs to that user
 	And user can see the newly created instance on top of that list
 	And user can see the state of that instance is "Starting"
@@ -57,6 +56,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from Tests.CE.ce_base_test import CEBaseTest
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.instances_page import CEInstancesPage
+from Pages.CE.keypair_page import CEKeypairPage
 from Pages.CE.launch_instances_wizard_page import *
 from Configs.TestData.CEInstanceTestData import CEInstanceTestData
 from Configs.TestData.CEVolumeTestData import CEVolumeTestData
@@ -69,9 +69,29 @@ import time
 class TestInstances(CEBaseTest):
     def test_create_vm_fullInfo(self):
         """
-            TEST CASE: Instance should be created successfully without setting default password
+            TEST CASE: Instance should be created successfully with existing keypair
         """
+
         self.CE_homepage = CEHomePage(self.driver)
+        # first creating keypair
+        # go to keypair page
+        self.CE_homepage.access_keypair_page()
+        self.keypair_page = CEKeypairPage(self.driver)
+        self.assertEqual(self.driver.current_url, self.keypair_page.base_url)
+        self.keypair_page.click_button(CEKeypairLocators.CREATE_KEYPAIR_BTN)
+        self.keypair_name = CEKeypairTestData.KEYPAIR_NAME
+        self.keypair_page.fill_keypair_info(self.keypair_name, "")
+        self.keypair_page.click_button(CEKeypairLocators.OK_BTN)
+
+        # check if keypair is created successfully
+        print(self.driver.find_element(*CEKeypairLocators.SUCCESSFULLY_MESSAGE).text)
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(CEKeypairLocators.SUCCESSFULLY_MESSAGE, "Created keypair successfully."))
+        self.keypair_page.click_button(CEKeypairLocators.CLOSE_BTN)
+
+        # get Fingerprint
+        self.keypair_fingerprint = self.driver.find_element(*CEKeypairLocators.FINGERPRINT_BY_KEYPAIR_NAME(self.keypair_name)).text
+
+
         self.CE_homepage.access_instances_page()
 
         # When user selects "Instances => Instances" on left side menu
@@ -100,11 +120,12 @@ class TestInstances(CEBaseTest):
         instance_name = CEInstanceTestData.INSTANCE_NAME
         self.configure_instance_wizard.fill_instance_name(instance_name)
 
-        # Create keypair
-        self.keypair_name = CEKeypairTestData.KEYPAIR_NAME
-        self.configure_instance_wizard.create_new_keypair(self.keypair_name, "")
+        # Choose existing keypair
+        self.configure_instance_wizard.choose_keypair(self.keypair_fingerprint)
 
-        # Without setting default password
+        # Set default password
+        self.configure_instance_wizard.fill_default_password(CEInstanceTestData.DEFAULT_PASSWORD, CEInstanceTestData.DEFAULT_PASSWORD)
+
         self.configure_instance_wizard.click_next_btn()
 
     # Step 4: Add Storage
@@ -123,7 +144,6 @@ class TestInstances(CEBaseTest):
 
     # Step 5: Configure Security Group
         self.configure_security_wizard = SecurityGroupWizardPage(self.driver)
-
         self.configure_security_wizard.create_new_security_group(CESecurityGroupTestData.SECURITY_GROUP_NAME, CESecurityGroupTestData.DESCRIPTION)
         self.configure_security_wizard.apply_sg_for_instance()
         
@@ -134,15 +154,6 @@ class TestInstances(CEBaseTest):
 
     # Step 6: Review Instance & Launch
         self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
-        # Show generated pass
-        self.review_launch_wizard.show_password()
-        
-        # Copy password
-        self.review_launch_wizard.copy_password()
-
-        # Apply pass 
-        self.review_launch_wizard.apply_password()
-
         self.review_launch_wizard.launch_instance()
 
         # Get instance id for clear data after test
@@ -168,8 +179,13 @@ class TestInstances(CEBaseTest):
             CEInstancePageLocators.STOP_STATUS)
         )
 
+        
 
-# python3 -m unittest Tests.CE_Instance.test_launch_instance_07 -v
+
+# python3 -m unittest Tests.CE_Instance.test_launch_instance_05 -v
+
+
+    
 
 if __name__ == "__main__":
     unittest.main(
