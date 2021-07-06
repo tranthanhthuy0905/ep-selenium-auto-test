@@ -20,17 +20,16 @@ class Test_DEVICEFARM_Create_Session(DEVICE_FARM_BaseTest):
         self.df_homepage = DEVICE_FARM_HomePage(self.driver)
         self.df_session = DEVICE_FARM_CreateSessionPage(self.driver)
         self.df_session.click_create_session_submit_button()
-        _session_name = self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_NAME_TEXT).text
-        self.find_element(*DEVICE_FARM_ProjectLocators.LG_G5_SE_BUTTON)\
-            .click()
-        time.sleep(2)
-        self.find_element(*DEVICE_FARM_ProjectLocators.CONFIRM_START_SESSION_BUTTON)\
-            .click()
-        time.sleep(2)
-        self.driver.implicitly_wait(10)
+        _session_name = self.df_session.click_create_session_lg()
+        self.assertTrue(
+            self.df_session.check_element_existence(
+                DEVICE_FARM_ProjectLocators.SESSION_STOP_NOTIC
+            )
+        )
         self.assertTrue(
             self.driver.find_element_by_link_text(_session_name)
         )
+        
         
 if __name__ == "__main__":
     unittest.main(
