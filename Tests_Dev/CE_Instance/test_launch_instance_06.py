@@ -52,7 +52,7 @@ import time
 class TestInstances(CEBaseTest):
     def test_create_vm_fullInfo(self):
         """
-            TEST CASE: Instance should be created successfully with with keypair 
+            TEST CASE: Launch instance with keypair then click on "Preview and Launch"	
         """
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_instances_page()

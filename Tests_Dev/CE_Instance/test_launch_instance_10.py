@@ -62,7 +62,7 @@ import time
 class TestInstances(CEBaseTest):
     def test_create_vm_fullInfo(self):
         """
-            TEST CASE: Instance should be created successfully with full flow
+            TEST CASE: Launch instance with existing volume then click on "Preview and Launch"  
         """
         self.CE_homepage = CEHomePage(self.driver)
         # first create a volume
