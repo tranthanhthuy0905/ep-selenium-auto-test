@@ -12,15 +12,15 @@ from Pages.device_farm.devicefarm_create_session_page import DEVICE_FARM_CreateS
 
 from Locators.device_farm import DEVICE_FARM_ProjectLocators
 
-class Test_DEVICEFARM_Create_Session(DEVICE_FARM_BaseTest):
-    def test_create_session_successful(self):
+class Test_DEVICEFARM_Create_Session_Live(DEVICE_FARM_BaseTest):
+    def test_create_session_live_successful(self):
         """
             TEST CASE: DF Session should be created successfully
         """
         self.df_homepage = DEVICE_FARM_HomePage(self.driver)
         self.df_session = DEVICE_FARM_CreateSessionPage(self.driver)
         self.df_session.click_create_session_submit_button()
-        _session_name = self.df_session.click_create_session_lg()
+        _session_name = self.df_session.click_create_session_live()
         self.assertTrue(
             self.df_session.check_element_existence(
                 DEVICE_FARM_ProjectLocators.SESSION_STOP_NOTIC
@@ -29,6 +29,7 @@ class Test_DEVICEFARM_Create_Session(DEVICE_FARM_BaseTest):
         self.assertTrue(
             self.driver.find_element_by_link_text(_session_name)
         )
+        self.assertIn("Created session successfully", self.driver.page_source, msg="CREATE SESSION IS NOT SUCCESSFULLY")
         
         
 if __name__ == "__main__":

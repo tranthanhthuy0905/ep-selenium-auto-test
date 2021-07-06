@@ -19,10 +19,9 @@ class Test_DEVICEFARM_Stop_Session(DEVICE_FARM_BaseTest):
         """
         self.df_homepage = DEVICE_FARM_HomePage(self.driver)
         self.df_session = DEVICE_FARM_StopSessionPage(self.driver)
-        _status = self.df_session.click_stop_session_submit_button()
+        self.df_session.click_stop_session_submit_button()
         time.sleep(2)
-        # assert "Session is stopped successfully" in self.driver.page_source
-        # self.assertIn("Session is stopped successfully", self.driver.page_source, msg='FAIL SM')
+        self.assertIn("Session is stopped successfully", self.driver.page_source, msg='STOP SESSION IS NOT SUCCESSFULLY')
         
 if __name__ == "__main__":
     unittest.main(

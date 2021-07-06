@@ -26,8 +26,4 @@ class DEVICE_FARM_StopSessionPage(BasePage):
         time.sleep(2)
         self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_STOP_CONFIRM_BUTTON)\
             .click()
-        time.sleep(3)
-        _status = self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_STATUS_TEXT).text
-        print("TEXT", _status)
-        time.sleep(2)
-        return _status
+        

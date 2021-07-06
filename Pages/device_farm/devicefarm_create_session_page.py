@@ -14,20 +14,37 @@ class DEVICE_FARM_CreateSessionPage(BasePage):
         self.driver.implicitly_wait(10)
         self.find_element(*DEVICE_FARM_ProjectLocators.PROJECT_SELECTOR_LINK)\
             .click()
-        time.sleep(2)
+        time.sleep(2) #must have sleep because waiting
         self.driver.implicitly_wait(10)
         self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_CREATE_BUTTON)\
             .click()
-        time.sleep(2)
 
     def click_create_session_lg(self):
         self.driver.implicitly_wait(10)
         _session_name = self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_NAME_TEXT).text
         self.find_element(*DEVICE_FARM_ProjectLocators.LG_G5_SE_BUTTON)\
             .click()
-        time.sleep(2)
         self.find_element(*DEVICE_FARM_ProjectLocators.CONFIRM_START_SESSION_BUTTON)\
             .click()
-        time.sleep(2)
+        self.driver.implicitly_wait(10)
+        return _session_name
+
+    def click_create_session_live(self):
+        self.driver.implicitly_wait(10)
+        _session_name = self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_NAME_TEXT).text
+        self.find_element(*DEVICE_FARM_ProjectLocators.LIVE_BUTTON)\
+            .click()
+        self.find_element(*DEVICE_FARM_ProjectLocators.CONFIRM_START_SESSION_BUTTON)\
+            .click()
+        self.driver.implicitly_wait(10)
+        return _session_name
+
+    def click_create_session_pixel(self):
+        self.driver.implicitly_wait(10)
+        _session_name = self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_NAME_TEXT).text
+        self.find_element(*DEVICE_FARM_ProjectLocators.PIXEL_BUTTON)\
+            .click()
+        self.find_element(*DEVICE_FARM_ProjectLocators.CONFIRM_START_SESSION_BUTTON)\
+            .click()
         self.driver.implicitly_wait(10)
         return _session_name

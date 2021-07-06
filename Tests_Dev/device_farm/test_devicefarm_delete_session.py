@@ -20,7 +20,7 @@ class Test_DEVICEFARM_Delete_Session(DEVICE_FARM_BaseTest):
         self.df_homepage = DEVICE_FARM_HomePage(self.driver)
         self.df_session = DEVICE_FARM_DeleteSessionPage(self.driver)
         self.df_session.click_delete_session_submit_button()
-        self.assertIn("Delete session is successful!", self.driver.page_source, msg='FAIL SM')
+        self.assertIn("Delete session is successful!", self.driver.page_source, msg='DELETE SESSION IS NOT SUCCESSFULLY')
 
 if __name__ == "__main__":
     unittest.main(
