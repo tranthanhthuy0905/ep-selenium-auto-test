@@ -78,7 +78,8 @@ class TestInstances(CEBaseTest):
             self.sg_home_page = SGHomePage(self.driver)
             self.sg_home_page.click_create_button()
             sg_create_page = SGCreatePage(self.driver)
-            self.list_sg_id.append(sg_create_page.create_simple_sg(CESecurityGroupTestData.gen_SG_name()))
+            sg_id = sg_create_page.create_simple_sg(CESecurityGroupTestData.gen_SG_name())
+            self.list_sg_id.append(sg_id)
         
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_instances_page()
