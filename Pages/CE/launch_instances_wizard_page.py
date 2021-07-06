@@ -195,6 +195,15 @@ class SecurityGroupWizardPage(CELaunchInstancesWizardPage):
         self.\
             wait_and_click_button(self.locator.SG_APPLY_CHECKBOX)
         return self
+    
+    def click_on_select_sg_for_instance(self):
+        self\
+            .click_button(self.locator.CREATE_NEW_SG_RADIO)\
+            .click_button(self.locator.SELECT_EXISTING_SG_RADIO)
+
+    def select_sg_for_instance(self, sg_id):
+        self.click_button(self.locator.EXISTING_SG_RADIO(sg_id))
+
 
     
 

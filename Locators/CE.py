@@ -99,6 +99,7 @@ class CELaunchInstancesWizardPageLocators(object):
     SHOW_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/span/span")
     APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
     FAILED_TO_LAUNCH_NOTI = (By.XPATH, "//div[contains(.,'Failed to launch instance.')]")
+    EXISTING_SG_RADIO = lambda _sg_id: (By.NAME, f'{_sg_id}')
     
     
 
@@ -136,6 +137,8 @@ class CECreateVolumnePageLocators(object):
 class CESecurityGroupLocators:
 
     CREATE_SEC_GROUP_TEXTBOX_NAME_CSS = (By.CSS_SELECTOR, "input.ant-input")
+    PREVIEW_SEC_GROUP_NAME = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[2]/div/div[2]/span")
+    SEC_GROUP_ID = (By.XPATH, "/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div")
 
     CREATE_BUTTON = (By.XPATH, '//span[text()=" Create Security Group"]')
     SUBMIT_CREATE_BUTTON_X_PATH = (By.XPATH, '//span[text()="Create Security Group"]')
