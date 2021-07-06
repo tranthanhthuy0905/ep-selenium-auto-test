@@ -23,7 +23,6 @@ class CELaunchInstancesWizardPage(BasePage):
         except TimeoutException:
             self.driver.get_screenshot_as_file(
                 'error_snapshot/{filename}.png'.format(filename='choose_volume_type'))
-            self.driver.quit()
 
     def click_next_btn(self):
         self\
@@ -108,7 +107,6 @@ class ConfigureInstanceWizardPage(CELaunchInstancesWizardPage):
         except TimeoutException:
             self.driver.get_screenshot_as_file(
                 'error_snapshot/{filename}.png'.format(filename='choose_volume_type'))
-            self.driver.quit()
 
     def fill_default_password(self, password, confirm_password):
         self\
@@ -176,6 +174,11 @@ class SecurityGroupWizardPage(CELaunchInstancesWizardPage):
             .fill_form(sg_name, self.locator.SG_NAME_TEXTBOX)\
             .fill_form(sg_description, self.locator.SG_DESCRIPTION_TEXTBOX)
         return self
+    
+    def expand_sg_list(self):
+        self.click_button(self.locator.LIST_SG_PAGE)
+        self.find_element(*self.locator.LIST_SG_PAGE)
+        self.click_button((By.XPATH,"//div[text()='15 / page']"))
 
     def create_new_security_group(self, sg_name, sg_description):
         # Click on "Create new SG radio"

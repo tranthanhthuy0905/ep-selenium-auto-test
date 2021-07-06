@@ -29,6 +29,7 @@ class CEInstancesPage(BasePage):
             .wait_and_click_button(self.locator.INSTANCE_STATE_BTN)\
             .wait_and_click_button(state_button)\
             .wait_and_click_button(confirm_button)
+        
         return self
 
 

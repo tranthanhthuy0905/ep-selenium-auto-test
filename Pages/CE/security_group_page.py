@@ -23,7 +23,7 @@ class SGHomePage(BasePage):
 
     def click_create_button(self):
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located(CESecurityGroupLocators.CREATE_BUTTON)
+            EC.element_to_be_clickable(CESecurityGroupLocators.CREATE_BUTTON)
         )
         self.driver.find_element(*CESecurityGroupLocators.CREATE_BUTTON).click()
 
@@ -43,9 +43,11 @@ class SGCreatePage(BasePage):
     def click_create_submit_button(self):
         self.driver.find_element(*CESecurityGroupLocators.SUBMIT_CREATE_BUTTON_X_PATH).click()
 
-    def create_simple_sg(self):
+    def create_simple_sg(self, sec_group_name):
         self.sg_create_page = SGCreatePage(self.driver)
-        self.sg_create_page.fill_sg_information()
+        name_text_box = self.driver.find_element(*CESecurityGroupLocators.CREATE_SEC_GROUP_TEXTBOX_NAME_CSS)
+        name_text_box.send_keys(Keys.COMMAND + "a" + Keys.DELETE)
+        name_text_box.send_keys(sec_group_name)
         # name = self.driver.find_element(*CESecurityGroupLocators.PREVIEW_SEC_GROUP_NAME).text
         self.sg_create_page.click_create_submit_button()
         WebDriverWait(self.driver, 10).until(EC.url_changes(self.driver.current_url))

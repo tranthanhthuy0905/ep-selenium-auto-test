@@ -100,7 +100,7 @@ class CELaunchInstancesWizardPageLocators(object):
     APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
     FAILED_TO_LAUNCH_NOTI = (By.XPATH, "//div[contains(.,'Failed to launch instance.')]")
     EXISTING_SG_RADIO = lambda _sg_id: (By.NAME, f'{_sg_id}')
-    
+    LIST_SG_PAGE = (By.XPATH, "//div[@class='ant-select-selector']/span[@class='ant-select-selection-item']")
     
 
 

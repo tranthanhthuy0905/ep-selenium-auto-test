@@ -90,7 +90,7 @@ class BasePage(object):
     def wait_and_click_button(self, locator):
         try:
             time.sleep(1)
-            WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(locator)).click()
+            WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).click()
             return self
         except TimeoutException:
             self.driver.get_screenshot_as_file(
