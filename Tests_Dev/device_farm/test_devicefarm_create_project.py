@@ -33,6 +33,7 @@ class Test_DEVICEFARM_Create_Project(DEVICE_FARM_BaseTest):
         self.assertTrue(
             self.driver.find_element_by_link_text(project_name)
         )
+        self.assertIn("Created project successfully", self.driver.page_source, msg='CREATE PROJECT IS NOT SUCCESSFULLY')
 
 if __name__ == "__main__":
     unittest.main(

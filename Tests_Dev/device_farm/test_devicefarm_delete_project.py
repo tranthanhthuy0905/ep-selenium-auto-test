@@ -20,6 +20,7 @@ class Test_DEVICEFARM_Delete_Project(DEVICE_FARM_BaseTest):
         self.df_homepage = DEVICE_FARM_HomePage(self.driver)
         self.df_delete_project_page = DEVICE_FARM_DeleteProjectPage(self.driver)
         _project_name = self.df_delete_project_page.click_delete_project_submit_button()
+        print('PROJECT NAME', _project_name)
         self.driver.implicitly_wait(10)
         self.assertTrue(
             self.driver.find_element_by_link_text(_project_name)
