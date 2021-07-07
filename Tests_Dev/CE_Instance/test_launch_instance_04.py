@@ -149,10 +149,7 @@ class TestInstances(CEBaseTest):
         print("Instance is stopping")
 
         # Check if the new instance state is Stopped
-        WebDriverWait(self.driver, 300).until(EC.text_to_be_present_in_element(
-            CEInstancePageLocators.INSTANCE_STATE_BY_ID(self.instance_id), 
-            CEInstancePageLocators.STOP_STATUS)
-        )
+        self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.STOPPED_STATUS)
 
 
 

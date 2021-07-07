@@ -45,7 +45,7 @@ class CEInstancePageLocators(object):
     REFRESH_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[1]')
     INSTANCE_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[4]/div/span")
     INSTANCE_RADIO_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td/label/span")
-    STOP_STATUS = "Stopped"
+    STOPPED_STATUS = "Stopped"
     RUNNING_STATUS = "Running"
 
 class CEInstanceTypesPageLocators(object):
