@@ -1,5 +1,5 @@
 '''
-Scenario 9. Launch instance with existing volume	
+Scenario 11. Launch instance with existing security group	
 	Given a certain user
 	When user wants to launch an instance
 	Then user selects "Instances => Instances" on left side menu
@@ -22,13 +22,18 @@ Scenario 9. Launch instance with existing volume
 	Then the password for root account is set
 	When user clicks on "Next" button in the bottom right corner
 	Then user can see the list of Volumes in the step 4 of wizard
-	When user selects a Volume in the list
-	Then the selected volume is attached to the instance
+	When user clicks "Add new Volume" button
+	Then user can see a modal form for creating new volume
+	And user can fill the form and select type of volume
+	When user clicks on "Create" button on modal
+	Then the new volume is created
+	When user selects a volume in Volumes list
+	Then the volume is attached to the instance
 	When user clicks on "Next" button in the bottom right corner
 	Then user can see the Security Group Setting page
 	And user can create a security group or select an existing security group
-	When user fill the form and clicks on "Add Security Group" button
-	Then user can set Ingress and Egress rule
+	When user select a security group from security groups list
+	Then user can see its infomation and set Ingress and Egress rule
 	When user clicks on "Review and Launch" button in the bottom right corner
 	Then user can see the review of current instance in the last step of wizard
 	And user can see the "Launch" button in the bottom right corner
@@ -52,8 +57,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from Tests.CE.ce_base_test import CEBaseTest
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.instances_page import CEInstancesPage
-from Pages.CE.volume_page import CEVolumePage
-from Pages.CE.create_volume_page import CECreateVolumePage
+from Pages.CE.security_group_page import SGHomePage, SGCreatePage, SGDetailsPage
 from Pages.CE.launch_instances_wizard_page import *
 from Configs.TestData.CEInstanceTestData import CEInstanceTestData
 from Configs.TestData.CEVolumeTestData import CEVolumeTestData
@@ -64,38 +68,17 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_with_existing_volume(self):
+    def test_create_vm_existing_security_group(self):
         """
-            TEST CASE: Launch instance with existing volume	    
+            TEST CASE: Launch instance with existing security group	
         """
+        # first create a security group
+        self.sg_home_page = SGHomePage(self.driver)
+        self.sg_home_page.click_create_button()
+        self.sg_create_page = SGCreatePage(self.driver)
+        self.sg_id = self.sg_create_page.create_simple_sg(CESecurityGroupTestData.SECURITY_GROUP_NAME)
+        
         self.CE_homepage = CEHomePage(self.driver)
-        # first create a volume
-        self.CE_homepage.access_volumes_page()
-        # Then user can see the list of available Volumes
-        self.volume_page = CEVolumePage(self.driver)
-        self.assertEqual(self.driver.current_url, self.volume_page.base_url)
-        self.assertTrue(self.volume_page.check_element_existence(CEVolumnePageLocators.CREATE_VOLUME_BTN))
-        self.assertTrue(self.volume_page.check_element_existence(CEVolumnePageLocators.VOLUMES_LIST))
-
-        # When user clicks on "Create Volume" button on the top right
-        self.volume_page.click_button(CEVolumnePageLocators.CREATE_VOLUME_BTN)
-        #Then user can move to "Create New Volume" page
-        self.create_volume_page = CECreateVolumePage(self.driver)
-        self.assertEqual(self.driver.current_url, self.create_volume_page.base_url)
-        # And user can fill in Volume name and select volume type
-        self.volume_name = CEVolumeTestData.VOLUME_NAME
-        self.create_volume_page.fill_volume_info(self.volume_name, volume_size=CEVolumeTestData.SIZE)
-
-        # When user clicks on "Create Volume" button
-        self.create_volume_page.click_button(CECreateVolumnePageLocators.CREATE_VOLUME_BTN)
-        # Then user can see the newly created volume updated in the list of volumes (status: Allocated)
-        WebDriverWait(self.driver, 10).until(EC.url_to_be(self.volume_page.base_url))
-        volume_row = self.driver.find_element(*CECreateVolumnePageLocators.PARRENT_BY_VOLUME_NAME(self.volume_name))
-        self.volume_id = volume_row.get_attribute("data-row-key")
-        self.volume_page.check_volume_state(self.volume_id, CEVolumeTestData.ALLOCATED)
-        self.driver.find_element(*(CEVolumnePageLocators.CLOSE_MESSAGE_BTN)).click()
-
-        # Move to instance page
         self.CE_homepage.access_instances_page()
 
         # When user selects "Instances => Instances" on left side menu
@@ -134,7 +117,13 @@ class TestInstances(CEBaseTest):
         self.configure_instance_wizard.click_next_btn()
 
     # Step 4: Add Storage
+        volume_name = CEVolumeTestData.VOLUME_NAME
         self.add_storage_wizard = AddStorageWizardPage(self.driver)
+        self.add_storage_wizard.add_new_volume(CEVolumeTestData.VOLUME_NAME, CEVolumeTestData.SIZE)
+
+        # Get Volume ID for delete data after test
+        volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
+        self.volume_id = volume_row.get_attribute("data-row-key")
         
         # Select volume to attach to instance
         self.add_storage_wizard.select_volume(self.volume_id)
@@ -143,11 +132,8 @@ class TestInstances(CEBaseTest):
 
     # Step 5: Configure Security Group
         self.configure_security_wizard = SecurityGroupWizardPage(self.driver)
-        self.configure_security_wizard.create_new_security_group(CESecurityGroupTestData.SECURITY_GROUP_NAME, CESecurityGroupTestData.DESCRIPTION)
-        self.configure_security_wizard.apply_sg_for_instance()
-        
-        # Get SG ID for delete data after test
-        self.sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
+        self.configure_security_wizard.click_on_select_sg_for_instance()
+        self.configure_security_wizard.select_sg_for_instance(self.sg_id)
     
         self.configure_security_wizard.click_button(CELaunchInstancesWizardPageLocators.REVIEW_N_LAUNCH_BTN)
 
@@ -181,10 +167,8 @@ class TestInstances(CEBaseTest):
         
 
 
-# python3 -m unittest Tests.CE_Instance.test_launch_instance_09 -v
+# python3 -m unittest Tests.CE_Instance.test_launch_instance_11 -v
 
-
-    
 
 if __name__ == "__main__":
     unittest.main(

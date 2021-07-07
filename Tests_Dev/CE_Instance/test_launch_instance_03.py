@@ -64,9 +64,9 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_with_empty_name(self):
         """
-            TEST CASE: Instance should be created fail because invalid name
+            TEST CASE: Launch instance with empty name, Instance should be created fail 
         """
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_instances_page()

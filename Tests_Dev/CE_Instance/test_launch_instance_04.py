@@ -63,9 +63,9 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_without_selecting_keypair(self):
         """
-            TEST CASE: Instance should be created successfully with full flow but not selecting keypair
+            TEST CASE: Launch instance without selecting keypair	
         """
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_instances_page()
