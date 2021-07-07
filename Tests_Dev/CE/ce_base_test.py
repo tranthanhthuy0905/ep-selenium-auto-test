@@ -58,7 +58,7 @@ class CEBaseTest(BaseTest):
             self._call_request_put(url, jsonBody, CE_USER_TOKEN)
 
         except Exception as e:
-            print("Can't remove CE sg in instance", str(e))
+            print("Can't delete CE instance", str(e))
 
     def detach_CE_volume_by_id(self, volume_id):
         try:
@@ -69,7 +69,7 @@ class CEBaseTest(BaseTest):
             self._call_request_post(url, jsonBody, CE_USER_TOKEN)
 
         except Exception as e:
-            print("Can't detach CE volume", str(e))
+            print("Can't delete CE instance", str(e))
 
     def delete_CE_instance_by_id(self, instance_id):
         try:

@@ -30,28 +30,17 @@ import time
 import unittest
 import HtmlTestRunner
 
-<<<<<<< HEAD
-from selenium.webdriver.common.by import By
-from Tests_Dev.CE.ce_base_test import CEBaseTest
-=======
 from Tests.base_test import BaseTest
->>>>>>> origin/dev
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.launch_instances_wizard_page import *
 from Locators.CE import CELaunchInstancesWizardPageLocators
 
-<<<<<<< HEAD
-class Test_launch_instance_01(CEBaseTest):
-=======
 class Test_launch_instance_01(BaseTest):
->>>>>>> origin/dev
     """
         TEST CASE: Launch instance with simple flow (Scenario 01)
     """
 
-<<<<<<< HEAD
-=======
     # General method to pass through step 1 & 2 of launching an instance
     def choose_MI_N_Instance_Type(self):
 
@@ -91,67 +80,10 @@ class Test_launch_instance_01(BaseTest):
             self.driver.current_url, self.launch_instances_wizard_page.base_url
         )
 
->>>>>>> origin/dev
     def test_launch_instance_01_default_pw(self):
         """
             TEST CASE: Apply default password
         """
-<<<<<<< HEAD
-        self.launch_instance_01_default_pw()
-        self.delete_CE_instance()
-        time.sleep(2)
-
-    # def edit_pw(self, value1, value2):
-    #     # Passing step 1 (Choose MI) and step 2 (Instance Type)
-    #     self.choose_MI_N_Instance_Type()
-    #
-    #     time.sleep(1)
-    #     # Edit own password
-    #     self.launch_instances_wizard_page.edit_password()
-    #     # Check if click on Edit button, whether come back to "Configure Instance" step or not
-    #     self.assertEqual(
-    #         self.driver.current_url, self.launch_instances_wizard_page.base_url
-    #     )
-    #     self.assertTrue(
-    #         self.launch_instances_wizard_page.check_element_existence(
-    #             CELaunchInstancesWizardPageLocators.CONFIGURE_INSTANCE_DETAILS)
-    #     )
-    #     time.sleep(1)
-    #     self.launch_instances_wizard_page.input_password(value1, value2)
-    #
-    #     # Check if there is a reminding message or not
-    #     if (value1 != value2):
-    #         self.assertTrue(
-    #             self.launch_instances_wizard_page.check_element_existence(
-    #                 CELaunchInstancesWizardPageLocators.TWO_PASSWORD_NOT_MATCH)
-    #         )
-    #     # Once two passwords match together, choose to launch instance
-    #     else:
-    #         self.launch_instances_wizard_page.review_and_launch_instance()
-    #         # Check whether successfully creating an instance with simple flow (own password) or not
-    #         time.sleep(2)
-    #         self.assertTrue(
-    #             self.launch_instances_wizard_page.check_element_existence(
-    #                 (By.XPATH, "//td[contains(.,'" + self.instance_name + "')]")),
-    #             "Should successfully create an instance by editing own password"
-    #         )
-    #     # Sleep to wait for the page loading
-    #     time.sleep(3)
-    #     #self.delete_CE_instance()
-    #     self.tearDown()
-    #
-    # def test_launch_instance_01_edit_valid_pw(self):
-    #     """
-    #         TEST CASE: Edit own default password (matched confirmation password)
-    #     """
-    #     self.edit_pw("Abc12345", "Abc12345")
-    #
-    # def test_launch_instance_01_edit_invalid_pw(self):
-    #     """
-    #         TEST CASE: Edit own default password (unmatched confirmation password)
-    #     """
-    #     self.edit_pw("Abc12345", "Abcd12345")
-=======
         # Passing step 1 (Choose MI) and step 2 (Instance Type)
         self.choose_MI_N_Instance_Type()
 
@@ -227,7 +159,6 @@ class Test_launch_instance_01(BaseTest):
         # Sleep to wait for the page loading
         time.sleep(3)
         self.tearDown()
->>>>>>> origin/dev
 
 if __name__ == "__main__":
     unittest.main(

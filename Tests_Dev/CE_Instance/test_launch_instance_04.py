@@ -93,7 +93,7 @@ class TestInstances(CEBaseTest):
     # Step 3: Configure Instance Details
         self.configure_instance_wizard = ConfigureInstanceWizardPage(self.driver)
         # Set instance name
-        instance_name = CEInstanceTestData.INSTANCE_NAME
+        instance_name = CEInstanceTestData.gen_instance_name()
         self.configure_instance_wizard.fill_instance_name(instance_name)
 
         # Without Creating keypair
@@ -104,9 +104,9 @@ class TestInstances(CEBaseTest):
         self.configure_instance_wizard.click_next_btn()
 
     # Step 4: Add Storage
-        volume_name = CEVolumeTestData.VOLUME_NAME
+        volume_name = CEVolumeTestData.gen_volume_name()
         self.add_storage_wizard = AddStorageWizardPage(self.driver)
-        self.add_storage_wizard.add_new_volume(CEVolumeTestData.VOLUME_NAME, CEVolumeTestData.SIZE)
+        self.add_storage_wizard.add_new_volume(volume_name, CEVolumeTestData.SIZE)
 
         # Get Volume ID for delete data after test
         volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
@@ -119,7 +119,7 @@ class TestInstances(CEBaseTest):
 
     # Step 5: Configure Security Group
         self.configure_security_wizard = SecurityGroupWizardPage(self.driver)
-        self.configure_security_wizard.create_new_security_group(CESecurityGroupTestData.SECURITY_GROUP_NAME, CESecurityGroupTestData.DESCRIPTION)
+        self.configure_security_wizard.create_new_security_group(CESecurityGroupTestData.gen_SG_name(), CESecurityGroupTestData.DESCRIPTION)
         self.configure_security_wizard.apply_sg_for_instance()
 
         # Get SG ID for delete data after test

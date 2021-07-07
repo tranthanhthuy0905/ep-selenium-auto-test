@@ -45,7 +45,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.CE.ce_base_test import CEBaseTest
+from Tests_Dev.CE.ce_base_test import CEBaseTest
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.volume_page import CEVolumePage
@@ -70,26 +70,26 @@ class TestInstances(CEBaseTest):
         # Then user can see the list of available Volumes
         self.volume_page = CEVolumePage(self.driver)
         self.assertEqual(self.driver.current_url, self.volume_page.base_url)
-        self.assertTrue(self.volume_page.check_element_existence(CEVolumnePageLocators.CREATE_VOLUME_BTN))
-        self.assertTrue(self.volume_page.check_element_existence(CEVolumnePageLocators.VOLUMES_LIST))
+        self.assertTrue(self.volume_page.check_element_existence(CEVolumePageLocators.CREATE_VOLUME_BTN))
+        self.assertTrue(self.volume_page.check_element_existence(CEVolumePageLocators.VOLUMES_LIST))
 
         # When user clicks on "Create Volume" button on the top right
-        self.volume_page.click_button(CEVolumnePageLocators.CREATE_VOLUME_BTN)
+        self.volume_page.click_button(CEVolumePageLocators.CREATE_VOLUME_BTN)
         #Then user can move to "Create New Volume" page
         self.create_volume_page = CECreateVolumePage(self.driver)
         self.assertEqual(self.driver.current_url, self.create_volume_page.base_url)
         # And user can fill in Volume name and select volume type
-        self.volume_name = CEVolumeTestData.VOLUME_NAME
+        self.volume_name = CEVolumeTestData.gen_volume_name()
         self.create_volume_page.fill_volume_info(self.volume_name, volume_size=CEVolumeTestData.SIZE)
 
         # When user clicks on "Create Volume" button
-        self.create_volume_page.click_button(CECreateVolumnePageLocators.CREATE_VOLUME_BTN)
+        self.create_volume_page.click_button(CECreateVolumePageLocators.CREATE_VOLUME_BTN)
         # Then user can see the newly created volume updated in the list of volumes (status: Allocated)
         WebDriverWait(self.driver, 10).until(EC.url_to_be(self.volume_page.base_url))
-        volume_row = self.driver.find_element(*CECreateVolumnePageLocators.PARRENT_BY_VOLUME_NAME(self.volume_name))
+        volume_row = self.driver.find_element(*CECreateVolumePageLocators.PARRENT_BY_VOLUME_NAME(self.volume_name))
         self.volume_id = volume_row.get_attribute("data-row-key")
         self.volume_page.check_volume_state(self.volume_id, CEVolumeTestData.ALLOCATED)
-        self.driver.find_element(*(CEVolumnePageLocators.CLOSE_MESSAGE_BTN)).click()
+        self.driver.find_element(*(CEVolumePageLocators.CLOSE_MESSAGE_BTN)).click()
 
         # Move to instance page
         self.CE_homepage.access_instances_page()
@@ -117,11 +117,11 @@ class TestInstances(CEBaseTest):
     # Step 3: Configure Instance Details
         self.configure_instance_wizard = ConfigureInstanceWizardPage(self.driver)
         # Set instance name
-        instance_name = CEInstanceTestData.INSTANCE_NAME
+        instance_name = CEInstanceTestData.gen_instance_name()
         self.configure_instance_wizard.fill_instance_name(instance_name)
 
         # Create keypair
-        self.keypair_name = CEKeypairTestData.KEYPAIR_NAME
+        self.keypair_name = CEKeypairTestData.gen_keypair_name()
         self.configure_instance_wizard.create_new_keypair(self.keypair_name, "")
 
         # Set default password

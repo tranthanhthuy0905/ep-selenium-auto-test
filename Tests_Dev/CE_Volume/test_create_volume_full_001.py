@@ -56,7 +56,7 @@ class TestVolume(VolumeBaseTest):
         self.assertEqual(self.driver.current_url, self.create_volume_page.base_url)
         # And user can fill in Volume name
         # And user can select Volume type
-        volume_name = CEVolumeTestData.VOLUME_NAME
+        volume_name = CEVolumeTestData.gen_volume_name()
         self.create_volume_page.fill_volume_info(volume_name=volume_name, volume_size=CEVolumeTestData.SIZE)
         self.volume_name = volume_name
 

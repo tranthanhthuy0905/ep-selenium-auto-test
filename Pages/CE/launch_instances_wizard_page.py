@@ -26,7 +26,7 @@ class CELaunchInstancesWizardPage(BasePage):
                 'error_snapshot/{filename}.png'.format(filename='choose_volume_type'))
 
     def choose_instance_details(self):
-        self.instance_name = CEInstanceTestData.INSTANCE_NAME
+        self.instance_name = CEInstanceTestData.gen_instance_name()
         self\
             .click_button(self.locator.MI_SELECT_BTN)\
             .click_button(self.locator.TYPE_2G_RADIO)\
@@ -94,6 +94,7 @@ class ConfigureInstanceWizardPage(CELaunchInstancesWizardPage):
         super().__init__(driver)
 
     def fill_instance_name(self, instance_name):
+        print(instance_name)
         self.fill_form(instance_name, self.locator.INSTANCE_NAME_TEXTBOX)
         return self
 
@@ -159,11 +160,11 @@ class AddStorageWizardPage(CELaunchInstancesWizardPage):
         self.click_button(CELaunchInstancesWizardPageLocators.RADIO_BY_NAME(volume_id))
         return self
 
-    def add_new_volume(self, volume_name, volume_size):
+    def add_new_volume(self, _volume_name, volume_size):
         # Click "Add new Volume" button
         self.click_button(self.locator.ADD_NEW_VOLUME_BTN)
         # Fill the form and select type of volume
-        self.fill_volume_info(volume_name, volume_size)
+        self.fill_volume_info(_volume_name, volume_size)
         # Click on "Create" button on modal
         self.click_button(self.locator.CREATE_VOLUME_BTN)
         # Then the new volume is created
@@ -242,10 +243,8 @@ class ReviewLaunchWizardPage(CELaunchInstancesWizardPage):
         return self
 
     def copy_password(self):
-        self\
-            .click_button(self.locator.COPY_PASSWORD_BTN)
-        WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.locator.CLOSE_MESSAGE_BTN))
-        self.click_button(self.locator.CLOSE_MESSAGE_BTN)
+        self.wait_and_click_button(self.locator.COPY_PASSWORD_BTN)
+        self.wait_and_click_button(self.locator.CLOSE_MESSAGE_BTN)
         return self
 
     def launch_instance(self):

@@ -54,7 +54,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.CE.ce_base_test import CEBaseTest
+from Tests_Dev.CE.ce_base_test import CEBaseTest
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.security_group_page import SGHomePage, SGCreatePage, SGDetailsPage
@@ -107,11 +107,11 @@ class TestInstances(CEBaseTest):
     # Step 3: Configure Instance Details
         self.configure_instance_wizard = ConfigureInstanceWizardPage(self.driver)
         # Set instance name
-        instance_name = CEInstanceTestData.INSTANCE_NAME
+        instance_name = CEInstanceTestData.gen_instance_name()
         self.configure_instance_wizard.fill_instance_name(instance_name)
 
         # Create keypair
-        self.keypair_name = CEKeypairTestData.KEYPAIR_NAME
+        self.keypair_name = CEKeypairTestData.gen_keypair_name()
         self.configure_instance_wizard.create_new_keypair(self.keypair_name, "")
 
         # Set default password
@@ -120,12 +120,12 @@ class TestInstances(CEBaseTest):
         self.configure_instance_wizard.click_next_btn()
 
     # Step 4: Add Storage
-        volume_name = CEVolumeTestData.VOLUME_NAME
+        volume_name = CEVolumeTestData.gen_volume_name()
         self.add_storage_wizard = AddStorageWizardPage(self.driver)
-        self.add_storage_wizard.add_new_volume(CEVolumeTestData.VOLUME_NAME, CEVolumeTestData.SIZE)
+        self.add_storage_wizard.add_new_volume(volume_name, CEVolumeTestData.SIZE)
 
         # Get Volume ID for delete data after test
-        volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
+        volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(volume_name))
         self.volume_id = volume_row.get_attribute("data-row-key")
         
         # Select volume to attach to instance

@@ -25,7 +25,7 @@ class CEVolumePage(BasePage):
         self.create_volume_page = CECreateVolumePage(self.driver)
 
         # When user clicks on "Create" button
-        self.volume_name = CEVolumeTestData.VOLUME_NAME
+        self.volume_name = CEVolumeTestData.gen_volume_name()
         time.sleep(2)
         self.create_volume_page.create_volume(volume_name=self.volume_name, volume_size=volume_size,disk_option=disk_option)
 

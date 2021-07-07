@@ -79,7 +79,7 @@ class TestInstances(CEBaseTest):
     # Step 3: Configure Instance Details
         self.configure_instance_wizard = ConfigureInstanceWizardPage(self.driver)
         # Set instance name
-        self.instance_name = CEInstanceTestData.INSTANCE_NAME
+        self.instance_name = CEInstanceTestData.gen_instance_name()
         self.configure_instance_wizard.fill_instance_name(self.instance_name)
 
         # Without Creating keypair

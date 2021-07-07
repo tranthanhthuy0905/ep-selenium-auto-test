@@ -80,11 +80,11 @@ class TestInstances(CEBaseTest):
     # Step 3: Configure Instance Details
         self.configure_instance_wizard = ConfigureInstanceWizardPage(self.driver)
         # Set instance name
-        instance_name = CEInstanceTestData.INSTANCE_NAME
+        instance_name = CEInstanceTestData.gen_instance_name()
         self.configure_instance_wizard.fill_instance_name(instance_name)
 
         # Create keypair
-        self.keypair_name = CEKeypairTestData.KEYPAIR_NAME
+        self.keypair_name = CEKeypairTestData.gen_keypair_name()
         self.configure_instance_wizard.create_new_keypair(self.keypair_name, "")
 
         # Without setting default password
