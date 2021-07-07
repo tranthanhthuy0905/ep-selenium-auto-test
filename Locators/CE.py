@@ -187,19 +187,14 @@ class CESecurityGroupLocators:
     Weird note: ADD_INGRESS_BUTTON and ADD_EGRESS_BUTTON has different structure: preceding::div/text() vs div/span/text()
     ADD_EGRESS_BUTTON has extra space and the end of text: 'Egress Rule '
     '''
-    ADD_INGRESS_BUTTON = (By.XPATH, '//*[@id="addRule"]/div/div[5]/div/div[2]/div/div/button')
-    # ADD_INGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
-    #                                 "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
-    #                                 "and preceding::div/text()='Ingress Rule')]][1]")
-    ADD_EGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
-                                   "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
-                                   "and preceding::div/span/text()='Egress Rule ')]]")
+    ADD_INGRESS_BUTTON = (By.XPATH, "//button[@type='submit' and ancestor::div[preceding-sibling::div/span/text()='Ingress Rule ']]")
+    ADD_EGRESS_BUTTON = (By.XPATH, "//button[@type='submit' and ancestor::div[preceding-sibling::div/span/text()='Egress Rule ']]")
 
-    INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport']")
-    INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport']")
-    INGRESS_IMCP_TYPE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmptype']")
-    INGRESS_IMCP_CODE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmpcode']")
-    INGRESS_CIDR_TEXTBOX = (By.XPATH, "//input[@id='addRule_cidrlist']")
+    INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport' and ancestor::div[preceding-sibling::div/span/text()='Ingress Rule ']]")
+    INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport' and ancestor::div[preceding-sibling::div/span/text()='Ingress Rule ']]")
+    INGRESS_IMCP_TYPE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmptype' and ancestor::div[preceding-sibling::div/span/text()='Ingress Rule ']]")
+    INGRESS_IMCP_CODE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmpcode' and ancestor::div[preceding-sibling::div/span/text()='Ingress Rule ']]")
+    INGRESS_CIDR_TEXTBOX = (By.XPATH, "//input[@id='addRule_cidrlist'] and ancestor::div[preceding-sibling::div/span/text()='Ingress Rule ']")
     INGRESS_PROTOCOL_SELECTOR = (By.XPATH, '//*[@id="addRule"]/div/div[1]/div/div[2]/div/div/div/div/span[2]')
     INGRESS_PROTOCOL_SELECTOR_INPUT = (By.XPATH, '//*[@id="addRule_protocol"]')
 
