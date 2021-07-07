@@ -7,11 +7,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from Pages.base_page import BasePage
-from Configs import CE_SG_URL, CE_SG_CREATE_URL, CE_SG_DETAILS_PAGE_URL
+from Configs import CE_SG_URL, CE_SG_CREATE_URL, CE_SG_DETAILS_PAGE_URL, CE_SG_KEYPAIR_HOMEPAGE_URL
 from Configs import CE_USER_TOKEN
 from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 
-from Locators.CE import CESecurityGroupLocators
+from Locators.CE import CESecurityGroupLocators, CEKeypairLocators
 
 
 class SGHomePage(BasePage):
@@ -127,5 +127,4 @@ class SGDetailsPage(BasePage):
         self.find_element(*CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON).click()
         logging.info(f"Delete confirm button clicked. "
                      f"Element: {CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON}")
-
-
+                     

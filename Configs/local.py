@@ -37,6 +37,8 @@ CE_SG_URL = urllib.parse.urljoin(CE_BASE_URL, "network/security-groups/")
 CE_SG_CREATE_URL = urllib.parse.urljoin(CE_SG_URL, "create-security-group")
 CE_SG_DETAILS_PAGE_URL = urllib.parse.urljoin(CE_SG_URL, "{sg_id}")
 
+CE_SG_KEYPAIR_HOMEPAGE_URL = urllib.parse.urljoin(CE_BASE_URL, "keypair") #Should keypair be plural??
+
 CE_INSTANCE_CREATE_WIZARD_URL = posixpath.join(CE_BASE_URL, "launch-instance-wizard")
 CE_SG_API_URL = urllib.parse.urljoin(CE_API_URL, "security-groups")
 
