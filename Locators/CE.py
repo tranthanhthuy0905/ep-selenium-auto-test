@@ -224,6 +224,13 @@ class CESecurityGroupLocators:
             f"and following-sibling::td[text()='{cidr}']]]]]]"
         )
 
+    START_PORT_REQUIRED_ALERT = (By.XPATH, "//div[@role='alert' and text()='Start Port is required!']")
+    END_PORT_REQUIRED_ALERT = (By.XPATH, "//div[@role='alert' and text()='End Port is required!']")
+    IMCP_TYPE_REQUIRED_ALERT = (By.XPATH, "//div[@role='alert' and text()='ICMP Type is required!']")
+    IMCP_CODE_REQUIRED_ALERT = (By.XPATH, "//div[@role='alert' and text()='ICMP Code is required!']")
+    INVALID_START_PORT_ALERT = None # Waiting for bug fixes
+    INVALID_END_PORT_ALERT = None # Waiting for bug fixes
+
 class CEKeypairLocators:
     KEYPAIR_NAME_TEXTBOX = (By.XPATH, "//*[@id='create-ssh-key-form_name']")
     PUBLIC_KEY_TEXTBOX = (By.XPATH, "//*[@id='create-ssh-key-form_publicKey']")
