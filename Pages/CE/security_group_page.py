@@ -51,6 +51,7 @@ class SGCreatePage(BasePage):
         # name = self.driver.find_element(*CESecurityGroupLocators.PREVIEW_SEC_GROUP_NAME).text
         self.sg_create_page.click_create_submit_button()
         WebDriverWait(self.driver, 10).until(EC.url_changes(self.driver.current_url))
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(CESecurityGroupLocators.SEC_GROUP_ID))
         id = self.driver.find_element(*CESecurityGroupLocators.SEC_GROUP_ID).text
         return id
 
