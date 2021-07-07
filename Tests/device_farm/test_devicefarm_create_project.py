@@ -28,12 +28,12 @@ class Test_DEVICEFARM_Create_Project(DEVICE_FARM_BaseTest):
         self.service_slug = project_name
 
         self.df_create_project_page.click_create_project_submit_button()
+        self._call_api_get_info_project()
         self.driver.implicitly_wait(10)
         self.assertTrue(
             self.driver.find_element_by_link_text(project_name)
         )
         self.assertIn("Created project successfully", self.driver.page_source, msg='CREATE PROJECT IS NOT SUCCESSFULLY')
-        self._call_api_delete_project()
 
 if __name__ == "__main__":
     unittest.main(

@@ -51,6 +51,6 @@ S3_BUCKET_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "buckets")
 S3_FILES_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "files")
 
 # Device Farm
-DEVICE_FARM_BASE_URL = urllib.parse.urljoin(os.getenv("DEVICE_FARM_BASE_URL"), "devicefarm/mobile-device")
-DEVICE_FARM_API_CLIENT_URL = urllib.parse.urljoin(DEVICE_FARM_BASE_URL, "api/client")
-DEVICE_FARM_API_PROJECT = urllib.parse.urljoin(DEVICE_FARM_API_CLIENT_URL, "projects")
+DEVICE_FARM_BASE_URL = os.getenv("DEVICE_FARM_BASE_URL")
+DEVICE_FARM_API_PROJECT = urllib.parse.urljoin(os.getenv("DEVICE_FARM_BASE_URL"), "api/client/projects")
+DEVICE_FARM_API_SESSION = urllib.parse.urljoin(os.getenv("DEVICE_FARM_BASE_URL"), "api/client/mobile-devices/sessions")
