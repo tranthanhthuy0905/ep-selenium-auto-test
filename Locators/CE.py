@@ -12,12 +12,16 @@ class CEPageLocators(object):
     ELASTIC_BLOCK_STORE_MENU_BTN = (By.XPATH, '/html/body/div/section/div[2]/aside/div/div[2]/div[1]/ul/li[6]/div[1]')
     VOLUMES_SUBMENU_BTN = (By.LINK_TEXT, 'Volumes')
     SNAPSHOTS_SUBMENU_BTN = (By.LINK_TEXT, 'Snapshots')
+    KEYPAIR_SUBMENU_BTN = (By.LINK_TEXT, 'Key Pairs')
+
+
+
 
 class CEInstancePageLocators(object):
     LAUNCH_INSTANCES_BTN = (By.LINK_TEXT, 'Launch Instance')
     ANNOUNCEMENT = (By.CSS_SELECTOR, 'div > div > div > div.ant-notification-notice-message')
     RADIO_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[1]/label/span/input')
-    INSTANCE_STATE_BTN = (By.CSS_SELECTOR, '#root > section > section > main > div > div > div > div > div > div > div > div:nth-child(1) > div > div > div.ant-card-head > div > div.ant-card-extra > div > button:nth-child(3) > div')
+    INSTANCE_STATE_BTN = (By.XPATH, "//button[contains(.,'Instance state ')]")
     STOP_INSTANCE_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(1)')
     START_INSTANCE_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(2)')
     REBOOT_INSTANCE_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(3)')
@@ -42,6 +46,11 @@ class CEInstancePageLocators(object):
     REFRESH_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[1]')
 
     INSTANCE_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div[3]/div[2]/div/div[2]/div/div[4]/div/div/div[2]')
+    INSTANCE_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[4]/div/span")
+    INSTANCE_RADIO_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td/label/span")
+    STOP_STATUS = "Stopped"
+    RUNNING_STATUS = "Running"
+
 class CEInstanceTypesPageLocators(object):
     INSTANCE_TYPE_4G_RADIO = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[1]/label/span/input')
     INSTANCE_TYPE_32G_RADIO = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr[7]/td[1]/label/span/input')
@@ -59,7 +68,7 @@ class CELaunchInstancesWizardPageLocators(object):
     CREATE_NEW_KEYPAIR_OK_BTN = (By.XPATH, "//button[contains(.,'OK')]")
     CREATE_NEW_KEYPAIR_CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
     CREATE_NEW_KEYPAIR_SUCCESS_MESSAGE = (By.XPATH, "//div[contains(.,'Created keypair successfully.')]")
-    KEYPAIR_LIST = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[2]/div/div/div")
+    KEYPAIR_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[3]/div[5]/div[2]/div")
     KEYPAIR_NAME_TEXTBOX = (By.ID, "create-ssh-key-form_name")
     PUBLIC_KEY_TEXTBOX = (By.ID, "create-ssh-key-form_publicKey")
     DEFAULT_PASSWORD_TEXTBOX = (By.ID, "password")
@@ -68,7 +77,7 @@ class CELaunchInstancesWizardPageLocators(object):
     INSTANCE_NAME_TEXTBOX = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[3]/div[1]/div[2]/input')
     LAUNCH_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[3]/button[3]')
     REVIEW_N_LAUNCH_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[3]/button[3]')
-    ADD_NEW_VOLUME_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[1]/button/span')
+    ADD_NEW_VOLUME_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div[1]/button/span')
     VOlUME_NAME_TEXTBOX = (By.XPATH, "/html/body/div/div/div[2]/div/div[2]/div[2]/div[1]/input[@class='ant-input']")
     VOLUME_TYPE_LIST = (By.XPATH, '/html/body/div/div/div[2]/div/div[2]/div[2]/div[2]/div[2]/div/div/span[2]')
     VOLUME_SIZE_TEXTBOX = (By.XPATH, "/html/body/div/div/div[2]/div/div[2]/div[2]/div[3]/div/div/div/input")
@@ -80,19 +89,20 @@ class CELaunchInstancesWizardPageLocators(object):
     RADIO_BY_NAME = lambda _radio_name: (By.NAME, f'{_radio_name}')
     CREATE_NEW_SG_RADIO = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[1]/label/span[1]/input")
     SELECT_EXISTING_SG_RADIO = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[1]/div[2]/div[2]/div/div[2]/label/span[1]/input")
-    SG_NAME_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[1]/div[2]/input")
-    SG_DESCRIPTION_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[2]/div[2]/input")
-    ADD_SG_BTN = (By.XPATH, "//button[contains(.,'Add Security group')]")
+    SG_NAME_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[2]/div[2]/span/span/input")
+    SG_DESCRIPTION_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[3]/div[2]/input")
+    ADD_SG_BTN = (By.XPATH, "//button[contains(.,'Add Security Group')]")
     SG_DETAILS_ID = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[4]/div/div/div/div/div/div[1]/div[2]/div/div[1]/div[2]/div")
-    SG_APPLY_CHECKBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div/div[2]/label/span[1]")
+    SG_APPLY_CHECKBOX = (By.XPATH, "/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div/div[2]/label/span[1]")
     CREATE_SG_SUCCESS_MESSAGE = (By.XPATH, "//div[contains(.,'Created security group successfully')]")
     PARRENT_BY_INSTANCE_NAME = lambda _instance_name: (By.XPATH, f"//td[contains(.,'{_instance_name}')]/parent::*")
     STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[@class='ant-table-cell'][2]/div/span/span[@class='ant-badge-status-text']")
-    RANDOM_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[2]/button")
-    COPY_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[3]/button")
+    RANDOM_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[2]/button/span")
+    COPY_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[3]/button/span")
     SHOW_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/span/span")
     APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
-    INSTANCE_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[4]/div/span")
+    FAILED_TO_LAUNCH_NOTI = (By.XPATH, "//div[contains(.,'Failed to launch instance.')]")
+
 
 
 
@@ -144,12 +154,16 @@ class CEVolumePageLocators(object):
     VM_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[8]/div/div/div[2]')
     VM_ID = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[2]/div')
     VOLUMES_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div")
+    CLOSE_MESSAGE_BTN = (By.CLASS_NAME, "ant-notification-close-x")
+    VOLUME_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[3]/div/span/span[2]")
+
+
 
 class CECreateVolumePageLocators(object):
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,'Create Volume')]")
     VOLUME_TYPE_LIST = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[2]/div/div/div")
-    VOLUME_NAME_FORM = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[3]/div[2]/div/div[1]/input")
     CUSTOM_DISK = (By.XPATH, "//div[text()='Custom Disk']")
+    VOLUME_NAME_FORM = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[3]/div[2]/div/div[1]/input")
     VOLUME_SIZE_FORM = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[3]/div/div/div/input")
     CREATE_VOLUME_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Created volume successfully.']")
     PARRENT_BY_VOLUME_NAME = lambda _volume_name: (By.XPATH, f"//td[contains(.,'{_volume_name}')]/parent::*")
@@ -179,6 +193,8 @@ class CESecurityGroupLocators:
 
     INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport']")
     INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport']")
+    INGRESS_IMCP_TYPE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmptype']")
+    INGRESS_IMCP_CODE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmpcode']")
     INGRESS_CIDR_TEXTBOX = (By.XPATH, "//input[@id='addRule_cidrlist']")
     INGRESS_PROTOCOL_SELECTOR = (By.XPATH, '//*[@id="addRule"]/div/div[1]/div/div[2]/div/div/div/div/span[2]')
     INGRESS_PROTOCOL_SELECTOR_INPUT = (By.XPATH, '//*[@id="addRule_protocol"]')
@@ -192,7 +208,6 @@ class CESecurityGroupLocators:
     REMOVE_FIRST_INGRESS_RULE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div[3]/div[2]/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[2]/td[8]/button')
     CONFIRM_DELETE_RULE_BUTTON = (By.XPATH, "//button[@type='button' and ./span/text()='Delete']")
     CANCEL_DELETE_RULE_BUTTON = (By.XPATH, "//button[@type='button' and ./span/text()='Cancel']")
-
     INGRESS_RULE_ROW = lambda protocol, start_port, end_port, cidr: (
         By.XPATH,
         f"//td[@class='ant-table-cell' and text()='{protocol}' "
@@ -202,6 +217,24 @@ class CESecurityGroupLocators:
         f"::td[following-sibling"
         f"::td[text()='{cidr}']]]]]]"
     )
+    INGRESS_RULE_ICMP_ROW = lambda protocol, icmp_type, icmp_code, cidr: (
+            By.XPATH,
+            f"//td[@class='ant-table-cell' and text()='{protocol}' "
+            f"and following-sibling::td[following-sibling::td[following-sibling::td[text()='{icmp_type}' "
+            f"and following-sibling::td[text()='{icmp_code}' "
+            f"and following-sibling::td[text()='{cidr}']]]]]]"
+        )
+
+class CEKeypairLocators:
+    KEYPAIR_NAME_TEXTBOX = (By.XPATH, "//*[@id='create-ssh-key-form_name']")
+    PUBLIC_KEY_TEXTBOX = (By.XPATH, "//*[@id='create-ssh-key-form_publicKey']")
+    CREATE_KEYPAIR_BTN = (By.XPATH, "//button[contains(.,' Create keypair')]")
+    OK_BTN = (By.XPATH, "//button[contains(.,'OK')]")
+    FINGERPRINT_BY_KEYPAIR_NAME = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[@class='ant-table-cell'][2]")
+    SUCCESSFULLY_MESSAGE = (By.XPATH, "//p[contains(.,'Created keypair successfully.')]")
+    CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
+
+
 
 class CESnapshotLocators(object):
     # Create Snapshot

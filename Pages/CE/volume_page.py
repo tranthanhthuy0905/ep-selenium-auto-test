@@ -1,13 +1,11 @@
-from selenium.webdriver.support import expected_conditions as EC
 import time
 
-from selenium.webdriver.support.wait import WebDriverWait
-
 from Configs.TestData.CEVolumeTestData import CEVolumeTestData
-
-from Locators.CE import CEVolumePageLocators
+from selenium.webdriver.support.wait import WebDriverWait
 from Pages.CE.create_volume_page import CECreateVolumePage
+from Locators.CE import CEVolumePageLocators
 from Pages.base_page import BasePage
+from selenium.webdriver.support import expected_conditions as EC
 from Configs import CE_VOLUME_URL
 from selenium.common.exceptions import TimeoutException
 
@@ -51,6 +49,20 @@ class CEVolumePage(BasePage):
     def check_size_gb(self):
         size_gb = self.driver.find_element(*self.locator.SIZE_GB).text
         return size_gb
+
+    def check_volume_state(self, volume_id, state):
+        WebDriverWait(self.driver, 300).until(EC.text_to_be_present_in_element(self.locator.VOLUME_STATE_BY_ID(volume_id), state))
+
+
+    def change_instance_states(self, state_button, confirm_button, message):
+        self.click_button(self.locator.RADIO_BTN)\
+            .click_button(self.locator.INSTANCE_STATE_BTN)\
+            .click_button(state_button)\
+            .wait_and_click_button(confirm_button)
+        if message:
+            self.check_element_existence(message)
+        return self
+
 
 
 

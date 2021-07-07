@@ -12,15 +12,11 @@ import unittest
 
 import HtmlTestRunner
 
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
 from Locators.CE import CESecurityGroupLocators
 from Pages.CE.security_group_page import SGHomePage, SGCreatePage, SGDetailsPage
 from Tests_Dev.CE_Security_Group.sg_base_test import SGBaseTest
-from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
-from Configs import CE_SG_DETAILS_PAGE_URL
 
+from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 
 
 class TestCreateSgUdpProtocol(SGBaseTest):

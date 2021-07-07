@@ -1,5 +1,4 @@
 import os
-import time
 import unittest
 
 import HtmlTestRunner
@@ -83,7 +82,6 @@ class TestCreateSecurityGroup(SGBaseTest):
         self.sg_id = self.driver.current_url.split("/")[-1]
         self.sg_details_page = SGDetailsPage(self.driver, self.sg_id)
         self.sg_details_page.add_ingress_rule(CESecurityGroupTestData.VALID_PORTS_1[0], CESecurityGroupTestData.VALID_PORTS_1[1])
-
 
 if __name__ == "__main__":
     unittest.main(

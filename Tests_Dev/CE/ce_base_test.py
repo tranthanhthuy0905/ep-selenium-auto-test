@@ -86,13 +86,12 @@ class CEBaseTest(BaseTest):
         time.sleep(2)
         # TODO: Test the instance state (should be Running)
         WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element
-                                             (CELaunchInstancesWizardPageLocators.INSTANCE_STATE_BY_ID(self.instance_id),
+                                             (CEInstancePageLocators.INSTANCE_STATE_BY_ID(self.instance_id),
                                                "Running"),
                                              "Cannot run the newly created instance")
         self.ce_instances_page.click_button(
             (By.XPATH, '//span[././input/@type="radio" and ancestor::tr/@data-row-key="' + self.instance_id + '"]'))
         self.instance_state = self.ce_instances_page.check_instance_state(CEInstancePageLocators.INSTANCE_STATE)
-
 
     def delete_CE_instance(self):
         try:
@@ -154,5 +153,4 @@ class CEBaseTest(BaseTest):
             self._call_request_delete(url, params, CE_USER_TOKEN)
         except Exception as e:
             print("Can't delete CE security group", str(e))
-
 

@@ -79,8 +79,8 @@ class TestInstances(CEBaseTest):
     # Step 3: Configure Instance Details
         self.configure_instance_wizard = ConfigureInstanceWizardPage(self.driver)
         # Set instance name
-        instance_name = CEInstanceTestData.INSTANCE_NAME
-        self.configure_instance_wizard.fill_instance_name(instance_name)
+        self.instance_name = CEInstanceTestData.INSTANCE_NAME
+        self.configure_instance_wizard.fill_instance_name(self.instance_name)
 
         # Without Creating keypair
 
@@ -95,23 +95,25 @@ class TestInstances(CEBaseTest):
         self.review_launch_wizard.launch_instance()
 
         # Get instance id for clear data after test
-        WebDriverWait(self.driver, 10).until(EC.url_to_be(self.instances_page.base_url))
-        instance_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_INSTANCE_NAME(instance_name))
-        instance_id = instance_row.get_attribute("data-row-key")
+        # WebDriverWait(self.driver, 10).until(EC.url_to_be(self.instances_page.base_url))
+        instance_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_INSTANCE_NAME(self.instance_name))
+        self.instance_id = instance_row.get_attribute("data-row-key")
 
         self.instances_page.check_element_existence(CEInstancePageLocators.ANNOUNCEMENT)
         self.instances_page.check_element_existence(CEInstancePageLocators.LAUNCH_VM_SUCCESS_MESSAGE)
 
         # Check if the new instance state is Running
-        self.review_launch_wizard.check_instance_state(instance_id, "Running")
+        self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.RUNNING_STATUS)
+        print("Instance is created successfully!")
 
 
-        #TODO clear test data
-        self.delete_CE_instance_by_id(instance_id)
-        self.driver.implicitly_wait(10)
 
+<<<<<<< HEAD:Tests_Dev/CE_Instance/test_launch_instance_08.py
 
 # python3 -m unittest Tests_Dev.CE_Instance.test_launch_instance_02 -v
+=======
+# python3 -m unittest Tests.CE_Instance.test_launch_instance_08 -v
+>>>>>>> origin/dev:Tests/CE_Instance/test_launch_instance_08.py
 
 if __name__ == "__main__":
     unittest.main(

@@ -11,4 +11,3 @@ class DEVICE_FARM_HomePage(BasePage):
 
     def click_create_project(self):
         self.driver.find_element(*DEVICE_FARM_ProjectLocators.CREATE_PROJECT_HOME_BUTTON).click()
-        

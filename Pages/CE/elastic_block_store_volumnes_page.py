@@ -1,6 +1,6 @@
 from Configs.local import CE_VOLUME_URL
 from Pages.CE.volume_page import CEVolumePage
-from Locators.CE import CECreateVolumePageLocators, CEVolumePageLocators
+from Locators.CE import CEVolumePageLocators
 from Pages.base_page import BasePage
 from Configs import CE_BASE_URL
 
