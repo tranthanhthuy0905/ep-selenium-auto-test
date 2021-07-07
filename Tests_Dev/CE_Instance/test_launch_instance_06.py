@@ -121,11 +121,7 @@ class TestInstances(CEBaseTest):
         print("Instance is created successfully!")
 
 
-<<<<<<< HEAD:Tests_Dev/CE_Instance/test_launch_instance_06.py
-# python3 -m unittest Tests_Dev.CE_Instance.test_launch_instance_02 -v
-=======
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_06 -v
->>>>>>> origin/dev:Tests/CE_Instance/test_launch_instance_06.py
 
 if __name__ == "__main__":
     unittest.main(

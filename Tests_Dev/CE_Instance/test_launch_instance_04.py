@@ -110,13 +110,8 @@ class TestInstances(CEBaseTest):
 
         # Get Volume ID for delete data after test
         volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
-<<<<<<< HEAD:Tests_Dev/CE_Instance/test_launch_instance_04.py
-        volume_id = volume_row.get_attribute("data-row-key")
-
-=======
         self.volume_id = volume_row.get_attribute("data-row-key")
         
->>>>>>> origin/dev:Tests/CE_Instance/test_launch_instance_04.py
         # Select volume to attach to instance
         self.add_storage_wizard.select_volume(self.volume_id)
 
@@ -128,13 +123,8 @@ class TestInstances(CEBaseTest):
         self.configure_security_wizard.apply_sg_for_instance()
 
         # Get SG ID for delete data after test
-<<<<<<< HEAD:Tests_Dev/CE_Instance/test_launch_instance_04.py
-        sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
-
-=======
         self.sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
     
->>>>>>> origin/dev:Tests/CE_Instance/test_launch_instance_04.py
         self.configure_security_wizard.click_button(CELaunchInstancesWizardPageLocators.REVIEW_N_LAUNCH_BTN)
 
     # Step 6: Review Instance & Launch
@@ -162,13 +152,9 @@ class TestInstances(CEBaseTest):
         self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.STOPPED_STATUS)
 
 
-<<<<<<< HEAD:Tests_Dev/CE_Instance/test_launch_instance_04.py
-# python3 -m unittest Tests_Dev.CE_Instance.test_launch_instance_02 -v
-=======
 
 
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_04 -v
->>>>>>> origin/dev:Tests/CE_Instance/test_launch_instance_04.py
 
 if __name__ == "__main__":
     unittest.main(
