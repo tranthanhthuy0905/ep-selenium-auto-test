@@ -23,7 +23,7 @@ class CEBaseTest(BaseTest):
             for sg_id in self.list_sg_id:
                 self.delete_CE_sg_by_id(sg_id)
             print("Security groups have been deleted")
-        
+
 
 
     def delete_CE_instance(self):
@@ -36,7 +36,7 @@ class CEBaseTest(BaseTest):
 
         except Exception as e:
             print("Can't delete CE instance", str(e))
-    
+
     def change_CE_instance_status(self, instance_id, instance_status):
         try:
             url = CE_INSTANCE_API_CLIENT_URL + "changeStatus"

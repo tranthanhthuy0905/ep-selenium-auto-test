@@ -36,7 +36,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests_Dev.CE.ce_base_test import CEBaseTest
+from Tests.CE.ce_base_test import CEBaseTest
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.launch_instances_wizard_page import *
@@ -51,7 +51,7 @@ import time
 class TestInstances(CEBaseTest):
     def test_create_vm_with_password_then_launch(self):
         """
-            TEST CASE: Launch instance set password then click on "Preview and Launch"    
+            TEST CASE: Launch instance set password then click on "Preview and Launch"
         """
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_instances_page()
@@ -106,14 +106,7 @@ class TestInstances(CEBaseTest):
         self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.RUNNING_STATUS)
         print("Instance is created successfully!")
 
-
-
-<<<<<<< HEAD:Tests_Dev/CE_Instance/test_launch_instance_08.py
-
-# python3 -m unittest Tests_Dev.CE_Instance.test_launch_instance_02 -v
-=======
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_08 -v
->>>>>>> origin/dev:Tests/CE_Instance/test_launch_instance_08.py
 
 if __name__ == "__main__":
     unittest.main(
