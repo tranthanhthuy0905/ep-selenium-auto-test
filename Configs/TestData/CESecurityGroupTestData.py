@@ -4,6 +4,7 @@ import random
 class CESecurityGroupTestData(BaseTestData):
     SECURITY_GROUP_NAME = "autotest-sg-" + str(random.randint(100000,999999))
     DESCRIPTION = "This security group is created by automated testing."
+    NUMBER_OF_SG = 3
     VALID_PORTS_1 = (1, 8000)
     VALID_PORTS_2 = (5000, 5000)
     INVALID_PORTS_1 = (6666, 5555)
@@ -23,3 +24,6 @@ class CESecurityGroupTestData(BaseTestData):
 
     UDP_VALUE_IN_TABLE = "udp"
     ICMP_VALUE_IN_TABLE = "icmp"
+
+    def gen_SG_name():
+        return "autotest-sg-" + str(random.randint(100000,999999))

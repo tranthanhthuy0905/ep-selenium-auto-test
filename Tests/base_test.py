@@ -29,6 +29,9 @@ class BaseTest(unittest.TestCase, APIService):
         logging.info(f"TEST START: Start testing: {self.__class__.__name__}")
 
     def clear_test_instances(self):
+        '''
+            Override this function for clearing test instances.
+        '''
         pass
 
     def tearDown(self):

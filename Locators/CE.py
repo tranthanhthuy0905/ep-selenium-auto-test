@@ -102,6 +102,8 @@ class CELaunchInstancesWizardPageLocators(object):
     SHOW_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/span/span")
     APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
     FAILED_TO_LAUNCH_NOTI = (By.XPATH, "//div[contains(.,'Failed to launch instance.')]")
+    EXISTING_SG_RADIO = lambda _sg_id: (By.NAME, f'{_sg_id}')
+    LIST_SG_PAGE = (By.XPATH, "//div[@class='ant-select-selector']/span[@class='ant-select-selection-item']")
 
 
 
@@ -126,7 +128,7 @@ class CEVolumePageLocators(object):
 
     # Resize Volume Elements
     RESIZE_VOLUME_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[2]')
-    SIZE_GB = (By.XPATH, '//div[preceding-sibling::div/div/text()="Size"]')
+    SIZE_GB = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[6]')
     RESIZE_VOLUME_BOX = (By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]')
     # OK_BTN = (By.XPATH, "//button/span[text()='OK']")
     OK_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[3]/button[2]")
@@ -171,6 +173,8 @@ class CECreateVolumePageLocators(object):
 class CESecurityGroupLocators:
 
     CREATE_SEC_GROUP_TEXTBOX_NAME_CSS = (By.CSS_SELECTOR, "input.ant-input")
+    PREVIEW_SEC_GROUP_NAME = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[2]/div/div[2]/span")
+    SEC_GROUP_ID = (By.XPATH, "/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div")
 
     CREATE_BUTTON = (By.XPATH, '//span[text()=" Create Security Group"]')
     SUBMIT_CREATE_BUTTON_X_PATH = (By.XPATH, '//span[text()="Create Security Group"]')
