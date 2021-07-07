@@ -6,7 +6,7 @@ import HtmlTestRunner
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.S3.s3_base_test import S3BaseTest
+from Tests_Dev.S3.s3_base_test import S3BaseTest
 
 from Pages.S3.s3_homepage import S3HomePage
 from Pages.S3.s3_create_bucket_page import S3CreateBucketPage

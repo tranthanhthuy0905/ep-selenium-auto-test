@@ -1,7 +1,11 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+<<<<<<< HEAD
+from Tests_Dev.base_test import BaseTest
+=======
 from Tests.base_test import BaseTest
+>>>>>>> origin/dev
 from Configs import DEVICE_FARM_BASE_URL
 from Pages.device_farm.devicefarm_homepage import DEVICE_FARM_HomePage
 from Pages.device_farm.devicefarm_create_project_page import DEVICE_FARM_CreateProjectPage
@@ -16,4 +20,8 @@ class DEVICE_FARM_BaseTest(BaseTest):
         self.df_create_project_page.click_create_project_submit_button()
         self.driver.implicitly_wait(10)
         # WebDriverWait(self.driver, 10).until(EC.url_to_be(S3_BUCKET_DETAILS_URL.format(bucket_name=bucket_name)))
+<<<<<<< HEAD
         return project_name
+=======
+        return project_name
+>>>>>>> origin/dev

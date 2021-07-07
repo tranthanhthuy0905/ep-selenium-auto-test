@@ -3,7 +3,7 @@ import logging
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.base_test import BaseTest
+from Tests_Dev.base_test import BaseTest
 from Configs import S3_BUCKET_API_CLIENT_URL, S3_FILES_API_CLIENT_URL
 from Configs import S3_BUCKET_DETAILS_URL
 from Configs import S3_USER_TOKEN
@@ -14,7 +14,7 @@ from Pages.S3.s3_bucket_details_page import S3BucketDetailsPage
 class S3BaseTest(BaseTest):
     def clear_test_instances(self):
         self.delete_s3_buckets()
-    
+
 
     def delete_s3_buckets(self):
         try:
@@ -44,7 +44,7 @@ class S3BaseTest(BaseTest):
         self.driver.implicitly_wait(10)
         WebDriverWait(self.driver, 10).until(EC.url_to_be(S3_BUCKET_DETAILS_URL.format(bucket_name=bucket_name)))
         return bucket_name
-    
+
     def delete_bucket_files(self,bucket_name):
         #TODO: Refactor
         files_info = self._call_api_get_bucket_files(bucket_name)
@@ -55,7 +55,7 @@ class S3BaseTest(BaseTest):
                     list_filenames.append(item["key"])
         except Exception as e:
             logging.error("Can't get filenames to delete;", str(e))
-        
+
         logging.info(f"List files to delete in bucket {bucket_name}: {list_filenames}")
         if list_filenames:
             for filename in list_filenames:
@@ -92,6 +92,6 @@ class S3BaseTest(BaseTest):
             return self._call_request_get(url, params, S3_USER_TOKEN)
         except Exception as e:
             logging.error("Can't list S3 files;", str(e))
-        
+
 
 

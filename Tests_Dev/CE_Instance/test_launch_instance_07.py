@@ -1,5 +1,5 @@
 '''
-Scenario 7. Launch instance without setting default password	
+Scenario 7. Launch instance without setting default password
 	Given a certain user
 	When user wants to launch an instance
 	Then user selects "Instances => Instances" on left side menu
@@ -54,7 +54,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.CE.ce_base_test import CEBaseTest
+from Tests_Dev.CE.ce_base_test import CEBaseTest
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.launch_instances_wizard_page import *
@@ -84,8 +84,8 @@ class TestInstances(CEBaseTest):
         # Then user can see the wizard form for creating a new instance
         self.assertEqual(self.driver.current_url, self.launch_instances_wizard_page.base_url)
         self.assertTrue(self.launch_instances_wizard_page.check_element_existence(CELaunchInstancesWizardPageLocators.MI_SELECT_BTN))
-        
-    # Step 1: Choose an Machine Image 
+
+    # Step 1: Choose an Machine Image
         self.machine_image_wizard = MachineImageWizardPage(self.driver)
         self.machine_image_wizard.choose_machine_image()
 
@@ -105,7 +105,11 @@ class TestInstances(CEBaseTest):
         self.configure_instance_wizard.create_new_keypair(self.keypair_name, "")
 
         # Without setting default password
+<<<<<<< HEAD:Tests_Dev/CE_Instance/test_launch_instance_07.py
+
+=======
         self.configure_instance_wizard.click_next_btn()
+>>>>>>> origin/dev:Tests/CE_Instance/test_launch_instance_07.py
 
     # Step 4: Add Storage
         volume_name = CEVolumeTestData.VOLUME_NAME
@@ -114,8 +118,13 @@ class TestInstances(CEBaseTest):
 
         # Get Volume ID for delete data after test
         volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
+<<<<<<< HEAD:Tests_Dev/CE_Instance/test_launch_instance_07.py
+        volume_id = volume_row.get_attribute("data-row-key")
+
+=======
         self.volume_id = volume_row.get_attribute("data-row-key")
         
+>>>>>>> origin/dev:Tests/CE_Instance/test_launch_instance_07.py
         # Select volume to attach to instance
         self.add_storage_wizard.select_volume(self.volume_id)
 
@@ -126,21 +135,26 @@ class TestInstances(CEBaseTest):
 
         self.configure_security_wizard.create_new_security_group(CESecurityGroupTestData.SECURITY_GROUP_NAME, CESecurityGroupTestData.DESCRIPTION)
         self.configure_security_wizard.apply_sg_for_instance()
-        
+
         # Get SG ID for delete data after test
+<<<<<<< HEAD:Tests_Dev/CE_Instance/test_launch_instance_07.py
+        sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
+
+=======
         self.sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
     
+>>>>>>> origin/dev:Tests/CE_Instance/test_launch_instance_07.py
         self.configure_security_wizard.click_button(CELaunchInstancesWizardPageLocators.REVIEW_N_LAUNCH_BTN)
 
     # Step 6: Review Instance & Launch
         self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
         # Show generated pass
         self.review_launch_wizard.show_password()
-        
+
         # Copy password
         self.review_launch_wizard.copy_password()
 
-        # Apply pass 
+        # Apply pass
         self.review_launch_wizard.apply_password()
 
         self.review_launch_wizard.launch_instance()
@@ -166,7 +180,11 @@ class TestInstances(CEBaseTest):
         self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.STOPPED_STATUS)
 
 
+<<<<<<< HEAD:Tests_Dev/CE_Instance/test_launch_instance_07.py
+# python3 -m unittest Tests_Dev.CE_Instance.test_launch_instance_02 -v
+=======
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_07 -v
+>>>>>>> origin/dev:Tests/CE_Instance/test_launch_instance_07.py
 
 if __name__ == "__main__":
     unittest.main(

@@ -4,7 +4,7 @@ import logging
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.CE.ce_base_test import CEBaseTest
+from Tests_Dev.CE.ce_base_test import CEBaseTest
 from Pages.CE.security_group_page import SGHomePage, SGCreatePage
 from Configs import CE_SG_API_URL, CE_SG_URL
 from Configs import CE_USER_TOKEN
