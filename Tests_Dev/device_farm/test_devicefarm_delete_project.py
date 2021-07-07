@@ -1,12 +1,20 @@
 import os
 import unittest
+<<<<<<< HEAD
+import time
+=======
 import time 
+>>>>>>> origin/dev
 
 import HtmlTestRunner
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+<<<<<<< HEAD
+from Tests_Dev.device_farm.devicefarm_base_test import DEVICE_FARM_BaseTest
+=======
 from Tests.device_farm.devicefarm_base_test import DEVICE_FARM_BaseTest
+>>>>>>> origin/dev
 from Pages.device_farm.devicefarm_homepage import DEVICE_FARM_HomePage
 from Pages.device_farm.devicefarm_delete_project_page import DEVICE_FARM_DeleteProjectPage
 

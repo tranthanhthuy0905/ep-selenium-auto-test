@@ -4,7 +4,7 @@ import unittest
 
 import HtmlTestRunner
 
-from Tests.S3.s3_base_test import S3BaseTest
+from Tests_Dev.S3.s3_base_test import S3BaseTest
 from Pages.S3.s3_homepage import S3HomePage
 from Configs.TestData.S3TestData import S3TestData
 
