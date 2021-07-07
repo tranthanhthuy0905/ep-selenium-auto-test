@@ -66,7 +66,7 @@ from Locators.CE import *
 import time
 
 
-class TestInstances(CEBaseTest):
+class TestInstances05(CEBaseTest):
     def test_create_vm_with_existing_keypair(self):
         """
             TEST CASE: Launch instance with existing keypair    
@@ -84,7 +84,6 @@ class TestInstances(CEBaseTest):
         self.keypair_page.click_button(CEKeypairLocators.OK_BTN)
 
         # check if keypair is created successfully
-        print(self.driver.find_element(*CEKeypairLocators.SUCCESSFULLY_MESSAGE).text)
         WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(CEKeypairLocators.SUCCESSFULLY_MESSAGE, "Created keypair successfully."))
         self.keypair_page.click_button(CEKeypairLocators.CLOSE_BTN)
 
@@ -154,27 +153,19 @@ class TestInstances(CEBaseTest):
 
     # Step 6: Review Instance & Launch
         self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
-        self.review_launch_wizard.launch_instance()
+        self.review_launch_wizard.click_launch_instance()
+
+        self.instances_page.check_if_instance_launched_successfully()
 
         # Get instance id for clear data after test
-        WebDriverWait(self.driver, 10).until(EC.url_to_be(self.instances_page.base_url))
-        instance_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_INSTANCE_NAME(instance_name))
-        self.instance_id = instance_row.get_attribute("data-row-key")
-
-        self.instances_page.check_element_existence(CEInstancePageLocators.ANNOUNCEMENT)
-        self.instances_page.check_element_existence(CEInstancePageLocators.LAUNCH_VM_SUCCESS_MESSAGE)
+        self.instance_id = self.instances_page.get_instance_id(instance_name)
 
         # Check if the new instance state is Running
         self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.RUNNING_STATUS)
         print("Instance is created successfully!")
 
         # Test completed, stop instance for cleaning test data
-        self.instances_page.select_instance(self.instance_id)
-        self.instances_page.change_instance_states(CEInstancePageLocators.STOP_INSTANCE_BTN, CEInstancePageLocators.STOP_CONFIRM_BTN)
-        print("Instance is stopping")
-
-        # Check if the new instance state is Stopped
-        self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.STOPPED_STATUS)
+        self.instances_page.stop_instance(self.instance_id)
 
         
 

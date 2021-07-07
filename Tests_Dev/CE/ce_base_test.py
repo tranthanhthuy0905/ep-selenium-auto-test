@@ -1,4 +1,4 @@
-from Tests.base_test import BaseTest
+from Tests_Dev.base_test import BaseTest
 from Configs import *
 
 class CEBaseTest(BaseTest):
@@ -6,19 +6,25 @@ class CEBaseTest(BaseTest):
         if hasattr(self, 'volume_id'):
             self.delete_CE_volume_by_id(self.volume_id)
             print("Volume has been deleted")
+
         if hasattr(self, 'instance_id'):
-            self.remove_CE_sg_in_instance(self.instance_id)
+            if hasattr(self, 'sg_id') or hasattr(self, 'list_sg_id'):
+                self.remove_CE_sg_in_instance(self.instance_id)
             self.delete_CE_instance_by_id(self.instance_id)
             print("Instance has been deleted")
+
         if hasattr(self, 'keypair_name'):
             self.delete_CE_keypair_by_name(self.keypair_name)
             print("Keypair has been deleted")
+
         if hasattr(self, 'sg_id'):
             self.delete_CE_sg_by_id(self.sg_id)
             print("Security group has been deleted")
+
         if hasattr(self, 'snapshot_id'):
             self.delete_CE_snapshot_by_id(self.snapshot_id)
             print("Snapshot volume has been deleted")
+            
         if hasattr(self, 'list_sg_id'):
             for sg_id in self.list_sg_id:
                 self.delete_CE_sg_by_id(sg_id)
@@ -89,7 +95,7 @@ class CEBaseTest(BaseTest):
             url = CE_VOLUME_API_CLIENT_URL + "destroy"
             params = {
                 "id": volume_id,
-                "expunge" : True
+                "expunge" : 'true'
             }
             self.detach_CE_volume_by_id(volume_id)
             self._call_request_delete(url, params, CE_USER_TOKEN)

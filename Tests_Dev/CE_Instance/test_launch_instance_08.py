@@ -48,7 +48,7 @@ from Locators.CE import *
 import time
 
 
-class TestInstances(CEBaseTest):
+class TestInstances08(CEBaseTest):
     def test_create_vm_with_password_then_launch(self):
         """
             TEST CASE: Launch instance set password then click on "Preview and Launch"    
@@ -92,15 +92,12 @@ class TestInstances(CEBaseTest):
 
     # Step 6: Review Instance & Launch
         self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
-        self.review_launch_wizard.launch_instance()
+        self.review_launch_wizard.click_launch_instance()
+
+        self.instances_page.check_if_instance_launched_successfully()
 
         # Get instance id for clear data after test
-        # WebDriverWait(self.driver, 10).until(EC.url_to_be(self.instances_page.base_url))
-        instance_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_INSTANCE_NAME(self.instance_name))
-        self.instance_id = instance_row.get_attribute("data-row-key")
-
-        self.instances_page.check_element_existence(CEInstancePageLocators.ANNOUNCEMENT)
-        self.instances_page.check_element_existence(CEInstancePageLocators.LAUNCH_VM_SUCCESS_MESSAGE)
+        self.instance_id = self.instances_page.get_instance_id(self.instance_name)
 
         # Check if the new instance state is Running
         self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.RUNNING_STATUS)

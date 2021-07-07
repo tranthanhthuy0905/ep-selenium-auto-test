@@ -63,7 +63,7 @@ from Locators.CE import *
 import time
 
 
-class TestInstances(CEBaseTest):
+class TestInstances03(CEBaseTest):
     def test_create_vm_with_empty_name(self):
         """
             TEST CASE: Launch instance with empty name, Instance should be created fail 
@@ -135,10 +135,10 @@ class TestInstances(CEBaseTest):
 
     # Step 6: Review Instance & Launch
         self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
-        self.review_launch_wizard.launch_instance()
+        self.review_launch_wizard.click_launch_instance()
 
         # Check if failed to launch instance
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(CELaunchInstancesWizardPageLocators.FAILED_TO_LAUNCH_NOTI))
+        self.instances_page.check_if_instance_launched_failed()
         
 
         

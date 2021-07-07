@@ -60,7 +60,7 @@ class CELaunchInstancesWizardPage(BasePage):
 
     def edit_password(self):
         self\
-            .click_button(self.locator.EDIT_PASSWORD)
+            .wait_and_click_button(self.locator.EDIT_PASSWORD)
 
     def input_password(self, value1, value2):
         self \
@@ -94,7 +94,6 @@ class ConfigureInstanceWizardPage(CELaunchInstancesWizardPage):
         super().__init__(driver)
 
     def fill_instance_name(self, instance_name):
-        print(instance_name)
         self.fill_form(instance_name, self.locator.INSTANCE_NAME_TEXTBOX)
         return self
 
@@ -227,19 +226,30 @@ class ReviewLaunchWizardPage(CELaunchInstancesWizardPage):
         self.locator = CELaunchInstancesWizardPageLocators
         super().__init__(driver)
 
-    def show_password(self):
+    def click_show_password(self):
         self\
             .click_button(self.locator.SHOW_PASSWORD_BTN)
         return self
 
-    def random_password(self):
+    def click_random_password(self):
         self\
             .click_button(self.locator.RANDOM_PASSWORD_BTN)
         return self
 
-    def apply_password(self):
+    def click_apply_password(self):
         self\
-            .click_button(self.locator.APPLY_PASSWORD_BTN)
+            .wait_and_click_button(self.locator.APPLY_PASSWORD_BTN)
+        return self
+
+    def apply_default_password(self):
+        # Show generated pass
+        self.click_show_password()
+        # Random password
+        self.click_random_password()
+        # Copy password
+        self.copy_password()
+        # Apply pass
+        self.click_apply_password()
         return self
 
     def copy_password(self):
@@ -247,7 +257,7 @@ class ReviewLaunchWizardPage(CELaunchInstancesWizardPage):
         self.wait_and_click_button(self.locator.CLOSE_MESSAGE_BTN)
         return self
 
-    def launch_instance(self):
+    def click_launch_instance(self):
         self\
             .click_button(self.locator.LAUNCH_BTN)
         return self

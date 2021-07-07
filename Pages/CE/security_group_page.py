@@ -25,7 +25,7 @@ class SGHomePage(BasePage):
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable(CESecurityGroupLocators.CREATE_BUTTON)
         )
-        self.driver.find_element(*CESecurityGroupLocators.CREATE_BUTTON).click()
+        self.wait_and_click_button(CESecurityGroupLocators.CREATE_BUTTON)
 
 
 class SGCreatePage(BasePage):
