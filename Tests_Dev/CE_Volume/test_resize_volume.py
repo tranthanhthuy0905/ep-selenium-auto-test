@@ -9,6 +9,7 @@ import time
 import unittest
 
 import HtmlTestRunner
+from selenium.webdriver.common.by import By
 
 from Configs.TestData.CEVolumeTestData import CEVolumeTestData
 from Locators.CE import CEVolumePageLocators, CECreateVolumePageLocators
@@ -56,46 +57,71 @@ class Test_custom_volume(VolumeBaseTest):
         # When user clicks on "OK" button
         self.volume_page.click_button(CEVolumePageLocators.OK_BTN)
 
-        time.sleep(10)
+        time.sleep(5)
 
+        self.volume_page.click_button(
+            (By.XPATH, '//span[././input/@type="radio" and ancestor::tr/@data-row-key="' + self.volume_id + '"]'))
         # If a VM is attached to volume
-        # if attach_vm:
-        #     # When the volume is attached with an instance => Only upsizing the volume without Shrinking it is workable
-        #     if enter_value > initial_size and shrink_ok == "without":
-        #         self.assertTrue(
-        #             self.volume_page.check_size_gb() != initial_size,
-        #             "Should succeed to upsize volume " + shrink_ok + " clicking on Shrink OK when it is attached with a" + self.instance_state + " VM"
-        #         )
-        #     elif enter_value == initial_size:
-        #         self.assertTrue(
-        #             self.volume_page.check_size_gb() == initial_size,
-        #             "Should have no change in volume size of the one attached with a" + self.instance_state + " VM when entering the same volume " + shrink_ok + " clicking on Shrink OK"
-        #         )
-        #     else:
-        #         self.assertTrue(
-        #             self.volume_page.check_size_gb() == initial_size,
-        #             "Should fail to upsize volume " + shrink_ok + " clicking on Shrink OK when it is attached with a" + self.instance_state + " VM"
-        #         )
-        #
-        # # If no VM is attached to volume
-        # else:
-        #     # Scenario 8 + 10: Downsize the volume without Shrink OK => Should not resize successfully
-        #     if enter_value < initial_size and shrink_ok == "without":
-        #         self.assertTrue(
-        #             self.volume_page.check_size_gb() == initial_size,
-        #             "Should fail to downsize volume not attached with any VM without shrinking it"
-        #         )
-        #     # Other scenarios should be successful by all means
-        #     else:
-        #         self.assertTrue(
-        #             self.volume_page.check_size_gb() != initial_size,
-        #             "Should successfully resize volume not attached with any VM " + shrink_ok + " Shrink OK"
-        #         )
-        # time.sleep(2)
-        # # TODO: Delete Volume and Instance
-        # self.delete_CE_volume_by_id(self.volume_id)
-        # if attach_vm:
-        #     self.delete_CE_instance_by_id(self.instance_id)
+        print("Size_GB is: ", self.volume_page.check_size_gb())
+        print("Initial size is: ", initial_size)
+        if attach_vm:
+            # When the volume is attached with an instance => Only upsizing the volume without Shrinking it is workable
+            if enter_value > initial_size:
+                if shrink_ok == "without":
+                    self.assertTrue(
+                        self.volume_page.check_size_gb() != initial_size,
+                        "Should SUCCEED to upsize volume without clicking on Shrink OK when it is attached with a " + self.instance_state + " VM"
+                    )
+                else:
+                    self.assertTrue(
+                        self.volume_page.check_size_gb() == initial_size,
+                        "Should FAIL to upsize volume with clicking on Shrink OK when it is attached with a " + self.instance_state + " VM"
+                    )
+            elif enter_value == initial_size:
+                self.assertTrue(
+                    self.volume_page.check_size_gb() == initial_size,
+                    "Should have NO change in volume size of the one attached with a " + self.instance_state + " VM when entering the same volume " + shrink_ok + " clicking on Shrink OK"
+                )
+            else:
+                self.assertTrue(
+                    self.volume_page.check_size_gb() == initial_size,
+                    "Should FAIL to downsize volume " + shrink_ok + " clicking on Shrink OK when it is attached with a " + self.instance_state + " VM"
+                )
+
+        # If no VM is attached to volume
+        else:
+            if enter_value > initial_size:
+                if shrink_ok == "without":
+                    self.assertTrue(
+                        self.volume_page.check_size_gb() != initial_size,
+                        "Should SUCCEED to upsize volume NOT attached with a " + self.instance_state + " VM without clicking on Shrink OK"
+                    )
+                else:
+                    self.assertTrue(
+                        self.volume_page.check_size_gb() == initial_size,
+                        "Should FAIL to upsize volume NOT attached with a " + self.instance_state + " VM with clicking on Shrink OK"
+                    )
+            elif enter_value == initial_size:
+                self.assertTrue(
+                    self.volume_page.check_size_gb() == initial_size,
+                    "Should have NO change in volume size of the one NOT attached with a VM, entering the same volume " + shrink_ok + " clicking on Shrink OK"
+                )
+            else:
+                if shrink_ok == "with":
+                    self.assertTrue(
+                        self.volume_page.check_size_gb() != initial_size,
+                        "Should SUCCEED to downsize volume NOT attached with a " + self.instance_state + " VM with clicking on Shrink OK"
+                    )
+                else:
+                    self.assertTrue(
+                        self.volume_page.check_size_gb() == initial_size,
+                        "Should FAIL to downsize volume NOT attached with a " + self.instance_state + " VM without clicking on Shrink OK"
+                    )
+        time.sleep(2)
+        # TODO: Delete Volume and Instance
+        self.delete_CE_volume_by_id(self.volume_id)
+        if attach_vm:
+            self.delete_CE_instance_by_id(self.instance_id)
 
         self.tearDown()
 
