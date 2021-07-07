@@ -11,16 +11,15 @@ class CEPageLocators(object):
     INSTANCES_MENU_BTN = (By.LINK_TEXT, 'Instances')
     ELASTIC_BLOCK_STORE_MENU_BTN = (By.XPATH, '/html/body/div/section/div[2]/aside/div/div[2]/div[1]/ul/li[6]/div[1]')
     VOLUMES_SUBMENU_BTN = (By.LINK_TEXT, 'Volumes')
-    SNAPSHOTS_SUBMENU_BTN = (By.LINK_TEXT, 'Snapshots')
     KEYPAIR_SUBMENU_BTN = (By.LINK_TEXT, 'Key Pairs')
-
-
+    
+    
 
 
 class CEInstancePageLocators(object):
     LAUNCH_INSTANCES_BTN = (By.LINK_TEXT, 'Launch Instance')
     ANNOUNCEMENT = (By.CSS_SELECTOR, 'div > div > div > div.ant-notification-notice-message')
-    RADIO_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[1]/label/span/input')
+    RADIO_BTN = (By.CSS_SELECTOR, '#root > section > section > main > div > div > div > div > div > div > div > div:nth-child(1) > div > div > div.ant-card-body > div.ant-spin-nested-loading > div > div > div > div > div > div > div.ant-table-body > table > tbody > tr.ant-table-row.ant-table-row-level-0 > td.ant-table-cell.ant-table-selection-column > label > span > input')
     INSTANCE_STATE_BTN = (By.XPATH, "//button[contains(.,'Instance state ')]")
     STOP_INSTANCE_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(1)')
     START_INSTANCE_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(2)')
@@ -44,8 +43,6 @@ class CEInstancePageLocators(object):
     DROP_DOWN_LIST_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div[3]/div[2]/div/div[2]/div/div/div[1]')
     COPY = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div[3]/div[2]/div/div[2]/div/div/div[2]/div/div/div[2]/div/div/div[2]/div/span/span')
     REFRESH_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[1]')
-
-    INSTANCE_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div[3]/div[2]/div/div[2]/div/div[4]/div/div/div[2]')
     INSTANCE_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[4]/div/span")
     INSTANCE_RADIO_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td/label/span")
     STOP_STATUS = "Stopped"
@@ -102,8 +99,9 @@ class CELaunchInstancesWizardPageLocators(object):
     SHOW_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/span/span")
     APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
     FAILED_TO_LAUNCH_NOTI = (By.XPATH, "//div[contains(.,'Failed to launch instance.')]")
-
-
+    EXISTING_SG_RADIO = lambda _sg_id: (By.NAME, f'{_sg_id}')
+    LIST_SG_PAGE = (By.XPATH, "//div[@class='ant-select-selector']/span[@class='ant-select-selection-item']")
+    
 
 
 
@@ -114,52 +112,20 @@ class CELaunchInstancesWizardPageLocators(object):
     EDIT_PASSWORD = (By.XPATH, "//button[contains(.,'<< Edit password')]")
     TWO_PASSWORD_NOT_MATCH = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[3]/form/div[2]/div[2]/div/div/div[2]/div')
 
-class CEVolumePageLocators(object):
+class CEVolumnePageLocators(object):
     CHOOSE_VOLUME_RADIO = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/label/span/input')
-    VOLUME_ACTIONS_BTN = (By.XPATH, '//button[contains(.,"Actions ")]')
+    VOLUME_ACTIONS_BTN = (By.XPATH, '/html/body/div[1]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[4]')
     EXPUNGE_VOLUME_BTN = (By.CSS_SELECTOR, 'li.ant-dropdown-menu-item.ant-dropdown-menu-item-only-child:nth-child(4)')
     EXPUNGE_VOLUME_CONFIRM_BTN = (By.XPATH, "//span[text()='Expunge']")
     CREATE_VOLUME_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Expunge volume is successful!']")
     VOLUME_NAME_IN_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[2]")
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,' Create Volume')]")
-    #VOLUME_LIST = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]')
-
-    # Resize Volume Elements
-    RESIZE_VOLUME_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[2]')
-    SIZE_GB = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[6]')
-    RESIZE_VOLUME_BOX = (By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]')
-    # OK_BTN = (By.XPATH, "//button/span[text()='OK']")
-    OK_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[3]/button[2]")
-    SHRINK_OK_BTN = (By.ID, "form_resize_volume_shrink")
-    DISK_OFFERING = (By.XPATH, '//*[@id="form_resize_volume"]/div[1]/div[2]/div/div/div')
-    DEFAULT_100G = (By.XPATH, "//div[text()='Default (100G)']")
-    OPTION_200G = (By.XPATH, "//div[text()='200G']")
-    OPTION_500G = (By.XPATH, "//div[text()='500G']")
-    SIZE_FORM = (By.XPATH, "//*[@id='form_resize_volume_size']")
-
-    # Attach volume
-    ATTACH_VOLUME_BTN = (By.XPATH, "//button[following-sibling::button/div/text()='Actions ' and ./div/span/@class='anticon anticon-link']")
-    SELECT_AN_INSTANCE = (By.ID, "form_attach_volume_vm_id")
-    ATTACH_VOLUME_BOX = (By.XPATH, "//div[@class='ant-modal-content' and contains(.,'Attach Volume')]")
-    ATTACH_OK_BUTTON = (By.XPATH, "/html/body/div[4]/div/div[2]/div/div[2]/div[3]/button[2]")
-    # Detach volume
-    DETACH_VOLUME_BTN = (By.XPATH, "//span[text()='Detach volume']")
-    DETACH_CONFIRM_BTN = (By.XPATH, "//button//span[text()='Detach']")
-    # Delete volume
-    DELETE_VOLUME_BTN = (By.XPATH, "//span[text()='Delete volume']")
-    DELETE_CONFIRM_BUTTON = (By.XPATH, "//button//span[text()='Delete']")
-
-    # Volume detail
-    VM_NAME = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[4]/div/div/div[2]')
-    VM_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[8]/div/div/div[2]')
-    VM_ID = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[2]/div')
     VOLUMES_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div")
     CLOSE_MESSAGE_BTN = (By.CLASS_NAME, "ant-notification-close-x")
     VOLUME_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[3]/div/span/span[2]")
 
 
-
-class CECreateVolumePageLocators(object):
+class CECreateVolumnePageLocators(object):
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,'Create Volume')]")
     VOLUME_TYPE_LIST = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[2]/div/div/div")
     CUSTOM_DISK = (By.XPATH, "//div[text()='Custom Disk']")
@@ -171,6 +137,8 @@ class CECreateVolumePageLocators(object):
 class CESecurityGroupLocators:
 
     CREATE_SEC_GROUP_TEXTBOX_NAME_CSS = (By.CSS_SELECTOR, "input.ant-input")
+    PREVIEW_SEC_GROUP_NAME = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[2]/div/div[2]/span")
+    SEC_GROUP_ID = (By.XPATH, "/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div/div[1]/div[2]/div/div[1]/div[2]/div")
 
     CREATE_BUTTON = (By.XPATH, '//span[text()=" Create Security Group"]')
     SUBMIT_CREATE_BUTTON_X_PATH = (By.XPATH, '//span[text()="Create Security Group"]')
@@ -183,7 +151,7 @@ class CESecurityGroupLocators:
     Weird note: ADD_INGRESS_BUTTON and ADD_EGRESS_BUTTON has different structure: preceding::div/text() vs div/span/text()
     ADD_EGRESS_BUTTON has extra space and the end of text: 'Egress Rule '
     '''
-    ADD_INGRESS_BUTTON = (By.XPATH, '//*[@id="addRule"]/div/div[5]/div/div[2]/div/div/button')
+    ADD_INGRESS_BUTTON = (By.XPATH, '//*[@id="addRule"]/div/div[5]/div/div[2]/div/div/button') 
     # ADD_INGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
     #                                 "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
     #                                 "and preceding::div/text()='Ingress Rule')]][1]")
@@ -233,24 +201,5 @@ class CEKeypairLocators:
     FINGERPRINT_BY_KEYPAIR_NAME = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[@class='ant-table-cell'][2]")
     SUCCESSFULLY_MESSAGE = (By.XPATH, "//p[contains(.,'Created keypair successfully.')]")
     CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
-
-
-
-class CESnapshotLocators(object):
-    # Create Snapshot
-    CREATE_SNAPSHOT_BTN = (By.XPATH, "//span[text()=' Create Snapshot']")
-    SNAPSHOT_NAME_FORM = (By.XPATH, "//input[preceding-sibling::div/text()='Snapshot name']")
-    SELECT_VOLUME = (By.XPATH, "//div[preceding-sibling::div/text()='Volume']")
-    CREATE_SNAPSHOT_CONFIRM = (By.XPATH, "//button[contains(.,'Create Snapshot')]")
-
-    # Actions button
-    ACTIONS_BTN = (By.XPATH, "//button[contains(.,'Actions ')]")
-
-    # Delete Snapshot
-    DELETE_SNAPSHOT = (By.XPATH, "//span[text()='Delete snapshot']")
-    DELETE_CONFIRM = (By.XPATH, "//button[contains(.,'Delete')]")
-    # Revert to snapshot
-    REVERT_TO_SNAPSHOT = (By.XPATH, "//span[text()='Revert to snapshot']")
-
-    # Get Snapshot ID
-    PARRENT_BY_SNAPSHOT_NAME = lambda _snapshot_name: (By.XPATH, f"//td[contains(.,'{_snapshot_name}')]/parent::*")
+    
+    

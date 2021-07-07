@@ -49,9 +49,9 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_with_password_then_launch(self):
         """
-            TEST CASE: Instance should be created successfully with full flow
+            TEST CASE: Launch instance set password then click on "Preview and Launch"    
         """
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_instances_page()

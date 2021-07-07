@@ -67,9 +67,9 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_without_setting_password(self):
         """
-            TEST CASE: Instance should be created successfully without setting default password
+            TEST CASE: Launch instance without setting default password	
         """
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_instances_page()
