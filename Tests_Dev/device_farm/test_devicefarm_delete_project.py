@@ -17,7 +17,9 @@ class Test_DEVICEFARM_Delete_Project(DEVICE_FARM_BaseTest):
         """
             TEST CASE: DF Project should be deleted successfully
         """
+        self._call_api_create_project("test-selenium-api")
         self.df_homepage = DEVICE_FARM_HomePage(self.driver)
+        
         self.df_delete_project_page = DEVICE_FARM_DeleteProjectPage(self.driver)
         _project_name = self.df_delete_project_page.click_delete_project_submit_button()
         print('PROJECT NAME', _project_name)
