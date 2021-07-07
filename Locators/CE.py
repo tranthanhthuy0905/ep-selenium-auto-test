@@ -241,6 +241,8 @@ class CEKeypairLocators:
     CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
     KEYPAIR_ROW = lambda _name: (By.XPATH, f"//td[@class='ant-table-cell' and text()='{_name}']")
 
+    INVALID_KEY_ALERT_DIALOG = (By.XPATH, "//div[@class='ant-modal-confirm-body' and ./span/text()='Failed' and ./div/text()='Public key is invalid']")
+
 
 
 class CESnapshotLocators(object):

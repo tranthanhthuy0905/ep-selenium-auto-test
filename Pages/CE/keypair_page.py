@@ -36,3 +36,8 @@ class CEKeypairPage(BasePage):
         return self.check_element_existence(
             CEKeypairLocators.KEYPAIR_ROW(kp_name)
         )
+
+    def check_alert_invalid_key_existence(self):
+        return self.check_element_existence(
+            CEKeypairLocators.INVALID_KEY_ALERT_DIALOG
+        )
