@@ -31,36 +31,36 @@ from Tests_Dev.CE_Volume.volume_base_test import VolumeBaseTest
 
 class Test_attach_volume(VolumeBaseTest):
 
-    def test_attach_running_vm_to_volume(self):
-        '''
-            TEST CASE: Attach a Running vm to a volume
-        '''
-        # Flow of work: Create an instance
-        #               Create a volume
-        #               Attach volume with the above instance
-        self.choose_volume(CECreateVolumePageLocators.CUSTOM_DISK,
-                           False, CEVolumeTestData.SIZE2, True)
-        # Delete instance in the end of test
-        self.delete_CE_instance_by_id(self.instance_id)
-        # Delete volume in the end of test
-        self.delete_CE_volume_by_id(self.volume_id)
-        time.sleep(2)
-
-    # def test_attach_stopped_vm_to_volume(self):
+    # def test_attach_running_vm_to_volume(self):
     #     '''
-    #         TEST CASE: Attach a Stopped vm to a volume
+    #         TEST CASE: Attach a Running vm to a volume
     #     '''
-    #
-    #     # Flow of work: Create an instance + Stop the instance
+    #     # Flow of work: Create an instance
     #     #               Create a volume
     #     #               Attach volume with the above instance
     #     self.choose_volume(CECreateVolumePageLocators.CUSTOM_DISK,
-    #                        True, CEVolumeTestData.SIZE2, True)
+    #                        False, CEVolumeTestData.SIZE2, True)
     #     # Delete instance in the end of test
     #     self.delete_CE_instance_by_id(self.instance_id)
     #     # Delete volume in the end of test
     #     self.delete_CE_volume_by_id(self.volume_id)
     #     time.sleep(2)
+
+    def test_attach_stopped_vm_to_volume(self):
+        '''
+            TEST CASE: Attach a Stopped vm to a volume
+        '''
+
+        # Flow of work: Create an instance + Stop the instance
+        #               Create a volume
+        #               Attach volume with the above instance
+        self.choose_volume(CECreateVolumePageLocators.CUSTOM_DISK,
+                           True, CEVolumeTestData.SIZE2, True)
+        # Delete instance in the end of test
+        self.delete_CE_instance_by_id(self.instance_id)
+        # Delete volume in the end of test
+        self.delete_CE_volume_by_id(self.volume_id)
+        time.sleep(2)
 
 
     # def test_attach_vm_to_attached_volume(self):
