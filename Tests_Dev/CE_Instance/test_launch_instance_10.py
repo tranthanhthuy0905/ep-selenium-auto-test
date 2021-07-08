@@ -45,7 +45,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.CE.ce_base_test import CEBaseTest
+from Tests_Dev.CE.ce_base_test import CEBaseTest
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.volume_page import CEVolumePage
@@ -59,7 +59,7 @@ from Locators.CE import *
 import time
 
 
-class TestInstances(CEBaseTest):
+class TestInstances10(CEBaseTest):
     def test_create_vm_with_existing_volume_then_launch(self):
         """
             TEST CASE: Launch instance with existing volume then click on "Preview and Launch"
@@ -79,7 +79,7 @@ class TestInstances(CEBaseTest):
         self.create_volume_page = CECreateVolumePage(self.driver)
         self.assertEqual(self.driver.current_url, self.create_volume_page.base_url)
         # And user can fill in Volume name and select volume type
-        self.volume_name = CEVolumeTestData.VOLUME_NAME
+        self.volume_name = CEVolumeTestData.gen_volume_name()
         self.create_volume_page.fill_volume_info(self.volume_name, volume_size=CEVolumeTestData.SIZE)
 
         # When user clicks on "Create Volume" button
@@ -117,11 +117,11 @@ class TestInstances(CEBaseTest):
     # Step 3: Configure Instance Details
         self.configure_instance_wizard = ConfigureInstanceWizardPage(self.driver)
         # Set instance name
-        instance_name = CEInstanceTestData.INSTANCE_NAME
+        instance_name = CEInstanceTestData.gen_instance_name()
         self.configure_instance_wizard.fill_instance_name(instance_name)
 
         # Create keypair
-        self.keypair_name = CEKeypairTestData.KEYPAIR_NAME
+        self.keypair_name = CEKeypairTestData.gen_new_keypair_name()
         self.configure_instance_wizard.create_new_keypair(self.keypair_name, "")
 
         # Set default password
@@ -141,15 +141,12 @@ class TestInstances(CEBaseTest):
 
     # Step 6: Review Instance & Launch
         self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
-        self.review_launch_wizard.launch_instance()
+        self.review_launch_wizard.click_launch_instance()
+
+        self.instances_page.check_if_instance_launched_successfully()
 
         # Get instance id for clear data after test
-        WebDriverWait(self.driver, 10).until(EC.url_to_be(self.instances_page.base_url))
-        instance_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_INSTANCE_NAME(instance_name))
-        self.instance_id = instance_row.get_attribute("data-row-key")
-
-        self.instances_page.check_element_existence(CEInstancePageLocators.ANNOUNCEMENT)
-        self.instances_page.check_element_existence(CEInstancePageLocators.LAUNCH_VM_SUCCESS_MESSAGE)
+        self.instance_id = self.instances_page.get_instance_id(instance_name)
 
         # Check if the new instance state is Running
         self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.RUNNING_STATUS)

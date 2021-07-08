@@ -43,4 +43,14 @@ class CECreateVolumePage(BasePage):
         self.click_button(self.locator.CREATE_VOLUME_BTN)
         return self
 
+    def fill_volume_info(self, volume_name, volume_size):
+        self\
+            .fill_form(volume_name, self.locator.VOLUME_NAME_FORM) \
+            .click_button(self.locator.VOLUME_TYPE_LIST) \
+            .choose_volume_type(self.locator.VOLUME_TYPE_LIST, self.locator.CUSTOM_DISK) \
+            .fill_form(volume_size, self.locator.VOLUME_SIZE_FORM)
+        return self
+
+
+
 

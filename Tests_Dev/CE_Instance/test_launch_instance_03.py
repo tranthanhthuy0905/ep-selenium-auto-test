@@ -51,7 +51,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.CE.ce_base_test import CEBaseTest
+from Tests_Dev.CE.ce_base_test import CEBaseTest
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.launch_instances_wizard_page import *
@@ -63,7 +63,7 @@ from Locators.CE import *
 import time
 
 
-class TestInstances(CEBaseTest):
+class TestInstances03(CEBaseTest):
     def test_create_vm_with_empty_name(self):
         """
             TEST CASE: Launch instance with empty name, Instance should be created fail 
@@ -98,10 +98,8 @@ class TestInstances(CEBaseTest):
         self.driver.find_element(*CELaunchInstancesWizardPageLocators.INSTANCE_NAME_TEXTBOX).send_keys(Keys.DELETE)
         
 
-        time.sleep(5)
-
         # Create keypair
-        self.keypair_name = CEKeypairTestData.KEYPAIR_NAME
+        self.keypair_name = CEKeypairTestData.gen_new_keypair_name()
         self.configure_instance_wizard.create_new_keypair(self.keypair_name, "")
 
         # Set default password
@@ -110,13 +108,12 @@ class TestInstances(CEBaseTest):
         self.configure_instance_wizard.click_next_btn()
 
     # Step 4: Add Storage
-        volume_name = CEVolumeTestData.VOLUME_NAME
+        volume_name = CEVolumeTestData.gen_volume_name()
         self.add_storage_wizard = AddStorageWizardPage(self.driver)
-        self.add_storage_wizard.add_new_volume(CEVolumeTestData.VOLUME_NAME, CEVolumeTestData.SIZE)
+        self.add_storage_wizard.add_new_volume(volume_name, CEVolumeTestData.SIZE)
 
         # Get Volume ID for delete data after test
-        volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
-        self.volume_id = volume_row.get_attribute("data-row-key")
+        self.volume_id = self.add_storage_wizard.get_volume_id(volume_name)
         
         # Select volume to attach to instance
         self.add_storage_wizard.select_volume(self.volume_id)
@@ -125,7 +122,7 @@ class TestInstances(CEBaseTest):
 
     # Step 5: Configure Security Group
         self.configure_security_wizard = SecurityGroupWizardPage(self.driver)
-        self.configure_security_wizard.create_new_security_group(CESecurityGroupTestData.SECURITY_GROUP_NAME, CESecurityGroupTestData.DESCRIPTION)
+        self.configure_security_wizard.create_new_security_group(CESecurityGroupTestData.gen_SG_name(), CESecurityGroupTestData.DESCRIPTION)
         self.configure_security_wizard.apply_sg_for_instance()
         
         # Get SG ID for delete data after test
@@ -135,10 +132,10 @@ class TestInstances(CEBaseTest):
 
     # Step 6: Review Instance & Launch
         self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
-        self.review_launch_wizard.launch_instance()
+        self.review_launch_wizard.click_launch_instance()
 
         # Check if failed to launch instance
-        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(CELaunchInstancesWizardPageLocators.FAILED_TO_LAUNCH_NOTI))
+        self.instances_page.check_if_instance_launched_failed()
         
 
         

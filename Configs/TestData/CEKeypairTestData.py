@@ -1,5 +1,6 @@
 from Configs.TestData.BaseTestData import BaseTestData
 import random
+import time
 
 class CEKeypairTestData(BaseTestData):
     KEYPAIR_NAME = "autotest-keypair-" + str(random.randint(100000,999999))
