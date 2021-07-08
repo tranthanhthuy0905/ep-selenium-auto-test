@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.support import expected_conditions as EC
 from Locators.CE import CECreateVolumePageLocators
 from selenium.common.exceptions import TimeoutException
@@ -37,6 +39,7 @@ class CECreateVolumePage(BasePage):
         if disk_option == self.locator.CUSTOM_DISK:
             self.fill_form(volume_size, CECreateVolumePageLocators.VOLUME_SIZE_FORM)
 
+        time.sleep(2)
         self.click_button(self.locator.CREATE_VOLUME_BTN)
         return self
 

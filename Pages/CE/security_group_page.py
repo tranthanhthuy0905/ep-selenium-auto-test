@@ -7,16 +7,17 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from Pages.base_page import BasePage
-from Configs import CE_SG_URL, CE_SG_CREATE_URL, CE_SG_DETAILS_PAGE_URL
+from Configs import CE_SG_URL, CE_SG_CREATE_URL, CE_SG_DETAILS_PAGE_URL, CE_SG_KEYPAIR_HOMEPAGE_URL
 from Configs import CE_USER_TOKEN
 from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 
-from Locators.CE import CESecurityGroupLocators
+from Locators.CE import CESecurityGroupLocators, CEKeypairLocators
 
 
 class SGHomePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver, CE_SG_URL)
+        logging.info(f"Authenticating url: {CE_SG_URL}, Token: {CE_USER_TOKEN[:10]}....{CE_USER_TOKEN[-10:]}")
         self.driver.get(CE_SG_URL)
         self.authenticate(CE_USER_TOKEN)
         self.driver.get(CE_SG_URL)
@@ -67,16 +68,9 @@ class SGDetailsPage(BasePage):
         end_port_text_box.send_keys(end_port)
         logging.info(f"Filled into textboxes ports {start_port} and {end_port}.")
 
-    def fill_in_ingress_rule_info(self, start_port, end_port):
-        start_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_START_PORT_TEXTBOX)
-        end_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_END_PORT_TEXTBOX)
-        start_port_text_box.send_keys(start_port)
-        end_port_text_box.send_keys(end_port)
-        logging.info(f"Filled into textboxes ports {start_port} and {end_port}.")
-
     def fill_in_icmp_info(self, icmp_type, icmp_code):
-        start_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_START_PORT_TEXTBOX)
-        end_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_END_PORT_TEXTBOX)
+        start_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_IMCP_TYPE_TEXTBOX)
+        end_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_IMCP_CODE_TEXTBOX)
         start_port_text_box.send_keys(icmp_type)
         end_port_text_box.send_keys(icmp_code)
         logging.info(f"Filled into textboxes ICMP {icmp_type} and {icmp_code}.")
@@ -133,5 +127,4 @@ class SGDetailsPage(BasePage):
         self.find_element(*CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON).click()
         logging.info(f"Delete confirm button clicked. "
                      f"Element: {CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON}")
-
-
+                     

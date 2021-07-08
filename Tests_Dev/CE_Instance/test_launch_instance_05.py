@@ -79,7 +79,7 @@ class TestInstances05(CEBaseTest):
         self.keypair_page = CEKeypairPage(self.driver)
         self.assertEqual(self.driver.current_url, self.keypair_page.base_url)
         self.keypair_page.click_button(CEKeypairLocators.CREATE_KEYPAIR_BTN)
-        self.keypair_name = CEKeypairTestData.gen_keypair_name()
+        self.keypair_name = CEKeypairTestData.gen_new_keypair_name()
         self.keypair_page.fill_keypair_info(self.keypair_name, "")
         self.keypair_page.click_button(CEKeypairLocators.OK_BTN)
 

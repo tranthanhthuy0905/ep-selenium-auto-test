@@ -50,7 +50,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests_Dev.CE.ce_base_test import CEBaseTest
+from Tests.CE.ce_base_test import CEBaseTest
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.launch_instances_wizard_page import *
@@ -65,7 +65,7 @@ import time
 class TestInstances04(CEBaseTest):
     def test_create_vm_without_selecting_keypair(self):
         """
-            TEST CASE: Launch instance without selecting keypair	
+            TEST CASE: Launch instance without selecting keypair
         """
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_instances_page()
@@ -111,7 +111,6 @@ class TestInstances04(CEBaseTest):
         # Get Volume ID for delete data after test
         volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
         self.volume_id = volume_row.get_attribute("data-row-key")
-        
         # Select volume to attach to instance
         self.add_storage_wizard.select_volume(self.volume_id)
 
@@ -124,7 +123,6 @@ class TestInstances04(CEBaseTest):
 
         # Get SG ID for delete data after test
         self.sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
-    
         self.configure_security_wizard.click_button(CELaunchInstancesWizardPageLocators.REVIEW_N_LAUNCH_BTN)
 
     # Step 6: Review Instance & Launch

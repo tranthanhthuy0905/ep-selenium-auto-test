@@ -54,7 +54,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests_Dev.CE.ce_base_test import CEBaseTest
+from Tests.CE.ce_base_test import CEBaseTest
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.launch_instances_wizard_page import *
@@ -101,7 +101,7 @@ class TestInstances02(CEBaseTest):
         self.configure_instance_wizard.fill_instance_name(instance_name)
 
         # Create keypair
-        self.keypair_name = CEKeypairTestData.gen_keypair_name()
+        self.keypair_name = CEKeypairTestData.gen_new_keypair_name()
         self.configure_instance_wizard.create_new_keypair(self.keypair_name, "")
 
         # Set default password
@@ -131,7 +131,6 @@ class TestInstances02(CEBaseTest):
 
         # Get SG ID for delete data after test
         self.sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
-    
         self.configure_security_wizard.click_button(CELaunchInstancesWizardPageLocators.REVIEW_N_LAUNCH_BTN)
 
     # Step 6: Review Instance & Launch
@@ -150,7 +149,7 @@ class TestInstances02(CEBaseTest):
         # Test completed, stop instance for cleaning test data
         self.instances_page.stop_instance(self.instance_id)
 
-        
+
 
 
 # python3 -m unittest Tests_Dev.CE_Instance.test_launch_instance_02 -v

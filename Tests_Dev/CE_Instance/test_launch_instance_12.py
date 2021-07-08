@@ -111,7 +111,7 @@ class TestInstances12(CEBaseTest):
         self.configure_instance_wizard.fill_instance_name(instance_name)
 
         # Create keypair
-        self.keypair_name = CEKeypairTestData.gen_keypair_name()
+        self.keypair_name = CEKeypairTestData.gen_new_keypair_name()
         self.configure_instance_wizard.create_new_keypair(self.keypair_name, "")
 
         # Set default password

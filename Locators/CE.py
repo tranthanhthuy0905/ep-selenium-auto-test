@@ -128,15 +128,12 @@ class CEVolumePageLocators(object):
 
     # Resize Volume Elements
     RESIZE_VOLUME_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[2]')
-    SIZE_GB = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[6]')
+    SIZE_GB = (By.XPATH, "//div[preceding-sibling::div/div/text()='Size']")
     RESIZE_VOLUME_BOX = (By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]')
     # OK_BTN = (By.XPATH, "//button/span[text()='OK']")
     OK_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[3]/button[2]")
     SHRINK_OK_BTN = (By.ID, "form_resize_volume_shrink")
     DISK_OFFERING = (By.XPATH, '//*[@id="form_resize_volume"]/div[1]/div[2]/div/div/div')
-    DEFAULT_100G = (By.XPATH, "//div[text()='Default (100G)']")
-    OPTION_200G = (By.XPATH, "//div[text()='200G']")
-    OPTION_500G = (By.XPATH, "//div[text()='500G']")
     SIZE_FORM = (By.XPATH, "//*[@id='form_resize_volume_size']")
 
     # Attach volume
@@ -177,6 +174,9 @@ class CECreateVolumePageLocators(object):
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,'Create Volume')]")
     VOLUME_TYPE_LIST = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[2]/div/div/div")
     CUSTOM_DISK = (By.XPATH, "//div[text()='Custom Disk']")
+    DEFAULT_100G = (By.XPATH, "//div[text()='Default (100G)']")
+    OPTION_200G = (By.XPATH, "//div[text()='200G']")
+    OPTION_500G = (By.XPATH, "//div[text()='500G']")
     VOLUME_NAME_FORM = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[3]/div[2]/div/div[1]/input")
     VOLUME_SIZE_FORM = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[3]/div/div/div/input")
     CREATE_VOLUME_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Created volume successfully.']")
@@ -199,19 +199,14 @@ class CESecurityGroupLocators:
     Weird note: ADD_INGRESS_BUTTON and ADD_EGRESS_BUTTON has different structure: preceding::div/text() vs div/span/text()
     ADD_EGRESS_BUTTON has extra space and the end of text: 'Egress Rule '
     '''
-    ADD_INGRESS_BUTTON = (By.XPATH, '//*[@id="addRule"]/div/div[5]/div/div[2]/div/div/button')
-    # ADD_INGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
-    #                                 "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
-    #                                 "and preceding::div/text()='Ingress Rule')]][1]")
-    ADD_EGRESS_BUTTON = (By.XPATH, "//button[ancestor::form[@id='addRule' "
-                                   "and (ancestor::div/@class='ant-collapse-content ant-collapse-content-active' "
-                                   "and preceding::div/span/text()='Egress Rule ')]]")
+    ADD_INGRESS_BUTTON = (By.XPATH, "//button[@type='submit' and ancestor::div[preceding-sibling::div/span/text()='Ingress Rule ']]")
+    ADD_EGRESS_BUTTON = (By.XPATH, "//button[@type='submit' and ancestor::div[preceding-sibling::div/span/text()='Egress Rule ']]")
 
-    INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport']")
-    INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport']")
-    INGRESS_IMCP_TYPE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmptype']")
-    INGRESS_IMCP_CODE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmpcode']")
-    INGRESS_CIDR_TEXTBOX = (By.XPATH, "//input[@id='addRule_cidrlist']")
+    INGRESS_START_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_startport' and ancestor::div[preceding-sibling::div/span/text()='Ingress Rule ']]")
+    INGRESS_END_PORT_TEXTBOX = (By.XPATH, "//input[@id='addRule_endport' and ancestor::div[preceding-sibling::div/span/text()='Ingress Rule ']]")
+    INGRESS_IMCP_TYPE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmptype' and ancestor::div[preceding-sibling::div/span/text()='Ingress Rule ']]")
+    INGRESS_IMCP_CODE_TEXTBOX = (By.XPATH, "//input[@id='addRule_icmpcode' and ancestor::div[preceding-sibling::div/span/text()='Ingress Rule ']]")
+    INGRESS_CIDR_TEXTBOX = (By.XPATH, "//input[@id='addRule_cidrlist'] and ancestor::div[preceding-sibling::div/span/text()='Ingress Rule ']")
     INGRESS_PROTOCOL_SELECTOR = (By.XPATH, '//*[@id="addRule"]/div/div[1]/div/div[2]/div/div/div/div/span[2]')
     INGRESS_PROTOCOL_SELECTOR_INPUT = (By.XPATH, '//*[@id="addRule_protocol"]')
 
@@ -241,6 +236,13 @@ class CESecurityGroupLocators:
             f"and following-sibling::td[text()='{cidr}']]]]]]"
         )
 
+    START_PORT_REQUIRED_ALERT = (By.XPATH, "//div[@role='alert' and text()='Start Port is required!']")
+    END_PORT_REQUIRED_ALERT = (By.XPATH, "//div[@role='alert' and text()='End Port is required!']")
+    IMCP_TYPE_REQUIRED_ALERT = (By.XPATH, "//div[@role='alert' and text()='ICMP Type is required!']")
+    IMCP_CODE_REQUIRED_ALERT = (By.XPATH, "//div[@role='alert' and text()='ICMP Code is required!']")
+    INVALID_START_PORT_ALERT = None # Waiting for bug fixes
+    INVALID_END_PORT_ALERT = None # Waiting for bug fixes
+
 class CEKeypairLocators:
     KEYPAIR_NAME_TEXTBOX = (By.XPATH, "//*[@id='create-ssh-key-form_name']")
     PUBLIC_KEY_TEXTBOX = (By.XPATH, "//*[@id='create-ssh-key-form_publicKey']")
@@ -250,6 +252,17 @@ class CEKeypairLocators:
     SUCCESSFULLY_MESSAGE = (By.XPATH, "//p[contains(.,'Created keypair successfully.')]")
     CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
     SELECT_KEYPAIR_RADIO = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[1]/label/span/input")
+    KEYPAIR_ROW = lambda _name: (By.XPATH, f"//td[@class='ant-table-cell' and text()='{_name}']")
+
+    INVALID_KEY_ALERT_DIALOG = (By.XPATH, "//div[@class='ant-modal-confirm-body' and ./span/text()='Failed' and ./div/text()='Public key is invalid']")
+
+    DOWNLOAD_KEYPAIR_DIALOG = (By.XPATH, "//div[@class='ant-modal-header' and ./div='SSH key pair' "
+                                         "and following-sibling::div/p='Created keypair successfully.' "
+                                         "and following-sibling::div[./button='Close' "
+                                         "and ./button='Download SSH key pair']]")
+
+    DUPLICATED_PUBLIC_KEY_DIALOG = (By.XPATH, "//div[span='Failed' and following-sibling::div/button[@type='button' and ./span/text()='Ok']]")
+
 
 
 class CESnapshotLocators(object):
@@ -267,7 +280,7 @@ class CESnapshotLocators(object):
     DELETE_CONFIRM = (By.XPATH, "//button[contains(.,'Delete')]")
     # Revert to snapshot
     REVERT_TO_SNAPSHOT = (By.XPATH, "//span[text()='Revert to snapshot']")
-
+    REVERT_CONFIRM = (By.XPATH,"//button[contains(.,'Revert')]")
     # Get Snapshot ID
     PARRENT_BY_SNAPSHOT_NAME = lambda _snapshot_name: (By.XPATH, f"//td[contains(.,'{_snapshot_name}')]/parent::*")
 

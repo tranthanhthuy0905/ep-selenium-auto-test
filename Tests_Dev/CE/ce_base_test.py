@@ -1,3 +1,7 @@
+from Configs.TestData.CEInstanceTestData import CEInstanceTestData
+from Pages.CE.launch_instances_wizard_page import ConfigureInstanceWizardPage
+from Pages.CE.instances_page import CEInstancesPage
+from Pages.CE.homepage import CEHomePage
 from Tests_Dev.base_test import BaseTest
 from Configs import *
 
@@ -129,4 +133,20 @@ class CEBaseTest(BaseTest):
             self._call_request_delete(url, params, CE_USER_TOKEN)
         except Exception as e:
             print("Can't delete CE snapshot volume", str(e))
+
+
+    def passing_first_two_step(self):
+        self.CE_homepage = CEHomePage(self.driver)
+        self.CE_homepage.access_instances_page()
+
+        # When user selects "Instances => Instances" on left side menu
+        self.instances_page = CEInstancesPage(self.driver)
+
+        # Passing step 1 (Choose MI) and step 2 (Instance Type)
+        self.instances_page.choose_MI_N_Instance_Type()
+        self.configure_instance_wizard = ConfigureInstanceWizardPage(self.driver)
+        # set instance name
+        instance_name = CEInstanceTestData.gen_instance_name()
+        self.configure_instance_wizard.fill_instance_name(instance_name)
+        return instance_name
 
