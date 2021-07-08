@@ -91,6 +91,8 @@ class VolumeBaseTest(CEBaseTest):
         self.instance_id = self.driver.find_element_by_xpath(
             "//td[contains(.,'" + self.instance_name + "')]/parent::*").get_attribute("data-row-key")
 
+        self.instance_ip = self.driver.find_element(CEVolumePageLocators.VM_IP).text
+
         time.sleep(2)
         # TODO: Test the instance state (should be Running)
         WebDriverWait(self.driver, 30).until(EC.text_to_be_present_in_element
