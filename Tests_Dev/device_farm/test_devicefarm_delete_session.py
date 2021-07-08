@@ -18,22 +18,40 @@ class Test_DEVICEFARM_Delete_Session(DEVICE_FARM_BaseTest):
         """
             TEST CASE: DF Session should be deleted successfully
         """
-        print("---create project-------")
+        """
+            Step 1: Create a new project.
+        """
         self.project_text = DEVICE_FARM_TestData()
         self._call_api_create_project(self.project_text.PROJECT_NAME)
-        print("------get info project--------")
+        """
+            Step 2: Get info above project to get project's _id.
+        """
         project_info = self._call_api_get_info_project()
-        print("-------create session---------")
-        self._call_api_create_session(project_info[0].get('_id'), self.project_text.GALAXY_TAB_E_SERIAL)
-        print("-------get info session---------")
-        session_info = self._call_api_get_info_session('60e5af7c7259ac001258aac2')
-        print("-------stop session----------")
-        self._call_api_stop_session(self.project_text.GALAXY_TAB_E_SERIAL, session_info[0].get('_id'))
-        print("-------begin delete session-------")
+        """
+            Step 3: Create a new LG session
+        """
+        self._call_api_create_session(project_info[0].get('_id'), self.project_text.LG_G5_SE)
+        """
+            Step 4: Get info session to get session's _id
+        """
+        session_info = self._call_api_get_info_session(project_info[0].get('_id'))
+        """
+            Step 5: Stop above session.
+        """
+        self._call_api_stop_session(self.project_text.LG_G5_SE, session_info[0].get('_id'))
+        #  begin TEST-CASE
+        """
+            Step 6: TEST-CASE Delete session.
+        """
         self.df_homepage = DEVICE_FARM_HomePage(self.driver)
         self.df_session = DEVICE_FARM_DeleteSessionPage(self.driver)
         self.df_session.click_delete_session_submit_button()
         self.assertIn("Delete session is successful!", self.driver.page_source, msg='DELETE SESSION IS NOT SUCCESSFULLY')
+        # end TEST-CASE
+        """
+            Step 7: Delete above project for cleaning.
+        """ 
+        self._call_api_delete_project()
 
 if __name__ == "__main__":
     unittest.main(

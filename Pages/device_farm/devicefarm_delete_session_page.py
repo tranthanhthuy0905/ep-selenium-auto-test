@@ -26,4 +26,5 @@ class DEVICE_FARM_DeleteSessionPage(BasePage):
         time.sleep(2)
         self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_DELETE_CONFIRM_BUTTON)\
             .click()
+        time.sleep(2)
         
