@@ -158,6 +158,10 @@ class AddStorageWizardPage(CELaunchInstancesWizardPage):
     def select_volume(self, volume_id):
         self.click_button(CELaunchInstancesWizardPageLocators.RADIO_BY_NAME(volume_id))
         return self
+    
+    def get_volume_id(self, volume_name):
+        volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(volume_name))
+        return volume_row.get_attribute("data-row-key")
 
     def add_new_volume(self, _volume_name, volume_size):
         # Click "Add new Volume" button

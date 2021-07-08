@@ -122,8 +122,7 @@ class TestInstances11(CEBaseTest):
         self.add_storage_wizard.add_new_volume(volume_name, CEVolumeTestData.SIZE)
 
         # Get Volume ID for delete data after test
-        volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(volume_name))
-        self.volume_id = volume_row.get_attribute("data-row-key")
+        self.volume_id = self.add_storage_wizard.get_volume_id(volume_name)
         
         # Select volume to attach to instance
         self.add_storage_wizard.select_volume(self.volume_id)
