@@ -243,6 +243,11 @@ class CEKeypairLocators:
 
     INVALID_KEY_ALERT_DIALOG = (By.XPATH, "//div[@class='ant-modal-confirm-body' and ./span/text()='Failed' and ./div/text()='Public key is invalid']")
 
+    DOWNLOAD_KEYPAIR_DIALOG = (By.XPATH, "//div[@class='ant-modal-header' and ./div='SSH key pair' "
+                                         "and following-sibling::div/p='Created keypair successfully.' "
+                                         "and following-sibling::div[./button='Close' "
+                                         "and ./button='Download SSH key pair']]")
+
 
 
 class CESnapshotLocators(object):

@@ -1,5 +1,5 @@
 '''
-Screnario 1: Create Key pairs with Public Key	
+Scenario 1: Create Key pairs with Public Key
 	Given a certain user
 	When user wants to create a keypair
 	Then user selects "Create keypair" on the top right corner
@@ -27,7 +27,7 @@ class TestCreateKeyPairWithPublicKey(SGBaseTest):
         self.keypair_homepage.click_create_keypair()
 
         keypair_name = CEKeypairTestData.KEYPAIR_NAME
-        self.keypair_homepage.fill_keypair_info(keypair_name, CEKeypairTestData.VALID_PUBLIC_KEY_1)
+        self.keypair_homepage.fill_keypair_info(keypair_name, CEKeypairTestData.VALID_PUBLIC_KEY_1 + str(time.time)[-5:])
         self.keypair_homepage.click_create_keypair_submit_button()
 
         self.assertTrue(self.keypair_homepage.check_keypair_existence_in_table(keypair_name))

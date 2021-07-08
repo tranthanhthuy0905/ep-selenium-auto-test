@@ -41,3 +41,8 @@ class CEKeypairPage(BasePage):
         return self.check_element_existence(
             CEKeypairLocators.INVALID_KEY_ALERT_DIALOG
         )
+
+    def check_download_keypair_dialog_existence(self):
+        return self.check_element_existence(
+            CEKeypairLocators.DOWNLOAD_KEYPAIR_DIALOG
+        )
