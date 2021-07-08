@@ -48,7 +48,7 @@ class CEInstancePageLocators(object):
     INSTANCE_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div[3]/div[2]/div/div[2]/div/div[4]/div/div/div[2]')
     INSTANCE_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[4]/div/span")
     INSTANCE_RADIO_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td/label/span")
-    STOP_STATUS = "Stopped"
+    STOPPED_STATUS = "Stopped"
     RUNNING_STATUS = "Running"
 
 class CEInstanceTypesPageLocators(object):
@@ -98,7 +98,7 @@ class CELaunchInstancesWizardPageLocators(object):
     PARRENT_BY_INSTANCE_NAME = lambda _instance_name: (By.XPATH, f"//td[contains(.,'{_instance_name}')]/parent::*")
     STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[@class='ant-table-cell'][2]/div/span/span[@class='ant-badge-status-text']")
     RANDOM_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[2]/button/span")
-    COPY_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[3]/button/span")
+    COPY_PASSWORD_BTN = (By.XPATH, "//span[@class='anticon anticon-copy']")
     SHOW_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/span/span")
     APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
     FAILED_TO_LAUNCH_NOTI = (By.XPATH, "//div[contains(.,'Failed to launch instance.')]")
@@ -156,6 +156,18 @@ class CEVolumePageLocators(object):
     CLOSE_MESSAGE_BTN = (By.CLASS_NAME, "ant-notification-close-x")
     VOLUME_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[3]/div/span/span[2]")
 
+     # Resize Volume Elements
+    RESIZE_VOLUME_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[2]')
+    SIZE_GB = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[6]')
+    RESIZE_VOLUME_BOX = (By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]')
+    # OK_BTN = (By.XPATH, "//button/span[text()='OK']")
+    OK_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[3]/button[2]")
+    SHRINK_OK_BTN = (By.ID, "form_resize_volume_shrink")
+    DISK_OFFERING = (By.XPATH, '//*[@id="form_resize_volume"]/div[1]/div[2]/div/div/div')
+    DEFAULT_100G = (By.XPATH, "//div[text()='Default (100G)']")
+    OPTION_200G = (By.XPATH, "//div[text()='200G']")
+    OPTION_500G = (By.XPATH, "//div[text()='500G']")
+    SIZE_FORM = (By.XPATH, "//*[@id='form_resize_volume_size']")
 
 
 class CECreateVolumePageLocators(object):
@@ -239,6 +251,7 @@ class CEKeypairLocators:
     FINGERPRINT_BY_KEYPAIR_NAME = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[@class='ant-table-cell'][2]")
     SUCCESSFULLY_MESSAGE = (By.XPATH, "//p[contains(.,'Created keypair successfully.')]")
     CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
+    SELECT_KEYPAIR_RADIO = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[1]/label/span/input")
     KEYPAIR_ROW = lambda _name: (By.XPATH, f"//td[@class='ant-table-cell' and text()='{_name}']")
 
     INVALID_KEY_ALERT_DIALOG = (By.XPATH, "//div[@class='ant-modal-confirm-body' and ./span/text()='Failed' and ./div/text()='Public key is invalid']")
@@ -270,3 +283,6 @@ class CESnapshotLocators(object):
     REVERT_CONFIRM = (By.XPATH,"//button[contains(.,'Revert')]")
     # Get Snapshot ID
     PARRENT_BY_SNAPSHOT_NAME = lambda _snapshot_name: (By.XPATH, f"//td[contains(.,'{_snapshot_name}')]/parent::*")
+
+    
+    

@@ -1,5 +1,6 @@
 from Configs.TestData.BaseTestData import BaseTestData
 import random
+import time
 
 class CEVolumeTestData(BaseTestData):
     VOLUME_NAME = "autotest-volume-" + str(random.randint(100000,999999))
@@ -10,3 +11,6 @@ class CEVolumeTestData(BaseTestData):
     SIZE2 = str(random.randint(101, 500))
 
     ALLOCATED = "Allocated"
+
+    def gen_volume_name():
+        return "autotest-volume-" + str(time.time()).replace('.', '')

@@ -26,7 +26,7 @@ class SGHomePage(BasePage):
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable(CESecurityGroupLocators.CREATE_BUTTON)
         )
-        self.driver.find_element(*CESecurityGroupLocators.CREATE_BUTTON).click()
+        self.wait_and_click_button(CESecurityGroupLocators.CREATE_BUTTON)
 
 
 class SGCreatePage(BasePage):
@@ -35,7 +35,7 @@ class SGCreatePage(BasePage):
         self.driver.get(CE_SG_CREATE_URL)
 
     def fill_sg_information(self):
-        sec_group_name = CESecurityGroupTestData.SECURITY_GROUP_NAME
+        sec_group_name = CESecurityGroupTestData.gen_SG_name()
         name_text_box = self.driver.find_element(*CESecurityGroupLocators.CREATE_SEC_GROUP_TEXTBOX_NAME_CSS)
         name_text_box.send_keys(Keys.COMMAND + "a" + Keys.DELETE)
         name_text_box.send_keys(sec_group_name)

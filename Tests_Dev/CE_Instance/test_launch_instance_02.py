@@ -66,7 +66,7 @@ from Locators.CE import *
 import time
 
 
-class TestInstances(CEBaseTest):
+class TestInstances02(CEBaseTest):
     def test_create_vm_fullInfo(self):
         """
             TEST CASE: Instance should be created successfully with full flow
@@ -97,11 +97,11 @@ class TestInstances(CEBaseTest):
     # Step 3: Configure Instance Details
         self.configure_instance_wizard = ConfigureInstanceWizardPage(self.driver)
         # Set instance name
-        instance_name = CEInstanceTestData.INSTANCE_NAME
+        instance_name = CEInstanceTestData.gen_instance_name()
         self.configure_instance_wizard.fill_instance_name(instance_name)
 
         # Create keypair
-        self.keypair_name = CEKeypairTestData.KEYPAIR_NAME
+        self.keypair_name = CEKeypairTestData.gen_new_keypair_name()
         self.configure_instance_wizard.create_new_keypair(self.keypair_name, "")
 
         # Set default password
@@ -110,14 +110,13 @@ class TestInstances(CEBaseTest):
         self.configure_instance_wizard.click_next_btn()
 
     # Step 4: Add Storage
-        volume_name = CEVolumeTestData.VOLUME_NAME
+        volume_name = CEVolumeTestData.gen_volume_name()
         self.add_storage_wizard = AddStorageWizardPage(self.driver)
-        self.add_storage_wizard.add_new_volume(CEVolumeTestData.VOLUME_NAME, CEVolumeTestData.SIZE)
+        self.add_storage_wizard.add_new_volume(volume_name, CEVolumeTestData.SIZE)
 
         # Get Volume ID for delete data after test
-        volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
-        self.volume_id = volume_row.get_attribute("data-row-key")
-
+        self.volume_id = self.add_storage_wizard.get_volume_id(volume_name)
+        
         # Select volume to attach to instance
         self.add_storage_wizard.select_volume(self.volume_id)
 
@@ -125,40 +124,28 @@ class TestInstances(CEBaseTest):
 
     # Step 5: Configure Security Group
         self.configure_security_wizard = SecurityGroupWizardPage(self.driver)
-        self.configure_security_wizard.create_new_security_group(CESecurityGroupTestData.SECURITY_GROUP_NAME, CESecurityGroupTestData.DESCRIPTION)
+        self.configure_security_wizard.create_new_security_group(CESecurityGroupTestData.gen_SG_name(), CESecurityGroupTestData.DESCRIPTION)
         self.configure_security_wizard.apply_sg_for_instance()
 
         # Get SG ID for delete data after test
         self.sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
-
         self.configure_security_wizard.click_button(CELaunchInstancesWizardPageLocators.REVIEW_N_LAUNCH_BTN)
 
     # Step 6: Review Instance & Launch
         self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
-        self.review_launch_wizard.launch_instance()
+        self.review_launch_wizard.click_launch_instance()
+
+        self.instances_page.check_if_instance_launched_successfully()
 
         # Get instance id for clear data after test
-        WebDriverWait(self.driver, 10).until(EC.url_to_be(self.instances_page.base_url))
-        instance_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_INSTANCE_NAME(instance_name))
-        self.instance_id = instance_row.get_attribute("data-row-key")
-
-        self.instances_page.check_element_existence(CEInstancePageLocators.ANNOUNCEMENT)
-        self.instances_page.check_element_existence(CEInstancePageLocators.LAUNCH_VM_SUCCESS_MESSAGE)
+        self.instance_id = self.instances_page.get_instance_id(instance_name)
 
         # Check if the new instance state is Running
         self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.RUNNING_STATUS)
         print("Instance is created successfully!")
 
         # Test completed, stop instance for cleaning test data
-        self.instances_page.select_instance(self.instance_id)
-        self.instances_page.change_instance_states(CEInstancePageLocators.STOP_INSTANCE_BTN, CEInstancePageLocators.STOP_CONFIRM_BTN)
-        print("Instance is stopping")
-
-        # Check if the new instance state is Stopped
-        WebDriverWait(self.driver, 300).until(EC.text_to_be_present_in_element(
-            CEInstancePageLocators.INSTANCE_STATE_BY_ID(self.instance_id),
-            CEInstancePageLocators.STOP_STATUS)
-        )
+        self.instances_page.stop_instance(self.instance_id)
 
 
 

@@ -10,6 +10,30 @@ class APIService:
     def _call_api_delete_instance(self):
         pass
 
+    def _call_request_post(self, url, jsonBody, user_token):
+        headers = {
+            "cookie": f"user-token={user_token}",
+            "accept": "application/json"
+        }
+        r = requests.post(url, headers=headers, json=jsonBody)
+        if r.status_code == 200:
+            logging.info(f"Succeeded calling {url}")
+        else:
+            logging.error(f"FAILED calling {url}")
+        logging.info(f"POST response: {r.content}. Body: {jsonBody}")
+    
+    def _call_request_put(self, url, jsonBody, user_token):
+        headers = {
+            "cookie": f"user-token={user_token}",
+            "accept": "application/json"
+        }
+        r = requests.put(url, headers=headers, json=jsonBody)
+        if r.status_code == 200:
+            logging.info(f"Succeeded calling {url}")
+        else:
+            logging.error(f"FAILED calling {url}")
+        logging.info(f"PUT response: {r.content}. Body: {jsonBody}")
+    
     def _call_request_delete(self, url, params, user_token):
         headers = {
             "cookie": f"user-token={user_token}",
@@ -20,7 +44,7 @@ class APIService:
             logging.info(f"Succeeded calling {url}")
         else:
             logging.error(f"FAILED calling {url}")
-        logging.info(f"Delete response: {r.content}. Params: {params}")
+        logging.info(f"DELETE response: {r.content}. Params: {params}")
 
     def _call_request_get(self, url, params, user_token):
         headers = {
