@@ -7,23 +7,24 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from Pages.base_page import BasePage
-from Configs import CE_SG_URL, CE_SG_CREATE_URL, CE_SG_DETAILS_PAGE_URL
+from Configs import CE_SG_URL, CE_SG_CREATE_URL, CE_SG_DETAILS_PAGE_URL, CE_SG_KEYPAIR_HOMEPAGE_URL
 from Configs import CE_USER_TOKEN
 from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 
-from Locators.CE import CESecurityGroupLocators
+from Locators.CE import CESecurityGroupLocators, CEKeypairLocators
 
 
 class SGHomePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver, CE_SG_URL)
+        logging.info(f"Authenticating url: {CE_SG_URL}, Token: {CE_USER_TOKEN[:10]}....{CE_USER_TOKEN[-10:]}")
         self.driver.get(CE_SG_URL)
         self.authenticate(CE_USER_TOKEN)
         self.driver.get(CE_SG_URL)
 
     def click_create_button(self):
         WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located(CESecurityGroupLocators.CREATE_BUTTON)
+            EC.element_to_be_clickable(CESecurityGroupLocators.CREATE_BUTTON)
         )
         self.driver.find_element(*CESecurityGroupLocators.CREATE_BUTTON).click()
 
@@ -43,6 +44,18 @@ class SGCreatePage(BasePage):
     def click_create_submit_button(self):
         self.driver.find_element(*CESecurityGroupLocators.SUBMIT_CREATE_BUTTON_X_PATH).click()
 
+    def create_simple_sg(self, sec_group_name):
+        self.sg_create_page = SGCreatePage(self.driver)
+        name_text_box = self.driver.find_element(*CESecurityGroupLocators.CREATE_SEC_GROUP_TEXTBOX_NAME_CSS)
+        name_text_box.send_keys(Keys.COMMAND + "a" + Keys.DELETE)
+        name_text_box.send_keys(sec_group_name)
+        # name = self.driver.find_element(*CESecurityGroupLocators.PREVIEW_SEC_GROUP_NAME).text
+        self.sg_create_page.click_create_submit_button()
+        WebDriverWait(self.driver, 10).until(EC.url_changes(self.driver.current_url))
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(CESecurityGroupLocators.SEC_GROUP_ID))
+        id = self.driver.find_element(*CESecurityGroupLocators.SEC_GROUP_ID).text
+        return id
+
 
 class SGDetailsPage(BasePage):
     def __init__(self, driver, sg_id):
@@ -55,16 +68,9 @@ class SGDetailsPage(BasePage):
         end_port_text_box.send_keys(end_port)
         logging.info(f"Filled into textboxes ports {start_port} and {end_port}.")
 
-    def fill_in_ingress_rule_info(self, start_port, end_port):
-        start_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_START_PORT_TEXTBOX)
-        end_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_END_PORT_TEXTBOX)
-        start_port_text_box.send_keys(start_port)
-        end_port_text_box.send_keys(end_port)
-        logging.info(f"Filled into textboxes ports {start_port} and {end_port}.")
-
     def fill_in_icmp_info(self, icmp_type, icmp_code):
-        start_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_START_PORT_TEXTBOX)
-        end_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_END_PORT_TEXTBOX)
+        start_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_IMCP_TYPE_TEXTBOX)
+        end_port_text_box = self.find_element(*CESecurityGroupLocators.INGRESS_IMCP_CODE_TEXTBOX)
         start_port_text_box.send_keys(icmp_type)
         end_port_text_box.send_keys(icmp_code)
         logging.info(f"Filled into textboxes ICMP {icmp_type} and {icmp_code}.")
@@ -121,5 +127,4 @@ class SGDetailsPage(BasePage):
         self.find_element(*CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON).click()
         logging.info(f"Delete confirm button clicked. "
                      f"Element: {CESecurityGroupLocators.CONFIRM_DELETE_RULE_BUTTON}")
-
-
+                     

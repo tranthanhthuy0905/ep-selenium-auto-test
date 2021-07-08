@@ -1,5 +1,5 @@
 '''
-Scenario 7. Launch instance without setting default password	
+Scenario 7. Launch instance without setting default password
 	Given a certain user
 	When user wants to launch an instance
 	Then user selects "Instances => Instances" on left side menu
@@ -67,9 +67,9 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_without_setting_password(self):
         """
-            TEST CASE: Instance should be created successfully without setting default password
+            TEST CASE: Launch instance without setting default password
         """
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_instances_page()
@@ -84,8 +84,8 @@ class TestInstances(CEBaseTest):
         # Then user can see the wizard form for creating a new instance
         self.assertEqual(self.driver.current_url, self.launch_instances_wizard_page.base_url)
         self.assertTrue(self.launch_instances_wizard_page.check_element_existence(CELaunchInstancesWizardPageLocators.MI_SELECT_BTN))
-        
-    # Step 1: Choose an Machine Image 
+
+    # Step 1: Choose an Machine Image
         self.machine_image_wizard = MachineImageWizardPage(self.driver)
         self.machine_image_wizard.choose_machine_image()
 
@@ -115,7 +115,6 @@ class TestInstances(CEBaseTest):
         # Get Volume ID for delete data after test
         volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
         self.volume_id = volume_row.get_attribute("data-row-key")
-        
         # Select volume to attach to instance
         self.add_storage_wizard.select_volume(self.volume_id)
 
@@ -126,21 +125,20 @@ class TestInstances(CEBaseTest):
 
         self.configure_security_wizard.create_new_security_group(CESecurityGroupTestData.SECURITY_GROUP_NAME, CESecurityGroupTestData.DESCRIPTION)
         self.configure_security_wizard.apply_sg_for_instance()
-        
+
         # Get SG ID for delete data after test
         self.sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
-    
         self.configure_security_wizard.click_button(CELaunchInstancesWizardPageLocators.REVIEW_N_LAUNCH_BTN)
 
     # Step 6: Review Instance & Launch
         self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
         # Show generated pass
         self.review_launch_wizard.show_password()
-        
+
         # Copy password
         self.review_launch_wizard.copy_password()
 
-        # Apply pass 
+        # Apply pass
         self.review_launch_wizard.apply_password()
 
         self.review_launch_wizard.launch_instance()
@@ -164,7 +162,7 @@ class TestInstances(CEBaseTest):
 
         # Check if the new instance state is Stopped
         WebDriverWait(self.driver, 300).until(EC.text_to_be_present_in_element(
-            CEInstancePageLocators.INSTANCE_STATE_BY_ID(self.instance_id), 
+            CEInstancePageLocators.INSTANCE_STATE_BY_ID(self.instance_id),
             CEInstancePageLocators.STOP_STATUS)
         )
 

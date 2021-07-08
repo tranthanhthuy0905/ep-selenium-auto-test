@@ -45,7 +45,7 @@ class APIService:
             logging.info(f"Succeeded calling {url}")
         else:
             logging.error(f"FAILED calling {url}")
-        logging.info(f"DELETE response: {r.content}. Params: {params}")
+        logging.info(f"Delete response: {r.content}. Params: {params}")
 
     def _call_request_get(self, url, params, user_token):
         print("payload", url, params, user_token)

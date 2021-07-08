@@ -1,4 +1,5 @@
-from Locators.CE import CELaunchInstancesWizardPageLocators
+from Configs.TestData.CEInstanceTestData import CEInstanceTestData
+from Locators.CE import CELaunchInstancesWizardPageLocators, CEVolumePageLocators
 from Pages.base_page import BasePage
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
@@ -23,13 +24,21 @@ class CELaunchInstancesWizardPage(BasePage):
         except TimeoutException:
             self.driver.get_screenshot_as_file(
                 'error_snapshot/{filename}.png'.format(filename='choose_volume_type'))
-            self.driver.quit()
+
+    def choose_instance_details(self):
+        self.instance_name = CEInstanceTestData.INSTANCE_NAME
+        self\
+            .click_button(self.locator.MI_SELECT_BTN)\
+            .click_button(self.locator.TYPE_2G_RADIO)\
+            .click_button(self.locator.NEXT_BTN)\
+            .fill_form(self.instance_name, self.locator.INSTANCE_NAME_TEXTBOX)
+        return self
 
     def click_next_btn(self):
         self\
             .click_button(self.locator.NEXT_BTN)
         return self
-    
+
     def click_review_and_launch_btn(self):
         self\
             .click_button(self.locator.REVIEW_N_LAUNCH_BTN)
@@ -63,7 +72,7 @@ class MachineImageWizardPage(CELaunchInstancesWizardPage):
     def __init__(self, driver):
         self.locator = CELaunchInstancesWizardPageLocators
         super().__init__(driver)
-    
+
     def choose_machine_image(self):
         self\
             .click_button(self.locator.MI_SELECT_BTN)
@@ -73,7 +82,7 @@ class InstanceTypeWizardPage(CELaunchInstancesWizardPage):
     def __init__(self, driver):
         self.locator = CELaunchInstancesWizardPageLocators
         super().__init__(driver)
-    
+
     def choose_instance_type(self):
         self\
             .click_button(self.locator.TYPE_2G_RADIO)
@@ -83,7 +92,7 @@ class ConfigureInstanceWizardPage(CELaunchInstancesWizardPage):
     def __init__(self, driver):
         self.locator = CELaunchInstancesWizardPageLocators
         super().__init__(driver)
-    
+
     def fill_instance_name(self, instance_name):
         self.fill_form(instance_name, self.locator.INSTANCE_NAME_TEXTBOX)
         return self
@@ -108,7 +117,6 @@ class ConfigureInstanceWizardPage(CELaunchInstancesWizardPage):
         except TimeoutException:
             self.driver.get_screenshot_as_file(
                 'error_snapshot/{filename}.png'.format(filename='choose_volume_type'))
-            self.driver.quit()
 
     def fill_default_password(self, password, confirm_password):
         self\
@@ -130,7 +138,7 @@ class ConfigureInstanceWizardPage(CELaunchInstancesWizardPage):
         # Close popup message
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.locator.CLOSE_MESSAGE_BTN))
         self.click_button(self.locator.CLOSE_MESSAGE_BTN)
-    
+
 
 
 
@@ -138,7 +146,7 @@ class AddStorageWizardPage(CELaunchInstancesWizardPage):
     def __init__(self, driver):
         self.locator = CELaunchInstancesWizardPageLocators
         super().__init__(driver)
-    
+
     def fill_volume_info(self, volume_name, volume_size):
         self\
             .fill_form(volume_name, self.locator.VOlUME_NAME_TEXTBOX) \
@@ -146,11 +154,11 @@ class AddStorageWizardPage(CELaunchInstancesWizardPage):
             .choose_volume_type(self.locator.VOLUME_TYPE_LIST) \
             .fill_form(volume_size, self.locator.VOLUME_SIZE_TEXTBOX)
         return self
-    
+
     def select_volume(self, volume_id):
         self.click_button(CELaunchInstancesWizardPageLocators.RADIO_BY_NAME(volume_id))
         return self
-    
+
     def add_new_volume(self, volume_name, volume_size):
         # Click "Add new Volume" button
         self.click_button(self.locator.ADD_NEW_VOLUME_BTN)
@@ -170,12 +178,17 @@ class SecurityGroupWizardPage(CELaunchInstancesWizardPage):
     def __init__(self, driver):
         self.locator = CELaunchInstancesWizardPageLocators
         super().__init__(driver)
-    
+
     def fill_security_group_info(self, sg_name, sg_description):
         self\
             .fill_form(sg_name, self.locator.SG_NAME_TEXTBOX)\
             .fill_form(sg_description, self.locator.SG_DESCRIPTION_TEXTBOX)
         return self
+    
+    def expand_sg_list(self):
+        self.click_button(self.locator.LIST_SG_PAGE)
+        self.find_element(*self.locator.LIST_SG_PAGE)
+        self.click_button((By.XPATH,"//div[text()='15 / page']"))
 
     def create_new_security_group(self, sg_name, sg_description):
         # Click on "Create new SG radio"
@@ -189,21 +202,30 @@ class SecurityGroupWizardPage(CELaunchInstancesWizardPage):
         # Close popup message
         WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.locator.CLOSE_MESSAGE_BTN))
         self.click_button(self.locator.CLOSE_MESSAGE_BTN)
-    
+
     def apply_sg_for_instance(self):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.locator.SG_APPLY_CHECKBOX))
         self.\
             wait_and_click_button(self.locator.SG_APPLY_CHECKBOX)
         return self
-
     
+    def click_on_select_sg_for_instance(self):
+        self\
+            .click_button(self.locator.CREATE_NEW_SG_RADIO)\
+            .click_button(self.locator.SELECT_EXISTING_SG_RADIO)
+
+    def select_sg_for_instance(self, sg_id):
+        self.click_button(self.locator.EXISTING_SG_RADIO(sg_id))
+
+
+
 
 
 class ReviewLaunchWizardPage(CELaunchInstancesWizardPage):
     def __init__(self, driver):
         self.locator = CELaunchInstancesWizardPageLocators
         super().__init__(driver)
-    
+
     def show_password(self):
         self\
             .click_button(self.locator.SHOW_PASSWORD_BTN)
@@ -232,4 +254,4 @@ class ReviewLaunchWizardPage(CELaunchInstancesWizardPage):
         return self
 
 
-    
+

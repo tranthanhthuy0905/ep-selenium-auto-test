@@ -1,5 +1,5 @@
 '''
-Scenario 9. Launch instance with existing volume	
+Scenario 9. Launch instance with existing volume
 	Given a certain user
 	When user wants to launch an instance
 	Then user selects "Instances => Instances" on left side menu
@@ -18,7 +18,7 @@ Scenario 9. Launch instance with existing volume
 	Then user can see a modal form for creating new keypair
 	When user fills in the form and clicks on "Ok" button on modal
 	Then the new keypair is created and added to the instance
-	When user fills in "Default Password" and "Confirm Password" 
+	When user fills in "Default Password" and "Confirm Password"
 	Then the password for root account is set
 	When user clicks on "Next" button in the bottom right corner
 	Then user can see the list of Volumes in the step 4 of wizard
@@ -64,9 +64,9 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_with_existing_volume(self):
         """
-            TEST CASE: Instance should be created successfully with full flow
+            TEST CASE: Launch instance with existing volume
         """
         self.CE_homepage = CEHomePage(self.driver)
         # first create a volume
@@ -74,11 +74,11 @@ class TestInstances(CEBaseTest):
         # Then user can see the list of available Volumes
         self.volume_page = CEVolumePage(self.driver)
         self.assertEqual(self.driver.current_url, self.volume_page.base_url)
-        self.assertTrue(self.volume_page.check_element_existence(CEVolumnePageLocators.CREATE_VOLUME_BTN))
-        self.assertTrue(self.volume_page.check_element_existence(CEVolumnePageLocators.VOLUMES_LIST))
+        self.assertTrue(self.volume_page.check_element_existence(CEVolumePageLocators.CREATE_VOLUME_BTN))
+        self.assertTrue(self.volume_page.check_element_existence(CEVolumePageLocators.VOLUMES_LIST))
 
         # When user clicks on "Create Volume" button on the top right
-        self.volume_page.click_button(CEVolumnePageLocators.CREATE_VOLUME_BTN)
+        self.volume_page.click_button(CEVolumePageLocators.CREATE_VOLUME_BTN)
         #Then user can move to "Create New Volume" page
         self.create_volume_page = CECreateVolumePage(self.driver)
         self.assertEqual(self.driver.current_url, self.create_volume_page.base_url)
@@ -87,13 +87,13 @@ class TestInstances(CEBaseTest):
         self.create_volume_page.fill_volume_info(self.volume_name, volume_size=CEVolumeTestData.SIZE)
 
         # When user clicks on "Create Volume" button
-        self.create_volume_page.click_button(CECreateVolumnePageLocators.CREATE_VOLUME_BTN)
+        self.create_volume_page.click_button(CECreateVolumePageLocators.CREATE_VOLUME_BTN)
         # Then user can see the newly created volume updated in the list of volumes (status: Allocated)
         WebDriverWait(self.driver, 10).until(EC.url_to_be(self.volume_page.base_url))
-        volume_row = self.driver.find_element(*CECreateVolumnePageLocators.PARRENT_BY_VOLUME_NAME(self.volume_name))
+        volume_row = self.driver.find_element(*CECreateVolumePageLocators.PARRENT_BY_VOLUME_NAME(self.volume_name))
         self.volume_id = volume_row.get_attribute("data-row-key")
         self.volume_page.check_volume_state(self.volume_id, CEVolumeTestData.ALLOCATED)
-        self.driver.find_element(*(CEVolumnePageLocators.CLOSE_MESSAGE_BTN)).click()
+        self.driver.find_element(*(CEVolumePageLocators.CLOSE_MESSAGE_BTN)).click()
 
         # Move to instance page
         self.CE_homepage.access_instances_page()
@@ -108,8 +108,8 @@ class TestInstances(CEBaseTest):
         # Then user can see the wizard form for creating a new instance
         self.assertEqual(self.driver.current_url, self.launch_instances_wizard_page.base_url)
         self.assertTrue(self.launch_instances_wizard_page.check_element_existence(CELaunchInstancesWizardPageLocators.MI_SELECT_BTN))
-        
-    # Step 1: Choose an Machine Image 
+
+    # Step 1: Choose an Machine Image
         self.machine_image_wizard = MachineImageWizardPage(self.driver)
         self.machine_image_wizard.choose_machine_image()
 
@@ -135,7 +135,7 @@ class TestInstances(CEBaseTest):
 
     # Step 4: Add Storage
         self.add_storage_wizard = AddStorageWizardPage(self.driver)
-        
+
         # Select volume to attach to instance
         self.add_storage_wizard.select_volume(self.volume_id)
 
@@ -145,10 +145,10 @@ class TestInstances(CEBaseTest):
         self.configure_security_wizard = SecurityGroupWizardPage(self.driver)
         self.configure_security_wizard.create_new_security_group(CESecurityGroupTestData.SECURITY_GROUP_NAME, CESecurityGroupTestData.DESCRIPTION)
         self.configure_security_wizard.apply_sg_for_instance()
-        
+
         # Get SG ID for delete data after test
         self.sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
-    
+
         self.configure_security_wizard.click_button(CELaunchInstancesWizardPageLocators.REVIEW_N_LAUNCH_BTN)
 
     # Step 6: Review Instance & Launch
@@ -174,17 +174,17 @@ class TestInstances(CEBaseTest):
 
         # Check if the new instance state is Stopped
         WebDriverWait(self.driver, 300).until(EC.text_to_be_present_in_element(
-            CEInstancePageLocators.INSTANCE_STATE_BY_ID(self.instance_id), 
+            CEInstancePageLocators.INSTANCE_STATE_BY_ID(self.instance_id),
             CEInstancePageLocators.STOP_STATUS)
         )
 
-        
+
 
 
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_09 -v
 
 
-    
+
 
 if __name__ == "__main__":
     unittest.main(

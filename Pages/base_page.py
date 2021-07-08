@@ -90,7 +90,7 @@ class BasePage(object):
     def wait_and_click_button(self, locator):
         try:
             time.sleep(1)
-            WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(locator)).click()
+            WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).click()
             return self
         except TimeoutException:
             self.driver.get_screenshot_as_file(
@@ -108,7 +108,7 @@ class BasePage(object):
             self.driver.get_screenshot_as_file(
                 'error_snapshot/{filename}.png'.format(filename='check_element_existence'))
             print(_msg)
-            logging.error("CHECK ELEMENT EXISTENCE: Element {locator} does not exist.")
+            logging.error(f"CHECK ELEMENT EXISTENCE: Element {locator} does not exist.")
             self.driver.quit()
             return False
 

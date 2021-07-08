@@ -4,9 +4,10 @@ import logging
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+#TODO
 from Tests.CE.ce_base_test import CEBaseTest
 from Pages.CE.security_group_page import SGHomePage, SGCreatePage
-from Configs import CE_SG_API_URL, CE_SG_URL
+from Configs import CE_SG_API_URL, CE_SG_URL, CE_KEYPAIR_API_URL
 from Configs import CE_USER_TOKEN
 from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 
@@ -36,6 +37,16 @@ class SGBaseTest(CEBaseTest):
 
         self._call_request_delete(url, params, CE_USER_TOKEN)
 
+    def delete_keypair(self):
+        try:
+            url = CE_KEYPAIR_API_URL.format(keypair_name=self.keypair_name)
+        except:
+            logging.info("No keypair to clean.")
+            return
+        self._call_request_delete(url, None, CE_USER_TOKEN)
+
+
     def clear_test_instances(self):
         logging.info("Done testing. Clearing test instances.")
         self.delete_sg()
+        self.delete_keypair()

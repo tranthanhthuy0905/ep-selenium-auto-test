@@ -6,7 +6,11 @@ And user cannot add Ingress Rule
 '''
 
 from Pages.CE.security_group_page import SGDetailsPage
+<<<<<<< HEAD:Tests_Dev/CE_Security_Group/test_entering_wrong_cidr.py
+from Tests_Dev.CE_Security_Group.sg_base_test import SGBaseTest
+=======
 from Tests.CE.CE_Security_Group.sg_base_test import SGBaseTest
+>>>>>>> origin/dev:Tests/CE_Failed/CE_Security_Group/test_entering_wrong_cidr.py
 from Locators.CE import CESecurityGroupLocators
 from Configs.TestData.CESecurityGroupTestData import CESecurityGroupTestData
 
@@ -31,6 +35,6 @@ class TestEnteringWrongCidr(SGBaseTest):
             And user cannot add Ingress Rule
         '''
         self.assertTrue(
-            self.sg_details_page.check_element_existence(CESecurityGroupLocators.INVALID_CIDR_ALERT), 
+            self.sg_details_page.check_element_existence(CESecurityGroupLocators.INVALID_CIDR_ALERT),
             "INVALID CIDR ALERT NOT FOUND"
             )

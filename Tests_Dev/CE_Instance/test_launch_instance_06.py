@@ -1,5 +1,5 @@
 '''
-Scenario 6. Launch instance with keypair then click on "Preview and Launch"	
+Scenario 6. Launch instance with keypair then click on "Preview and Launch"
 	Given a certain user
 	When user wants to launch an instance
 	Then user selects "Instances => Instances" on left side menu
@@ -37,7 +37,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.CE.ce_base_test import CEBaseTest
+from Tests_Dev.CE.ce_base_test import CEBaseTest
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.launch_instances_wizard_page import *
@@ -50,9 +50,9 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_with_keypair_then_launch(self):
         """
-            TEST CASE: Instance should be created successfully with with keypair 
+            TEST CASE: Launch instance with keypair then click on "Preview and Launch"	
         """
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_instances_page()
@@ -67,8 +67,8 @@ class TestInstances(CEBaseTest):
         # Then user can see the wizard form for creating a new instance
         self.assertEqual(self.driver.current_url, self.launch_instances_wizard_page.base_url)
         self.assertTrue(self.launch_instances_wizard_page.check_element_existence(CELaunchInstancesWizardPageLocators.MI_SELECT_BTN))
-        
-    # Step 1: Choose an Machine Image 
+
+    # Step 1: Choose an Machine Image
         self.machine_image_wizard = MachineImageWizardPage(self.driver)
         self.machine_image_wizard.choose_machine_image()
 
@@ -91,7 +91,7 @@ class TestInstances(CEBaseTest):
 
         self.configure_instance_wizard.click_review_and_launch_btn()
 
-    
+
 
     # Step 6: Review Instance & Launch
         self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
@@ -102,7 +102,7 @@ class TestInstances(CEBaseTest):
         # Copy password
         self.review_launch_wizard.copy_password()
 
-        # Apply pass 
+        # Apply pass
         self.review_launch_wizard.apply_password()
 
         # Launch instance
@@ -121,7 +121,11 @@ class TestInstances(CEBaseTest):
         print("Instance is created successfully!")
 
 
+<<<<<<< HEAD:Tests_Dev/CE_Instance/test_launch_instance_06.py
+# python3 -m unittest Tests_Dev.CE_Instance.test_launch_instance_02 -v
+=======
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_06 -v
+>>>>>>> origin/dev:Tests/CE_Instance/test_launch_instance_06.py
 
 if __name__ == "__main__":
     unittest.main(

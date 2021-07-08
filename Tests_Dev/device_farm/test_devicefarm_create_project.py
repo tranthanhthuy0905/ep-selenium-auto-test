@@ -1,12 +1,13 @@
 import os
 import unittest
-import time 
+import time
 
 import HtmlTestRunner
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from Tests_Dev.device_farm.devicefarm_base_test import DEVICE_FARM_BaseTest
+
 from Pages.device_farm.devicefarm_homepage import DEVICE_FARM_HomePage
 from Pages.device_farm.devicefarm_create_project_page import DEVICE_FARM_CreateProjectPage
 
@@ -28,6 +29,7 @@ class Test_DEVICEFARM_Create_Project(DEVICE_FARM_BaseTest):
         self.service_slug = project_name
 
         self.df_create_project_page.click_create_project_submit_button()
+
         self.driver.implicitly_wait(10)
         self.assertTrue(
             self.driver.find_element_by_link_text(project_name)

@@ -1,5 +1,5 @@
 '''
-Scenarior 4. Launch instance without selecting keypair	
+Scenarior 4. Launch instance without selecting keypair
 	Given a certain user
 	When user wants to launch an instance
 	Then user selects "Instances => Instances" on left side menu
@@ -14,7 +14,7 @@ Scenarior 4. Launch instance without selecting keypair
 	When user selects "2G-2Core-2k2" type and clicks on "Next" button
 	Then user can see the Configure Instance Details form in the step 3 of wizard
 	And user can change details of the current instance
-	When user fills in "Default Password" and "Confirm Password" 
+	When user fills in "Default Password" and "Confirm Password"
 	Then the password for root account is set
 	When user clicks on "Next" button in the bottom right corner
 	Then user can see the list of Volumes in the step 4 of wizard
@@ -63,9 +63,9 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_without_selecting_keypair(self):
         """
-            TEST CASE: Instance should be created successfully with full flow but not selecting keypair
+            TEST CASE: Launch instance without selecting keypair
         """
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_instances_page()
@@ -80,8 +80,8 @@ class TestInstances(CEBaseTest):
         # Then user can see the wizard form for creating a new instance
         self.assertEqual(self.driver.current_url, self.launch_instances_wizard_page.base_url)
         self.assertTrue(self.launch_instances_wizard_page.check_element_existence(CELaunchInstancesWizardPageLocators.MI_SELECT_BTN))
-        
-    # Step 1: Choose an Machine Image 
+
+    # Step 1: Choose an Machine Image
         self.machine_image_wizard = MachineImageWizardPage(self.driver)
         self.machine_image_wizard.choose_machine_image()
 
@@ -111,7 +111,7 @@ class TestInstances(CEBaseTest):
         # Get Volume ID for delete data after test
         volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(_volume_name=volume_name))
         self.volume_id = volume_row.get_attribute("data-row-key")
-        
+
         # Select volume to attach to instance
         self.add_storage_wizard.select_volume(self.volume_id)
 
@@ -121,10 +121,10 @@ class TestInstances(CEBaseTest):
         self.configure_security_wizard = SecurityGroupWizardPage(self.driver)
         self.configure_security_wizard.create_new_security_group(CESecurityGroupTestData.SECURITY_GROUP_NAME, CESecurityGroupTestData.DESCRIPTION)
         self.configure_security_wizard.apply_sg_for_instance()
-        
+
         # Get SG ID for delete data after test
         self.sg_id = self.driver.find_element(*CELaunchInstancesWizardPageLocators.SG_DETAILS_ID).text
-    
+
         self.configure_security_wizard.click_button(CELaunchInstancesWizardPageLocators.REVIEW_N_LAUNCH_BTN)
 
     # Step 6: Review Instance & Launch
@@ -150,11 +150,9 @@ class TestInstances(CEBaseTest):
 
         # Check if the new instance state is Stopped
         WebDriverWait(self.driver, 300).until(EC.text_to_be_present_in_element(
-            CEInstancePageLocators.INSTANCE_STATE_BY_ID(self.instance_id), 
+            CEInstancePageLocators.INSTANCE_STATE_BY_ID(self.instance_id),
             CEInstancePageLocators.STOP_STATUS)
         )
-
-
 
 
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_04 -v

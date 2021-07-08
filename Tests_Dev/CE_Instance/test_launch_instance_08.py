@@ -1,5 +1,5 @@
 '''
-Scenarior 8. Launch instance, edit password then click on "Preview and Launch"	
+Scenarior 8. Launch instance, edit password then click on "Preview and Launch"
 	Given a certain user
 	When user wants to launch an instance
 	Then user selects "Instances => Instances" on left side menu
@@ -14,7 +14,7 @@ Scenarior 8. Launch instance, edit password then click on "Preview and Launch"
 	When user selects "2G-2Core-2k2" type and clicks on "Next" button
 	Then user can see the Configure Instance Details form in the step 3 of wizard
 	And user can change details of the current instance
-	When user fills in "Default Password" and "Confirm Password" 
+	When user fills in "Default Password" and "Confirm Password"
 	Then the password for root account is set
 	When user clicks on "Review and Launch" button in the bottom right corner
 	Then user can see the review of current instance in the last step of wizard
@@ -49,9 +49,9 @@ import time
 
 
 class TestInstances(CEBaseTest):
-    def test_create_vm_fullInfo(self):
+    def test_create_vm_with_password_then_launch(self):
         """
-            TEST CASE: Instance should be created successfully with full flow
+            TEST CASE: Launch instance set password then click on "Preview and Launch"
         """
         self.CE_homepage = CEHomePage(self.driver)
         self.CE_homepage.access_instances_page()
@@ -66,8 +66,8 @@ class TestInstances(CEBaseTest):
         # Then user can see the wizard form for creating a new instance
         self.assertEqual(self.driver.current_url, self.launch_instances_wizard_page.base_url)
         self.assertTrue(self.launch_instances_wizard_page.check_element_existence(CELaunchInstancesWizardPageLocators.MI_SELECT_BTN))
-        
-    # Step 1: Choose an Machine Image 
+
+    # Step 1: Choose an Machine Image
         self.machine_image_wizard = MachineImageWizardPage(self.driver)
         self.machine_image_wizard.choose_machine_image()
 
@@ -105,8 +105,6 @@ class TestInstances(CEBaseTest):
         # Check if the new instance state is Running
         self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.RUNNING_STATUS)
         print("Instance is created successfully!")
-
-
 
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_08 -v
 

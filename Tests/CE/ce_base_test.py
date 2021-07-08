@@ -16,6 +16,14 @@ class CEBaseTest(BaseTest):
         if hasattr(self, 'sg_id'):
             self.delete_CE_sg_by_id(self.sg_id)
             print("Security group has been deleted")
+        if hasattr(self, 'snapshot_id'):
+            self.delete_CE_snapshot_by_id(self.snapshot_id)
+            print("Snapshot volume has been deleted")
+        if hasattr(self, 'list_sg_id'):
+            for sg_id in self.list_sg_id:
+                self.delete_CE_sg_by_id(sg_id)
+            print("Security groups have been deleted")
+
 
 
     def delete_CE_instance(self):
@@ -28,7 +36,7 @@ class CEBaseTest(BaseTest):
 
         except Exception as e:
             print("Can't delete CE instance", str(e))
-    
+
     def change_CE_instance_status(self, instance_id, instance_status):
         try:
             url = CE_INSTANCE_API_CLIENT_URL + "changeStatus"
@@ -104,4 +112,15 @@ class CEBaseTest(BaseTest):
             self._call_request_delete(url, params, CE_USER_TOKEN)
         except Exception as e:
             print("Can't delete CE security group", str(e))
+
+
+    def delete_CE_snapshot_by_id(self, snapshot_id):
+        try:
+            url = CE_SNAPSHOT_API_CLIENT_URL
+            params = {
+                "id": snapshot_id,
+            }
+            self._call_request_delete(url, params, CE_USER_TOKEN)
+        except Exception as e:
+            print("Can't delete CE snapshot volume", str(e))
 
