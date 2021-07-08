@@ -1,8 +1,11 @@
-from selenium.webdriver.common.by import By
 
-from Configs import EFS_FILESYSTEM_BASE_URL, EFS_USER_TOKEN
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
+
+from Configs import EFS_FILESYSTEM_BASE_URL
 from Locators.EFS import EFSFileSystemLocators
-from Pages.EFS.efs_homepage import EFSHomePage
 from Pages.base_page import BasePage
 
 
@@ -22,25 +25,29 @@ class EFSFileSystemPage(BasePage):
             .click_button(self.locator.OK_BTN)
         return self
 
-    def allow_ip(self, instance_ip, file_system_id, read_only):
+    def allow_ip(self, instance_ip, file_id, read_only):
         self\
-            .select_file_system(file_system_id)\
+            .select_file_system(file_id)\
             .click_button(self.locator.ALLOW_IP_BTN)\
-            .fill_form(instance_ip, self.locator.IP_INPUT_FORM)
+            .click_button(self.locator.ADD_FIELD_BTN)\
+            .fill_form(instance_ip, self.locator.INPUT_IP)
         if read_only:
             self.click_button(self.locator.READ_ONLY_CHECKBOX)
-        self.click_button(self.locator.OK_BTN)
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.locator.ALLOW_IP_OK),
+                                             "Test fails due to not being able to click OK to complete Allow IP process")
+        self.click_button(self.locator.ALLOW_IP_OK)
         return self
 
-    def remove_ip(self):
-        self\
-            .click_button(self.locator.IP_REMOVE_BTN)\
-            .click_button(self.locator.OK_BTN)
-        self
+    # def remove_ip(self):
+    #     self\
+    #         .click_button(self.locator.IP_REMOVE_BTN)\
+    #         .click_button(self.locator.OK_BTN)
+    #     self
 
-    def delete_filesystem(self, file_id):
+    def delete_filesystem(self):
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.locator.ACTIONS_BTN),
+                                             "Wait more time to update the volume before deleting it")
         self \
-            .select_file_system(file_id) \
             .click_button(self.locator.ACTIONS_BTN)\
             .click_button(self.locator.DELETE_OPTION)\
             .click_button(self.locator.DELETE_CONFIRM)

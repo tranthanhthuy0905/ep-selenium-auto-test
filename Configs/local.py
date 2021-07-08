@@ -44,11 +44,9 @@ CE_SG_API_URL = urllib.parse.urljoin(CE_API_URL, "security-groups")
 
 # EFS
 EFS_BASE_URL = urllib.parse.urljoin(os.getenv("EFS_BASE_URL"), "efs/home")
-# EFS_HOME_URL = urllib.parse.urljoin(EFS_BASE_URL, "home/")
 EFS_API_URL = urllib.parse.urljoin(os.getenv("EFS_BASE_URL"), "api/client/")
 
-# EFS_FILESYSTEM_URL = os.path.join(os.getenv("EFS_FILESYSTEM_URL"), "efs/file-systems")
-EFS_FILESYSTEM_BASE_URL = urllib.parse.urljoin("EFS_FILESYSTEM_URL", "efs/file-systems")
+EFS_FILESYSTEM_BASE_URL = urllib.parse.urljoin("EFS_FILESYSTEM_BASE_URL", "efs/file-systems")
 EFS_FILESYSTEM_API_CLIENT_URL = urllib.parse.urljoin(os.getenv("EFS_FILESYSTEM_BASE_URL"), "api/client/")
 
 # S3
