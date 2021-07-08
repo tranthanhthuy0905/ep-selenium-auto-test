@@ -22,8 +22,9 @@ CE_BASE_URL = os.path.join(os.getenv("CE_BASE_URL"), "ce/")
 CE_API_URL = urllib.parse.urljoin(os.getenv("CE_BASE_URL"), "api/client/")
 
 CE_VOLUME_URL = posixpath.join(CE_BASE_URL, "elastic-block-store/volumes")
-CE_SNAPSHOT_URL = posixpath.join(CE_BASE_URL, "elastic-block-store/snapshots")
 CE_CREATE_VOLUME_URL = posixpath.join(CE_VOLUME_URL, "create-volume")
+CE_SNAPSHOT_URL = posixpath.join(CE_BASE_URL, "elastic-block-store/snapshots")
+CE_CREATE_SNAPSHOT_URL = posixpath.join(CE_SNAPSHOT_URL, "create-snapshot")
 CE_INSTANCE_URL = posixpath.join(CE_BASE_URL, "instances")
 CE_KEYPAIR_URL = posixpath.join(CE_BASE_URL, "keypair")
 

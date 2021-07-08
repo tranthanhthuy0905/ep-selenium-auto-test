@@ -23,7 +23,6 @@ class CEVolumePage(BasePage):
         # When user clicks on "Create Volume" button on the top right
         self.click_create_volume_btn()
         self.create_volume_page = CECreateVolumePage(self.driver)
-
         # When user clicks on "Create" button
         self.volume_name = CEVolumeTestData.VOLUME_NAME
         time.sleep(2)
@@ -47,7 +46,7 @@ class CEVolumePage(BasePage):
         self
 
     def check_size_gb(self):
-        size_gb = self.driver.find_element(*self.locator.SIZE_GB).text
+        size_gb = int(self.driver.find_element(*self.locator.SIZE_GB).text)
         return size_gb
 
     def check_volume_state(self, volume_id, state):

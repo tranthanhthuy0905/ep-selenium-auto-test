@@ -42,7 +42,7 @@ class CEInstancesPage(BasePage):
 
         # TODO: Test the instance state (should be Running)
         WebDriverWait(self.driver, 300).until(EC.text_to_be_present_in_element
-                                             (CELaunchInstancesWizardPageLocators.INSTANCE_STATE_BY_ID(
+                                             (CEInstancePageLocators.INSTANCE_STATE_BY_ID(
                                                  instance_id),
                                               "Stopped"),
                                              "Cannot stop the chosen instance")

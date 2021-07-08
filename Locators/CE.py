@@ -128,15 +128,12 @@ class CEVolumePageLocators(object):
 
     # Resize Volume Elements
     RESIZE_VOLUME_BTN = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/button[2]')
-    SIZE_GB = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[3]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[6]')
+    SIZE_GB = (By.XPATH, "//div[preceding-sibling::div/div/text()='Size']")
     RESIZE_VOLUME_BOX = (By.XPATH, '/html/body/div[2]/div/div[2]/div/div[2]')
     # OK_BTN = (By.XPATH, "//button/span[text()='OK']")
     OK_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[3]/button[2]")
     SHRINK_OK_BTN = (By.ID, "form_resize_volume_shrink")
     DISK_OFFERING = (By.XPATH, '//*[@id="form_resize_volume"]/div[1]/div[2]/div/div/div')
-    DEFAULT_100G = (By.XPATH, "//div[text()='Default (100G)']")
-    OPTION_200G = (By.XPATH, "//div[text()='200G']")
-    OPTION_500G = (By.XPATH, "//div[text()='500G']")
     SIZE_FORM = (By.XPATH, "//*[@id='form_resize_volume_size']")
 
     # Attach volume
@@ -165,6 +162,9 @@ class CECreateVolumePageLocators(object):
     CREATE_VOLUME_BTN = (By.XPATH, "//button[contains(.,'Create Volume')]")
     VOLUME_TYPE_LIST = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[2]/div/div/div")
     CUSTOM_DISK = (By.XPATH, "//div[text()='Custom Disk']")
+    DEFAULT_100G = (By.XPATH, "//div[text()='Default (100G)']")
+    OPTION_200G = (By.XPATH, "//div[text()='200G']")
+    OPTION_500G = (By.XPATH, "//div[text()='500G']")
     VOLUME_NAME_FORM = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[3]/div[2]/div/div[1]/input")
     VOLUME_SIZE_FORM = (By.XPATH, "/html[@class=' ']/body/div[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[3]/div/div/div/input")
     CREATE_VOLUME_SUCCESS_MESSAGE = (By.XPATH, "//div[text()='Created volume successfully.']")
@@ -255,6 +255,6 @@ class CESnapshotLocators(object):
     DELETE_CONFIRM = (By.XPATH, "//button[contains(.,'Delete')]")
     # Revert to snapshot
     REVERT_TO_SNAPSHOT = (By.XPATH, "//span[text()='Revert to snapshot']")
-
+    REVERT_CONFIRM = (By.XPATH,"//button[contains(.,'Revert')]")
     # Get Snapshot ID
     PARRENT_BY_SNAPSHOT_NAME = lambda _snapshot_name: (By.XPATH, f"//td[contains(.,'{_snapshot_name}')]/parent::*")
