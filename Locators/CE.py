@@ -248,6 +248,8 @@ class CEKeypairLocators:
                                          "and following-sibling::div[./button='Close' "
                                          "and ./button='Download SSH key pair']]")
 
+    DUPLICATED_PUBLIC_KEY_DIALOG = (By.XPATH, "//div[span='Failed' and following-sibling::div/button[@type='button' and ./span/text()='Ok']]")
+
 
 
 class CESnapshotLocators(object):

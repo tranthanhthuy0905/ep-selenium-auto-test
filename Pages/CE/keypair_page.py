@@ -18,6 +18,12 @@ class CEKeypairPage(BasePage):
             self.authenticate(CE_USER_TOKEN)
             self.driver.get(self.base_url)
 
+    def create_new_keypair(self, keypair_name, public_key):
+        self.click_create_keypair()
+        self.fill_keypair_info(keypair_name, public_key)
+        self.click_create_keypair_submit_button()
+        return keypair_name
+
     def fill_keypair_info(self, keypair_name, public_key):
         self \
             .fill_form(keypair_name, self.locator.KEYPAIR_NAME_TEXTBOX) \
@@ -45,4 +51,9 @@ class CEKeypairPage(BasePage):
     def check_download_keypair_dialog_existence(self):
         return self.check_element_existence(
             CEKeypairLocators.DOWNLOAD_KEYPAIR_DIALOG
+        )
+
+    def check_alert_public_key_existence(self):
+        return self.check_element_existence(
+            CEKeypairLocators.DUPLICATED_PUBLIC_KEY_DIALOG
         )
