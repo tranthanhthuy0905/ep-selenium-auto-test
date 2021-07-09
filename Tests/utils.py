@@ -40,7 +40,7 @@ class APIService:
             "accept": "application/json"
         }
         r = requests.delete(url, headers=headers, params=params)
-        print('response', r)
+        # print('response', r)
         if r.status_code == 200:
             logging.info(f"Succeeded calling {url}")
         else:
@@ -54,7 +54,7 @@ class APIService:
             "accept": "application/json"
         }
         r = requests.get(url, headers=headers, params=params)
-        print(r)
+        # print(r)
         if r.status_code == 200:
             logging.info(f"Succeeded calling {url}")
         else:

@@ -100,7 +100,7 @@ class BasePage(object):
 
     def check_element_existence(self, locator):
         try:
-            WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(locator))
+            WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(locator))
             logging.info(f"CHECK ELEMENT EXISTENCE: Element {locator} exists.")
             return self
         except TimeoutException:

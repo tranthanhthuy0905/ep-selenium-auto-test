@@ -12,6 +12,7 @@ DEVICE_FARM_USER_TOKEN = os.getenv("DEVICE_FARM_USER_TOKEN", "")
 CE_USER_TOKEN = os.getenv("CE_USER_TOKEN", "")
 S3_USER_TOKEN = os.getenv("S3_USER_TOKEN", "")
 EFS_USER_TOKEN = os.getenv("EFS_USER_TOKEN","")
+CUSTOM_DOMAIN_USER_TOKEN = os.getenv("CUSTOM_DOMAIN_USER_TOKEN","")
 
 # Common
 FILE_PATH_UPLOAD_SAMPLE = os.path.abspath("Configs/TestData/sample_files/first.txt")
@@ -69,3 +70,8 @@ S3_FILES_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "files")
 DEVICE_FARM_BASE_URL = os.getenv("DEVICE_FARM_BASE_URL")
 DEVICE_FARM_API_PROJECT = urllib.parse.urljoin(os.getenv("DEVICE_FARM_BASE_URL"), "api/client/projects")
 DEVICE_FARM_API_SESSION = urllib.parse.urljoin(os.getenv("DEVICE_FARM_BASE_URL"), "api/client/mobile-devices/sessions")
+
+# Custom Domain
+CUSTOM_DOMAIN_BASE_URL = os.getenv("CUSTOM_DOMAIN_BASE_URL")
+CUSTOM_DOMAIN_API_BASE_URL = posixpath.join(CUSTOM_DOMAIN_BASE_URL, "api/client")
+CUSTOM_DOMAIN_API_CLIENT_URL = posixpath.join(CUSTOM_DOMAIN_API_BASE_URL, "domains/")
