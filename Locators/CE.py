@@ -148,10 +148,11 @@ class CEVolumePageLocators(object):
     DELETE_VOLUME_BTN = (By.XPATH, "//span[text()='Delete volume']")
     DELETE_CONFIRM_BUTTON = (By.XPATH, "//button//span[text()='Delete']")
 
-    # Volume detail
+    # Instance detail
     VM_NAME = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[4]/div/div/div[2]')
     VM_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[8]/div/div/div[2]')
     VM_ID = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[2]/div')
+    VM_IP = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[7]')
     VOLUMES_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div")
     CLOSE_MESSAGE_BTN = (By.CLASS_NAME, "ant-notification-close-x")
     VOLUME_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[3]/div/span/span[2]")

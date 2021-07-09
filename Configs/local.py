@@ -11,6 +11,7 @@ load_dotenv()
 DEVICE_FARM_USER_TOKEN = os.getenv("DEVICE_FARM_USER_TOKEN", "")
 CE_USER_TOKEN = os.getenv("CE_USER_TOKEN", "")
 S3_USER_TOKEN = os.getenv("S3_USER_TOKEN", "")
+EFS_USER_TOKEN = os.getenv("EFS_USER_TOKEN","")
 
 # Common
 FILE_PATH_UPLOAD_SAMPLE = os.path.abspath("Configs/TestData/sample_files/first.txt")
@@ -44,6 +45,13 @@ CE_SG_KEYPAIR_HOMEPAGE_URL = urllib.parse.urljoin(CE_BASE_URL, "keypair") #Shoul
 CE_INSTANCE_CREATE_WIZARD_URL = posixpath.join(CE_BASE_URL, "launch-instance-wizard")
 CE_SG_API_URL = urllib.parse.urljoin(CE_API_URL, "security-groups")
 CE_KEYPAIR_API_URL = urllib.parse.urljoin(CE_API_URL, "keypairs/{keypair_name}")
+
+# EFS
+EFS_BASE_URL = urllib.parse.urljoin(os.getenv("EFS_BASE_URL"), "efs/home")
+EFS_API_URL = urllib.parse.urljoin(os.getenv("EFS_BASE_URL"), "api/client/")
+
+EFS_FILESYSTEM_BASE_URL = urllib.parse.urljoin("EFS_FILESYSTEM_BASE_URL", "efs/file-systems")
+EFS_FILESYSTEM_API_CLIENT_URL = urllib.parse.urljoin(os.getenv("EFS_FILESYSTEM_BASE_URL"), "api/client/")
 
 # S3
 S3_BASE_URL = urllib.parse.urljoin(os.getenv("S3_BASE_URL"), "s3/")
