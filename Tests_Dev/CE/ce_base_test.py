@@ -1,5 +1,5 @@
 from Configs.TestData.CEInstanceTestData import CEInstanceTestData
-from Pages.CE.launch_instances_wizard_page import ConfigureInstanceWizardPage
+from Pages.CE.launch_instances_wizard_page import ConfigureInstanceWizardPage, ReviewLaunchWizardPage
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.homepage import CEHomePage
 from Tests_Dev.base_test import BaseTest
@@ -149,4 +149,16 @@ class CEBaseTest(BaseTest):
         instance_name = CEInstanceTestData.gen_instance_name()
         self.configure_instance_wizard.fill_instance_name(instance_name)
         return instance_name
+
+    def create_simple_instance(self):
+        instance_name = self.passing_first_two_step()
+        self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
+        self.review_launch_wizard.click_review_and_launch_btn()
+        self.review_launch_wizard.apply_default_password()
+        # Launch instance
+        self.review_launch_wizard.click_launch_instance()
+
+        self.instances_page.check_if_instance_launched_successfully()
+        return instance_name
+
 

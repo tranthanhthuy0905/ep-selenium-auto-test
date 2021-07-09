@@ -45,6 +45,18 @@ class CEInstancesPage(BasePage):
         # Check if the new instance state is Stopped
         self.check_instance_state(instance_id, CEInstancePageLocators.STOPPED_STATUS)
 
+    def terminate_instance(self, instance_id):
+        # Test completed, stop instance for cleaning test data
+        self.select_instance(instance_id)
+        self.change_instance_states(self.locator.TERMINATE_INSTANCE_BTN, self.locator.TERMINATE_CONFIRM_BTN)
+        print("Instance is terminating")
+
+        # Check if the new instance state is terminated
+        WebDriverWait(self.driver, 300).until(EC.invisibility_of_element_located(
+            CEInstancePageLocators.INSTANCE_STATE_BY_ID(instance_id)))
+        if (hasattr(self, "instance_id")):
+            delattr(self, "instance_id")
+
 
     def stop_vm(self, instance_id):
         self.change_instance_states(instance_id,
