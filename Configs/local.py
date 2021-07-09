@@ -34,13 +34,17 @@ CE_KEYPAIR_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "keypairs/")
 CE_VOLUME_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "volumes/")
 CE_SNAPSHOT_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "snapshot-volume/")
 CE_SG_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "security-groups/")
+CE_SNAPSHOT_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "snapshot-volume/")
 
 CE_SG_URL = urllib.parse.urljoin(CE_BASE_URL, "network/security-groups/")
 CE_SG_CREATE_URL = urllib.parse.urljoin(CE_SG_URL, "create-security-group")
 CE_SG_DETAILS_PAGE_URL = urllib.parse.urljoin(CE_SG_URL, "{sg_id}")
 
+CE_SG_KEYPAIR_HOMEPAGE_URL = urllib.parse.urljoin(CE_BASE_URL, "keypair") #Should keypair be plural??
+
 CE_INSTANCE_CREATE_WIZARD_URL = posixpath.join(CE_BASE_URL, "launch-instance-wizard")
 CE_SG_API_URL = urllib.parse.urljoin(CE_API_URL, "security-groups")
+CE_KEYPAIR_API_URL = urllib.parse.urljoin(CE_API_URL, "keypairs/{keypair_name}")
 
 # EFS
 EFS_BASE_URL = urllib.parse.urljoin(os.getenv("EFS_BASE_URL"), "efs/home")
@@ -62,4 +66,6 @@ S3_BUCKET_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "buckets")
 S3_FILES_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "files")
 
 # Device Farm
-DEVICE_FARM_BASE_URL = urllib.parse.urljoin(os.getenv("DEVICE_FARM_BASE_URL"), "devicefarm/mobile-device")
+DEVICE_FARM_BASE_URL = os.getenv("DEVICE_FARM_BASE_URL")
+DEVICE_FARM_API_PROJECT = urllib.parse.urljoin(os.getenv("DEVICE_FARM_BASE_URL"), "api/client/projects")
+DEVICE_FARM_API_SESSION = urllib.parse.urljoin(os.getenv("DEVICE_FARM_BASE_URL"), "api/client/mobile-devices/sessions")

@@ -13,6 +13,3 @@ class EFSHomePage(BasePage):
     def click_file_systems_button(self):
         self.click_button(EFSHomePageLocators.FILES_SYSTEMS)
         return self
-    # def access_efs_filesystem_page(self):
-    #     efs_filesystem_page = self.click_button_and_return_page(EFSHomePageLocators.FILES_SYSTEMS, EFSFileSystemPage(self.driver))
-    #     return efs_filesystem_page

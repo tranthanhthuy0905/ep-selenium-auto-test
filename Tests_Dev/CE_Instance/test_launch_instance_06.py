@@ -49,7 +49,7 @@ from Locators.CE import *
 import time
 
 
-class TestInstances(CEBaseTest):
+class TestInstances06(CEBaseTest):
     def test_create_vm_with_keypair_then_launch(self):
         """
             TEST CASE: Launch instance with keypair then click on "Preview and Launch"	
@@ -80,11 +80,11 @@ class TestInstances(CEBaseTest):
     # Step 3: Configure Instance Details
         self.configure_instance_wizard = ConfigureInstanceWizardPage(self.driver)
         # Set instance name
-        instance_name = CEInstanceTestData.INSTANCE_NAME
+        instance_name = CEInstanceTestData.gen_instance_name()
         self.configure_instance_wizard.fill_instance_name(instance_name)
 
         # Create keypair
-        self.keypair_name = CEKeypairTestData.KEYPAIR_NAME
+        self.keypair_name = CEKeypairTestData.gen_new_keypair_name()
         self.configure_instance_wizard.create_new_keypair(self.keypair_name, "")
 
         # Without setting default password
@@ -95,37 +95,22 @@ class TestInstances(CEBaseTest):
 
     # Step 6: Review Instance & Launch
         self.review_launch_wizard = ReviewLaunchWizardPage(self.driver)
-        # Show generated pass
-        self.review_launch_wizard.show_password()
-        # Random password
-        self.review_launch_wizard.random_password()
-        # Copy password
-        self.review_launch_wizard.copy_password()
-
-        # Apply pass
-        self.review_launch_wizard.apply_password()
-
+        self.review_launch_wizard.apply_default_password()
+        
         # Launch instance
-        self.review_launch_wizard.launch_instance()
+        self.review_launch_wizard.click_launch_instance()
+
+        self.instances_page.check_if_instance_launched_successfully()
 
         # Get instance id for clear data after test
-        # WebDriverWait(self.driver, 10).until(EC.url_to_be(self.instances_page.base_url))
-        instance_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_INSTANCE_NAME(instance_name))
-        self.instance_id = instance_row.get_attribute("data-row-key")
-
-        self.instances_page.check_element_existence(CEInstancePageLocators.ANNOUNCEMENT)
-        self.instances_page.check_element_existence(CEInstancePageLocators.LAUNCH_VM_SUCCESS_MESSAGE)
+        self.instance_id = self.instances_page.get_instance_id(instance_name)
 
         # Check if the new instance state is Running
         self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.RUNNING_STATUS)
         print("Instance is created successfully!")
 
 
-<<<<<<< HEAD:Tests_Dev/CE_Instance/test_launch_instance_06.py
-# python3 -m unittest Tests_Dev.CE_Instance.test_launch_instance_02 -v
-=======
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_06 -v
->>>>>>> origin/dev:Tests/CE_Instance/test_launch_instance_06.py
 
 if __name__ == "__main__":
     unittest.main(

@@ -26,7 +26,7 @@ class CELaunchInstancesWizardPage(BasePage):
                 'error_snapshot/{filename}.png'.format(filename='choose_volume_type'))
 
     def choose_instance_details(self):
-        self.instance_name = CEInstanceTestData.INSTANCE_NAME
+        self.instance_name = CEInstanceTestData.gen_instance_name()
         self\
             .click_button(self.locator.MI_SELECT_BTN)\
             .click_button(self.locator.TYPE_2G_RADIO)\
@@ -60,7 +60,7 @@ class CELaunchInstancesWizardPage(BasePage):
 
     def edit_password(self):
         self\
-            .click_button(self.locator.EDIT_PASSWORD)
+            .wait_and_click_button(self.locator.EDIT_PASSWORD)
 
     def input_password(self, value1, value2):
         self \
@@ -158,12 +158,16 @@ class AddStorageWizardPage(CELaunchInstancesWizardPage):
     def select_volume(self, volume_id):
         self.click_button(CELaunchInstancesWizardPageLocators.RADIO_BY_NAME(volume_id))
         return self
+    
+    def get_volume_id(self, volume_name):
+        volume_row = self.driver.find_element(*CELaunchInstancesWizardPageLocators.PARRENT_BY_VOLUME_NAME(volume_name))
+        return volume_row.get_attribute("data-row-key")
 
-    def add_new_volume(self, volume_name, volume_size):
+    def add_new_volume(self, _volume_name, volume_size):
         # Click "Add new Volume" button
         self.click_button(self.locator.ADD_NEW_VOLUME_BTN)
         # Fill the form and select type of volume
-        self.fill_volume_info(volume_name, volume_size)
+        self.fill_volume_info(_volume_name, volume_size)
         # Click on "Create" button on modal
         self.click_button(self.locator.CREATE_VOLUME_BTN)
         # Then the new volume is created
@@ -226,29 +230,38 @@ class ReviewLaunchWizardPage(CELaunchInstancesWizardPage):
         self.locator = CELaunchInstancesWizardPageLocators
         super().__init__(driver)
 
-    def show_password(self):
+    def click_show_password(self):
         self\
             .click_button(self.locator.SHOW_PASSWORD_BTN)
         return self
 
-    def random_password(self):
+    def click_random_password(self):
         self\
             .click_button(self.locator.RANDOM_PASSWORD_BTN)
         return self
 
-    def apply_password(self):
+    def click_apply_password(self):
         self\
-            .click_button(self.locator.APPLY_PASSWORD_BTN)
+            .wait_and_click_button(self.locator.APPLY_PASSWORD_BTN)
+        return self
+
+    def apply_default_password(self):
+        # Show generated pass
+        self.click_show_password()
+        # Random password
+        self.click_random_password()
+        # Copy password
+        self.copy_password()
+        # Apply pass
+        self.click_apply_password()
         return self
 
     def copy_password(self):
-        self\
-            .click_button(self.locator.COPY_PASSWORD_BTN)
-        WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located(self.locator.CLOSE_MESSAGE_BTN))
-        self.click_button(self.locator.CLOSE_MESSAGE_BTN)
+        self.wait_and_click_button(self.locator.COPY_PASSWORD_BTN)
+        self.wait_and_click_button(self.locator.CLOSE_MESSAGE_BTN)
         return self
 
-    def launch_instance(self):
+    def click_launch_instance(self):
         self\
             .click_button(self.locator.LAUNCH_BTN)
         return self

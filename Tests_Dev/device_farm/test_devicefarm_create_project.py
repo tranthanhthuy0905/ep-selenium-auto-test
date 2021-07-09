@@ -1,20 +1,13 @@
 import os
 import unittest
-<<<<<<< HEAD
 import time
-=======
-import time 
->>>>>>> origin/dev
 
 import HtmlTestRunner
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-<<<<<<< HEAD
 from Tests_Dev.device_farm.devicefarm_base_test import DEVICE_FARM_BaseTest
-=======
-from Tests.device_farm.devicefarm_base_test import DEVICE_FARM_BaseTest
->>>>>>> origin/dev
+
 from Pages.device_farm.devicefarm_homepage import DEVICE_FARM_HomePage
 from Pages.device_farm.devicefarm_create_project_page import DEVICE_FARM_CreateProjectPage
 
@@ -36,23 +29,16 @@ class Test_DEVICEFARM_Create_Project(DEVICE_FARM_BaseTest):
         self.service_slug = project_name
 
         self.df_create_project_page.click_create_project_submit_button()
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> origin/dev
         self.driver.implicitly_wait(10)
         self.assertTrue(
             self.driver.find_element_by_link_text(project_name)
         )
         self.assertIn("Created project successfully", self.driver.page_source, msg='CREATE PROJECT IS NOT SUCCESSFULLY')
+        self._call_api_delete_project()
 
 if __name__ == "__main__":
     unittest.main(
         testRunner=HtmlTestRunner.HTMLTestRunner(
             output=os.path.join(os.getcwd(), "Reports"))
-<<<<<<< HEAD
     )
-=======
-    )
->>>>>>> origin/dev

@@ -22,8 +22,10 @@ class CESecurityGroupTestData(BaseTestData):
     ICMP_SELECTION_INDEX = 2
     ALL_SELECTION_INDEX = 3
 
+    TCP_VALUE_IN_TABLE = "tcp"
     UDP_VALUE_IN_TABLE = "udp"
     ICMP_VALUE_IN_TABLE = "icmp"
+    ALL_VALUE_IN_TABLE = "all"
 
     def gen_SG_name():
         return "autotest-sg-" + str(random.randint(100000,999999))
