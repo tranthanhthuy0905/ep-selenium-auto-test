@@ -251,7 +251,7 @@ class CEKeypairLocators:
     FINGERPRINT_BY_KEYPAIR_NAME = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[@class='ant-table-cell'][2]")
     SUCCESSFULLY_MESSAGE = (By.XPATH, "//p[contains(.,'Created keypair successfully.')]")
     CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
-    SELECT_KEYPAIR_RADIO = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[1]/label/span/input")
+    SELECT_KEYPAIR_RADIO = lambda _name: (By.XPATH, f"//input[@type='radio' and ancestor::td[following-sibling::td='{_name}']]")
     KEYPAIR_ROW = lambda _name: (By.XPATH, f"//td[@class='ant-table-cell' and text()='{_name}']")
 
     INVALID_KEY_ALERT_DIALOG = (By.XPATH, "//div[@class='ant-modal-confirm-body' and ./span/text()='Failed' and ./div/text()='Public key is invalid']")
@@ -262,6 +262,9 @@ class CEKeypairLocators:
                                          "and ./button='Download SSH key pair']]")
 
     DUPLICATED_PUBLIC_KEY_DIALOG = (By.XPATH, "//div[span='Failed' and following-sibling::div/button[@type='button' and ./span/text()='Ok']]")
+    ACTION_BTN = (By.XPATH, "//button[div='Actions ']")
+    DELETE_BTN = (By.XPATH, "//span[text()='Delete keypair']")
+    CONFIRM_DELETE_BTN = (By.XPATH, "//button[span='Delete']")
 
 
 
