@@ -65,7 +65,7 @@ class VolumeBaseTest(CEBaseTest):
 
         # Click "Apply this password" button,
         # Click "Launch" button
-        wait = WebDriverWait(self.driver, 50)
+        wait = WebDriverWait(self.driver, 100)
         wait.until(EC.element_to_be_clickable(CELaunchInstancesWizardPageLocators.APPLY_THIS_PASSWORD),
                    'Cannot apply default password because "Apply this password" button is not clickable. Maybe it requires more time to wait')
         self.launch_instances_wizard_page.apply_default_password()
@@ -90,6 +90,8 @@ class VolumeBaseTest(CEBaseTest):
 
         self.instance_id = self.driver.find_element_by_xpath(
             "//td[contains(.,'" + self.instance_name + "')]/parent::*").get_attribute("data-row-key")
+
+        self.instance_ip = self.driver.find_element(*CEVolumePageLocators.VM_IP).text
 
         time.sleep(2)
         # TODO: Test the instance state (should be Running)
