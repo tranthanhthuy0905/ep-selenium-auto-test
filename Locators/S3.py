@@ -35,3 +35,7 @@ class S3Locators:
     DELETE_BUCKET_SUCCESSFUL_ALERT = (By.XPATH, "//div[@role='alert' "
                                                 "and ./div/text()='Successful!' "
                                                 "and ./div/text()='Delete bucket is successful!']")
+
+    DELETE_NON_EMPTY_BUCKET_ALERT = (By.XPATH, "//div[@class='ant-modal-body' "
+                                               "and */div/span/text()='Failed to delete bucket' "
+                                               "and */div/button/span/text()='Ok']")

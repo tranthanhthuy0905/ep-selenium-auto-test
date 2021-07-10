@@ -3,13 +3,6 @@ import json
 import requests
 
 class APIService:
-
-    def _call_api_delete_s3_bucket(self):
-        pass
-
-    def _call_api_delete_instance(self):
-        pass
-
     def _call_request_post(self, url, jsonBody, user_token):
         headers = {
             "Cookie": f"user-token={user_token}",
@@ -48,7 +41,6 @@ class APIService:
         logging.info(f"DELETE response: {r.content}. Params: {params}")
 
     def _call_request_get(self, url, params, user_token):
-        print("payload", url, params, user_token)
         headers = {
             "cookie": f"user-token={user_token}",
             "accept": "application/json"

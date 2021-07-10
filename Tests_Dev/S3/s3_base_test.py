@@ -9,20 +9,39 @@ from Configs import S3_BUCKET_DETAILS_URL
 from Configs import S3_USER_TOKEN
 from Pages.S3.s3_homepage import S3HomePage
 from Pages.S3.s3_create_bucket_page import S3CreateBucketPage
-from Pages.S3.s3_bucket_details_page import S3BucketDetailsPage
+from Pages.S3.s3_bucket_details_page import S3BucketDetailsPage, S3BucketFilesAndFoldersPage
 
 class S3BaseTest(BaseTest):
+
+    def setup_test_instances(self):
+        self.bucket_name = None
+        self.buckets_list = []
+
     def clear_test_instances(self):
+        self.delete_s3_bucket()
         self.delete_s3_buckets()
 
+    def delete_s3_bucket(self):
+        try:
+            bucket_name = self.bucket_name
+            assert bucket_name
+        except:
+            return None
+        self._exec_delete_bucket(bucket_name)
 
     def delete_s3_buckets(self):
         try:
-            bucket_name = self.bucket_name
+            buckets_list = self.buckets_list
+            assert buckets_list
         except:
             return None
+        for bucket_name in buckets_list:
+            self._exec_delete_bucket(bucket_name)
+
+    def _exec_delete_bucket(self, bucket_name):
         self.delete_bucket_files(bucket_name)
         self._call_api_delete_s3_bucket(bucket_name)
+
 
     def _call_api_delete_s3_bucket(self, bucket_name):
         try:
@@ -43,7 +62,19 @@ class S3BaseTest(BaseTest):
         self.s3_create_bucket_page.click_create_bucket_submit_button()
         self.driver.implicitly_wait(10)
         WebDriverWait(self.driver, 10).until(EC.url_to_be(S3_BUCKET_DETAILS_URL.format(bucket_name=bucket_name)))
+        if upload_file:
+            # TODO: Can check selenium timeout here by removing if
+            self.upload_files_to_bucket(bucket_name)
+
         return bucket_name
+
+    def upload_files_to_bucket(self, bucket_name):
+        self.s3_bucket_details_page = S3BucketDetailsPage(self.driver, bucket_name)
+        self.s3_bucket_details_page.access_page()
+        self.s3_bucket_details_page.click_upload_file()
+
+        self.s3_files_and_folders_page = S3BucketFilesAndFoldersPage(self.driver, bucket_name)
+        self.s3_files_and_folders_page.upload_file_from_browser()
 
     def delete_bucket_files(self,bucket_name):
         #TODO: Refactor
@@ -61,7 +92,6 @@ class S3BaseTest(BaseTest):
             for filename in list_filenames:
                 self._call_api_delete_bucket_files(bucket_name, filename)
 
-
     def _call_api_delete_bucket_files(self, bucket_name, filename):
         url = S3_FILES_API_CLIENT_URL
         try:
@@ -70,16 +100,6 @@ class S3BaseTest(BaseTest):
                 "object_key": filename
             }
             self._call_request_delete(url, params, S3_USER_TOKEN)
-        except Exception as e:
-            logging.error("Can't delete S3 files;", str(e))
-
-    def _call_api_get_bucket_files(self, bucket_name):
-        url = S3_FILES_API_CLIENT_URL
-        try:
-            params = {
-                "bucket_name": bucket_name,
-            }
-            self._call_request_get(url, params, S3_USER_TOKEN)
         except Exception as e:
             logging.error("Can't delete S3 files;", str(e))
 

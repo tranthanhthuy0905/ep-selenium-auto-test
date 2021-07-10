@@ -1,8 +1,22 @@
 
 '''
-Scenario 5: Delete an empty bucket
+Scenario 4: Delete a non-empty bucket
 	Given there is at least 1 bucket created
 	When user select radio button next to any row of bucket info that has files in
+	Then user should see the radio button is ticked
+	And the details of bucket are displayed at the section below
+	When user click Action button
+	Then user see menu of options dropped down, inclduing Delete
+	When user select Delete
+	Then there is a confirmation window pop up
+	And user sees 2 buttons Delete and Cancel
+	When user clicks Delete
+	Then user receive an error notification dialog saying the bucket is not empty
+	And the bucket is not deleted
+
+Scenario 5: Delete an empty bucket
+	Given there is at least 1 bucket created
+	When user select radio button next to any row of bucket info that has no file in
 	Then user should see the radio button is ticked
 	And the details of bucket are displayed at the section below
 	When user click Action button
@@ -27,7 +41,7 @@ from Pages.S3.s3_homepage import S3HomePage
 
 class Test_S3_Delete_Bucket(S3BaseTest):
 
-    def test_delete_non_empty_bucket_successful(self):
+    def test_delete_empty_bucket_successful(self):
         '''
             Created empty bucket should be deleted successfully
         '''
@@ -35,10 +49,11 @@ class Test_S3_Delete_Bucket(S3BaseTest):
         # Given there is at least 1 bucket created
         self.s3_homepage = S3HomePage(self.driver, authenticate=True)
         bucket_name = self.create_s3_bucket(upload_file=False)
+        self.buckets_list.append(bucket_name)
 
         self.s3_homepage.access_page()
 
-        # When user select radio button next to any row of bucket info that has files in
+        # When user select radio button next to any row of bucket info that has no file in
         # Then user should see the radio button is ticked
         self.s3_homepage.select_s3_bucket(bucket_name)
 
@@ -66,7 +81,6 @@ class Test_S3_Delete_Bucket(S3BaseTest):
         # When user clicks Delete
         self.s3_homepage.click_delete_confirm_button()
 
-
         # Then user receives a successful notification popup
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(S3Locators.DELETE_BUCKET_SUCCESSFUL_ALERT)),
         self.assertTrue(
@@ -87,11 +101,55 @@ class Test_S3_Delete_Bucket(S3BaseTest):
             f"ERROR: Bucket {bucket_name} should not exist."
         )
 
-    def _test_upload_non_empty_bucket_non_successful(self):
+        self.buckets_list.remove(bucket_name)
+
+    def test_delete_non_empty_bucket_non_unsuccessful(self):
         '''
             Non-empty bucket must not be deleted
         '''
-        pass
+
+        # Given there is at least 1 bucket created
+        self.s3_homepage = S3HomePage(self.driver, authenticate=True)
+        bucket_name = self.create_s3_bucket(upload_file=True)
+        self.buckets_list.append(bucket_name)
+
+        self.s3_homepage.access_page()
+
+        # When user select radio button next to any row of bucket info that has files in
+        # Then user should see the radio button is ticked
+        self.s3_homepage.select_s3_bucket(bucket_name)
+
+        # And the details of bucket are displayed at the section below #todo
+        '''
+            Wait for issue https://gitlab-corp.vng.com.vn/tse/engineering-platform/r-n-d/console-storage-s3/-/issues/3
+        '''
+
+        # When user click Action button
+        # Then user see menu of options dropped down, including Delete
+        self.s3_homepage.click_action_button()
+
+        # When user select Delete
+        self.s3_homepage.click_delete_option()
+
+        #And user sees 2 buttons Delete and Cancel #TODO
+        #When user clicks Delete
+
+        self.s3_homepage.click_delete_confirm_button()
+
+        # Then user receive an error notification dialog saying the bucket is not empty
+        self.assertTrue(
+            self.s3_homepage.check_element_existence(S3Locators.DELETE_NON_EMPTY_BUCKET_ALERT)
+        )
+
+        # And the bucket is not deleted
+        self.assertTrue(
+            self.s3_homepage.check_element_existence(
+                S3Locators.BUCKET_DATA_ROW(bucket_name)
+            ),
+            f"ERROR: Bucket {bucket_name} should not be deleted."
+        )
+
+
         
 
 

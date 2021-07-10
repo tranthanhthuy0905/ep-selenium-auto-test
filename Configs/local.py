@@ -55,12 +55,12 @@ EFS_FILESYSTEM_API_CLIENT_URL = urllib.parse.urljoin(os.getenv("EFS_FILESYSTEM_B
 
 # S3
 S3_BASE_URL = urllib.parse.urljoin(os.getenv("S3_BASE_URL"), "s3/")
-S3_API_BASE_URL = urllib.parse.urljoin(os.getenv("S3_BASE_URL"), "api/client")
+S3_API_BASE_URL = urllib.parse.urljoin(os.getenv("S3_BASE_URL"), "api/client/")
 
 S3_BUCKET_URL = urllib.parse.urljoin(S3_BASE_URL, "buckets/")
 S3_BUCKET_CREATE_URL = urllib.parse.urljoin(S3_BUCKET_URL, "create")
 S3_BUCKET_DETAILS_URL = urllib.parse.urljoin(S3_BUCKET_URL, "{bucket_name}")
-S3_BUCKET_FILE_UPLOAD_URL = urllib.parse.urljoin(S3_BUCKET_URL, "{bucket_name}/upload",)
+S3_BUCKET_FILE_UPLOAD_URL = urllib.parse.urljoin(S3_BUCKET_URL, "{bucket_name}/upload")
 
 S3_BUCKET_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "buckets")
 S3_FILES_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "files")
