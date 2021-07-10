@@ -5,6 +5,7 @@ import HtmlTestRunner
 
 from Tests_Dev.S3.s3_base_test import S3BaseTest
 from Pages.S3.s3_bucket_details_page import S3BucketDetailsPage, S3BucketFilesAndFoldersPage
+from Pages.S3.s3_homepage import S3HomePage
 
 class Test_S3_Upload_File(S3BaseTest):
 
@@ -12,6 +13,8 @@ class Test_S3_Upload_File(S3BaseTest):
         '''
         File should be successfully uploaded to a S3 bucket
         '''
+
+        self.s3_homepage = S3HomePage(self.driver, authenticate=True)
         self.bucket_name = self.create_s3_bucket()
         self.s3_bucket_details_page = S3BucketDetailsPage(self.driver, self.bucket_name)
         self.s3_bucket_details_page.access_page()

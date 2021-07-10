@@ -16,9 +16,11 @@ class BasePage(object):
     def authenticate(self, user_token):
         _cookie = { "name": "user-token", "value": user_token}
         self.driver.add_cookie(_cookie)
-        self.driver.get(self.base_url)
+        # S3 issue: Have to refresh id page =]] don't know why
+        self.driver.get(self.driver.current_url)
+
         self.driver.implicitly_wait(10)
-        if "session/signin" in self.driver.current_url:
+        if "auth/login" in self.driver.current_url:
             self.driver.quit()
             logging.error("Something's wrong with authentication. Test cancelled.")
             raise Exception("Authentication may not be successful. User-token may need to be updated!")
@@ -74,8 +76,10 @@ class BasePage(object):
             self.find_element(*locator).click()
             return self
         except TimeoutException:
+            _msg = "\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1]) 
             self.driver.get_screenshot_as_file('error_snapshot/{filename}.png'.format(filename='click_button'))
-            print("\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1]))
+            print(_msg)
+            logging.error(_msg)
             self.driver.quit()
 
     def click_button_and_return_page(self, locator, page):
@@ -87,9 +91,9 @@ class BasePage(object):
             print("\n * ELEMENT NOT FOUND WITHIN GIVEN TIME! --> %s" %(locator[1]))
             self.driver.quit()
 
-    def wait_and_click_button(self, locator):
+    def wait_and_click_button(self, locator, seconds=1):
         try:
-            time.sleep(1)
+            time.sleep(seconds)
             WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator)).click()
             return self
         except TimeoutException:
