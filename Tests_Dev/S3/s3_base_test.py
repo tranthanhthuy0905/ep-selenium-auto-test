@@ -34,8 +34,8 @@ class S3BaseTest(BaseTest):
         except Exception as e:
             logging.error("Can't delete S3 bucket;", str(e))
 
-    def create_s3_bucket(self):
-        self.s3_homepage = S3HomePage(self.driver)
+    def create_s3_bucket(self, upload_file=False):
+        self.s3_homepage = S3HomePage(self.driver, authenticate=False)
         self.s3_homepage.click_create_bucket()
         self.s3_create_bucket_page = S3CreateBucketPage(self.driver)
         bucket_name = self.s3_create_bucket_page.fill_bucket_create_information()
