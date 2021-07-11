@@ -1,19 +1,17 @@
 '''
-Scenario 1. Create a custom domain with simple flow (http)	
-	When user want to create a domain with simple flow (Http)
+Scenario 3. Create a custom domain without setting domain name	
+	When user want to create a domain without setting domain name
 	Then user access Custom-Domain page
-	When user clicks on "Create domain" button on the top right corner
+	When user clicks on "Create domain" button on the top right corner 
 	Then user can see a pop-up "Create New Custom Domain" box
-	When user selects Http:// protocol
-	And fills in Domain name textbox
+	When user selects Https:// protocol
+	And leaves Domain name textbox empty
 	And selects Instance in IPAddress list
 	Add fills in port textbox
 	And clicks on Test Connection
 	Then the connection result is displayed as OK icon
 	When user clicks on "Create" button on the bottom right
-	And user should see the new domain is created successfully
-	When user accesses the newly created domain
-	Then user should see the service running on VM
+	User can see the "Failed" notification
 '''
 
 
@@ -28,10 +26,10 @@ from Locators.CD import CustomDomainPageLocators
 import time
 
 
-class TestCustomDomain02(CDBaseTest):
-    def test_create_doamin_https(self):
+class TestCustomDomain03(CDBaseTest):
+    def test_create_doamin_without_name(self):
         """
-            TEST CASE: Custom Domain should be created successfully with https protocol
+            TEST CASE: Custom Domain should be created successfully without setting domain name	
         """
         # Access Custom-Domain page
         self.custom_domain_page = CustomDomainPage(self.driver)

@@ -1,10 +1,10 @@
 '''
-Scenario 1. Create a custom domain with simple flow (http)	
-	When user want to create a domain with simple flow (Http)
+Scenario 2. Create a custom domain with simple flow (https)	
+	When user want to create a domain with simple flow (Https)
 	Then user access Custom-Domain page
-	When user clicks on "Create domain" button on the top right corner
+	When user clicks on "Create domain" button on the top right corner 
 	Then user can see a pop-up "Create New Custom Domain" box
-	When user selects Http:// protocol
+	When user selects Https:// protocol
 	And fills in Domain name textbox
 	And selects Instance in IPAddress list
 	Add fills in port textbox

@@ -1,19 +1,17 @@
 '''
-Scenario 1. Create a custom domain with simple flow (http)	
-	When user want to create a domain with simple flow (Http)
+Scenario 5. Delete a custom domain	
+	Given a custom domain
+	When user want to delete that custom domain
 	Then user access Custom-Domain page
-	When user clicks on "Create domain" button on the top right corner
-	Then user can see a pop-up "Create New Custom Domain" box
-	When user selects Http:// protocol
-	And fills in Domain name textbox
-	And selects Instance in IPAddress list
-	Add fills in port textbox
-	And clicks on Test Connection
-	Then the connection result is displayed as OK icon
-	When user clicks on "Create" button on the bottom right
-	And user should see the new domain is created successfully
-	When user accesses the newly created domain
-	Then user should see the service running on VM
+	When user selects that domain in Domains List
+	User should see the infomation of that domain
+	When user clicks on Actions button on the top right corner
+	Then user should see the Delete button in the drop-down
+	When user clicks on Delete button 
+	Then user should see the "Delete the domain" confirm modal
+	When user clicks on Delete button on the bottom right corner
+	Then the domain should be deleted successfully
+	And the domain should disappear from Domains List
 '''
 
 
@@ -28,10 +26,10 @@ from Locators.CD import CustomDomainPageLocators
 import time
 
 
-class TestCustomDomain01(CDBaseTest):
-    def test_create_doamin_http(self):
+class TestCustomDomain05(CDBaseTest):
+    def test_delete_domain(self):
         """
-            TEST CASE: Custom Domain should be created successfully with http protocol
+            TEST CASE: Custom Domain should be deleted successfully
         """
         # Access Custom-Domain page
         self.custom_domain_page = CustomDomainPage(self.driver)

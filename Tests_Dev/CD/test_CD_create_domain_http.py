@@ -60,9 +60,6 @@ class TestCustomDomain01(CDBaseTest):
 
     
 
-# python3 -m unittest Tests_Dev.CD.test_CD_create_domain_http -v
-
-
 if __name__ == "__main__":
     unittest.main(
         testRunner=HtmlTestRunner.HTMLTestRunner(

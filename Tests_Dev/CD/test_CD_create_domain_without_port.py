@@ -1,19 +1,17 @@
 '''
-Scenario 1. Create a custom domain with simple flow (http)	
-	When user want to create a domain with simple flow (Http)
+Scenario 4. Create a custom domain without filling port	
+	When user want to create a domain without filling port
 	Then user access Custom-Domain page
-	When user clicks on "Create domain" button on the top right corner
+	When user clicks on "Create domain" button on the top right corner 
 	Then user can see a pop-up "Create New Custom Domain" box
-	When user selects Http:// protocol
+	When user selects Https:// protocol
 	And fills in Domain name textbox
 	And selects Instance in IPAddress list
-	Add fills in port textbox
+	Add deletes port textbox value
 	And clicks on Test Connection
-	Then the connection result is displayed as OK icon
+	Then the connection result is displayed as FAILED icon
 	When user clicks on "Create" button on the bottom right
-	And user should see the new domain is created successfully
-	When user accesses the newly created domain
-	Then user should see the service running on VM
+	User can see the "Failed" notification
 '''
 
 
@@ -28,10 +26,10 @@ from Locators.CD import CustomDomainPageLocators
 import time
 
 
-class TestCustomDomain02(CDBaseTest):
-    def test_create_doamin_https(self):
+class TestCustomDomain04(CDBaseTest):
+    def test_create_doamin_without_port(self):
         """
-            TEST CASE: Custom Domain should be created successfully with https protocol
+            TEST CASE: Custom Domain should be created successfully without filling port	
         """
         # Access Custom-Domain page
         self.custom_domain_page = CustomDomainPage(self.driver)
@@ -56,7 +54,7 @@ class TestCustomDomain02(CDBaseTest):
 
     
 
-# python3 -m unittest Tests_Dev.CD.test_CD_create_domain_without_name -v
+# python3 -m unittest Tests_Dev.CD.test_CD_create_domain_without_port -v
 
 
 if __name__ == "__main__":
