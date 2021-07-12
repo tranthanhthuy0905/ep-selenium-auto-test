@@ -40,7 +40,7 @@ class TestInstances14(CEBaseTest):
         self.instances_page.check_instance_state(self.instance_id, CEInstancePageLocators.RUNNING_STATUS)
         print("Instance is created successfully!")
 
-        # Stop instance
+        # Terminal instance
         self.instances_page.terminate_instance(self.instance_id)
 
         

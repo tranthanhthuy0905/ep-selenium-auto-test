@@ -152,7 +152,6 @@ class TestInstances07(CEBaseTest):
         # Test completed, stop instance for cleaning test data
         self.instances_page.stop_instance(self.instance_id)
 
-
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_07 -v
 
 if __name__ == "__main__":

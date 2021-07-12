@@ -84,6 +84,8 @@ class TestInstances04(CEBaseTest):
     # Step 1: Choose an Machine Image
         self.machine_image_wizard = MachineImageWizardPage(self.driver)
         self.machine_image_wizard.choose_machine_image()
+        time.sleep(3)
+        
 
     # Step 2: Choose an Instance Type
         self.instances_type_wizard = InstanceTypeWizardPage(self.driver)
@@ -140,7 +142,6 @@ class TestInstances04(CEBaseTest):
 
         # Test completed, stop instance for cleaning test data
         self.instances_page.stop_instance(self.instance_id)
-
 
 
 
