@@ -18,7 +18,6 @@ class BasePage(object):
         self.driver.add_cookie(_cookie)
         # S3 issue: Have to refresh id page =]] don't know why
         self.driver.get(self.driver.current_url)
-
         self.driver.implicitly_wait(10)
         if "auth/login" in self.driver.current_url:
             self.driver.quit()
