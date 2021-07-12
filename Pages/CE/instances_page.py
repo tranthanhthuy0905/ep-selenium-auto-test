@@ -1,3 +1,5 @@
+import logging
+import time
 from selenium.webdriver.common.by import By
 
 from Locators.CE import CEInstancePageLocators, CEVolumePageLocators, CELaunchInstancesWizardPageLocators
@@ -28,6 +30,7 @@ class CEInstancesPage(BasePage):
 
     def select_instance(self, instance_id):
         self.find_element(*self.locator.INSTANCE_RADIO_BY_ID(instance_id)).click()
+        logging.info("Select instance:", instance_id)
         return self 
 
     def change_instance_states(self, state_button, confirm_button):
@@ -40,22 +43,33 @@ class CEInstancesPage(BasePage):
         # Test completed, stop instance for cleaning test data
         self.select_instance(instance_id)
         self.change_instance_states(self.locator.STOP_INSTANCE_BTN, self.locator.STOP_CONFIRM_BTN)
-        print("Instance is stopping")
 
         # Check if the new instance state is Stopped
         self.check_instance_state(instance_id, CEInstancePageLocators.STOPPED_STATUS)
+        logging.info("Instance has been stopped")
+        print("Instance has been stopped")
 
     def terminate_instance(self, instance_id):
         # Test completed, stop instance for cleaning test data
         self.select_instance(instance_id)
         self.change_instance_states(self.locator.TERMINATE_INSTANCE_BTN, self.locator.TERMINATE_CONFIRM_BTN)
-        print("Instance is terminating")
 
         # Check if the new instance state is terminated
         WebDriverWait(self.driver, 300).until(EC.invisibility_of_element_located(
             CEInstancePageLocators.INSTANCE_STATE_BY_ID(instance_id)))
         if (hasattr(self, "instance_id")):
             delattr(self, "instance_id")
+        logging.info("Instance has been terminated")
+        print("Instance has been terminated")
+
+    def reboot_instance(self, instance_id):
+        self.select_instance(instance_id)
+        self.change_instance_states(self.locator.REBOOT_INSTANCE_BTN, self.locator.REBOOT_CONFIRM_BTN)
+
+        # Check if the new instance state is Running
+        self.check_instance_state(instance_id, CEInstancePageLocators.RUNNING_STATUS)
+        logging.info("Instance is Running")
+        print("Instance is Running")
 
 
     def stop_vm(self, instance_id):
