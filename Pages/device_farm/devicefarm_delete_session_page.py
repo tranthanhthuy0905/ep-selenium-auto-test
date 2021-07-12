@@ -27,4 +27,16 @@ class DEVICE_FARM_DeleteSessionPage(BasePage):
         self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_DELETE_CONFIRM_BUTTON)\
             .click()
         time.sleep(2)
+
+    def click_delete_session_fail_button(self):
+        self.driver.implicitly_wait(10)
+        self.find_element(*DEVICE_FARM_ProjectLocators.PROJECT_SELECTOR_LINK)\
+            .click()
+        time.sleep(2)
+        self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_SELECT_BUTTON)\
+            .click()
+        time.sleep(2)
+        self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_ACTION_BUTTON)\
+            .click()
+        time.sleep(2)
         

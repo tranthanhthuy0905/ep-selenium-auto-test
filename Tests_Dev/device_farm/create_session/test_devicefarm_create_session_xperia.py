@@ -13,8 +13,8 @@ from Configs.TestData.DeviceFarmTestData import DEVICE_FARM_TestData
 
 from Locators.device_farm import DEVICE_FARM_ProjectLocators
 
-class Test_DEVICEFARM_Create_Session_Pixel(DEVICE_FARM_BaseTest):
-    def test_create_session_pixel_successful(self):
+class Test_DEVICEFARM_Create_Session_Xperia(DEVICE_FARM_BaseTest):
+    def test_create_session_live_successful(self):
         """
             TEST CASE: DF Session should be created successfully
         """
@@ -34,7 +34,7 @@ class Test_DEVICEFARM_Create_Session_Pixel(DEVICE_FARM_BaseTest):
         self.df_homepage = DEVICE_FARM_HomePage(self.driver)
         self.df_session = DEVICE_FARM_CreateSessionPage(self.driver)
         self.df_session.click_create_session_submit_button()
-        _session_name = self.df_session.click_create_session_pixel()
+        _session_name = self.df_session.click_create_session_xperia()
         self.assertTrue(
             self.df_session.check_element_existence(
                 DEVICE_FARM_ProjectLocators.SESSION_STOP_NOTIC
@@ -53,7 +53,7 @@ class Test_DEVICEFARM_Create_Session_Pixel(DEVICE_FARM_BaseTest):
         """
             Step 5: Stop above session
         """
-        self._call_api_stop_session(self.project_text.PIXEL, session_info[0].get('_id'))
+        self._call_api_stop_session(self.project_text.XPERIA_AQA, session_info[0].get('_id'))
         """
             Step 6: Get info session to get session's _id
         """
@@ -66,6 +66,7 @@ class Test_DEVICEFARM_Create_Session_Pixel(DEVICE_FARM_BaseTest):
             Step 8: Delete above project for cleaning.
         """
         self._call_api_delete_project()
+        
         
 if __name__ == "__main__":
     unittest.main(

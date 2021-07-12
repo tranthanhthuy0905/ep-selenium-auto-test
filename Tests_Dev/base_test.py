@@ -11,7 +11,7 @@ from Tests_Dev.utils import APIService
 class BaseTest(unittest.TestCase, APIService):
     def setUp(self):
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('--headless')
         chrome_options.add_argument("--test-type")
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--no-first-run")

@@ -6,15 +6,15 @@ import HtmlTestRunner
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests_Dev.device_farm.devicefarm_base_test import DEVICE_FARM_BaseTest
+from Tests.device_farm.devicefarm_base_test import DEVICE_FARM_BaseTest
 from Pages.device_farm.devicefarm_homepage import DEVICE_FARM_HomePage
 from Pages.device_farm.devicefarm_create_session_page import DEVICE_FARM_CreateSessionPage
-from Configs.TestData.DeviceFarmTestData import DEVICE_FARM_TestData
 
 from Locators.device_farm import DEVICE_FARM_ProjectLocators
+from Configs.TestData.DeviceFarmTestData import DEVICE_FARM_TestData
 
-class Test_DEVICEFARM_Create_Session_Pixel(DEVICE_FARM_BaseTest):
-    def test_create_session_pixel_successful(self):
+class Test_DEVICEFARM_Create_Session_LG(DEVICE_FARM_BaseTest):
+    def test_create_session_lg_successful(self):
         """
             TEST CASE: DF Session should be created successfully
         """
@@ -34,7 +34,7 @@ class Test_DEVICEFARM_Create_Session_Pixel(DEVICE_FARM_BaseTest):
         self.df_homepage = DEVICE_FARM_HomePage(self.driver)
         self.df_session = DEVICE_FARM_CreateSessionPage(self.driver)
         self.df_session.click_create_session_submit_button()
-        _session_name = self.df_session.click_create_session_pixel()
+        _session_name = self.df_session.click_create_session_lg()
         self.assertTrue(
             self.df_session.check_element_existence(
                 DEVICE_FARM_ProjectLocators.SESSION_STOP_NOTIC
@@ -43,7 +43,6 @@ class Test_DEVICEFARM_Create_Session_Pixel(DEVICE_FARM_BaseTest):
         self.assertTrue(
             self.driver.find_element_by_link_text(_session_name)
         )
-        time.sleep(2)
         self.assertIn("Created session successfully", self.driver.page_source, msg="CREATE SESSION IS NOT SUCCESSFULLY")
         # end TEST-CASE
         """
@@ -53,7 +52,7 @@ class Test_DEVICEFARM_Create_Session_Pixel(DEVICE_FARM_BaseTest):
         """
             Step 5: Stop above session
         """
-        self._call_api_stop_session(self.project_text.PIXEL, session_info[0].get('_id'))
+        self._call_api_stop_session(self.project_text.LG_G5_SE, session_info[0].get('_id'))
         """
             Step 6: Get info session to get session's _id
         """
@@ -66,7 +65,7 @@ class Test_DEVICEFARM_Create_Session_Pixel(DEVICE_FARM_BaseTest):
             Step 8: Delete above project for cleaning.
         """
         self._call_api_delete_project()
-        
+
 if __name__ == "__main__":
     unittest.main(
         testRunner=HtmlTestRunner.HTMLTestRunner(

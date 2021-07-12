@@ -48,3 +48,33 @@ class DEVICE_FARM_CreateSessionPage(BasePage):
             .click()
         self.driver.implicitly_wait(10)
         return _session_name
+
+    def click_create_session_galaxy(self):
+        self.driver.implicitly_wait(10)
+        _session_name = self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_NAME_TEXT).text
+        self.find_element(*DEVICE_FARM_ProjectLocators.GALAXY_TAB_E)\
+            .click()
+        self.find_element(*DEVICE_FARM_ProjectLocators.CONFIRM_START_SESSION_BUTTON)\
+            .click()
+        self.driver.implicitly_wait(10)
+        return _session_name
+
+    def click_create_session_xperia(self):
+        self.driver.implicitly_wait(10)
+        _session_name = self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_NAME_TEXT).text
+        self.find_element(*DEVICE_FARM_ProjectLocators.XPERIA_AQUA)\
+            .click()
+        self.find_element(*DEVICE_FARM_ProjectLocators.CONFIRM_START_SESSION_BUTTON)\
+            .click()
+        self.driver.implicitly_wait(10)
+        return _session_name
+
+    def click_create_session_pixel3(self):
+        self.driver.implicitly_wait(10)
+        _session_name = self.find_element(*DEVICE_FARM_ProjectLocators.SESSION_NAME_TEXT).text
+        self.find_element(*DEVICE_FARM_ProjectLocators.PIXEL_3)\
+            .click()
+        self.find_element(*DEVICE_FARM_ProjectLocators.CONFIRM_START_SESSION_BUTTON)\
+            .click()
+        self.driver.implicitly_wait(10)
+        return _session_name
