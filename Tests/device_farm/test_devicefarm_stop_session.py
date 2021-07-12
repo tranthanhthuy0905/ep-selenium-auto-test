@@ -6,7 +6,7 @@ import HtmlTestRunner
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests_Dev.device_farm.devicefarm_base_test import DEVICE_FARM_BaseTest
+from Tests.device_farm.devicefarm_base_test import DEVICE_FARM_BaseTest
 from Pages.device_farm.devicefarm_homepage import DEVICE_FARM_HomePage
 from Pages.device_farm.devicefarm_stop_session_page import DEVICE_FARM_StopSessionPage
 
@@ -29,7 +29,7 @@ class Test_DEVICEFARM_Stop_Session(DEVICE_FARM_BaseTest):
         """
             Step 3: Create a new session.
         """
-        self._call_api_create_session(project_info[0].get('_id'), self.project_text.GALAXY_TAB_E_SERIAL)
+        self._call_api_create_session(project_info[0].get('_id'), self.project_text.LG_G5_SE)
         # begin TEST_CASE
         """
             Step 4: TEST_CASE Stop above session

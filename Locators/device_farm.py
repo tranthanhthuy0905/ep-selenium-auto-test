@@ -23,7 +23,7 @@ class DEVICE_FARM_ProjectLocators(object):
     LG_G5_SE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/label/span/input')
     LIVE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[6]/td[1]/label/span/input')
     PIXEL_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[7]/td[1]/label/span/input')
-    XPERIA_AQUA = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[1]/label/span/span')
+    XPERIA_AQUA = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[1]/label/span/input')
     GALAXY_TAB_E = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[4]/td[1]/label')
     PIXEL_3 = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[5]/td[1]/label/span/input')
     
