@@ -48,6 +48,7 @@ class CEInstancePageLocators(object):
     INSTANCE_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div[3]/div[2]/div/div[2]/div/div[4]/div/div/div[2]')
     INSTANCE_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[4]/div/span")
     INSTANCE_RADIO_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td/label/span")
+    INSTANCE_EXISTANT = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']")
     STOPPED_STATUS = "Stopped"
     RUNNING_STATUS = "Running"
 
@@ -97,14 +98,14 @@ class CELaunchInstancesWizardPageLocators(object):
     CREATE_SG_SUCCESS_MESSAGE = (By.XPATH, "//div[contains(.,'Created security group successfully')]")
     PARRENT_BY_INSTANCE_NAME = lambda _instance_name: (By.XPATH, f"//td[contains(.,'{_instance_name}')]/parent::*")
     STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[@class='ant-table-cell'][2]/div/span/span[@class='ant-badge-status-text']")
-    RANDOM_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[2]/button/span")
+    RANDOM_PASSWORD_BTN = (By.XPATH, "//span[@class='anticon anticon-reload']")
     COPY_PASSWORD_BTN = (By.XPATH, "//span[@class='anticon anticon-copy']")
-    SHOW_PASSWORD_BTN = (By.XPATH, "/html/body/div[3]/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div/div[1]/span/span")
+    SHOW_PASSWORD_BTN = (By.XPATH, "//span[@class='anticon anticon-eye-invisible ant-input-password-icon']")
     APPLY_PASSWORD_BTN = (By.XPATH, "//button[contains(.,'Apply this password')]")
     FAILED_TO_LAUNCH_NOTI = (By.XPATH, "//div[contains(.,'Failed to launch instance.')]")
     EXISTING_SG_RADIO = lambda _sg_id: (By.NAME, f'{_sg_id}')
     LIST_SG_PAGE = (By.XPATH, "//div[@class='ant-select-selector']/span[@class='ant-select-selection-item']")
-
+    DEFAULT_PASSWORD_CONFIRM_MODAL = (By.ID, "//*[@id='rcDialogTitle2']")
 
 
 
@@ -148,10 +149,11 @@ class CEVolumePageLocators(object):
     DELETE_VOLUME_BTN = (By.XPATH, "//span[text()='Delete volume']")
     DELETE_CONFIRM_BUTTON = (By.XPATH, "//button//span[text()='Delete']")
 
-    # Volume detail
+    # Instance detail
     VM_NAME = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[4]/div/div/div[2]')
     VM_STATE = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[8]/div/div/div[2]')
     VM_ID = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div[2]/div')
+    VM_IP = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div/div/div[1]/div/div/div[2]/div[2]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[7]')
     VOLUMES_LIST = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div/div/div/div[1]/div/div")
     CLOSE_MESSAGE_BTN = (By.CLASS_NAME, "ant-notification-close-x")
     VOLUME_STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[3]/div/span/span[2]")
@@ -251,7 +253,7 @@ class CEKeypairLocators:
     FINGERPRINT_BY_KEYPAIR_NAME = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[@class='ant-table-cell'][2]")
     SUCCESSFULLY_MESSAGE = (By.XPATH, "//p[contains(.,'Created keypair successfully.')]")
     CLOSE_BTN = (By.XPATH, "//button[contains(.,'Close')]")
-    SELECT_KEYPAIR_RADIO = lambda _name: (By.XPATH, f"//tr[@data-row-key='{_name}']/td[1]/label/span/input")
+    SELECT_KEYPAIR_RADIO = lambda _name: (By.XPATH, f"//input[@type='radio' and ancestor::td[following-sibling::td='{_name}']]")
     KEYPAIR_ROW = lambda _name: (By.XPATH, f"//td[@class='ant-table-cell' and text()='{_name}']")
 
     INVALID_KEY_ALERT_DIALOG = (By.XPATH, "//div[@class='ant-modal-confirm-body' and ./span/text()='Failed' and ./div/text()='Public key is invalid']")
@@ -262,6 +264,9 @@ class CEKeypairLocators:
                                          "and ./button='Download SSH key pair']]")
 
     DUPLICATED_PUBLIC_KEY_DIALOG = (By.XPATH, "//div[span='Failed' and following-sibling::div/button[@type='button' and ./span/text()='Ok']]")
+    ACTION_BTN = (By.XPATH, "//button[div='Actions ']")
+    DELETE_BTN = (By.XPATH, "//span[text()='Delete keypair']")
+    CONFIRM_DELETE_BTN = (By.XPATH, "//button[span='Delete']")
 
 
 

@@ -11,6 +11,8 @@ load_dotenv()
 DEVICE_FARM_USER_TOKEN = os.getenv("DEVICE_FARM_USER_TOKEN", "")
 CE_USER_TOKEN = os.getenv("CE_USER_TOKEN", "")
 S3_USER_TOKEN = os.getenv("S3_USER_TOKEN", "")
+EFS_USER_TOKEN = os.getenv("EFS_USER_TOKEN","")
+CUSTOM_DOMAIN_USER_TOKEN = os.getenv("CUSTOM_DOMAIN_USER_TOKEN","")
 
 # Common
 FILE_PATH_UPLOAD_SAMPLE = os.path.abspath("Configs/TestData/sample_files/first.txt")
@@ -45,14 +47,21 @@ CE_INSTANCE_CREATE_WIZARD_URL = posixpath.join(CE_BASE_URL, "launch-instance-wiz
 CE_SG_API_URL = urllib.parse.urljoin(CE_API_URL, "security-groups")
 CE_KEYPAIR_API_URL = urllib.parse.urljoin(CE_API_URL, "keypairs/{keypair_name}")
 
+# EFS
+EFS_BASE_URL = urllib.parse.urljoin(os.getenv("EFS_BASE_URL"), "efs/home")
+EFS_API_URL = urllib.parse.urljoin(os.getenv("EFS_BASE_URL"), "api/client/")
+
+EFS_FILESYSTEM_BASE_URL = urllib.parse.urljoin("EFS_FILESYSTEM_BASE_URL", "efs/file-systems")
+EFS_FILESYSTEM_API_CLIENT_URL = urllib.parse.urljoin(os.getenv("EFS_FILESYSTEM_BASE_URL"), "api/client/")
+
 # S3
 S3_BASE_URL = urllib.parse.urljoin(os.getenv("S3_BASE_URL"), "s3/")
-S3_API_BASE_URL = urllib.parse.urljoin(os.getenv("S3_BASE_URL"), "api/client")
+S3_API_BASE_URL = urllib.parse.urljoin(os.getenv("S3_BASE_URL"), "api/client/")
 
 S3_BUCKET_URL = urllib.parse.urljoin(S3_BASE_URL, "buckets/")
 S3_BUCKET_CREATE_URL = urllib.parse.urljoin(S3_BUCKET_URL, "create")
 S3_BUCKET_DETAILS_URL = urllib.parse.urljoin(S3_BUCKET_URL, "{bucket_name}")
-S3_BUCKET_FILE_UPLOAD_URL = urllib.parse.urljoin(S3_BUCKET_URL, "{bucket_name}/upload",)
+S3_BUCKET_FILE_UPLOAD_URL = urllib.parse.urljoin(S3_BUCKET_URL, "{bucket_name}/upload")
 
 S3_BUCKET_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "buckets")
 S3_FILES_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "files")
@@ -61,3 +70,8 @@ S3_FILES_API_CLIENT_URL = urllib.parse.urljoin(S3_API_BASE_URL, "files")
 DEVICE_FARM_BASE_URL = os.getenv("DEVICE_FARM_BASE_URL")
 DEVICE_FARM_API_PROJECT = urllib.parse.urljoin(os.getenv("DEVICE_FARM_BASE_URL"), "api/client/projects")
 DEVICE_FARM_API_SESSION = urllib.parse.urljoin(os.getenv("DEVICE_FARM_BASE_URL"), "api/client/mobile-devices/sessions")
+
+# Custom Domain
+CUSTOM_DOMAIN_BASE_URL = os.getenv("CUSTOM_DOMAIN_BASE_URL")
+CUSTOM_DOMAIN_API_BASE_URL = posixpath.join(CUSTOM_DOMAIN_BASE_URL, "api/client")
+CUSTOM_DOMAIN_API_CLIENT_URL = posixpath.join(CUSTOM_DOMAIN_API_BASE_URL, "domains/")

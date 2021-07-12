@@ -27,6 +27,18 @@ class CEKeypairPage(BasePage):
     def select_keypair_by_name(self, keypair_name):
         self.click_button(self.locator.SELECT_KEYPAIR_RADIO(keypair_name))
         return self
+
+    def click_action(self):
+        self.click_button(CEKeypairLocators.ACTION_BTN)
+        return self
+
+    def click_delete(self):
+        self.click_button(CEKeypairLocators.DELETE_BTN)
+        return self
+
+    def click_confirm_delete(self):
+        self.click_button(CEKeypairLocators.CONFIRM_DELETE_BTN)
+        return self
     
     def click_create_keypair_btn(self):
         self.click_button(CEKeypairLocators.CREATE_KEYPAIR_BTN)

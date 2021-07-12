@@ -242,10 +242,11 @@ class ReviewLaunchWizardPage(CELaunchInstancesWizardPage):
 
     def click_apply_password(self):
         self\
-            .wait_and_click_button(self.locator.APPLY_PASSWORD_BTN)
+            .click_button(self.locator.APPLY_PASSWORD_BTN)
         return self
 
     def apply_default_password(self):
+        # WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(CELaunchInstancesWizardPageLocators.DEFAULT_PASSWORD_CONFIRM_MODAL))
         # Show generated pass
         self.click_show_password()
         # Random password
@@ -257,7 +258,7 @@ class ReviewLaunchWizardPage(CELaunchInstancesWizardPage):
         return self
 
     def copy_password(self):
-        self.wait_and_click_button(self.locator.COPY_PASSWORD_BTN)
+        self.click_button(self.locator.COPY_PASSWORD_BTN)
         self.wait_and_click_button(self.locator.CLOSE_MESSAGE_BTN)
         return self
 

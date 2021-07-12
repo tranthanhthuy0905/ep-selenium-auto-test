@@ -15,7 +15,7 @@ class Test_S3_Home_Page(S3BaseTest):
         """
             S3 Homepage must be loaded successfully
         """
-        self.s3_homepage = S3HomePage(self.driver)
+        self.s3_homepage = S3HomePage(self.driver, authenticate=True)
 
         # Page title must be correct
         self.assertIn(S3TestData.CE_PAGE_TITLE, self.driver.title)
