@@ -21,8 +21,11 @@ class DEVICE_FARM_ProjectLocators(object):
     SESSION_CREATE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div[2]/div/div/div/div/div/div[1]/div/div/div[1]/div/div[2]/div/a/span')
     # TYPE SESSION
     LG_G5_SE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[2]/td[1]/label/span/input')
-    LIVE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[1]/label/span')
-    PIXEL_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[4]/td[1]/label')
+    LIVE_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[6]/td[1]/label/span/input')
+    PIXEL_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[7]/td[1]/label/span/input')
+    XPERIA_AQUA = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[3]/td[1]/label/span/span')
+    GALAXY_TAB_E = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[4]/td[1]/label')
+    PIXEL_3 = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div/div/div/div/div/div/div[2]/table/tbody/tr[5]/td[1]/label/span/input')
     
     CONFIRM_START_SESSION_BUTTON = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[3]/button[2]/span')
     SESSION_NAME_TEXT = (By.XPATH, '//*[@id="root"]/section/section/main/div/div/div/div/div/div[2]/div/div/div[2]/div/div[2]/div/input')
