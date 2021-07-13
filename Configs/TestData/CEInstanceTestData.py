@@ -8,6 +8,8 @@ class CEInstanceTestData(BaseTestData):
     STOP_STATUS = "stop"
     RUNNING_STATUS = "start"
 
+    MACHINE_IMAGE = "Ubuntu20_Stable"
+
     def gen_instance_name():
         return "autotest-instance-" + str(time.time()).replace('.', '')
 

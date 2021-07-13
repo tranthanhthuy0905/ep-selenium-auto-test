@@ -22,7 +22,7 @@ import unittest
 
 import HtmlTestRunner
 from Configs.TestData.CustomDomainTestData import CustomDomainTestData
-from Tests_Dev.CD.cd_base_test import CDBaseTest
+from Tests_Dev.CE_Custom_Domain.cd_base_test import CDBaseTest
 from Pages.CD.custom_domain_page import CustomDomainPage
 from Locators.CD import CustomDomainPageLocators
 import time

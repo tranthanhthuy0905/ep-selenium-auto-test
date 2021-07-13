@@ -75,7 +75,7 @@ class MachineImageWizardPage(CELaunchInstancesWizardPage):
 
     def choose_machine_image(self):
         self\
-            .click_button(self.locator.MI_SELECT_BTN)
+            .click_button(self.locator.MI_SELECT_BTN(CEInstanceTestData.MACHINE_IMAGE))
         return self
 
 class InstanceTypeWizardPage(CELaunchInstancesWizardPage):
@@ -248,6 +248,7 @@ class ReviewLaunchWizardPage(CELaunchInstancesWizardPage):
     def apply_default_password(self):
         # WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(CELaunchInstancesWizardPageLocators.DEFAULT_PASSWORD_CONFIRM_MODAL))
         # Show generated pass
+        time.sleep(1)
         self.click_show_password()
         # Random password
         self.click_random_password()

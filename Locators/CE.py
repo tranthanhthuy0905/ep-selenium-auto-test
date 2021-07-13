@@ -62,7 +62,7 @@ class CEInstanceTypesPageLocators(object):
 
 
 class CELaunchInstancesWizardPageLocators(object):
-    MI_SELECT_BTN = (By.XPATH, "//button[contains(.,'Select')]")
+    MI_SELECT_BTN = lambda _MI : (By.XPATH, f"//h4[contains(.,'{_MI}')]")
     TYPE_2G_RADIO = (By.NAME, '872c5a42-fbb1-4d94-9482-6def419ec553')
     NEXT_BTN = (By.XPATH, "//button[contains(.,'Next')]")
     CREATE_NEW_KEYPAIR_BTN = (By.XPATH, "//button[contains(.,'Create new Keypair')]")
@@ -94,7 +94,7 @@ class CELaunchInstancesWizardPageLocators(object):
     SG_DESCRIPTION_TEXTBOX = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div[3]/div[2]/input")
     ADD_SG_BTN = (By.XPATH, "//button[contains(.,'Add Security Group')]")
     SG_DETAILS_ID = (By.XPATH, "//*[@id='root']/section/section/main/div/div/div/div/div/div[2]/div[1]/div[4]/div/div/div/div/div/div[1]/div[2]/div/div[1]/div[2]/div")
-    SG_APPLY_CHECKBOX = (By.XPATH, "/html/body/div[1]/section/section/main/div/div/div/div/div/div[2]/div[1]/div[2]/div/div[2]/label/span[1]")
+    SG_APPLY_CHECKBOX = (By.XPATH, "//div[contains(.,'Apply for this instance')]")
     CREATE_SG_SUCCESS_MESSAGE = (By.XPATH, "//div[contains(.,'Created security group successfully')]")
     PARRENT_BY_INSTANCE_NAME = lambda _instance_name: (By.XPATH, f"//td[contains(.,'{_instance_name}')]/parent::*")
     STATE_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[@class='ant-table-cell'][2]/div/span/span[@class='ant-badge-status-text']")
@@ -105,7 +105,7 @@ class CELaunchInstancesWizardPageLocators(object):
     FAILED_TO_LAUNCH_NOTI = (By.XPATH, "//div[contains(.,'Failed to launch instance.')]")
     EXISTING_SG_RADIO = lambda _sg_id: (By.NAME, f'{_sg_id}')
     LIST_SG_PAGE = (By.XPATH, "//div[@class='ant-select-selector']/span[@class='ant-select-selection-item']")
-    DEFAULT_PASSWORD_CONFIRM_MODAL = (By.ID, "//*[@id='rcDialogTitle2']")
+    DEFAULT_PASSWORD_CONFIRM_MODAL = (By.ID, "//div[text()='Setting Default Password']")
 
 
 

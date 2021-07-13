@@ -14,3 +14,6 @@ class CEVolumeTestData(BaseTestData):
 
     def gen_volume_name():
         return "autotest-volume-" + str(time.time()).replace('.', '')
+
+    def gen_volume_size():
+        return str(random.randint(1,200))

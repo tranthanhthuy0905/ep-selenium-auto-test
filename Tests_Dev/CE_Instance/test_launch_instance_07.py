@@ -54,7 +54,8 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from Tests.CE.ce_base_test import CEBaseTest
+
+from Tests_Dev.CE.ce_base_test import CEBaseTest
 from Pages.CE.homepage import CEHomePage
 from Pages.CE.instances_page import CEInstancesPage
 from Pages.CE.launch_instances_wizard_page import *
@@ -150,7 +151,6 @@ class TestInstances07(CEBaseTest):
 
         # Test completed, stop instance for cleaning test data
         self.instances_page.stop_instance(self.instance_id)
-
 
 # python3 -m unittest Tests.CE_Instance.test_launch_instance_07 -v
 

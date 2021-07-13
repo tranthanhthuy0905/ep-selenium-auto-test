@@ -110,7 +110,7 @@ class TestInstances03(CEBaseTest):
     # Step 4: Add Storage
         volume_name = CEVolumeTestData.gen_volume_name()
         self.add_storage_wizard = AddStorageWizardPage(self.driver)
-        self.add_storage_wizard.add_new_volume(volume_name, CEVolumeTestData.SIZE)
+        self.add_storage_wizard.add_new_volume(volume_name, CEVolumeTestData.gen_volume_size())
 
         # Get Volume ID for delete data after test
         self.volume_id = self.add_storage_wizard.get_volume_id(volume_name)
