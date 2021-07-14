@@ -14,22 +14,22 @@ from Tests_Dev.CE_Volume.volume_base_test import VolumeBaseTest
 
 class EFSBaseTest(VolumeBaseTest):
 
-    def clear_filesystem(self):
-        """
-        Clear all file systems after testing
-        """
-        if hasattr(self, 'file_id'):
-            self.delete_filesystem_by_id(self.file_id)
-
-    def delete_filesystem_by_id(self, file_id):
-        try:
-            url = EFS_FILESYSTEM_API_CLIENT_URL
-            params = {
-                "id": file_id,
-            }
-            self._call_request_delete(url, params, EFS_USER_TOKEN)
-        except Exception as e:
-            print("Can't delete file system ", str(e))
+    # def clear_filesystem(self):
+    #     """
+    #     Clear all file systems after testing
+    #     """
+    #     if hasattr(self, 'file_id'):
+    #         self.delete_filesystem_by_id(self.file_id)
+    #
+    # def delete_filesystem_by_id(self, file_id):
+    #     try:
+    #         url = EFS_FILESYSTEM_API_CLIENT_URL
+    #         params = {
+    #             "id": file_id,
+    #         }
+    #         self._call_request_delete(url, params, EFS_USER_TOKEN)
+    #     except Exception as e:
+    #         print("Can't delete file system ", str(e))
 
     def create_filesystem_cases(self):
         """

@@ -12,6 +12,7 @@ DEVICE_FARM_USER_TOKEN = os.getenv("DEVICE_FARM_USER_TOKEN", "")
 CE_USER_TOKEN = os.getenv("CE_USER_TOKEN", "")
 S3_USER_TOKEN = os.getenv("S3_USER_TOKEN", "")
 EFS_USER_TOKEN = os.getenv("EFS_USER_TOKEN","")
+RDS_USER_TOKEN = os.getenv("RDS_USER_TOKEN","")
 CUSTOM_DOMAIN_USER_TOKEN = os.getenv("CUSTOM_DOMAIN_USER_TOKEN","")
 
 # Common
@@ -35,7 +36,7 @@ CE_KEYPAIR_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "keypairs/")
 CE_VOLUME_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "volumes/")
 CE_SNAPSHOT_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "snapshot-volume/")
 CE_SG_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "security-groups/")
-CE_SNAPSHOT_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "snapshot-volume/")
+#CE_SNAPSHOT_API_CLIENT_URL = urllib.parse.urljoin(CE_API_URL, "snapshot-volume/")
 
 CE_SG_URL = urllib.parse.urljoin(CE_BASE_URL, "network/security-groups/")
 CE_SG_CREATE_URL = urllib.parse.urljoin(CE_SG_URL, "create-security-group")
@@ -75,3 +76,8 @@ DEVICE_FARM_API_SESSION = urllib.parse.urljoin(os.getenv("DEVICE_FARM_BASE_URL")
 CUSTOM_DOMAIN_BASE_URL = os.getenv("CUSTOM_DOMAIN_BASE_URL")
 CUSTOM_DOMAIN_API_BASE_URL = posixpath.join(CUSTOM_DOMAIN_BASE_URL, "api/client")
 CUSTOM_DOMAIN_API_CLIENT_URL = posixpath.join(CUSTOM_DOMAIN_API_BASE_URL, "domains/")
+
+# RDS
+RDS_BASE_URL = urllib.parse.urljoin(os.getenv("RDS_BASE_URL"), "rds/databases")
+RDS_CREATE_URL = posixpath.join(RDS_BASE_URL, "/create")
+RDS_API_BASE_URL = posixpath.join(RDS_BASE_URL, "api/client")
