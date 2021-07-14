@@ -20,21 +20,18 @@ class Test_delete_filesystem(EFSBaseTest):
             TEST CASE: Delete a filesystem NOT giving access to any ip
         """
         self.delete_filesystem_cases(False, False)
-        self.tearDown()
 
     def test_delete_filesystem_read_only_ip(self):
         """
             TEST CASE: Delete a filesystem setting Read-only access for an ip
         """
         self.delete_filesystem_cases(True, True)
-        self.tearDown()
 
     def test_delete_filesystem_full_access_ip(self):
         """
             TEST CASE: Delete a filesystem setting Full access for an ip
         """
         self.delete_filesystem_cases(True, False)
-        self.tearDown()
 
 
 if __name__ == "__main__":

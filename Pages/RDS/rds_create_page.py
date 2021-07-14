@@ -18,7 +18,7 @@ class RDSCreatePage(BasePage):
                 .click_button(self.locator.FIRST_CPU_OPTION)\
                 .fill_form(no_of_replica, self.locator.NO_OF_REPLICA)
         self\
-            .fill_form(self.cluster_name)\
+            .fill_form(self.cluster_name, self.locator.DB_INSTANCE_IDENTIFIER)\
             .fill_form(master_password, self.locator.MASTER_PASSWORD)\
             .fill_form(confirm_password, self.locator.CONFIRM_PASSWORD)
         return self

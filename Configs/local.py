@@ -78,6 +78,6 @@ CUSTOM_DOMAIN_API_BASE_URL = posixpath.join(CUSTOM_DOMAIN_BASE_URL, "api/client"
 CUSTOM_DOMAIN_API_CLIENT_URL = posixpath.join(CUSTOM_DOMAIN_API_BASE_URL, "domains/")
 
 # RDS
-RDS_BASE_URL = urllib.parse.urljoin(os.getenv("RDS_BASE_URL"), "rds/databases")
-RDS_CREATE_URL = posixpath.join(RDS_BASE_URL, "/create")
-RDS_API_BASE_URL = posixpath.join(RDS_BASE_URL, "api/client")
+RDS_BASE_URL = os.path.join(os.getenv("RDS_BASE_URL"), "rds/databases/")
+RDS_CREATE_URL = posixpath.join(RDS_BASE_URL, "create")
+RDS_API_BASE_URL = urllib.parse.urljoin(os.getenv("RDS_BASE_URL"), "api/client/")

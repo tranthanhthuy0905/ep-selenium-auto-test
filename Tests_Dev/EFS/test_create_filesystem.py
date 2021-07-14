@@ -20,7 +20,6 @@ class Test_create_filesystem(EFSBaseTest):
             TEST CASE: Create a filesystem simple flow
         """
         self.create_filesystem_cases()
-        self.tearDown()
 
 
 if __name__ == "__main__":

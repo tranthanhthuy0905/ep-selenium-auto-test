@@ -18,9 +18,9 @@ class RDSHomePage(BasePage):
         self.click_button(self.locator.CREATE_DB_BTN)
         return self
 
-    def select_cluster(self, db_id):
+    def select_cluster(self, cluster_id):
         self.click_button(
-            (By.XPATH, '//span[././input/@type="radio" and ancestor::tr/@data-row-key="' + db_id + '"]'))
+            (By.XPATH, '//span[././input/@type="radio" and ancestor::tr/@data-row-key="' + cluster_id + '"]'))
         return self
 
     def start_cluster(self):
@@ -51,7 +51,7 @@ class RDSHomePage(BasePage):
             .click_button(self.locator.DELETE_CONFIRM_BTN)
         return self
 
-    def create_replica(self, no_of_replica):
+    def create_read_replica(self, no_of_replica):
         self\
             .click_button(self.locator.CREATE_READ_REPLICA)\
             .fill_form(no_of_replica, self.locator.NO_OF_SERVERS)\

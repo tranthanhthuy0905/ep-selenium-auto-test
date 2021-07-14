@@ -20,14 +20,12 @@ class Test_allow_ip(EFSBaseTest):
             TEST CASE: Allow an ip to access the filesystem (full access)
         """
         self.allow_ip_cases(False)
-        self.tearDown()
 
     def test_allow_ip_read_only(self):
         """
             TEST CASE: Allow an ip to access the filesystem (Read-only)
         """
         self.allow_ip_cases(True)
-        self.tearDown()
 
 
 if __name__ == "__main__":

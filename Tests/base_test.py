@@ -29,7 +29,7 @@ class BaseTest(unittest.TestCase, APIService):
         logging.info(f"TEST START: Start testing: {self.__class__.__name__}")
 
     def tearDown(self):
-        self.clear_test_instances()
+        #self.clear_test_instances()
         self.driver.quit()
         logging.info(f"TEST COMPLETE: Test {self.__class__.__name__} completed!\n")
 

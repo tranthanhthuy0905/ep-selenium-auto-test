@@ -16,6 +16,8 @@ class RDSHomePageLocators(object):
     OK_BTN = (By.XPATH, "//button[contains(.,'OK')]")
     PROGRESS_STATUS = (By.XPATH, "//*[local-name()='svg' and @class='ant-progress-circle' and following-sibling::span/span/@class='anticon anticon-check']")
     REFRESH_BTN = (By.XPATH, "//*[local-name()='svg' and @data-icon='reload']/*[local-name()='path']")
+    STATUS_BY_ID = lambda _id: (By.XPATH, f"//tr[@data-row-key='{_id}']/td[6]")
+    NO_OF_CLUSTER = (By.XPATH, "//div[preceding-sibling::div/div/text()='Number of Cluster']")
 
 class RDSCreatePageLocators(object):
     CUSTOM_CONFIGS = (By.XPATH, "//div[contains(.,'Custom') and @class='ant-col ant-col-6 gutter-row']")
@@ -31,4 +33,5 @@ class RDSCreatePageLocators(object):
     PRODUCTION_CONFIGS = (By.XPATH, "//div[contains(.,'Production') and @class='ant-col ant-col-6 gutter-row']")
 
     CREATE_DB_SUBMIT = (By.XPATH, "//button[contains(.,'Create database')]")
+    CONFIRM_BTN = (By.XPATH, "//button[contains(.,'Confirm')]")
     RESET_BTN = (By.XPATH, "//button[contains(.,'Reset')]")
