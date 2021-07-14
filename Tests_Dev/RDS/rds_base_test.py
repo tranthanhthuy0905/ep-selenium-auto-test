@@ -81,7 +81,7 @@ class RDSBaseTest(BaseTest):
                     self.driver.find_element_by_xpath("//div[text()='" + error_text + "']"),
                     "Should FAIL to create database with " + config_option + " config and missing password"
                 )
-        # TEST CASE: Master pw unmatches with Confirm pw
+        # TEST CASE: Master pw does not match with Confirm pw
         else:
             # Check whether FAIL to create database cluster or not
             self.assertTrue(
@@ -103,25 +103,17 @@ class RDSBaseTest(BaseTest):
 
         # Wait for the change in the number of replica being updated
         if no_of_replica <= no_of_server:
-            WebDriverWait(self.driver, 500).until(EC.text_to_be_present_in_element
-                                                  (RDSHomePageLocators.STATUS_BY_ID(self.cluster_id),
-                                                   "Running"),
-                                                  "FAIL to scale up the number of replica")
             # Check if the number of replica is upsized or not
-            self.assertTrue(
-                self.rds_homepage.find_element(*RDSHomePageLocators.NO_OF_CLUSTER).text == no_of_server,
-                "FAIL to scale up the number of replica"
-            )
-        else:
             WebDriverWait(self.driver, 500).until(EC.text_to_be_present_in_element
-                                                  (RDSHomePageLocators.STATUS_BY_ID(self.cluster_id),
-                                                   "Running"),
-                                                  "FAIL to scale down the number of replica")
+                                                  (int(RDSHomePageLocators.NO_OF_CLUSTER),
+                                                   no_of_server),
+                                                  "FAIL to scale up the number of replica")
+        else:
             # Check if the number of replica is downsized or not
-            self.assertTrue(
-                self.rds_homepage.find_element(RDSHomePageLocators.NO_OF_CLUSTER).text == no_of_server,
-                "FAIL to scale down the number of replica"
-            )
+            WebDriverWait(self.driver, 500).until(EC.text_to_be_present_in_element
+                                                  (int(RDSHomePageLocators.NO_OF_CLUSTER),
+                                                   no_of_server),
+                                                  "FAIL to scale down the number of replica")
 
     def delete_cluster_cases(self, config_option, no_of_replica):
         # Step 1: Create a Cluster simple flow
@@ -136,3 +128,50 @@ class RDSBaseTest(BaseTest):
         WebDriverWait(self.driver, 500).until(EC.invisibility_of_element_located
                                               ((By.XPATH, "//td[contains(.,'" + self.cluster_name + "')]/parent::*")),
                                               "FAIL to delete the cluster")
+
+    def restart_cluster_cases(self, config_option, no_of_replica):
+        # Step 1: Create a Cluster simple flow
+        self.create_db_cases("Abc123456", "Abc123456", config_option, no_of_replica)
+        # Flow of test:
+        #   - Select the newly created cluster
+        #   - Click on "Actions" button, select the restart option and click on "Restart" button to confirm
+        self.rds_homepage \
+            .select_cluster(self.cluster_id)\
+            .restart_cluster()
+        # Check if successfully restarting the Running cluster or not
+        WebDriverWait(self.driver, 500).until(EC.text_to_be_present_in_element
+                                              (RDSHomePageLocators.STATUS_BY_ID(self.cluster_id),
+                                               "Running"),
+                                              "FAIL to START the cluster")
+
+    def stop_cluster_cases(self, config_option, no_of_replica):
+        # Step 1: Create a Cluster simple flow
+        self.create_db_cases("Abc123456", "Abc123456", config_option, no_of_replica)
+        # Flow of test:
+        #   - Select the newly created cluster
+        #   - Click on "Actions" button, select the stop option and click on "Stop" button to confirm
+        self.rds_homepage \
+            .select_cluster(self.cluster_id) \
+            .stop_cluster()
+
+        # Check if successfully stopping the Running cluster or not
+        WebDriverWait(self.driver, 500).until(EC.text_to_be_present_in_element
+                                              (RDSHomePageLocators.STATUS_BY_ID(self.cluster_id),
+                                               "Stopped"),
+                                              "FAIL to STOP the cluster")
+
+    def start_cluster_cases(self, config_option, no_of_replica):
+        # Step 1: Create a Cluster simple flow and Stop it
+        self.stop_cluster_cases(config_option, no_of_replica)
+        # Flow of test:
+        #   - Select the Stopped cluster
+        #   - Click on "Actions" button, select the start option and click on "Start" button to confirm
+        self.rds_homepage \
+            .select_cluster(self.cluster_id) \
+            .start_cluster()
+        # Check if successfully starting the Stopped cluster or not
+        WebDriverWait(self.driver, 500).until(EC.text_to_be_present_in_element
+                                              (RDSHomePageLocators.STATUS_BY_ID(self.cluster_id),
+                                               "Running"),
+                                              "FAIL to START the cluster")
+
